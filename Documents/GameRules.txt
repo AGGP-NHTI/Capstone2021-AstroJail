@@ -25,13 +25,13 @@ not locked in office but only member that can enter his area
 has only gaurd that can access the security system. can lock halls and see security cameras
 intercom system 
 
-guard mechanics 
+guard mechanics  - one wheeled scap metal 
 guards can search players which takes 5 seconds. if they search someone and it is wrong they have to go to an 
 ai update center and wait for x amount of time. 
 if they do capture a prisoner they get sent to their cell for x amount of time or if someone lets them out.
 and they lose all contrand items. these items are placed in a contraband room. item tasks reset and can be redone.  
 
-prisoners
+prisoners- 2 legged humans
 prisoners keep all non contraband items
 can do tasks
 can craft items 
