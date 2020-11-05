@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Controller : NetworkedBehaviour
 {
-    protected Pawn myPawn;
+    public Pawn myPawn;
 
     public void PossessPawn(GameObject go)
     {

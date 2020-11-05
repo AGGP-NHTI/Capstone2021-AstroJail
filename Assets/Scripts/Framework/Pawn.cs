@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Pawn : Actor
 {
-    Controller control;
+    public Controller control;
 
     public void Possessed(Controller c)
     {
