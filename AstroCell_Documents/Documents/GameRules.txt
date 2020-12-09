@@ -1,0 +1,48 @@
+pitch for astro cell monday: 
+Astro Cell group questions/ comments/ and ideas
+general play time 8- 10 minutes
+
+manual set rules for game and player set up minimum  
+
+
+art style-
+models 
+character desing like fall guys 
+
+general-
+random win condition asigned at start of game.
+bare minimum 4 players 1 warden 3 prisoners
+minimum of 6 players 10 
+
+tasks
+win tasks
+sabatoge task 
+quality of life tasks
+
+
+warden - mechanics
+not locked in office but only member that can enter his area
+has only gaurd that can access the security system. can lock halls and see security cameras
+intercom system 
+
+guard mechanics  - one wheeled scap metal 
+guards can search players which takes 5 seconds. if they search someone and it is wrong they have to go to an 
+ai update center and wait for x amount of time. 
+if they do capture a prisoner they get sent to their cell for x amount of time or if someone lets them out.
+and they lose all contrand items. these items are placed in a contraband room. item tasks reset and can be redone.  
+
+prisoners- 2 legged humans
+prisoners keep all non contraband items
+can do tasks
+can craft items 
+menue for what can be crafted and what is required and where they can get it 
+items will not tell where they can be used.but will say what it does  
+
+can use any item on guards but most will fail. you should have read the escape pamphlet
+
+prisoner  wins
+
+
+guard win 
+capture all players with contraband
+time 
