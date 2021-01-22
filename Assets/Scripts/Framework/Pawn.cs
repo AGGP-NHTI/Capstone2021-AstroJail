@@ -6,7 +6,7 @@ using UnityEngine;
 public class Pawn : Actor
 {
     public Controller control;
-
+    public GameObject CameraControl;
     public void Possessed(Controller c)
     {
         control = c;
@@ -17,7 +17,7 @@ public class Pawn : Actor
         if(NetObj)
         {
             Debug.Log("Changed net Owner on Pawn");
-            NetObj.ChangeOwnership(c.OwnerClientId);
+            //NetObj.ChangeOwnership(c.OwnerClientId);
         }
         else
         {

@@ -153,8 +153,10 @@ public class PlayerController : Controller
     [ClientRPC]
     public void client_set(ulong id)
     {
+        Debug.Log("client_set");
         myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
+        myPawn.CameraControl.SetActive(true);
     }
 
         
