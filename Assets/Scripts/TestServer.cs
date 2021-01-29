@@ -16,37 +16,48 @@ public class TestServer : MonoBehaviour
     public GameObject ConnectAddress;
     public void StartAsHost()
     {
-        using (PuncherClient listenPeer = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
-        {
-            System.Console.WriteLine("[LISTENER] Listening for single punch on our port 1234...");
-            IPEndPoint endpoint = listenPeer.ListenForSinglePunch(new IPEndPoint(IPAddress.Any, 1234));
-            System.Console.WriteLine("[LISTENER] Connector: " + endpoint + " punched through our NAT");
-        }
 
-        NetworkingManager.Singleton.StartHost();
+        Debug.Log("1");
+        Task listenTask = Task.Factory.StartNew(() =>
+        {
+            Debug.Log("2");
+
+            using (PuncherClient listener = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
+            {
+
+                // 1234 is the port where the other peer will connect and punch through.
+                // That would be the port where your program is going to be listening after the punch is done.
+                listener.ListenForPunches(new IPEndPoint(IPAddress.Any, 1234));
+                Debug.Log("3");
+
+            }
+            Debug.Log("4");
+        });
+        Debug.Log("5");
         gameObject.SetActive(false);
+        NetworkingManager.Singleton.StartHost();
     }
 
     public void JoinAsClient()
     {
         string address = ConnectAddress.GetComponent<Text>().text;
 
-            using (PuncherClient connectPeer = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
+        using (PuncherClient connector = new PuncherClient("puncher.midlevel.io", 6776))
+        {
+            // Punches and returns the result
+            if (connector.TryPunch(IPAddress.Parse(address), out IPEndPoint remoteEndPoint))
             {
-                System.Console.WriteLine("[CONNECTOR] Punching...");
-
-                if (connectPeer.TryPunch(IPAddress.Parse(address), out IPEndPoint connectResult))
-                {
-                    System.Console.WriteLine("[CONNECTOR] Punched through to peer: " + connectResult);
-                }
-                else
-                {
-                    System.Console.WriteLine("[CONNECTOR] Failed to punch");
-                }
+                // NAT Punchthrough was successful. It can now be connected to using your normal connection logic.
+                NetworkingManager.Singleton.StartClient();
+                gameObject.SetActive(false);
             }
-        
-        NetworkingManager.Singleton.StartClient();
-        gameObject.SetActive(false);
+              else
+            {
+                // NAT Punchthrough failed.
+            }
+        }
+
+
     }
 
 
