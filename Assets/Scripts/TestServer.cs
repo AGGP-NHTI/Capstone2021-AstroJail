@@ -45,7 +45,7 @@ public class TestServer : MonoBehaviour
                 NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = remoteEndPoint.Address.ToString();
                 NetworkingManager.Singleton.StartClient();
                 gameObject.SetActive(false);
-                Debug.Log("Punch Succeed" + remoteEndPoint.Address + ":" + remoteEndPoint.Port );
+                Debug.Log("Punch Succeed"+ " " + remoteEndPoint.Address + ":" + remoteEndPoint.Port );
 
             }
               else
