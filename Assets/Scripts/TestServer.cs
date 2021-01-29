@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MLAPI;
+using MLAPI.Transports.UNET;
 using MLAPI.Spawning;
 using MLAPI.Puncher.Client;
 using System.Net;
@@ -16,22 +17,15 @@ public class TestServer : MonoBehaviour
     public GameObject ConnectAddress;
     public void StartAsHost()
     {
-
-        Debug.Log("1");
         Task listenTask = Task.Factory.StartNew(() =>
         {
-
-
             using (PuncherClient listener = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
             {
 
                 // 1234 is the port where the other peer will connect and punch through.
                 // That would be the port where your program is going to be listening after the punch is done.
                 listener.ListenForPunches(new IPEndPoint(IPAddress.Any, 1234));
-
-
             }
-
         });
 
         gameObject.SetActive(false);
@@ -48,6 +42,7 @@ public class TestServer : MonoBehaviour
             // Punches and returns the result
             if (connector.TryPunch(IPAddress.Parse(address), out IPEndPoint remoteEndPoint))
             {
+                NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = remoteEndPoint.Address.ToString();
                 NetworkingManager.Singleton.StartClient();
                 gameObject.SetActive(false);
                 Debug.Log("Punch Succeed" + remoteEndPoint.Address + ":" + remoteEndPoint.Port );
