@@ -314,8 +314,8 @@ MonoBehaviour:
   ConnectAddress: 75.69.155.74
   ConnectPort: 1234
   ServerListenPort: 1234
-  ServerWebsocketListenPort: 8887
-  SupportWebsocket: 0
+  ServerWebsocketListenPort: 1234
+  SupportWebsocket: 1
   Channels: []
   UseMLAPIRelay: 0
   MLAPIRelayAddress: 18.218.176.161
