@@ -20,7 +20,7 @@ public class TestServer : MonoBehaviour
         Debug.Log("1");
         Task listenTask = Task.Factory.StartNew(() =>
         {
-            Debug.Log("2");
+
 
             using (PuncherClient listener = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
             {
@@ -28,12 +28,12 @@ public class TestServer : MonoBehaviour
                 // 1234 is the port where the other peer will connect and punch through.
                 // That would be the port where your program is going to be listening after the punch is done.
                 listener.ListenForPunches(new IPEndPoint(IPAddress.Any, 1234));
-                Debug.Log("3");
+
 
             }
-            Debug.Log("4");
+
         });
-        Debug.Log("5");
+
         gameObject.SetActive(false);
         NetworkingManager.Singleton.StartHost();
     }
@@ -41,22 +41,26 @@ public class TestServer : MonoBehaviour
     public void JoinAsClient()
     {
         string address = ConnectAddress.GetComponent<Text>().text;
-
+        Debug.Log(address);
         using (PuncherClient connector = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
         {
+            Debug.Log("attempting connect");
             // Punches and returns the result
             if (connector.TryPunch(IPAddress.Parse(address), out IPEndPoint remoteEndPoint))
             {
-                // NAT Punchthrough was successful. It can now be connected to using your normal connection logic.
                 NetworkingManager.Singleton.StartClient();
                 gameObject.SetActive(false);
+                Debug.Log("Punch Succeed" + remoteEndPoint.Address + ":" + remoteEndPoint.Port );
+
             }
               else
             {
+                Debug.Log("Punch failed");
                 // NAT Punchthrough failed.
             }
         }
-
+        Debug.Log("After Punch");
+        
 
     }
 
