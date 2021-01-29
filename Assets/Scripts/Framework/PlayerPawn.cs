@@ -5,8 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerPawn : Pawn
-{
-    public GameObject CameraControl;
+{ 
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;
@@ -65,6 +64,11 @@ public class PlayerPawn : Pawn
 
     public override void Move(float horizontal, float vertical)
     {
+        if (!rb)
+        {
+            Debug.Log("waiting");
+            return;
+        }
         Vector3 direction = (gameObject.transform.forward * vertical) + (gameObject.transform.right * horizontal);
         direction = direction.normalized;
 
