@@ -42,7 +42,7 @@ public class TestServer : MonoBehaviour
     {
         string address = ConnectAddress.GetComponent<Text>().text;
 
-        using (PuncherClient connector = new PuncherClient("puncher.midlevel.io", 6776))
+        using (PuncherClient connector = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
         {
             // Punches and returns the result
             if (connector.TryPunch(IPAddress.Parse(address), out IPEndPoint remoteEndPoint))
