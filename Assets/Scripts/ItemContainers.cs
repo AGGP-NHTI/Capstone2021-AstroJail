@@ -12,11 +12,11 @@ public class ItemContainers : NetworkedBehaviour
     public GameObject Item;
     public bool IsPannelActive = false;
     public GameObject labelObject;
-    Container container;
+    Containers container;
 
     public void Start()
     {
-        container = gameObject.GetComponent<containers>();
+        container = gameObject.GetComponent<Containers>();
         labelObject.SetActive(false);
     }
 
@@ -38,3 +38,6 @@ public class ItemContainers : NetworkedBehaviour
         //}
     }
 }
+
+//This Script can look at whats in containers
+//This script will also call from TakeItem and AddItem
