@@ -15,11 +15,14 @@ public class PlayerPawn : Pawn
     public Vector2 pitchRange = new Vector2(-89, 89);
     public bool InvertCamVerticle = true;
     Rigidbody rb;
+    public bool IsGrounded = true;
+    public float JumpSpeed = 300.0f;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
+
 
     public void SetCamPitch(float value)
     {
@@ -72,7 +75,30 @@ public class PlayerPawn : Pawn
         Vector3 direction = (gameObject.transform.forward * vertical) + (gameObject.transform.right * horizontal);
         direction = direction.normalized;
 
-        rb.velocity = direction * moveRate;
+        rb.velocity = new Vector3(0,rb.velocity.y,0) + (direction * moveRate);
+    }
+
+    public override void Jump(bool s)
+    {
+        if(s)
+        {
+            Debug.Log("Jump in Player Pawn");
+            if (IsGrounded)
+            {
+                Debug.Log("In Ground");
+                rb.velocity = new Vector3(rb.velocity.x,JumpSpeed, rb.velocity.z);
+                //rb.AddForce(Vector3.up * JumpSpeed);
+                IsGrounded = false;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;
+        }
     }
 
     public override void Fire1()
@@ -93,4 +119,5 @@ public class PlayerPawn : Pawn
         NetworkSpawn(projPrefab, projSpawn.transform.position, projSpawn.transform.rotation);
     }
 
+    
 }

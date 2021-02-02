@@ -44,7 +44,10 @@ public class Pawn : Actor
     {
 
     }
-
+    public virtual void Jump(bool s)
+    {
+       
+    }
     public virtual void Fire1()
     {
 
