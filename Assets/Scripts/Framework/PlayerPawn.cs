@@ -16,7 +16,7 @@ public class PlayerPawn : Pawn
     public bool InvertCamVerticle = true;
     Rigidbody rb;
     public bool IsGrounded = true;
-    public float JumpSpeed = 300.0f;
+    public float JumpSpeed;
 
     public void Start()
     {
