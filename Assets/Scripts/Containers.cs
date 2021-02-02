@@ -10,12 +10,19 @@ public class Containers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(ItemDefinition item in startingItems)
+        foreach (ItemDefinition item in startingItems)
         {
-            
+
             //create a copy of the item 
+            ItemDefinition newItem = (ItemDefinition)ScriptableObject.CreateInstance(item.GetType());
+
             //set item copy container to this container
+            newItem.startingLocation = this;
+
             //put item into container (items in container)
+            this.Additem(newItem);
+
+
         }
     }
 
@@ -27,6 +34,11 @@ public class Containers : MonoBehaviour
     public bool Additem(ItemDefinition item)
     {
         //return false when the item cannot be added
+        if (ItemsInContainer.Count>=MaxItems)
+        {
+            return false;
+        }
+        ItemsInContainer.Add(item);
         return true;
     }
     
