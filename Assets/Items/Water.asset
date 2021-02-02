@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  itemId: -1
-  ItemName: Default Name
+  itemId: 3
+  ItemName: water
   ObjectModel: {fileID: 0}
   itemDescription: insert Degen Humor Here
   hasEffect: 0

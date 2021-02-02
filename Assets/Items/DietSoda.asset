@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
   m_Name: DietSoda
   m_EditorClassIdentifier: 
-  itemId: -1
-  ItemName: Default Name
+  itemId: 2
+  ItemName: diet soda
   ObjectModel: {fileID: 0}
   itemDescription: insert Degen Humor Here
-  hasEffect: 0
-  isContraband: 0
-  isCrafted: 0
+  hasEffect: 1
+  isContraband: 1
+  isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}

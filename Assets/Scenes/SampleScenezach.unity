@@ -340,6 +340,7 @@ MonoBehaviour:
     NetworkTransport: {fileID: 349739816}
     RegisteredScenes:
     - SampleScene
+    - SampleScenezach
     AllowRuntimeSceneChanges: 0
     NetworkedPrefabs:
     - Prefab: {fileID: 6323784573335748263, guid: 71649106233a2074288d23f9807f8b61,
@@ -2078,6 +2079,7 @@ GameObject:
   - component: {fileID: 1301661811}
   - component: {fileID: 1301661810}
   - component: {fileID: 1301661809}
+  - component: {fileID: 1301661816}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -2205,6 +2207,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1301661816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301661808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxItems: 5
+  startingItems:
+  - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}
+  - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
+  - {fileID: 11400000, guid: 41ee94e3f7df6d7419b9a0d722167a26, type: 2}
+  - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
+  ItemsInContainer: []
 --- !u!43 &1545777511
 Mesh:
   m_ObjectHideFlags: 0

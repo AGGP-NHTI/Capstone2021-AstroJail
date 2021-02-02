@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
   m_Name: Soda
   m_EditorClassIdentifier: 
-  itemId: 0
-  ItemName: 
-  ObjectModel: {fileID: 0}
+  itemId: 1
+  ItemName: 'Soda Test '
+  ObjectModel: {fileID: 923791832117716685, guid: ca2d9f7a17e13cf4cbe3076598ea9a20,
+    type: 3}
   itemDescription: insert Degen Humor Here
-  hasEffect: 0
+  hasEffect: 1
   isContraband: 0
-  isCrafted: 0
-  Effects: []
-  SpawnLocation: []
+  isCrafted: 1
+  Effects:
+  - {fileID: 0}
+  startingLocation: {fileID: 0}
