@@ -5,7 +5,8 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerPawn : Pawn
-{ 
+{
+    public List<ItemDefinition> playerInventory;
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;

@@ -46,7 +46,7 @@ public class ItemContainers : NetworkedBehaviour
             {
                 InvokeServerRpc(Server_StopUse);
             }
-                
+               
                    
         }
     }
@@ -73,7 +73,7 @@ public class ItemContainers : NetworkedBehaviour
         InUse = true;
         gamePanel.SetActive(true);
         IsPanelActive = true;
-        //labelObject.GetComponent<TextMeshPro>().text = "In Use";
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
         if(IsServer)
         {
