@@ -27,7 +27,7 @@ public class ItemContainers : NetworkedBehaviour
 
     public void Update()
     {
-        if(NextToContainer == true && Input.GetKeyDown(KeyCode.E))
+        if(NextToContainer == true && Input.GetKeyDown(KeyCode.E) && !InUse)
         {
             OpenContainer();
         }
@@ -61,9 +61,15 @@ public class ItemContainers : NetworkedBehaviour
         gamePanel.SetActive(true);
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        InvokeClientRpcOnEveryone(Client_InUse);
-        InvokeServerRpc(Server_InUse);
 
+        if(IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_InUse);
+        }
+        else
+        {
+            InvokeServerRpc(Server_InUse);
+        }
     }
     [ClientRPC]
     public void Client_InUse()
@@ -71,11 +77,21 @@ public class ItemContainers : NetworkedBehaviour
         InUse = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
+    public void Client_StopUse()
+    {
+        InUse = false;
+        labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+    }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
         InUse = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
+    }
+    public void Server_StopUse()
+    {
+        InUse = false;
+        labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
 }
 
