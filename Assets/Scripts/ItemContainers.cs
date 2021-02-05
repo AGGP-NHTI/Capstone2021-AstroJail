@@ -33,6 +33,7 @@ public class ItemContainers : NetworkedBehaviour
         }
         if(InUse == true && Input.GetKeyDown(KeyCode.Escape))
         {
+            InUse = false;
             gamePanel.SetActive(false);
             labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
             if(IsServer)
