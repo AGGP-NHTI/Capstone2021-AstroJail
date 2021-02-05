@@ -17,6 +17,8 @@ public class ItemContainers : NetworkedBehaviour
     Containers container;
     public bool InUse = false;
     bool NextToContainer=false;
+    private int currentUsersID;
+
  
 
     public void Start()
@@ -54,6 +56,7 @@ public class ItemContainers : NetworkedBehaviour
     {
         Controller P1C = other.gameObject.GetComponent<PlayerPawn>().control;
         PlayerController P1 = (PlayerController)P1C;
+        Debug.Log("test");
         labelObject.SetActive(true);
         if (P1)
         {
