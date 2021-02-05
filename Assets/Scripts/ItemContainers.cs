@@ -13,21 +13,23 @@ public class ItemContainers : NetworkedBehaviour
     public bool IsPannelActive = false;
     public GameObject labelObject;
     Containers container;
+    public bool InUse = false;
+ 
 
     public void Start()
     {
         container = gameObject.GetComponent<Containers>();
-        labelObject.SetActive(false);
+        labelObject.SetActive(true);
     }
 
 
     public void OnTriggerEnter(Collider other)
     {
-        labelObject.SetActive(true);
+        labelObject.SetActive(false);
         PlayerController Pl = other.gameObject.GetComponent<PlayerController>();
         if (Pl && Input.GetKeyDown(KeyCode.E))
         {
-
+            Debug.Log("In Game Panel");
             //Pl.canMove = false;
             gamePannel.SetActive(true);
             IsPannelActive = true;
@@ -41,3 +43,4 @@ public class ItemContainers : NetworkedBehaviour
 
 //This Script can look at whats in containers
 //This script will also call from TakeItem and AddItem
+//enum that checks for guard or prisoner

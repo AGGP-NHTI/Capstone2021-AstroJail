@@ -340,6 +340,7 @@ MonoBehaviour:
     NetworkTransport: {fileID: 349739816}
     RegisteredScenes:
     - SampleScene
+    - SampleSceneMatt
     AllowRuntimeSceneChanges: 0
     NetworkedPrefabs:
     - Prefab: {fileID: 6323784573335748263, guid: 71649106233a2074288d23f9807f8b61,
@@ -2074,10 +2075,10 @@ GameObject:
   - component: {fileID: 1301661815}
   - component: {fileID: 1301661814}
   - component: {fileID: 1301661813}
-  - component: {fileID: 1301661812}
   - component: {fileID: 1301661811}
   - component: {fileID: 1301661810}
   - component: {fileID: 1301661809}
+  - component: {fileID: 1301661812}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -2093,7 +2094,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301661808}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6252375, y: 1.4659295, z: 2.7302818}
@@ -2114,6 +2115,7 @@ MonoBehaviour:
   Item: {fileID: 0}
   IsPannelActive: 0
   labelObject: {fileID: 1890071610}
+  InUse: 0
 --- !u!54 &1301661811
 Rigidbody:
   m_ObjectHideFlags: 0
