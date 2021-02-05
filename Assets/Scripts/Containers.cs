@@ -12,6 +12,7 @@ public class Containers : MonoBehaviour
     public int MaxItems = 5;
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> ItemsInContainer;
+    int itemAtMe;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,13 @@ public class Containers : MonoBehaviour
             //put item into container (items in container)
             this.Additem(newItem);
 
+        }
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            TakeItem(1);
         }
     }
 
@@ -47,9 +55,9 @@ public class Containers : MonoBehaviour
 
 
     public ItemDefinition TakeItem(ItemDefinition item)
-    {
-
-        //TO DO : 
+    {     
+        //TO DO :        
+       
         //verify that the item is still there
         ItemsInContainer.Remove(item);
         //return null when you cannot remove the item asked 
@@ -58,19 +66,21 @@ public class Containers : MonoBehaviour
     public ItemDefinition TakeItem(int itemAt)
     {
         //this may not be the version/method we want to use :subject to change
-
-        //TO DO : 
-        //verify that there is an item to be taken at location
-
-        //to do :
-        //need to grab the item out of container before removing it from container 
-        //use this temp reff to return to player to verify this is what they got 
-
+        if(itemAt>(ItemsInContainer.Count-1))
+        {
+            Debug.LogError($"no stop get some help{itemAt} Is not there");
+            return null;
+        }
+        
+        ItemDefinition temp = ItemsInContainer[itemAt];
 
         ItemsInContainer.RemoveAt(itemAt);
-        //
-        //return null when you cannot remove the item asked 
-        return null;
+
+
+
+        //grab this return value to take item and place into player inventory 
+        Debug.Log($"you removed {temp} from the container");
+        return temp;
     }
     
     public bool Additem(ItemDefinition item)
