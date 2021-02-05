@@ -35,6 +35,16 @@ public class ItemContainers : NetworkedBehaviour
         {
             gamePanel.SetActive(false);
             labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+            if(IsServer)
+            {
+                InvokeClientRpcOnEveryone(Client_StopUse);
+            }
+            else
+            {
+                InvokeServerRpc(Server_StopUse);
+            }
+                
+                   
         }
     }
 
