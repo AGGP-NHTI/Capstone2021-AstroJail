@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 8485013548723830144}
   - component: {fileID: 2324383427353695573}
   - component: {fileID: -1622302655584012072}
+  - component: {fileID: 6904813256657367447}
   m_Layer: 0
   m_Name: Player Pawn
   m_TagString: Player
@@ -164,6 +165,7 @@ MonoBehaviour:
   CCImmune: 0
   control: {fileID: 0}
   CameraControl: {fileID: 6752052726915162006}
+  maxInventory: 5
   projSpawn: {fileID: 3616214986743682680}
   projPrefab: {fileID: 7761730822595351183, guid: 12c0e89cdb62afd47896e6bff870380f,
     type: 3}
@@ -270,6 +272,22 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6904813256657367447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154986995550128394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxItems: 2
+  startingItems: []
+  ItemsInContainer: []
+  thePlayer: {fileID: 0}
 --- !u!1 &9154986996181752700
 GameObject:
   m_ObjectHideFlags: 0

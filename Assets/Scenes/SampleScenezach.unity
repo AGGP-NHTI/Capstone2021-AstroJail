@@ -1971,6 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectAddress: {fileID: 539645834}
+  MainMenu: {fileID: 1208112496}
 --- !u!1 &1283576787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283576787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.2, y: 1.15, z: 3.703701}
+  m_LocalPosition: {x: -7.2, y: 1.15, z: 8.4}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2112,10 +2113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f027d33d253d8a745bec108f42641262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePannel: {fileID: 426851186}
+  gamePanel: {fileID: 0}
   Item: {fileID: 0}
-  IsPannelActive: 0
+  IsPanelActive: 0
   labelObject: {fileID: 1890071610}
+  InUse: 0
 --- !u!54 &1301661811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2226,6 +2228,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41ee94e3f7df6d7419b9a0d722167a26, type: 2}
   - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
   ItemsInContainer: []
+  thePlayer: {fileID: 0}
 --- !u!43 &1545777511
 Mesh:
   m_ObjectHideFlags: 0
@@ -2542,7 +2545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797916042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5976617, y: 1.15, z: 3.703701}
+  m_LocalPosition: {x: 2.5976617, y: 1.15, z: 9.3}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}

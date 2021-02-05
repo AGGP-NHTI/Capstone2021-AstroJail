@@ -55,7 +55,7 @@ public class PlayerController : Controller
         myPawn.RotatePlayer(rightStick.x);
         myPawn.Move(leftStick.x, leftStick.y);
         myPawn.Jump(buttonSpace);
-        my
+        
 
     }
 

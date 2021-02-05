@@ -8,7 +8,23 @@ public class PlayerPawn : Pawn
 {
 
     public int maxInventory = 5;
-    public List<ItemDefinition> playerInventory;
+    //  public List<ItemDefinition> playerInventory;
+    protected Containers _PlayerInvetory;
+    public Containers playerInventory
+    {
+        get
+        {
+            if(!_PlayerInvetory)
+            {
+                _PlayerInvetory = gameObject.GetComponent<Containers>();
+            }
+
+            return _PlayerInvetory;
+        }
+    }
+
+
+
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;

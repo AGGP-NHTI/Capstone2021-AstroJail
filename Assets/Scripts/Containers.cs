@@ -13,10 +13,13 @@ public class Containers : MonoBehaviour
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> ItemsInContainer;
 
+    public int itemCount
+    {
+        get { return ItemsInContainer.Count; }
+    }
     //i need this or failure 
     public PlayerPawn thePlayer;
-    
-   
+
     int itemAtMe;
     
     // Start is called before the first frame update
@@ -38,15 +41,23 @@ public class Containers : MonoBehaviour
     }
     private void Update()
     {
+        debugTake();
+    }
+
+    private void debugTake()
+    {
+        if(!thePlayer)
+        {
+            // debug if no player is set dont do stuff
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(thePlayer.playerInventory.Count  >= thePlayer.maxInventory)
+            if (thePlayer.playerInventory.itemCount >= thePlayer.playerInventory.MaxItems)
             {
                 Debug.LogError($"{thePlayer} invetory is full");
             }
-            else { thePlayer.playerInventory.Add(TakeItem(1)); }
-            
-            
+            else { thePlayer.playerInventory.Additem(TakeItem(1)); }                     
         }
     }
 
