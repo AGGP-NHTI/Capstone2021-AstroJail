@@ -99,6 +99,7 @@ public class ItemContainers : NetworkedBehaviour
         InUse = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
+    [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
         InUse = false;
