@@ -56,7 +56,6 @@ public class ItemContainers : NetworkedBehaviour
     {
         Controller P1C = other.gameObject.GetComponent<PlayerPawn>().control;
         PlayerController P1 = (PlayerController)P1C;
-        Debug.Log("test");
         labelObject.SetActive(true);
         if (P1)
         {
@@ -74,7 +73,7 @@ public class ItemContainers : NetworkedBehaviour
         InUse = true;
         gamePanel.SetActive(true);
         IsPanelActive = true;
-        labelObject.GetComponent<TextMeshPro>().text = "In Use";
+        //labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
         if(IsServer)
         {
