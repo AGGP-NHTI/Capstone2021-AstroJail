@@ -311,14 +311,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageBufferSize: 5120
   MaxConnections: 100
-  ConnectAddress: 75.69.155.74
+  ConnectAddress: 66.31.95.85
   ConnectPort: 1234
   ServerListenPort: 1234
   ServerWebsocketListenPort: 1234
-  SupportWebsocket: 1
+  SupportWebsocket: 0
   Channels: []
-  UseMLAPIRelay: 0
-  MLAPIRelayAddress: 18.218.176.161
+  UseMLAPIRelay: 1
+  MLAPIRelayAddress: 3.19.232.248
   MLAPIRelayPort: 8888
 --- !u!114 &349739817
 MonoBehaviour:
@@ -349,6 +349,9 @@ MonoBehaviour:
         type: 3}
       PlayerPrefab: 0
     - Prefab: {fileID: 9154986995550128394, guid: ec985acb1647aca419a5235fd1728c99,
+        type: 3}
+      PlayerPrefab: 0
+    - Prefab: {fileID: 859861221071382149, guid: 5f9176971ec78b44482f50f32d009135,
         type: 3}
       PlayerPrefab: 0
     PlayerPrefabHash:
@@ -1970,6 +1973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectAddress: {fileID: 539645834}
+  MainMenu: {fileID: 1208112496}
 --- !u!1 &1283576787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,10 +2114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f027d33d253d8a745bec108f42641262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePannel: {fileID: 426851186}
+  gamePanel: {fileID: 0}
   Item: {fileID: 0}
-  IsPannelActive: 0
+  IsPanelActive: 0
   labelObject: {fileID: 1890071610}
+  InUse: 0
 --- !u!54 &1301661811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2211,7 +2216,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19812
+  m_Name: pb_Mesh27180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
