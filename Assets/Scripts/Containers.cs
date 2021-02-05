@@ -12,11 +12,16 @@ public class Containers : MonoBehaviour
     public int MaxItems = 5;
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> ItemsInContainer;
+
+    //i need this or failure 
+    public PlayerPawn thePlayer;
+    
+   
     int itemAtMe;
     
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         foreach (ItemDefinition item in startingItems)
         {
             //create a copy of the item 
@@ -35,7 +40,13 @@ public class Containers : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            TakeItem(1);
+            if(thePlayer.playerInventory.Count  >= thePlayer.maxInventory)
+            {
+                Debug.LogError($"{thePlayer} invetory is full");
+            }
+            else { thePlayer.playerInventory.Add(TakeItem(1)); }
+            
+            
         }
     }
 
