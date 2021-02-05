@@ -56,15 +56,23 @@ public class ItemContainers : NetworkedBehaviour
 
     public void OpenContainer()
     {
+        
         InUse = true;
         gamePanel.SetActive(true);
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
         InvokeClientRpcOnEveryone(Client_InUse);
+        InvokeServerRpc(Server_InUse);
 
     }
     [ClientRPC]
     public void Client_InUse()
+    {
+        InUse = true;
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
+    }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_InUse()
     {
         InUse = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
