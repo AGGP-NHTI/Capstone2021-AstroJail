@@ -48,6 +48,11 @@ public class Pawn : Actor
     {
        
     }
+
+    public virtual void Interact(bool e)
+    {
+
+    }
     public virtual void Fire1()
     {
 

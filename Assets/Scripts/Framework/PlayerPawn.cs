@@ -94,6 +94,14 @@ public class PlayerPawn : Pawn
         }
     }
 
+    public override void Interact(bool e)
+    {
+        if(e)
+        {
+
+        }
+    }
+
     private void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "Ground")
