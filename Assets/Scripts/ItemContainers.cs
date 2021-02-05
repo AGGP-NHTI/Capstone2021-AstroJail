@@ -5,39 +5,68 @@ using UnityEngine;
 using MLAPI.Messaging;
 using MLAPI;
 using System.ComponentModel;
+using System.Reflection.Emit;
+using TMPro;
 
 public class ItemContainers : NetworkedBehaviour
 {
-    public GameObject gamePannel;
+    public GameObject gamePanel;
     public GameObject Item;
-    public bool IsPannelActive = false;
+    public bool IsPanelActive = false;
     public GameObject labelObject;
     Containers container;
     public bool InUse = false;
+    bool NextToContainer=false;
  
 
     public void Start()
     {
         container = gameObject.GetComponent<Containers>();
-        labelObject.SetActive(true);
+        labelObject.SetActive(false);
+    }
+
+    public void Update()
+    {
+        if(NextToContainer == true && Input.GetKeyDown(KeyCode.E))
+        {
+            OpenContainer();
+        }
+        if(InUse == true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            gamePanel.SetActive(false);
+            labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+        }
     }
 
 
     public void OnTriggerEnter(Collider other)
     {
-        labelObject.SetActive(false);
-        PlayerController Pl = other.gameObject.GetComponent<PlayerController>();
-        if (Pl && Input.GetKeyDown(KeyCode.E))
+        Controller P1C = other.gameObject.GetComponent<PlayerPawn>().control;
+        PlayerController P1 = (PlayerController)P1C;
+        labelObject.SetActive(true);
+        if (P1)
         {
-            Debug.Log("In Game Panel");
-            //Pl.canMove = false;
-            gamePannel.SetActive(true);
-            IsPannelActive = true;
+            NextToContainer = true;
         }
-        //if(IsPannelActive == false)
-        //{
-        //    Pl.canMove = true;
-        //}
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        labelObject.SetActive(false);
+    }
+
+    public void OpenContainer()
+    {
+        InUse = true;
+        gamePanel.SetActive(true);
+        IsPanelActive = true;
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
+
+    }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_InUse()
+    {
+        InUse = true;
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
 }
 
