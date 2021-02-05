@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//KNOWN ISSUE :
-//WILL NEED UPDATING UI AND OTHER ENTITIES WHEN CONTENTS CHANGE 
-//THINK LIKE A MINECRAFT CHEST IN MULTIPLAYER. YOU SHOULD BE ABLE TO SEE WHEN CONTENTS CHANGE
 public class Containers : MonoBehaviour
 {
 
@@ -13,22 +10,30 @@ public class Containers : MonoBehaviour
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> ItemsInContainer;
 
+
     public int itemCount
     {
         get { return ItemsInContainer.Count; }
     }
+
+
+    //*************************
+    // TO DO:
+    // need variable localPlayer 
+    // when set the container will be a part of a player 
+    // ASSUMED: will be class type variable and will be able to use null to indicate not part of player
+    //*************************
+
+
+
     //i need this or failure 
     public PlayerPawn thePlayer;
 
-    int itemAtMe;
-    
-    // Start is called before the first frame update
     void Start()
     {       
         foreach (ItemDefinition item in startingItems)
         {
             //create a copy of the item 
-            // ItemDefinition newItem = (ItemDefinition)ScriptableObject.CreateInstance(item.GetType());
             ItemDefinition newItem = Instantiate(item);
 
             //set item copy container to this container
@@ -61,24 +66,12 @@ public class Containers : MonoBehaviour
         }
     }
 
-    /*
-    //this is for debugging 
-    private void Update()
-    {
-         if(Input.GetKeyDown(KeyCode.Space))
-        {
-            foreach (ItemDefinition item in ItemsInContainer)
-            {
-                Debug.Log(item.itemId + ": " + item.ItemName);
-            }
-        }       
-    }
-    */
-
-
+    //this may not be the version/method we want to use :subject to change
     public ItemDefinition TakeItem(ItemDefinition item)
     {     
-        //TO DO :        
+        //TO DO :   
+        //validate that the item given is in the list 
+        //need to be careful about exact item instance vs. just an item type
        
         //verify that the item is still there
         ItemsInContainer.Remove(item);
@@ -87,7 +80,7 @@ public class Containers : MonoBehaviour
     }
     public ItemDefinition TakeItem(int itemAt)
     {
-        //this may not be the version/method we want to use :subject to change
+       
         if(itemAt>(ItemsInContainer.Count-1))
         {
             Debug.LogError($"no stop get some help{itemAt} Is not there");
