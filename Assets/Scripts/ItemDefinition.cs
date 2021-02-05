@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenuAttribute(fileName = "newItem", menuName = "Atro Items")]
+[CreateAssetMenuAttribute(fileName = "newItem", menuName = "Astro Items")]
 
 public class ItemDefinition : ScriptableObject
 {
