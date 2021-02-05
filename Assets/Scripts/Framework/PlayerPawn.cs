@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerPawn : Pawn
 {
+
+    public int maxInventory = 5;
     public List<ItemDefinition> playerInventory;
     public GameObject projSpawn;
     public GameObject projPrefab;
