@@ -8,21 +8,8 @@ public class PlayerPawn : Pawn
 {
 
     public int maxInventory = 5;
-    //  public List<ItemDefinition> playerInventory;
     protected Containers _PlayerInvetory;
-    public Containers playerInventory
-    {
-        get
-        {
-            if(!_PlayerInvetory)
-            {
-                _PlayerInvetory = gameObject.GetComponent<Containers>();
-            }
-
-            return _PlayerInvetory;
-        }
-    }
-
+ 
 
 
     public GameObject projSpawn;
@@ -36,6 +23,30 @@ public class PlayerPawn : Pawn
     Rigidbody rb;
     public bool IsGrounded = true;
     public float JumpSpeed;
+
+
+    public List<MapInteractable> Intereactables;
+    public MapInteractable ObjectUsing;
+
+
+
+    //bool for interact
+    public bool InteractE = false;
+
+
+    //Properties
+    public Containers playerInventory
+    {
+        get
+        {
+            if (!_PlayerInvetory)
+            {
+                _PlayerInvetory = gameObject.GetComponent<Containers>();
+            }
+
+            return _PlayerInvetory;
+        }
+    }
 
     public void Start()
     {
@@ -114,11 +125,37 @@ public class PlayerPawn : Pawn
 
     public override void Interact(bool e)
     {
-        if(e)
+        //how guards interact with prisoners will be different system
+        if (e && !ObjectUsing &&  (Intereactables.Count != 0))
         {
+            Debug.Log($"pressed e: {e} ");
+            if(Intereactables[0].IsInUse())
+            {
+                Debug.Log("object is in use");
+                //will need to add code here later to indicate the object is in use
+            }
+            else
+            {
+                
+                ObjectUsing = Intereactables[0];
+                //if you impliment bots this is going to fail
+                ObjectUsing.Use((PlayerController)control);
 
+            }
         }
+
+        
     }
+    public override void Close(bool escape)
+    {
+       
+        if (escape && ObjectUsing)
+        {
+            ObjectUsing.Done();
+        }
+      
+    }
+
 
     private void OnCollisionStay(Collision other)
     {

@@ -22,6 +22,7 @@ public class PlayerController : Controller
     bool buttonNorth = false;
     bool buttonSpace = false;
     bool buttonInteract = false;
+    bool buttonClose = false;
 
     bool dpad_up = false;
     bool dpad_right = false;
@@ -55,6 +56,8 @@ public class PlayerController : Controller
         myPawn.RotatePlayer(rightStick.x);
         myPawn.Move(leftStick.x, leftStick.y);
         myPawn.Jump(buttonSpace);
+        myPawn.Interact(buttonInteract);
+        myPawn.Close(buttonClose);
         
 
     }
@@ -110,9 +113,10 @@ public class PlayerController : Controller
         dpad_down = Input.GetKey(KeyCode.S);
         dpad_left = Input.GetKey(KeyCode.A);
         dpad_right = Input.GetKey(KeyCode.D);
-        buttonSouth = Input.GetKeyDown(KeyCode.E);
+        //buttonSouth = Input.GetKeyDown(KeyCode.E);
         buttonSpace = Input.GetKeyDown(KeyCode.Space);
         buttonInteract = Input.GetKeyDown(KeyCode.E);
+        buttonClose = Input.GetKeyDown(KeyCode.Escape);
 
         KeyToAxis();
     }

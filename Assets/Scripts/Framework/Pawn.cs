@@ -53,6 +53,10 @@ public class Pawn : Actor
     {
 
     }
+    public virtual void Close(bool escape)
+    {
+
+    }
     public virtual void Fire1()
     {
 

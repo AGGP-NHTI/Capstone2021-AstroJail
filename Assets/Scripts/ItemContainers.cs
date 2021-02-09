@@ -8,18 +8,59 @@ using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
 
-public class ItemContainers : NetworkedBehaviour
+public class ItemContainers : MapInteractable
 {
-    public GameObject gamePanel;
-    public GameObject Item;
+
+    //rename this to Generic Stash 
+    //this goes on a mapInteractable that a player can go up to and grab or place an item into 
+    
+
+    public GameObject HUDPanelToAttach;
     public bool IsPanelActive = false;
     public GameObject labelObject;
     Containers container;
-    public bool InUse = false;
-    bool NextToContainer=false;
-    private int currentUsersID;
 
- 
+    //order of operations that are happening as things are being interacte with 
+    //-------------------------------------------------------------------------
+    //this is acrossed multiple scripts and both client and server
+    //1.) local: player walks into the interactable trigger 
+    //2.) player now knows that it can interact with object 
+    //3.) local player hits e to interact
+    //4.) jump request from local client to the server || Client to server rpc
+    //5.) validate that the interactable can be used
+    //6a.) if in use: return back the requesting user that they cannot use it || Server to client rpc 
+    //     on client this ends the interaction with object 
+    //6b.) if not in use: set up so that that player is using it by set usingPlayer to requested player 
+    //6c.) tell local requesting player they can use interactable || server to client rpc 
+    //7.) local player now knows they are using an object 
+    //8.) for the container it now needs to add the panel to the local player 
+    //9.) panel will run interactions between containers and what not 
+    //9a.) this is an abstraction and these interactions will require thei rown client and server interactions 
+    //10.) local player hits escape 
+    //11.) done gets called locally 
+    //11a.) on client: panle gets removed. using object gets set to null. 
+    //12.) done called on server
+    //12a.) on server: UsingPlayer gets set to null.
+    //13.) this ends the interaction 
+
+
+    // this set of operations above dont include accounting for 
+    // controlling a label on top of an object to indicate its current state to the other players 
+    // part of this is going to be done locally and part of it will be done pushing information to the server down 
+
+    //on use : it should add a hud panel to the users hud 
+    //the logic for the panel should be on a hud panel script 
+    //the panel will have a reference to this object 
+
+
+
+
+    //for matt: work on the panel 
+    //pass items over the network - will look at on friday with prof. walek 
+    //when up to container panel will not know everything yet 
+    //do the same for the player as well 
+    //do all interactions with items on the server 
+    //this prevents hacking on client side 
 
     public void Start()
     {
@@ -27,84 +68,63 @@ public class ItemContainers : NetworkedBehaviour
         labelObject.SetActive(false);
     }
 
-    public void Update()
-    {
-        if(NextToContainer == true && Input.GetKeyDown(KeyCode.E) && !InUse)
-        {
-            OpenContainer();
-        }
-        if(InUse == true && Input.GetKeyDown(KeyCode.Escape))
-        {
-            InUse = false;
-            gamePanel.SetActive(false);
-            labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
-            if(IsServer)
-            {
-                InvokeClientRpcOnEveryone(Client_StopUse);
-            }
-            else
-            {
-                InvokeServerRpc(Server_StopUse);
-            }
-               
-                   
-        }
-    }
 
 
-    public void OnTriggerEnter(Collider other)
-    {
-        Controller P1C = other.gameObject.GetComponent<PlayerPawn>().control;
-        PlayerController P1 = (PlayerController)P1C;
-        labelObject.SetActive(true);
-        if (P1)
-        {
-            NextToContainer = true;
-        }
-    }
-    public void OnTriggerExit(Collider other)
-    {
-        labelObject.SetActive(false);
-    }
 
-    public void OpenContainer()
+
+    public override bool OnUse(PlayerController user)
     {
-        
-        InUse = true;
-        gamePanel.SetActive(true);
+        Debug.Log("we are in Open container");     
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
         if(IsServer)
+         {
+             InvokeClientRpcOnEveryone(Client_InUse);
+         }
+         else
+         {
+             InvokeServerRpc(Server_InUse);
+         }
+        return true;
+    }
+
+    public override bool OnDone()
+    {
+        Debug.Log("we are in close container");       
+        labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+        if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InUse);
+            InvokeClientRpcOnEveryone(Client_StopUse);
         }
         else
         {
-            InvokeServerRpc(Server_InUse);
+            InvokeServerRpc(Server_StopUse);
         }
+        return true;
+
     }
     [ClientRPC]
     public void Client_InUse()
     {
-        InUse = true;
+       
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     public void Client_StopUse()
     {
-        InUse = false;
+       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
-        InUse = true;
+        
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
-        InUse = false;
+       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
 }
