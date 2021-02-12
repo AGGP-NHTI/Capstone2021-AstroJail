@@ -8,7 +8,7 @@ public class PlayerPawn : Pawn
 {
 
     public int maxInventory = 5;
-    protected Containers _PlayerInvetory;
+    protected Containers _PlayerInventory;
  
 
 
@@ -25,7 +25,7 @@ public class PlayerPawn : Pawn
     public float JumpSpeed;
 
 
-    public List<MapInteractable> Intereactables;
+    public List<MapInteractable> Interactables;
     public MapInteractable ObjectUsing;
 
 
@@ -39,12 +39,12 @@ public class PlayerPawn : Pawn
     {
         get
         {
-            if (!_PlayerInvetory)
+            if (!_PlayerInventory)
             {
-                _PlayerInvetory = gameObject.GetComponent<Containers>();
+                _PlayerInventory = gameObject.GetComponent<Containers>();
             }
 
-            return _PlayerInvetory;
+            return _PlayerInventory;
         }
     }
 
@@ -56,6 +56,10 @@ public class PlayerPawn : Pawn
 
     public void SetCamPitch(float value)
     {
+        if (ObjectUsing)
+        {
+            return;
+        }
         if (value == 0)
         {
             return;
@@ -92,11 +96,19 @@ public class PlayerPawn : Pawn
 
     public override void RotatePlayer(float value)
     {
+        if (ObjectUsing)
+        {
+            return;
+        }
         gameObject.transform.Rotate(Vector3.up * value * mouseSensitivity * rotationRate * Time.deltaTime);
     }
 
     public override void Move(float horizontal, float vertical)
     {
+        if(ObjectUsing)
+        {
+            return;
+        }
         if (!rb)
         {
             Debug.Log("waiting");
@@ -110,7 +122,11 @@ public class PlayerPawn : Pawn
 
     public override void Jump(bool s)
     {
-        if(s)
+        if (ObjectUsing)
+        {
+            return;
+        }
+        if (s)
         {
             Debug.Log("Jump in Player Pawn");
             if (IsGrounded)
@@ -126,10 +142,10 @@ public class PlayerPawn : Pawn
     public override void Interact(bool e)
     {
         //how guards interact with prisoners will be different system
-        if (e && !ObjectUsing &&  (Intereactables.Count != 0))
+        if (e && !ObjectUsing &&  (Interactables.Count != 0))
         {
             Debug.Log($"pressed e: {e} ");
-            if(Intereactables[0].IsInUse())
+            if(Interactables[0].IsInUse())
             {
                 Debug.Log("object is in use");
                 //will need to add code here later to indicate the object is in use
@@ -137,7 +153,7 @@ public class PlayerPawn : Pawn
             else
             {
                 
-                ObjectUsing = Intereactables[0];
+                ObjectUsing = Interactables[0];
                 //if you impliment bots this is going to fail
                 ObjectUsing.Use((PlayerController)control);
 
@@ -152,6 +168,7 @@ public class PlayerPawn : Pawn
         if (escape && ObjectUsing)
         {
             ObjectUsing.Done();
+            ObjectUsing = null;
         }
       
     }

@@ -177,6 +177,9 @@ MonoBehaviour:
   InvertCamVerticle: 1
   IsGrounded: 1
   JumpSpeed: 3
+  Interactables: []
+  ObjectUsing: {fileID: 0}
+  InteractE: 0
 --- !u!54 &5926415598873321968
 Rigidbody:
   m_ObjectHideFlags: 0

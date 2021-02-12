@@ -114,11 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f027d33d253d8a745bec108f42641262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePanel: {fileID: 8869589392426228653}
-  Item: {fileID: 0}
+  HUDPanelToAttach: {fileID: 0}
   IsPanelActive: 0
   labelObject: {fileID: 859861221693332175}
-  InUse: 0
 --- !u!65 &859861221071382148
 BoxCollider:
   m_ObjectHideFlags: 0
