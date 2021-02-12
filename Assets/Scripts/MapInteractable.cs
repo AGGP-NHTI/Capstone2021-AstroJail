@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using MLAPI.Messaging;
 using MLAPI;
 
 public class MapInteractable : NetworkedBehaviour
 {
-
+    public GameObject Label;
     protected PlayerController UsingPlayer;
 
     public void OnTriggerEnter(Collider other)
@@ -14,7 +15,9 @@ public class MapInteractable : NetworkedBehaviour
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
         {
-            Player.Intereactables.Add(this);
+            Player.Interactables.Add(this);
+            Label.SetActive(true);
+            Debug.Log("Detected Player");
         }
         //may need to do more code to do operations on local client only 
     }
@@ -23,7 +26,9 @@ public class MapInteractable : NetworkedBehaviour
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
         {
-            Player.Intereactables.Remove(this);
+            Player.Interactables.Remove(this);
+            Label.SetActive(false);
+            Debug.Log("Player Left Vicinity");
         }
         //may need to do more code to do operations on local client only 
     }

@@ -1692,6 +1692,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031690118}
   m_CullTransparentMesh: 0
+--- !u!1 &1074646498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 859861221693332175, guid: 5f9176971ec78b44482f50f32d009135,
+    type: 3}
+  m_PrefabInstance: {fileID: 859861221967539957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1194601673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,11 +2055,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxItems: 5
   startingItems:
-  - {fileID: 11400000, guid: 41ee94e3f7df6d7419b9a0d722167a26, type: 2}
-  - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}
-  - {fileID: 11400000, guid: 1aaf0c30a86f46145bec2bbd561e72e1, type: 2}
-  - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
   - {fileID: 11400000, guid: 3643e7e01a231c24786d53abcb2538b8, type: 2}
+  - {fileID: 11400000, guid: fa68342b0a031fa4297239bf826d0353, type: 2}
+  - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
+  - {fileID: 11400000, guid: 1aaf0c30a86f46145bec2bbd561e72e1, type: 2}
+  - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}
   ItemsInContainer: []
   thePlayer: {fileID: 0}
 --- !u!43 &1545777511
@@ -2062,7 +2068,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25504
+  m_Name: pb_Mesh14906
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2590,6 +2596,16 @@ PrefabInstance:
       propertyPath: gamePannel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 859861221071382151, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: textScreen
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 859861221071382151, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: Label
+      value: 
+      objectReference: {fileID: 1074646498}
     - target: {fileID: 3853060938209035162, guid: 5f9176971ec78b44482f50f32d009135,
         type: 3}
       propertyPath: m_LocalPosition.z

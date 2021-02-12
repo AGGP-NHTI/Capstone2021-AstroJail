@@ -60,7 +60,7 @@ public class Containers : MonoBehaviour
         {
             if (thePlayer.playerInventory.itemCount >= thePlayer.playerInventory.MaxItems)
             {
-                Debug.LogError($"{thePlayer} invetory is full");
+                Debug.LogError($"{thePlayer} inventory is full");
             }
             else { thePlayer.playerInventory.Additem(TakeItem(1)); }                     
         }

@@ -15,10 +15,11 @@ MonoBehaviour:
   itemId: 0
   ItemName: Danger Something
   ObjectModel: {fileID: 0}
-  itemDescription: '*insert something here* (if every prisoner has a danger something
-    they will lose and unlock achievement: making something out of nothing'
+  itemDescription: ' If all prisoners have a DangerSomething in their inventory they
+    gain the Achievement: "making something out of nothings a danger" and lose the
+    game'
   hasEffect: 0
-  isContraband: 1
+  isContraband: 0
   isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}

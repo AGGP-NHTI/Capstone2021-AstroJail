@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
 
-public class ItemContainers : MapInteractable
+public class GenericStash : MapInteractable
 {
 
     //rename this to Generic Stash 
@@ -20,9 +20,9 @@ public class ItemContainers : MapInteractable
     public GameObject labelObject;
     Containers container;
 
-    //order of operations that are happening as things are being interacte with 
+    //order of operations that are happening as things are being interacted with 
     //-------------------------------------------------------------------------
-    //this is acrossed multiple scripts and both client and server
+    //this is across multiple scripts and both client and server
     //1.) local: player walks into the interactable trigger 
     //2.) player now knows that it can interact with object 
     //3.) local player hits e to interact
@@ -32,16 +32,19 @@ public class ItemContainers : MapInteractable
     //     on client this ends the interaction with object 
     //6b.) if not in use: set up so that that player is using it by set usingPlayer to requested player 
     //6c.) tell local requesting player they can use interactable || server to client rpc 
+
     //7.) local player now knows they are using an object 
     //8.) for the container it now needs to add the panel to the local player 
     //9.) panel will run interactions between containers and what not 
     //9a.) this is an abstraction and these interactions will require thei rown client and server interactions 
+
     //10.) local player hits escape 
     //11.) done gets called locally 
-    //11a.) on client: panle gets removed. using object gets set to null. 
+    //11a.) on client: panel gets removed. using object gets set to null. 
+
     //12.) done called on server
-    //12a.) on server: UsingPlayer gets set to null.
-    //13.) this ends the interaction 
+    //12a.) On server: UsingPlayer gets set to null.
+    //13.) This ends the interaction 
 
 
     // this set of operations above dont include accounting for 
@@ -68,16 +71,12 @@ public class ItemContainers : MapInteractable
         labelObject.SetActive(false);
     }
 
-
-
-
-
     public override bool OnUse(PlayerController user)
     {
         Debug.Log("we are in Open container");     
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-
+        container.thePlayer = (PlayerPawn)user.myPawn;
         if(IsServer)
          {
              InvokeClientRpcOnEveryone(Client_InUse);
@@ -93,6 +92,7 @@ public class ItemContainers : MapInteractable
     {
         Debug.Log("we are in close container");       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+        UsingPlayer = null;
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
@@ -102,8 +102,10 @@ public class ItemContainers : MapInteractable
             InvokeServerRpc(Server_StopUse);
         }
         return true;
-
     }
+
+
+
     [ClientRPC]
     public void Client_InUse()
     {
