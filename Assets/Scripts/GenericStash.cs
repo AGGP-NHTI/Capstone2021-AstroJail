@@ -13,8 +13,8 @@ public class GenericStash : MapInteractable
 
     //rename this to Generic Stash 
     //this goes on a mapInteractable that a player can go up to and grab or place an item into 
-    
 
+   
     public GameObject HUDPanelToAttach;
     public bool IsPanelActive = false;
     public GameObject labelObject;
@@ -84,7 +84,15 @@ public class GenericStash : MapInteractable
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
         container.thePlayer = (PlayerPawn)user.myPawn;
-        if(IsServer)
+
+        
+        //this creates the itemhud and gives the items in container
+        GameObject TransferData = Instantiate(HUDPanelToAttach);
+        TransferData.GetComponent<NetworkedObject>().Spawn();
+        TransferData.GetComponent<ContainerHUD>()._container = container;
+        TransferData.GetComponent<ContainerHUD>()._player = user;
+       
+        if (IsServer)
          {
              InvokeClientRpcOnEveryone(Client_InUse);
          }

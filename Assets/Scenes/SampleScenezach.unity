@@ -352,6 +352,9 @@ MonoBehaviour:
     - Prefab: {fileID: 9154986995550128394, guid: ec985acb1647aca419a5235fd1728c99,
         type: 3}
       PlayerPrefab: 0
+    - Prefab: {fileID: 9216868701305490912, guid: 83b15502a5d39bf498b286a1dd39a019,
+        type: 3}
+      PlayerPrefab: 0
     PlayerPrefabHash:
       Value: 17136045542841574506
     CreatePlayerPrefab: 1
@@ -2096,7 +2099,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301661808}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6252375, y: 1.4659295, z: 2.7302818}
@@ -2113,11 +2116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f027d33d253d8a745bec108f42641262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePanel: {fileID: 0}
-  Item: {fileID: 0}
+  Label: {fileID: 1890071610}
+  HUDPanelToAttach: {fileID: 9216868701305490912, guid: 83b15502a5d39bf498b286a1dd39a019,
+    type: 3}
   IsPanelActive: 0
   labelObject: {fileID: 1890071610}
-  InUse: 0
 --- !u!54 &1301661811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2235,7 +2238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14712
+  m_Name: pb_Mesh15748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
