@@ -70,6 +70,13 @@ public class GenericStash : MapInteractable
         container = gameObject.GetComponent<Containers>();
         labelObject.SetActive(false);
     }
+    private void Update()
+    {
+        if (labelObject.activeSelf)
+        {
+            labelObject.transform.rotation = Quaternion.LookRotation(labelObject.transform.position - Camera.main.transform.position);
+        }
+    }
 
     public override bool OnUse(PlayerController user)
     {

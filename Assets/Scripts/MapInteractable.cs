@@ -10,6 +10,8 @@ public class MapInteractable : NetworkedBehaviour
     public GameObject Label;
     protected PlayerController UsingPlayer;
 
+
+
     public void OnTriggerEnter(Collider other)
     {
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
@@ -33,7 +35,7 @@ public class MapInteractable : NetworkedBehaviour
         //may need to do more code to do operations on local client only 
     }
 
-    public  bool Use(PlayerController user)
+    public bool Use(PlayerController user)
     {
         if(UsingPlayer)
         {
@@ -42,7 +44,8 @@ public class MapInteractable : NetworkedBehaviour
         UsingPlayer = user;
         return OnUse(user);
     }
-    public  bool Done()
+
+    public bool Done()
     {
         UsingPlayer = null;
         return OnDone();
