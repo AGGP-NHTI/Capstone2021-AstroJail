@@ -15,14 +15,16 @@ public class ContainerHUD : NetworkedBehaviour
 
     //make sure the button corresponds with the number (we might need a list of buttons)
 
-    // Start is called before the first frame update
+    
     void Start()
     {
+        
         // access both containers to get the items for both the player and container (should have sprites associated with them)
         //      Set PlayerInv and ContainerInv to there corresponding accessed containers
         //      Populate UI with those items 
         // Make Container Panel Appear
     }
+
 
 
     public void TakeItem()
