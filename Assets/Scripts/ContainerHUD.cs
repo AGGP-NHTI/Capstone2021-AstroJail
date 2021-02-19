@@ -18,7 +18,7 @@ public class ContainerHUD : NetworkedBehaviour
 
     public List<Button> Containerbuttons;
     public List<Button> Playerbuttons;
-    int i = 0;
+
   
     //make sure the button corresponds with the number (we might need a list of buttons)
     void Start()
@@ -31,40 +31,84 @@ public class ContainerHUD : NetworkedBehaviour
         // Make Container Panel Appear
     }
 
-   
 
-    public void TakeItem()
+
+    public void TakeItem(int i)
     {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
+        if (!tempPawn)
+        {
+            // debug if no player is set dont do stuff
+            return;
+        }
+
+        if (tempPawn.playerInventory.itemCount >= tempPawn.playerInventory.MaxItems)
+        {
+            Debug.LogError($"{tempPawn} inventory is full");
+        }
+        else { tempPawn.playerInventory.Additem(_container.TakeItem(i)); }
+
         UpdateList();
     }
 
     public void AddItem(int i)
     {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
+        if (!tempPawn)
+        {
+            // debug if no player is set dont do stuff
+            return;
+        }
+
+        if (_container.ItemsInContainer.Count >= _container.MaxItems)
+        {
+            Debug.LogError($"{tempPawn} inventory is full");
+        }
+        else { _container.Additem(tempPawn.playerInventory.TakeItem(i)); }
         UpdateList();
 
     }
     public void UpdateList()
     {
+        int i = 0;
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
+        //Containerbuttons.Clear();
+        //Playerbuttons.Clear();
 
+        for (int buttons = 0; buttons < 5; buttons++)
+        {
+            Containerbuttons[buttons].gameObject.SetActive(false);
+            Containerbuttons[buttons].onClick.RemoveAllListeners();
+            Playerbuttons[buttons].gameObject.SetActive(false);
+            Playerbuttons[buttons].onClick.RemoveAllListeners();
+        }
         foreach (ItemDefinition items in _container.ItemsInContainer)
         {
             Containerbuttons[i].gameObject.SetActive(true);
-            Containerbuttons[i].onClick.AddListener(() => AddItem(i));
+            int x = new int();
+            x = i;
+            Containerbuttons[i].onClick.AddListener(() => TakeItem(x));
             Containerbuttons[i].image.sprite = items.imageArt;
             i++;
+            
         }
         i = 0;
         foreach (ItemDefinition items in PlayerInv)
         {
             Playerbuttons[i].gameObject.SetActive(true);
-            Playerbuttons[i].onClick.AddListener(() => AddItem(i));
+            int x = new int();
+            x = i;
+            Playerbuttons[i].onClick.AddListener(() => AddItem(x));
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
-
+            
         }
+        
+        
     }
 
 }

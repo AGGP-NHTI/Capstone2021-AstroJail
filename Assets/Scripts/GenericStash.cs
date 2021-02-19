@@ -19,6 +19,7 @@ public class GenericStash : MapInteractable
     public bool IsPanelActive = false;
     public GameObject labelObject;
     Containers container;
+    public GameObject HudReference;
 
     //order of operations that are happening as things are being interacted with 
     //-------------------------------------------------------------------------
@@ -87,10 +88,10 @@ public class GenericStash : MapInteractable
 
         
         //this creates the itemhud and gives the items in container
-        GameObject TransferData = Instantiate(HUDPanelToAttach);
-        TransferData.GetComponent<NetworkedObject>().Spawn();
-        TransferData.GetComponent<ContainerHUD>()._container = container;
-        TransferData.GetComponent<ContainerHUD>()._player = user;
+        HudReference = Instantiate(HUDPanelToAttach);
+        HudReference.GetComponent<NetworkedObject>().Spawn();
+        HudReference.GetComponent<ContainerHUD>()._container = container;
+        HudReference.GetComponent<ContainerHUD>()._player = user;
        
         if (IsServer)
          {
@@ -108,6 +109,12 @@ public class GenericStash : MapInteractable
         Debug.Log("we are in close container");       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
+        if(HudReference)
+        {
+            Debug.Log(HudReference);
+            Destroy(HudReference);
+            Debug.Log(HudReference);
+        }
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
