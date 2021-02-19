@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerPawn : Pawn
 {
 
-    public int maxInventory = 5;
+    public int maxInventory;
     protected Containers _PlayerInventory;
  
 

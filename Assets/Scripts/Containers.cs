@@ -6,7 +6,7 @@ using UnityEngine;
 public class Containers : MonoBehaviour
 {
 
-    public int MaxItems = 5;
+    public int MaxItems;
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> ItemsInContainer;
 

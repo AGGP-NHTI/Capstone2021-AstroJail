@@ -30,9 +30,15 @@ public class ContainerHUD : NetworkedBehaviour
         //      Populate UI with those items 
         // Make Container Panel Appear
     }
+    
 
 
-
+    public void CloseButtom()
+    {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        _container.gameObject.GetComponent<GenericStash>().OnDone();
+        tempPawn.ObjectUsing = null;
+    }
     public void TakeItem(int i)
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
@@ -79,7 +85,7 @@ public class ContainerHUD : NetworkedBehaviour
         //Containerbuttons.Clear();
         //Playerbuttons.Clear();
 
-        for (int buttons = 0; buttons < 5; buttons++)
+        for (int buttons = 0; buttons < 6; buttons++)
         {
             Containerbuttons[buttons].gameObject.SetActive(false);
             Containerbuttons[buttons].onClick.RemoveAllListeners();

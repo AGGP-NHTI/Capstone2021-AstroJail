@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: 2
   ItemName: diet soda
   ObjectModel: {fileID: 0}
+  imageArt: {fileID: 21300000, guid: 1ce6879cd38afcc45b6fbbd184f279cb, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 1
   isContraband: 1

@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxItems: 2
+  MaxItems: 6
   startingItems: []
   ItemsInContainer: []
   thePlayer: {fileID: 0}
