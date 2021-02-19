@@ -51,19 +51,7 @@ public class Containers : MonoBehaviour
 
     public void debugTake()
     {
-        if(!thePlayer)
-        {
-            // debug if no player is set dont do stuff
-            return;
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (thePlayer.playerInventory.itemCount >= thePlayer.playerInventory.MaxItems)
-            {
-                Debug.LogError($"{thePlayer} inventory is full");
-            }
-            else { thePlayer.playerInventory.Additem(TakeItem(1)); }                     
-        }
+      
     }
 
     //this may not be the version/method we want to use :subject to change
