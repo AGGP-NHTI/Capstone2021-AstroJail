@@ -49,7 +49,7 @@ public class Containers : MonoBehaviour
         debugTake();
     }
 
-    private void debugTake()
+    public void debugTake()
     {
         if(!thePlayer)
         {

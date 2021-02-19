@@ -23,6 +23,28 @@ public class ContainerHUD : NetworkedBehaviour
     //make sure the button corresponds with the number (we might need a list of buttons)
     void Start()
     {
+        UpdateList();
+
+        // access both containers to get the items for both the player and container (should have sprites associated with them)
+        //      Set PlayerInv and ContainerInv to there corresponding accessed containers
+        //      Populate UI with those items 
+        // Make Container Panel Appear
+    }
+
+   
+
+    public void TakeItem()
+    {
+        UpdateList();
+    }
+
+    public void AddItem(int i)
+    {
+        UpdateList();
+
+    }
+    public void UpdateList()
+    {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
@@ -35,7 +57,7 @@ public class ContainerHUD : NetworkedBehaviour
             i++;
         }
         i = 0;
-        foreach(ItemDefinition items in PlayerInv)
+        foreach (ItemDefinition items in PlayerInv)
         {
             Playerbuttons[i].gameObject.SetActive(true);
             Playerbuttons[i].onClick.AddListener(() => AddItem(i));
@@ -43,29 +65,6 @@ public class ContainerHUD : NetworkedBehaviour
             i++;
 
         }
-
-        // access both containers to get the items for both the player and container (should have sprites associated with them)
-        //      Set PlayerInv and ContainerInv to there corresponding accessed containers
-        //      Populate UI with those items 
-        // Make Container Panel Appear
-    }
-
-   
-
-    public void TakeItem()
-    {
-        //use ItemAt
-        //get the integer of where the item is at the list
-        //pass the int to the TakeItem() function
-        //Will return the item to add
-        //PlayerInventory.Add()
-    }
-
-    public void AddItem(int i)
-    {
-        //Hud needs to remove item from the player inventory
-        //Needs to add the item to the container inventory
-
     }
 
 }
