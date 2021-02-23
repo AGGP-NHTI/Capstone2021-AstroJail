@@ -122,6 +122,7 @@ public class GenericStash : MapInteractable
         Debug.Log("we are in close container");       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
+        container.thePlayer = null;
         if(HudReference)
         {
             Debug.Log(HudReference);
