@@ -35,19 +35,22 @@ public class PlayerVent : MapInteractable
     public override bool OnUse(PlayerController user)
     {
         PlayerPawn tempPawn = (PlayerPawn)user.myPawn;
-        if (CooldownTimer > 0)
+        if (tempPawn.playerType == PlayerType.Prisoner)
         {
-            UsingPlayer = null;
-            tempPawn.ObjectUsing = null;
+
+            if (CooldownTimer > 0)
+            {
+                return false;
+            }
+            tempPawn.transform.position = endPoint.transform.position;
+            CooldownTimer = maxCooldown;
+
             return false;
         }
-        UsingPlayer = null;
-
-        tempPawn.transform.position = endPoint.transform.position;
-        tempPawn.ObjectUsing = null;
-        CooldownTimer = maxCooldown;
-        
-        return true;
+        else
+        {
+            return false;
+        }
     }
 
     public void OnCooldown()

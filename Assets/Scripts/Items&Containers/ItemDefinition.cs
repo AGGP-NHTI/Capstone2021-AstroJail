@@ -19,7 +19,7 @@ public class ItemDefinition : ScriptableObject
     public List<itemEffects> Effects;
 
     public Containers startingLocation = null;
-
+    
     public List<ItemDefinition> Recipe;
 }
 

@@ -317,8 +317,8 @@ MonoBehaviour:
   ServerWebsocketListenPort: 1234
   SupportWebsocket: 1
   Channels: []
-  UseMLAPIRelay: 0
-  MLAPIRelayAddress: 18.218.176.161
+  UseMLAPIRelay: 1
+  MLAPIRelayAddress: 3.18.212.220
   MLAPIRelayPort: 8888
 --- !u!114 &349739817
 MonoBehaviour:
