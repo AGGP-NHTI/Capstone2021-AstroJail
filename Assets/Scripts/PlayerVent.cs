@@ -30,7 +30,6 @@ public class PlayerVent : MapInteractable
         {
             Label.transform.rotation = Quaternion.LookRotation(Label.transform.position - Camera.main.transform.position);
         }
-
     }
 
     public override bool OnUse(PlayerController user)
