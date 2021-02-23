@@ -14,7 +14,20 @@ public class MapInteractable : NetworkedBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        InvokeClientRpcOnClient(ClientTriggerEnter, OwnerClientId, other);
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        if (p)
+        {
+            if (p.control)
+            {
+                if (p.control.IsLocalPlayer)
+                {
+                    p.Interactables.Add(this);
+                    Label.SetActive(true);
+                    Debug.Log("Detected Player");
+
+                }
+            }
+        }
         /*
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
@@ -28,7 +41,20 @@ public class MapInteractable : NetworkedBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        InvokeClientRpcOnClient(ClientTriggerExit, OwnerClientId, other);
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        if (p)
+        {
+            if (p.control)
+            {
+                if (p.control.IsLocalPlayer)
+                {
+                    p.Interactables.Remove(this);
+                    Label.SetActive(false);
+                    Debug.Log("Player Left Vicinity");
+
+                }
+            }
+        }
         /*
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
@@ -88,7 +114,7 @@ public class MapInteractable : NetworkedBehaviour
             Debug.Log("Detected Player");
         }
     }
-
+    [ClientRPC]
     private void ClientTriggerExit(Collider other)
     {
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
