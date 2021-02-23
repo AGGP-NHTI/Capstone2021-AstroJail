@@ -28,16 +28,6 @@ public class MapInteractable : NetworkedBehaviour
                 }
             }
         }
-        /*
-        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
-        if (Player)
-        {
-            Player.Interactables.Add(this);
-            Label.SetActive(true);
-            Debug.Log("Detected Player");
-        }
-        */
-        //may need to do more code to do operations on local client only 
     }
     public void OnTriggerExit(Collider other)
     {
@@ -55,18 +45,6 @@ public class MapInteractable : NetworkedBehaviour
                 }
             }
         }
-        /*
-        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
-        if (Player)
-        {
-            Player.Interactables.Remove(this);
-            Label.SetActive(false);
-            Debug.Log("Player Left Vicinity");
-        }
-        */
-
-        //may need to do more code to do operations on local client only 
-
     }
 
     public bool Use(PlayerController user)
@@ -76,19 +54,35 @@ public class MapInteractable : NetworkedBehaviour
             return false;
         }
         UsingPlayer = user;
-        return OnUse(user);
+
+        if(OnUse(user))
+        {
+            return true;
+        }
+        else
+        {
+            Done();
+            return false;
+        }         
     }
 
     public bool Done()
     {
+        //Always called from PlayerPawn
         UsingPlayer = null;
         return OnDone();
     }
 
+    /// <summary>
+    /// The OnUse method return value is the deciding factor for whether or not the PlayerPawn movement will be locked, Return false to keep free movement, return true to lock the player down.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     public virtual bool OnUse(PlayerController user)
     {
-        return true;
+        return false;
     }
+
     public virtual bool OnDone()
     {
         return true;
@@ -102,29 +96,6 @@ public class MapInteractable : NetworkedBehaviour
         return UsingPlayer;
     }
 
-    [ClientRPC]
-
-    private void ClientTriggerEnter(Collider other)
-    {
-        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
-        if (Player)
-        {
-            Player.Interactables.Add(this);
-            Label.SetActive(true);
-            Debug.Log("Detected Player");
-        }
-    }
-    [ClientRPC]
-    private void ClientTriggerExit(Collider other)
-    {
-        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
-        if (Player)
-        {
-            Player.Interactables.Remove(this);
-            Label.SetActive(false);
-            Debug.Log("Player Left Vicinity");
-        }
-    }
 
 
 }

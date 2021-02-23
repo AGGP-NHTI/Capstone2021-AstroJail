@@ -152,11 +152,10 @@ public class PlayerPawn : Pawn
             }
             else
             {
-                
-                ObjectUsing = Interactables[0];
-                //if you impliment bots this is going to fail
-                ObjectUsing.Use((PlayerController)control);
-
+                if (Interactables[0].Use((PlayerController)control))
+                {
+                    ObjectUsing = Interactables[0];
+                }    
             }
         }
 
@@ -167,10 +166,14 @@ public class PlayerPawn : Pawn
        
         if (escape && ObjectUsing)
         {
-            ObjectUsing.Done();
-            ObjectUsing = null;
+            EndInteract();
         }
       
+    }
+    public override void EndInteract()
+    {
+        ObjectUsing.Done();
+        ObjectUsing = null;
     }
 
 

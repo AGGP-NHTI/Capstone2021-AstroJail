@@ -7,10 +7,11 @@ public class Pawn : Actor
 {
     public Controller control;
     public GameObject CameraControl;
+    public PlayerType playerType = PlayerType.Prisoner;
     public void Possessed(Controller c)
     {
         control = c;
-
+        
         OnPossessed();
 
         NetworkedObject NetObj = gameObject.GetComponent<NetworkedObject>();
@@ -54,6 +55,10 @@ public class Pawn : Actor
 
     }
     public virtual void Close(bool escape)
+    {
+
+    }
+    public virtual void EndInteract()
     {
 
     }
