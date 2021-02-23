@@ -8,13 +8,10 @@ using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
 
-public class GenericStash : MapInteractable
+public class CraftingStash : MapInteractable
 {
 
-    //rename this to Generic Stash 
-    //this goes on a mapInteractable that a player can go up to and grab or place an item into 
 
-   
     public GameObject HUDPanelToAttach;
     public bool IsPanelActive = false;
     public GameObject labelObject;
@@ -81,35 +78,35 @@ public class GenericStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        Debug.Log("we are in Open container");     
+        Debug.Log("we are in Open container");
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
         container.thePlayer = (PlayerPawn)user.myPawn;
 
-        
+
         //this creates the itemhud and gives the items in container
         HudReference = Instantiate(HUDPanelToAttach);
         HudReference.GetComponent<NetworkedObject>().Spawn();
-        HudReference.GetComponent<ContainerHUD>()._container = container;
-        HudReference.GetComponent<ContainerHUD>()._player = user;
-       
+        HudReference.GetComponent<CraftingHUD>()._container = container;
+        HudReference.GetComponent<CraftingHUD>()._player = user;
+
         if (IsServer)
-         {
-             InvokeClientRpcOnEveryone(Client_InUse);
-         }
-         else
-         {
-             InvokeServerRpc(Server_InUse);
-         }
+        {
+            InvokeClientRpcOnEveryone(Client_InUse);
+        }
+        else
+        {
+            InvokeServerRpc(Server_InUse);
+        }
         return true;
     }
 
     public override bool OnDone()
     {
-        Debug.Log("we are in close container");       
+        Debug.Log("we are in close container");
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
-        if(HudReference)
+        if (HudReference)
         {
             Debug.Log(HudReference);
             Destroy(HudReference);
@@ -131,28 +128,24 @@ public class GenericStash : MapInteractable
     [ClientRPC]
     public void Client_InUse()
     {
-       
+
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     public void Client_StopUse()
     {
-       
+
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
-        
+
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
-       
+
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
 }
-
-//This Script can look at whats in containers
-//This script will also call from TakeItem and AddItem
-//enum that checks for guard or prisoner

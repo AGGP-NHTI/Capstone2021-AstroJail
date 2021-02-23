@@ -22,3 +22,6 @@ MonoBehaviour:
   isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}
+  Recipe:
+  - {fileID: 11400000, guid: 41ee94e3f7df6d7419b9a0d722167a26, type: 2}
+  - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}

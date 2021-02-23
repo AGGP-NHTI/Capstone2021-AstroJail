@@ -14,6 +14,21 @@ public class MapInteractable : NetworkedBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        if (p)
+        {
+            if (p.control)
+            {
+                if (p.control.IsLocalPlayer)
+                {
+                    p.Interactables.Add(this);
+                    Label.SetActive(true);
+                    Debug.Log("Detected Player");
+
+                }
+            }
+        }
+        /*
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
         {
@@ -21,10 +36,26 @@ public class MapInteractable : NetworkedBehaviour
             Label.SetActive(true);
             Debug.Log("Detected Player");
         }
+        */
         //may need to do more code to do operations on local client only 
     }
     public void OnTriggerExit(Collider other)
     {
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        if (p)
+        {
+            if (p.control)
+            {
+                if (p.control.IsLocalPlayer)
+                {
+                    p.Interactables.Remove(this);
+                    Label.SetActive(false);
+                    Debug.Log("Player Left Vicinity");
+
+                }
+            }
+        }
+        /*
         PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
         if (Player)
         {
@@ -32,7 +63,10 @@ public class MapInteractable : NetworkedBehaviour
             Label.SetActive(false);
             Debug.Log("Player Left Vicinity");
         }
+        */
+
         //may need to do more code to do operations on local client only 
+
     }
 
     public bool Use(PlayerController user)
@@ -68,6 +102,29 @@ public class MapInteractable : NetworkedBehaviour
         return UsingPlayer;
     }
 
+    [ClientRPC]
+
+    private void ClientTriggerEnter(Collider other)
+    {
+        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
+        if (Player)
+        {
+            Player.Interactables.Add(this);
+            Label.SetActive(true);
+            Debug.Log("Detected Player");
+        }
+    }
+    [ClientRPC]
+    private void ClientTriggerExit(Collider other)
+    {
+        PlayerPawn Player = other.gameObject.GetComponent<PlayerPawn>();
+        if (Player)
+        {
+            Player.Interactables.Remove(this);
+            Label.SetActive(false);
+            Debug.Log("Player Left Vicinity");
+        }
+    }
 
 
 }
