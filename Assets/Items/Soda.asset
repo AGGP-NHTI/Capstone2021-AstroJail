@@ -16,10 +16,14 @@ MonoBehaviour:
   ItemName: 'Soda Test '
   ObjectModel: {fileID: 923791832117716685, guid: ca2d9f7a17e13cf4cbe3076598ea9a20,
     type: 3}
+  imageArt: {fileID: 0}
   itemDescription: insert Degen Humor Here
   hasEffect: 1
   isContraband: 0
-  isCrafted: 1
+  isCrafted: 0
   Effects:
   - {fileID: 0}
   startingLocation: {fileID: 0}
+  Recipe:
+  - {fileID: 0}
+  - {fileID: 0}

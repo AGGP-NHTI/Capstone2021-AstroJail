@@ -15,9 +15,11 @@ MonoBehaviour:
   itemId: 0
   ItemName: Nothing
   ObjectModel: {fileID: 0}
+  imageArt: {fileID: 0}
   itemDescription: 'othing how does it feel does it feel '
   hasEffect: 0
   isContraband: 0
   isCrafted: 0
   Effects: []
   startingLocation: {fileID: 0}
+  Recipe: []

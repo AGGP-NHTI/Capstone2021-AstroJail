@@ -7,18 +7,19 @@ using UnityEngine.UI;
 
 public class ItemDefinition : ScriptableObject
 {
-    public int  itemId=-1;
-    public string ItemName="Default Name";
+    public int itemId = -1;
+    public string ItemName = "Default Name";
     public GameObject ObjectModel;
     public Sprite imageArt;
     public string itemDescription = "insert Degen Humor Here";
-    public bool hasEffect=false;
-    public bool isContraband= false;
-    public bool isCrafted=false;
+    public bool hasEffect = false;
+    public bool isContraband = false;
+    public bool isCrafted = false;
 
     public List<itemEffects> Effects;
 
     public Containers startingLocation = null;
-  
+
+    public List<ItemDefinition> Recipe;
 }
 
