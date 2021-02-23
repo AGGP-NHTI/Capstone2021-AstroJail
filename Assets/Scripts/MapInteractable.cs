@@ -14,14 +14,17 @@ public class MapInteractable : NetworkedBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Pawn p = other.gameObject.GetComponentInParent<Pawn>();
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
         if (p)
         {
             if (p.control)
             {
                 if (p.control.IsLocalPlayer)
                 {
+                    p.Interactables.Add(this);
                     Label.SetActive(true);
+                    Debug.Log("Detected Player");
+
                 }
             }
         }
@@ -38,14 +41,17 @@ public class MapInteractable : NetworkedBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        Pawn p = other.gameObject.GetComponentInParent<Pawn>();
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
         if (p)
         {
             if (p.control)
             {
                 if (p.control.IsLocalPlayer)
                 {
+                    p.Interactables.Remove(this);
                     Label.SetActive(false);
+                    Debug.Log("Player Left Vicinity");
+
                 }
             }
         }
