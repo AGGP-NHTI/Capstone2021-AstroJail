@@ -16,6 +16,8 @@ public class CraftingHUD : NetworkedBehaviour
     public List<Button> Containerbuttons;
     public List<Button> Playerbuttons;
     public Button CraftedItems;
+    public recipes craftecCheck;
+    bool Crafting = true;
 
 
     //make sure the button corresponds with the number (we might need a list of buttons)
@@ -71,6 +73,26 @@ public class CraftingHUD : NetworkedBehaviour
         UpdateList();
 
     }
+
+    public void CraftItem()
+    {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        while (tempPawn.ObjectUsing)
+        {
+
+            foreach (ItemDefinition Pitems in _container.ItemsInContainer)
+            {
+                foreach (ItemDefinition items in craftecCheck.AllCraftedItems)
+                {
+
+
+                }
+
+            }
+        }
+
+    }
+    
     public void UpdateList()
     {
         int i = 0;
