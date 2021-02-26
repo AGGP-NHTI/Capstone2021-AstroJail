@@ -94,16 +94,14 @@ public class GenericStash : MapInteractable
             if (HUDPanelToAttach.GetComponent<ContainerHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
-                HudReference.GetComponent<NetworkedObject>().NetworkShow(user.OwnerClientId);
-                HudReference.GetComponent<NetworkedObject>().Spawn();
+                //HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<ContainerHUD>()._container = container;
                 HudReference.GetComponent<ContainerHUD>()._player = user;
             }
             else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
-                HudReference.GetComponent<NetworkedObject>().NetworkShow(user.OwnerClientId);
-                HudReference.GetComponent<NetworkedObject>().Spawn();
+                //HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<CraftingHUD>()._container = container;
                 HudReference.GetComponent<CraftingHUD>()._player = user;
             }
