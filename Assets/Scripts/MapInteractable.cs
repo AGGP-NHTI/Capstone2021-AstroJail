@@ -49,12 +49,12 @@ public class MapInteractable : NetworkedBehaviour
 
     public bool Use(PlayerController user)
     {
-
         if (UsingPlayer)
         {
             return false;
         }
-        UsingPlayer = user;
+
+        InvokeClientRpcOnEveryone(InteractableStartUse, user);
 
         if (OnUse(user))
         {
@@ -71,7 +71,7 @@ public class MapInteractable : NetworkedBehaviour
     public bool Done()
     {
         //Always called from PlayerPawn
-        UsingPlayer = null;
+        InvokeClientRpcOnEveryone(InteractableStopUse);
         return OnDone();
     }
 
@@ -98,6 +98,16 @@ public class MapInteractable : NetworkedBehaviour
         return UsingPlayer;
     }
 
+    [ClientRPC]
+    public void InteractableStartUse(PlayerController user)
+    {
+        UsingPlayer = user;
+    }
 
+    [ClientRPC]
+    public void InteractableStopUse()
+    {
+        UsingPlayer = null;
+    }
 
 }
