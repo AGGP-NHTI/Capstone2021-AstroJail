@@ -106,13 +106,10 @@ public class GenericStash : MapInteractable
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_InUse);
-            InvokeClientRpcOnEveryone(Client_UpdateContainer, container);
-
         }
         else
         {
             InvokeServerRpc(Server_InUse);
-            InvokeServerRpc(Server_UpdateContainer, container);
         }
         return true;
     }
@@ -132,10 +129,12 @@ public class GenericStash : MapInteractable
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
+            InvokeClientRpcOnEveryone(Client_UpdateContainer, container);
         }
         else
         {
             InvokeServerRpc(Server_StopUse);
+            InvokeServerRpc(Server_UpdateContainer, container);
         }
         return true;
     }
