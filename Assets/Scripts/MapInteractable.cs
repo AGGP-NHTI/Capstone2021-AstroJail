@@ -54,7 +54,15 @@ public class MapInteractable : NetworkedBehaviour
             return false;
         }
 
-        InvokeClientRpcOnEveryone(InteractableStartUse, user);
+        if(IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_InteractableStartUse, user);
+        }
+        else
+        {
+            InvokeServerRpc(Server_InteractableStartUse, user);
+        }
+
 
         if (OnUse(user))
         {
@@ -71,7 +79,14 @@ public class MapInteractable : NetworkedBehaviour
     public bool Done()
     {
         //Always called from PlayerPawn
-        InvokeClientRpcOnEveryone(InteractableStopUse);
+        if (IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_InteractableStopUse);
+        }
+        else
+        {
+            InvokeServerRpc(Server_InteractableStopUse);
+        }
         return OnDone();
     }
 
@@ -99,15 +114,27 @@ public class MapInteractable : NetworkedBehaviour
     }
 
     [ClientRPC]
-    public void InteractableStartUse(PlayerController user)
+    public void Client_InteractableStartUse(PlayerController user)
     {
         UsingPlayer = user;
     }
 
     [ClientRPC]
-    public void InteractableStopUse()
+    public void Client_InteractableStopUse()
     {
         UsingPlayer = null;
     }
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_InteractableStartUse(PlayerController user)
+    {
+        UsingPlayer = user;
+    }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_InteractableStopUse()
+    {
+        UsingPlayer = null;
+    }
+
 
 }
