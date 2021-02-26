@@ -82,8 +82,7 @@ public class GenericStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        if (user.IsLocalPlayer)
-        {
+
             Debug.Log("we are in Open container");
             IsPanelActive = true;
             labelObject.GetComponent<TextMeshPro>().text = "In Use";
@@ -94,19 +93,15 @@ public class GenericStash : MapInteractable
             if (HUDPanelToAttach.GetComponent<ContainerHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
-                //HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<ContainerHUD>()._container = container;
                 HudReference.GetComponent<ContainerHUD>()._player = user;
             }
             else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
-                //HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<CraftingHUD>()._container = container;
                 HudReference.GetComponent<CraftingHUD>()._player = user;
             }
-
-
 
             if (IsServer)
             {
@@ -117,11 +112,6 @@ public class GenericStash : MapInteractable
                 InvokeServerRpc(Server_InUse);
             }
             return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public override bool OnDone()

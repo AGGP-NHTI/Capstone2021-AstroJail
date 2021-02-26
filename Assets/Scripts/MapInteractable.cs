@@ -49,30 +49,23 @@ public class MapInteractable : NetworkedBehaviour
 
     public bool Use(PlayerController user)
     {
-        if (user.IsLocalPlayer)
-        {
 
-
-            if (UsingPlayer)
-            {
-                return false;
-            }
-            UsingPlayer = user;
-
-            if (OnUse(user))
-            {
-                return true;
-            }
-            else
-            {
-                Done();
-                return false;
-            }
-        }
-        else
+        if (UsingPlayer)
         {
             return false;
         }
+        UsingPlayer = user;
+
+        if (OnUse(user))
+        {
+            return true;
+        }
+        else
+        {
+            Done();
+            return false;
+        }
+
     }
 
     public bool Done()
