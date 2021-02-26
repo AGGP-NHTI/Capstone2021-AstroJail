@@ -82,39 +82,48 @@ public class GenericStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        Debug.Log("we are in Open container");     
-        IsPanelActive = true;
-        labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        container.thePlayer = (PlayerPawn)user.myPawn;
-
-        
-        //this creates the itemhud and gives the items in container
-        if(HUDPanelToAttach.GetComponent<ContainerHUD>())
+        if (user.IsLocalPlayer)
         {
-            HudReference = Instantiate(HUDPanelToAttach);
-            HudReference.GetComponent<NetworkedObject>().Spawn();
-            HudReference.GetComponent<ContainerHUD>()._container = container;
-            HudReference.GetComponent<ContainerHUD>()._player = user;
+
+
+            Debug.Log("we are in Open container");
+            IsPanelActive = true;
+            labelObject.GetComponent<TextMeshPro>().text = "In Use";
+            container.thePlayer = (PlayerPawn)user.myPawn;
+
+
+            //this creates the itemhud and gives the items in container
+            if (HUDPanelToAttach.GetComponent<ContainerHUD>())
+            {
+                HudReference = Instantiate(HUDPanelToAttach);
+                HudReference.GetComponent<NetworkedObject>().Spawn();
+                HudReference.GetComponent<ContainerHUD>()._container = container;
+                HudReference.GetComponent<ContainerHUD>()._player = user;
+            }
+            else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
+            {
+                HudReference = Instantiate(HUDPanelToAttach);
+                HudReference.GetComponent<NetworkedObject>().Spawn();
+                HudReference.GetComponent<CraftingHUD>()._container = container;
+                HudReference.GetComponent<CraftingHUD>()._player = user;
+            }
+
+
+
+            if (IsServer)
+            {
+                InvokeClientRpcOnEveryone(Client_InUse);
+            }
+            else
+            {
+                InvokeServerRpc(Server_InUse);
+            }
+            return true;
         }
-        else if(HUDPanelToAttach.GetComponent<CraftingHUD>())
+        else
         {
-            HudReference = Instantiate(HUDPanelToAttach);
-            HudReference.GetComponent<NetworkedObject>().Spawn();
-            HudReference.GetComponent<CraftingHUD>()._container = container;
-            HudReference.GetComponent<CraftingHUD>()._player = user;
+            return false;
         }
-           
-
-
-        if (IsServer)
-         {
-             InvokeClientRpcOnEveryone(Client_InUse);
-         }
-         else
-         {
-             InvokeServerRpc(Server_InUse);
-         }
-        return true;
     }
 
     public override bool OnDone()
