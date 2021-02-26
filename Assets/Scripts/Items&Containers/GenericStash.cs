@@ -84,8 +84,6 @@ public class GenericStash : MapInteractable
     {
         if (user.IsLocalPlayer)
         {
-
-
             Debug.Log("we are in Open container");
             IsPanelActive = true;
             labelObject.GetComponent<TextMeshPro>().text = "In Use";
@@ -96,6 +94,7 @@ public class GenericStash : MapInteractable
             if (HUDPanelToAttach.GetComponent<ContainerHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
+                HudReference.GetComponent<NetworkedObject>().NetworkShow(user.OwnerClientId);
                 HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<ContainerHUD>()._container = container;
                 HudReference.GetComponent<ContainerHUD>()._player = user;
@@ -103,6 +102,7 @@ public class GenericStash : MapInteractable
             else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
             {
                 HudReference = Instantiate(HUDPanelToAttach);
+                HudReference.GetComponent<NetworkedObject>().NetworkShow(user.OwnerClientId);
                 HudReference.GetComponent<NetworkedObject>().Spawn();
                 HudReference.GetComponent<CraftingHUD>()._container = container;
                 HudReference.GetComponent<CraftingHUD>()._player = user;
@@ -157,10 +157,16 @@ public class GenericStash : MapInteractable
        
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
+    [ClientRPC]
     public void Client_StopUse()
     {
        
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+    }
+    [ClientRPC]
+    public void Client_InstantiateCanvas()
+    {
+
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
