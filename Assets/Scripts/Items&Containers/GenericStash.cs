@@ -82,46 +82,36 @@ public class GenericStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        if (user.IsLocalPlayer)
+
+        Debug.Log("we are in Open container");
+        IsPanelActive = true;
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
+        container.thePlayer = (PlayerPawn)user.myPawn;
+
+
+        //this creates the itemhud and gives the items in container
+        if (HUDPanelToAttach.GetComponent<ContainerHUD>())
         {
-            Debug.Log("we are in Open container");
-            IsPanelActive = true;
-            labelObject.GetComponent<TextMeshPro>().text = "In Use";
-            container.thePlayer = (PlayerPawn)user.myPawn;
+            HudReference = Instantiate(HUDPanelToAttach);
+            HudReference.GetComponent<ContainerHUD>()._container = container;
+            HudReference.GetComponent<ContainerHUD>()._player = user;
+        }
+        else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
+        {
+            HudReference = Instantiate(HUDPanelToAttach);
+            HudReference.GetComponent<CraftingHUD>()._container = container;
+            HudReference.GetComponent<CraftingHUD>()._player = user;
+        }
 
-
-            //this creates the itemhud and gives the items in container
-            if (HUDPanelToAttach.GetComponent<ContainerHUD>())
-            {
-                HudReference = Instantiate(HUDPanelToAttach);
-                //HudReference.GetComponent<NetworkedObject>().Spawn();
-                HudReference.GetComponent<ContainerHUD>()._container = container;
-                HudReference.GetComponent<ContainerHUD>()._player = user;
-            }
-            else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
-            {
-                HudReference = Instantiate(HUDPanelToAttach);
-                //HudReference.GetComponent<NetworkedObject>().Spawn();
-                HudReference.GetComponent<CraftingHUD>()._container = container;
-                HudReference.GetComponent<CraftingHUD>()._player = user;
-            }
-
-
-
-            if (IsServer)
-            {
-                InvokeClientRpcOnEveryone(Client_InUse);
-            }
-            else
-            {
-                InvokeServerRpc(Server_InUse);
-            }
-            return true;
+        if (IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_InUse);
         }
         else
         {
-            return false;
+            InvokeServerRpc(Server_InUse);
         }
+        return true;
     }
 
     public override bool OnDone()
@@ -139,10 +129,12 @@ public class GenericStash : MapInteractable
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
+            InvokeClientRpcOnEveryone(Client_UpdateContainer, container.ItemsInContainer);
         }
         else
         {
             InvokeServerRpc(Server_StopUse);
+            InvokeServerRpc(Server_UpdateContainer, container.ItemsInContainer);
         }
         return true;
     }
@@ -166,6 +158,11 @@ public class GenericStash : MapInteractable
     {
 
     }
+    [ClientRPC]
+    public void Client_UpdateContainer(List<ItemDefinition> items)
+    {
+        container.ItemsInContainer = items;
+    }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
@@ -178,6 +175,12 @@ public class GenericStash : MapInteractable
        
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_UpdateContainer(List<ItemDefinition> Items)
+    {
+        container.ItemsInContainer = Items;
+    }
+
 }
 
 //This Script can look at whats in containers
