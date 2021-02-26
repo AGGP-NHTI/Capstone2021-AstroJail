@@ -129,12 +129,12 @@ public class GenericStash : MapInteractable
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
-            InvokeClientRpcOnEveryone(Client_UpdateContainer, container);
+            InvokeClientRpcOnEveryone(Client_UpdateContainer, container.ItemsInContainer);
         }
         else
         {
             InvokeServerRpc(Server_StopUse);
-            InvokeServerRpc(Server_UpdateContainer, container);
+            InvokeServerRpc(Server_UpdateContainer, container.ItemsInContainer);
         }
         return true;
     }
@@ -159,9 +159,9 @@ public class GenericStash : MapInteractable
 
     }
     [ClientRPC]
-    public void Client_UpdateContainer(Containers c)
+    public void Client_UpdateContainer(List<ItemDefinition> items)
     {
-        container = c;
+        container.ItemsInContainer = items;
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
@@ -176,9 +176,9 @@ public class GenericStash : MapInteractable
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRPC(RequireOwnership = false)]
-    public void Server_UpdateContainer(Containers c)
+    public void Server_UpdateContainer(List<ItemDefinition> Items)
     {
-        container = c;
+        container.ItemsInContainer = Items;
     }
 
 }
