@@ -8,6 +8,7 @@ public class Containers : MonoBehaviour
 
     public int MaxItems;
     public List<ItemDefinition> startingItems;
+    public List<ItemDefinition> craftableItems;
     public List<ItemDefinition> ItemsInContainer;
 
 
@@ -30,7 +31,10 @@ public class Containers : MonoBehaviour
     public PlayerPawn thePlayer;
 
     void Start()
-    {       
+    {  
+        // This got moved to Map Item Manager
+        // This is to control who gets processed first
+        /*
         foreach (ItemDefinition item in startingItems)
         {
             //create a copy of the item 
@@ -43,6 +47,7 @@ public class Containers : MonoBehaviour
             this.Additem(newItem);
 
         }
+        */
     }
     private void Update()
     {
