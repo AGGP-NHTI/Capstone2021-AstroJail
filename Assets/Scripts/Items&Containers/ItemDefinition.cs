@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MLAPI.Serialization;
+using System.IO;
+using MLAPI.Serialization.Pooled;
 
 [CreateAssetMenuAttribute(fileName = "newItem", menuName = "Astro Items")]
+
 
 public class ItemDefinition : ScriptableObject
 {

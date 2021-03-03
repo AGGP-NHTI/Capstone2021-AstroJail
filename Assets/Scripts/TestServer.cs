@@ -16,6 +16,9 @@ public class TestServer : MonoBehaviour
     public const int PUNCHER_SERVER_PORT = 6776;
     public GameObject ConnectAddress;
     public GameObject MainMenu;
+
+    public string ConnectAddressStandalone;
+    public string RelayAddressStandalone;
     public void StartAsHost()
     {
         Task listenTask = Task.Factory.StartNew(() =>
@@ -35,6 +38,7 @@ public class TestServer : MonoBehaviour
 
     public void JoinAsClient()
     {
+        /*
         string address = ConnectAddress.GetComponent<Text>().text;
         Debug.Log(address);
         using (PuncherClient connector = new PuncherClient(PUNCHER_SERVER_HOST, PUNCHER_SERVER_PORT))
@@ -56,8 +60,10 @@ public class TestServer : MonoBehaviour
             }
         }
         Debug.Log("After Punch");
-        
-
+        */
+        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
+        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
+        NetworkingManager.Singleton.StartClient();
     }
 
 
