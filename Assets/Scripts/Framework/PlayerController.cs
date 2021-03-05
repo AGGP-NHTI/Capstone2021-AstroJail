@@ -62,8 +62,6 @@ public class PlayerController : Controller
 
     }
 
-    
-
     private void GetInput()
     {
         leftStick = Vector2.zero;
@@ -79,8 +77,6 @@ public class PlayerController : Controller
         }
 
         GetInputKeyboardMouse();
-
-
     }
 
     private bool GetInputGamePad()
@@ -168,8 +164,4 @@ public class PlayerController : Controller
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
     }
-
-        
-    
-        
 }

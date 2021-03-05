@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageBufferSize: 5120
   MaxConnections: 100
-  ConnectAddress: 1231
+  ConnectAddress: 73.149.137.68
   ConnectPort: 1234
   ServerListenPort: 1234
   ServerWebsocketListenPort: 1234
