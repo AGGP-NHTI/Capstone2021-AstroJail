@@ -129,11 +129,13 @@ public class MapInteractable : NetworkedBehaviour
     public void Server_InteractableStartUse(PlayerController user)
     {
         UsingPlayer = user;
+        InvokeClientRpcOnEveryone(Client_InteractableStartUse, user);
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InteractableStopUse()
     {
         UsingPlayer = null;
+        InvokeClientRpcOnEveryone(Client_InteractableStopUse);
     }
 
 
