@@ -58,7 +58,7 @@ public class ContainerHUD : NetworkedBehaviour
         {
             if(IsServer)//not sure what the hell to do. it's being stupid. Almost have it working
             {
-                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
+                tempPawn.playerInventory.Additem(_container.TakeItem(i));
                 stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
             }
             else
