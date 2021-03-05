@@ -62,12 +62,14 @@ public class Containers : MonoBehaviour
     //this may not be the version/method we want to use :subject to change
     public ItemDefinition TakeItem(ItemDefinition item)
     {     
-        //TO DO :   
-        //validate that the item given is in the list 
-        //need to be careful about exact item instance vs. just an item type
-       
-        //verify that the item is still there
-        ItemsInContainer.Remove(item);
+        foreach(ItemDefinition items in ItemsInContainer)
+        {
+            if(items.itemId == item.itemId)
+            {
+                ItemsInContainer.Remove(items);
+                return items;
+            }
+        }
         //return null when you cannot remove the item asked 
         return null;
     }

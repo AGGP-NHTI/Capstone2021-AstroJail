@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class MapItemManager : MonoBehaviour
 {
+    private static MapItemManager _instance;
+
+    public static MapItemManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if(_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
+    }
+
     public List<Containers> containerList;
     public List<ItemDefinition> itemList;
     void Start()

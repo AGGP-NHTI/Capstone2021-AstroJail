@@ -7,7 +7,6 @@ using MLAPI;
 using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
-
 public class GenericStash : MapInteractable
 {
 
@@ -95,6 +94,7 @@ public class GenericStash : MapInteractable
             HudReference = Instantiate(HUDPanelToAttach);
             HudReference.GetComponent<ContainerHUD>()._container = container;
             HudReference.GetComponent<ContainerHUD>()._player = user;
+            HudReference.GetComponent<ContainerHUD>().stash = this;
         }
         else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
         {
@@ -129,18 +129,41 @@ public class GenericStash : MapInteractable
         if (IsServer)
         {
             InvokeClientRpcOnEveryone(Client_StopUse);
-            InvokeClientRpcOnEveryone(Client_UpdateContainer, container.ItemsInContainer);
         }
         else
         {
             InvokeServerRpc(Server_StopUse);
-            InvokeServerRpc(Server_UpdateContainer, container.ItemsInContainer);
         }
         return true;
     }
 
+    public void AddItemRPC(int i)
+    {
+        if (IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_AddItem, i);
+        }
+        else
+        {
+            InvokeServerRpc(Server_AddItem, i);
+        }
+    }
+
+    public void TakeItemRPC(int i)
+    {
+        if (IsServer)
+        {
+            InvokeClientRpcOnEveryone(Client_TakeItem, i);
+        }
+        else
+        {
+            InvokeServerRpc(Server_TakeItem, i);
+        }
+    }
 
 
+
+    //-------------Start interact/End Interact RPCs--------------//
     [ClientRPC]
     public void Client_InUse()
     {
@@ -152,16 +175,6 @@ public class GenericStash : MapInteractable
     {
        
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
-    }
-    [ClientRPC]
-    public void Client_InstantiateCanvas()
-    {
-
-    }
-    [ClientRPC]
-    public void Client_UpdateContainer(List<ItemDefinition> items)
-    {
-        container.ItemsInContainer = items;
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
@@ -175,11 +188,38 @@ public class GenericStash : MapInteractable
        
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_UpdateContainer(List<ItemDefinition> Items)
+
+    //-------------Taking/Adding item to container RPCs--------------//
+    [ClientRPC]
+    public void Client_TakeItem(int itemID)
     {
-        container.ItemsInContainer = Items;
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.TakeItem(itemDef);
     }
+    [ClientRPC]
+    public void Client_AddItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.Additem(itemDef);
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_TakeItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.TakeItem(itemDef);
+    }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_AddItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.Additem(itemDef);
+    }
+
 
 }
 

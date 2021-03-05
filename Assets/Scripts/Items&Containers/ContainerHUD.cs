@@ -12,6 +12,7 @@ public class ContainerHUD : NetworkedBehaviour
     //this variable holds the GENERIC STASH CONTAINER
     public Containers _container;
     public PlayerController _player;
+    public GenericStash stash;
     GameObject ContainerHUDPanel;
     List<ItemDefinition> PlayerInv;
     List<ItemDefinition> ContainerInv;
@@ -53,7 +54,20 @@ public class ContainerHUD : NetworkedBehaviour
         {
             Debug.LogError($"{tempPawn} inventory is full");
         }
-        else { tempPawn.playerInventory.Additem(_container.TakeItem(i)); }
+        else
+        {
+            if(IsServer)//not sure what the hell to do. it's being stupid. Almost have it working
+            {
+                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+            }
+            else
+            {
+                tempPawn.playerInventory.Additem(_container.TakeItem(i));
+                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+            }
+
+        }
 
         UpdateList();
     }
@@ -72,7 +86,20 @@ public class ContainerHUD : NetworkedBehaviour
         {
             Debug.LogError($"{tempPawn} inventory is full");
         }
-        else { _container.Additem(tempPawn.playerInventory.TakeItem(i)); }
+        else
+        {
+            if(IsServer) //not sure what the hell to do. it's being stupid, Almost have it working
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                tempPawn.playerInventory.TakeItem(i);
+            }
+            else
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                _container.Additem(tempPawn.playerInventory.TakeItem(i));
+            }
+
+        }
         UpdateList();
 
     }
@@ -112,9 +139,6 @@ public class ContainerHUD : NetworkedBehaviour
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
             
-        }
-        
-        
+        }  
     }
-
 }
