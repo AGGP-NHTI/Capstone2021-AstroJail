@@ -100,7 +100,10 @@ public class Containers : NetworkedBehaviour
 
         foreach(int i in itemList)
         {
-            ItemsInContainer.Add(MapItemManager.Instance.itemList[i]);
+            if(i != -1)
+            {
+                ItemsInContainer.Add(MapItemManager.Instance.itemList[i]);
+            }
         }
 
         if(itemUpdateCallback != null)
