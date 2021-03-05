@@ -69,6 +69,7 @@ public class GenericStash : MapInteractable
     public void Start()
     {
         container = gameObject.GetComponent<Containers>();
+        container.itemUpdateCallback = ItemsUpdated;
         labelObject.SetActive(false);
     }
     private void Update()
@@ -79,29 +80,29 @@ public class GenericStash : MapInteractable
         }
     }
 
-    public override bool OnUse(PlayerController user)
+    public void ItemsUpdated()
     {
-
-        Debug.Log("we are in Open container");
-        IsPanelActive = true;
-        labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        container.thePlayer = (PlayerPawn)user.myPawn;
-
-
         //this creates the itemhud and gives the items in container
         if (HUDPanelToAttach.GetComponent<ContainerHUD>())
         {
             HudReference = Instantiate(HUDPanelToAttach);
             HudReference.GetComponent<ContainerHUD>()._container = container;
-            HudReference.GetComponent<ContainerHUD>()._player = user;
+            HudReference.GetComponent<ContainerHUD>()._player = UsingPlayer;
             HudReference.GetComponent<ContainerHUD>().stash = this;
         }
         else if (HUDPanelToAttach.GetComponent<CraftingHUD>())
         {
             HudReference = Instantiate(HUDPanelToAttach);
             HudReference.GetComponent<CraftingHUD>()._container = container;
-            HudReference.GetComponent<CraftingHUD>()._player = user;
+            HudReference.GetComponent<CraftingHUD>()._player = UsingPlayer;
         }
+    }
+
+    public override bool OnUse(PlayerController user)
+    {
+        Debug.Log("we are in Open container");
+        IsPanelActive = true;
+        labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
         if (IsServer)
         {
@@ -111,6 +112,9 @@ public class GenericStash : MapInteractable
         {
             InvokeServerRpc(Server_InUse);
         }
+
+        container.ServerRequestItems(UsingPlayer.OwnerClientId);
+
         return true;
     }
 
@@ -119,7 +123,7 @@ public class GenericStash : MapInteractable
         Debug.Log("we are in close container");       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
-        container.thePlayer = null;
+
         if(HudReference)
         {
             Debug.Log(HudReference);
@@ -173,19 +177,16 @@ public class GenericStash : MapInteractable
     [ClientRPC]
     public void Client_StopUse()
     {
-       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
-        
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
-       
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
 

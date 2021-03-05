@@ -1,62 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MLAPI;
+using MLAPI.Messaging;
 
-
-public class Containers : MonoBehaviour
+public class Containers : NetworkedBehaviour
 {
-
+    public delegate void ContainerCallback();
+    public ContainerCallback itemUpdateCallback;
+    public int containerID;
     public int MaxItems;
     public List<ItemDefinition> startingItems;
     public List<ItemDefinition> craftableItems;
     public List<ItemDefinition> ItemsInContainer;
+    
 
+    public int[] GetItemArray()
+    {
+        int[] temp = new int[6];
+        for(int i = 0; i < temp.Length;i++)
+        {
+            temp[i] = -1;
+        }
+        for(int i = 0;i < ItemsInContainer.Count;i++)
+        {
+            temp[i] = ItemsInContainer[i].itemId;
+        }
+        return temp;
+    }
 
     public int itemCount
     {
         get { return ItemsInContainer.Count; }
-    }
-
-
-    //*************************
-    // TO DO:
-    // need variable localPlayer 
-    // when set the container will be a part of a player 
-    // ASSUMED: will be class type variable and will be able to use null to indicate not part of player
-    //*************************
-
-
-
-    //i need this or failure 
-    public PlayerPawn thePlayer;
-
-    void Start()
-    {  
-        // This got moved to Map Item Manager
-        // This is to control who gets processed first
-        /*
-        foreach (ItemDefinition item in startingItems)
-        {
-            //create a copy of the item 
-            ItemDefinition newItem = Instantiate(item);
-
-            //set item copy container to this container
-            newItem.startingLocation = this;
-
-            //put item into container (items in container)
-            this.Additem(newItem);
-
-        }
-        */
-    }
-    private void Update()
-    {
-        debugTake();
-    }
-
-    public void debugTake()
-    {
-      
     }
 
     //this may not be the version/method we want to use :subject to change
@@ -86,8 +61,6 @@ public class Containers : MonoBehaviour
 
         ItemsInContainer.RemoveAt(itemAt);
 
-
-
         //grab this return value to take item and place into player inventory 
         Debug.Log($"you removed {temp} from the container");
         return temp;
@@ -103,5 +76,37 @@ public class Containers : MonoBehaviour
         ItemsInContainer.Add(item);
         return true;
     }
-    
+
+
+    public void ServerRequestItems(ulong id)
+    {
+        InvokeServerRpc(Server_RequestItems, id);
+    }
+
+    /// <summary>
+    /// This request is from the client to the server, asks the server for a list of items in this container
+    /// </summary>
+    /// <param name="clientID"></param>
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_RequestItems(ulong clientID)
+    {
+        InvokeClientRpcOnClient(Client_ItemListUpdate, clientID,GetItemArray());
+    }
+
+    [ClientRPC]
+    public void Client_ItemListUpdate(int[] itemList)
+    {
+        ItemsInContainer.Clear();
+
+        foreach(int i in itemList)
+        {
+            ItemsInContainer.Add(MapItemManager.Instance.itemList[i]);
+        }
+
+        if(itemUpdateCallback != null)
+        {
+            itemUpdateCallback.Invoke();
+        }
+    }
+
 }

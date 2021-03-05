@@ -81,8 +81,6 @@ public class CraftingStash : MapInteractable
         Debug.Log("we are in Open container");
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        container.thePlayer = (PlayerPawn)user.myPawn;
-
 
         //this creates the itemhud and gives the items in container
         HudReference = Instantiate(HUDPanelToAttach);

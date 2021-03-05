@@ -56,16 +56,8 @@ public class ContainerHUD : NetworkedBehaviour
         }
         else
         {
-            if(IsServer)//not sure what the hell to do. it's being stupid. Almost have it working
-            {
-                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
-            }
-            else
-            {
-                tempPawn.playerInventory.Additem(_container.TakeItem(i));
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
-            }
+            tempPawn.playerInventory.Additem(_container.TakeItem(i));
+            stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
         }
 
         UpdateList();
@@ -87,17 +79,8 @@ public class ContainerHUD : NetworkedBehaviour
         }
         else
         {
-            if(IsServer) //not sure what the hell to do. it's being stupid, Almost have it working
-            {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
-                tempPawn.playerInventory.TakeItem(i);
-            }
-            else
-            {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
-                _container.Additem(tempPawn.playerInventory.TakeItem(i));
-            }
-
+            stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+            _container.Additem(tempPawn.playerInventory.TakeItem(i));
         }
         UpdateList();
 

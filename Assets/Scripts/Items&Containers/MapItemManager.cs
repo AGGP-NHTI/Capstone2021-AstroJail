@@ -27,6 +27,7 @@ public class MapItemManager : MonoBehaviour
     {
         foreach (Containers box in containerList)
         {
+            box.containerID = containerList.IndexOf(box);
             foreach (ItemDefinition item in box.startingItems)
             {
                 //create a copy of the item 
@@ -49,11 +50,9 @@ public class MapItemManager : MonoBehaviour
                 itemList.Add(item);
             }
 
-
-
         }
         // Debug Testing, 
-        if (true)
+        if (false)
         {
             Debug.Log(" ===== ");
             Debug.Log("ItemList Details");
