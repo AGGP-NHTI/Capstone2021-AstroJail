@@ -63,10 +63,9 @@ public class ContainerHUD : NetworkedBehaviour
             }
             else
             {
-                tempPawn.playerInventory.Additem(_container.TakeItem(i));
+                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
                 stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
             }
-
         }
 
         UpdateList();
