@@ -42,6 +42,7 @@ public class ContainerHUD : NetworkedBehaviour
     }
     public void TakeItem(int i)
     {
+        Debug.Log("Index where item should've been taken from " + i);
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
