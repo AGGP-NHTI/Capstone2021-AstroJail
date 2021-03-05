@@ -113,7 +113,7 @@ public class GenericStash : MapInteractable
             InvokeServerRpc(Server_InUse);
         }
 
-        Debug.Log(UsingPlayer);
+        Debug.Log(user);
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
         return true;
