@@ -10,8 +10,6 @@ public class MapInteractable : NetworkedBehaviour
     public GameObject Label;
     protected PlayerController UsingPlayer;
 
-
-
     public void OnTriggerEnter(Collider other)
     {
         PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
@@ -59,10 +57,10 @@ public class MapInteractable : NetworkedBehaviour
             InvokeClientRpcOnEveryone(Client_InteractableStartUse, user);
         }
         else
-        {
+        { //Potentially two people opening at the same time might break this
+            UsingPlayer = user;
             InvokeServerRpc(Server_InteractableStartUse, user);
         }
-
 
         if (OnUse(user))
         {
