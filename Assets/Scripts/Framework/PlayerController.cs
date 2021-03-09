@@ -142,6 +142,7 @@ public class PlayerController : Controller
         if (IsOwner)
         {
             InvokeServerRpc(Server_SpawnPlayer, OwnerClientId);
+            Debug.Log(OwnerClientId);
         }
     }
 
