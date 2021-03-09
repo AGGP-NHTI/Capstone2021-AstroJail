@@ -142,14 +142,13 @@ public class PlayerController : Controller
         if (IsOwner)
         {
             InvokeServerRpc(Server_SpawnPlayer, OwnerClientId);
-            Debug.Log(OwnerClientId);
         }
     }
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_SpawnPlayer(ulong whclient)
     {
-        Debug.Log("Server_SpawnPlayer called");
+        Debug.Log("Server_SpawnPlayer called with owner id of " + whclient);
         Vector3 position = new Vector3(0, 0, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
@@ -160,7 +159,7 @@ public class PlayerController : Controller
     [ClientRPC]
     public void client_set(ulong id)
     {
-        Debug.Log("client_set");
+        Debug.Log("client_set with owner id of " + id);
         myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
