@@ -38,7 +38,7 @@ public class PlayerController : Controller
 
     private void Start()
     {
-        Debug.Log(OwnerClientId);
+        Debug.Log("My owner id is " + OwnerClientId);
         SpawnPlayer();
     }
 
