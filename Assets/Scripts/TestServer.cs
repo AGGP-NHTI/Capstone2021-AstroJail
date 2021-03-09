@@ -16,6 +16,7 @@ public class TestServer : MonoBehaviour
     public const int PUNCHER_SERVER_PORT = 6776;
     public GameObject ConnectAddress;
     public GameObject MainMenu;
+    public bool attemptedConnection = false;
 
     public string ConnectAddressStandalone;
     public string RelayAddressStandalone;
@@ -61,10 +62,21 @@ public class TestServer : MonoBehaviour
         }
         Debug.Log("After Punch");
         */
-        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().DisconnectLocalClient();
-        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
-        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
-        NetworkingManager.Singleton.StartClient();
+
+        if (attemptedConnection)
+        {
+            NetworkingManager.Singleton.StopClient();
+            NetworkingManager.Singleton.GetComponent<UnetTransport>().Shutdown();
+            attemptedConnection = false;
+        }
+        else
+        {
+            NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
+            NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
+            NetworkingManager.Singleton.StartClient();
+            attemptedConnection = true;
+        }
+        
     }
 
 
