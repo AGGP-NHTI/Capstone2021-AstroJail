@@ -38,6 +38,7 @@ public class PlayerController : Controller
 
     private void Start()
     {
+        Debug.Log(OwnerClientId);
         SpawnPlayer();
     }
 
