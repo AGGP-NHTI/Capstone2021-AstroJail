@@ -184,11 +184,13 @@ public class GenericStash : MapInteractable
     public void Server_InUse()
     {
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
+        InvokeClientRpcOnEveryone(Client_InUse);
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+        InvokeClientRpcOnEveryone(Client_StopUse);
     }
 
     //-------------Taking/Adding item to container RPCs--------------//
