@@ -37,7 +37,7 @@ public class ContainerHUD : NetworkedBehaviour
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        _container.gameObject.GetComponent<GenericStash>().OnDone();
+        _container.gameObject.GetComponent<GenericStash>().Done();
         tempPawn.ObjectUsing = null;
     }
     public void TakeItem(int i)
