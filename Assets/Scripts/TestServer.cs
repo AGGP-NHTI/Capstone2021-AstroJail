@@ -34,7 +34,6 @@ public class TestServer : MonoBehaviour
         });
         */
         NetworkingManager.Singleton.StartHost();
-        MainMenu.gameObject.SetActive(false);
     }
 
     public void JoinAsClient()
@@ -66,7 +65,6 @@ public class TestServer : MonoBehaviour
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
         NetworkingManager.Singleton.StartClient();
-        MainMenu.gameObject.SetActive(false);
     }
 
 
