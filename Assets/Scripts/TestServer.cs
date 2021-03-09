@@ -62,7 +62,7 @@ public class TestServer : MonoBehaviour
         }
         Debug.Log("After Punch");
         */
-
+        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().DisconnectLocalClient();
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
         NetworkingManager.Singleton.StartClient();
