@@ -32,7 +32,6 @@ public class TestServer : MonoBehaviour
                 listener.ListenForPunches(new IPEndPoint(IPAddress.Any, 1234));
             }
         });
-
         */
         NetworkingManager.Singleton.StartHost();
         MainMenu.gameObject.SetActive(false);
@@ -63,6 +62,7 @@ public class TestServer : MonoBehaviour
         }
         Debug.Log("After Punch");
         */
+
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
         NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
         NetworkingManager.Singleton.StartClient();
