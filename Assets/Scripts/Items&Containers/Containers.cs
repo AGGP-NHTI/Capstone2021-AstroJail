@@ -96,6 +96,7 @@ public class Containers : NetworkedBehaviour
     [ClientRPC]
     public void Client_ItemListUpdate(int[] itemList)
     {
+        Debug.Log("In the Client_ItemListUpdate");
         ItemsInContainer.Clear();
 
         foreach(int i in itemList)
