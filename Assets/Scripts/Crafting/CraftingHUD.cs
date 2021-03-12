@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine.UI;
 
 public class CraftingHUD : NetworkedBehaviour
 {
- 
+
     //this variable holds the GENERIC STASH CONTAINER
 
     public Button CraftedItems;
-    public recipes craftecCheck;
+
     bool Crafting = true;
 
     //this variable holds the GENERIC STASH CONTAINER
@@ -45,22 +46,52 @@ public class CraftingHUD : NetworkedBehaviour
 
     public void CraftItem()
     {
+        int CorrectItems = 0;
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        while (tempPawn.ObjectUsing)
+        //might need to do iterger checdk for amount of items correct = amount of items in recipe to provide item 
+        if (_container.ItemsInContainer.Count == stash.craftedItem.Recipe.Count)
         {
-
-            foreach (ItemDefinition Pitems in _container.ItemsInContainer)
+            Debug.Log("did we ever get here?");
+            foreach (ItemDefinition ingredients in stash.craftedItem.Recipe)
             {
-                foreach (ItemDefinition items in craftecCheck.AllCraftedItems)
+                foreach(ItemDefinition items in _container.ItemsInContainer)
                 {
-
+                    Debug.Log($"igredients needed{ingredients} was compared to items{items}");
+                    if(items.itemId == ingredients.itemId)
+                    {
+                        Debug.Log($"#correct item {CorrectItems} out of {ingredients}");
+                        CorrectItems++;
+                    }
 
                 }
+            }
+            if(CorrectItems == stash.craftedItem.Recipe.Count)
+            {
+                Debug.Log("inside of providing the item are we here ever?");
+                //run code to supply the crafted item here 
+                ItemDefinition newCraftedItem =stash.craftedItem;
 
+
+                if(IsServer)
+                {
+                    tempPawn.playerInventory.Additem(newCraftedItem);
+                    stash.CraftItemRPC(newCraftedItem.itemId);
+                }
+                else
+                {
+                    tempPawn.playerInventory.Additem(newCraftedItem);
+                    stash.CraftItemRPC(newCraftedItem.itemId);
+                }
+             
+             
             }
         }
-
+       
+        UpdateList();
+        return;
     }
+
+
 
 
     public void TakeItem(int i)
@@ -83,11 +114,11 @@ public class CraftingHUD : NetworkedBehaviour
             if (IsServer)
             {
                 tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
             }
             else
             {
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }
         }
@@ -113,13 +144,13 @@ public class CraftingHUD : NetworkedBehaviour
         {
             if (IsServer)
             {
-                Debug.Log($"index inventory {i} + {stash} +  item id{tempPawn.playerInventory.ItemsInContainer[i].itemId}");
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                Debug.Log($"index inventory {i} + {stash} +  item id{tempPawn.playerInventory.ItemsInContainer[i].instanceId}");
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.TakeItem(i);
             }
             else
             {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
                 _container.Additem(tempPawn.playerInventory.TakeItem(i));
             }
 
@@ -172,5 +203,7 @@ public class CraftingHUD : NetworkedBehaviour
 
 
     }
+
+   
 
 }

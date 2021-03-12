@@ -20,6 +20,7 @@ public class CraftingStash : MapInteractable
     public GameObject labelObject;
     Containers container;
     public GameObject HudReference;
+    public ItemDefinition craftedItem;
 
 
     //order of operations that are happening as things are being interacted with 
@@ -147,6 +148,10 @@ public class CraftingStash : MapInteractable
     {
         InvokeServerRpc(Server_TakeItem, i);
     }
+    public void CraftItemRPC(int i)
+    {
+        InvokeServerRpc(Server_CraftItem, i);
+    }
 
 
 
@@ -190,6 +195,7 @@ public class CraftingStash : MapInteractable
 
         container.Additem(itemDef);
     }
+   
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_TakeItem(int itemID)
@@ -206,6 +212,38 @@ public class CraftingStash : MapInteractable
         container.Additem(itemDef);
     }
 
+    //---------------- Crafted items ------------------//
+
+    [ClientRPC]
+
+    public void Client_CraftItem(int id)
+    {
+        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        {
+            if (id == item.itemId)
+            {
+                ItemDefinition tempItem = item;
+                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                MapItemManager.Instance.itemList.Add(tempItem);
+            }
+        }
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+
+    public void Server_CraftItem(int id)
+    {
+        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        {
+            if (id == item.itemId)
+            {
+                ItemDefinition tempItem = item;
+                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                MapItemManager.Instance.itemList.Add(tempItem);
+            }
+        }
+        InvokeClientRpcOnEveryone(Client_CraftItem, id);
+;    }
 
 
 }

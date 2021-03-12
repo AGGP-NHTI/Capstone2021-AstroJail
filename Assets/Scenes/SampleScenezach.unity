@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 3191376966352908225}
   - {fileID: 1564551399}
   itemList: []
+  craftedItems: []
 --- !u!4 &61112825
 Transform:
   m_ObjectHideFlags: 0
@@ -501,6 +502,7 @@ MonoBehaviour:
   IsPanelActive: 0
   labelObject: {fileID: 1792328291}
   HudReference: {fileID: 0}
+  craftedItem: {fileID: 11400000, guid: fa68342b0a031fa4297239bf826d0353, type: 2}
 --- !u!1 &426851186
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +931,92 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Empty Container
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f9176971ec78b44482f50f32d009135, type: 3}
+--- !u!1001 &860289544
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4383110808353465221, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: startingItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465221, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: startingItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1aaf0c30a86f46145bec2bbd561e72e1,
+        type: 2}
+    - target: {fileID: 4383110808353465221, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: startingItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3643e7e01a231c24786d53abcb2538b8,
+        type: 2}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.971
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465226, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383110808353465229, guid: 5f9176971ec78b44482f50f32d009135,
+        type: 3}
+      propertyPath: m_Name
+      value: crafting ingredients container
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f9176971ec78b44482f50f32d009135, type: 3}

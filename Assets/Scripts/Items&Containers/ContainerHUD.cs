@@ -59,11 +59,11 @@ public class ContainerHUD : NetworkedBehaviour
             if(IsServer)
             {
                 tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
             }
             else
             {
-                stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }
         }
@@ -89,12 +89,12 @@ public class ContainerHUD : NetworkedBehaviour
         {
             if(IsServer)
             {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.TakeItem(i);
             }
             else
             {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
                 _container.Additem(tempPawn.playerInventory.TakeItem(i));
             }
 

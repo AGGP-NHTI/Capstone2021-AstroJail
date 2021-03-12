@@ -11,7 +11,7 @@ public class Containers : NetworkedBehaviour
     public int containerID;
     public int MaxItems;
     public List<ItemDefinition> startingItems;
-    public List<ItemDefinition> craftableItems;
+    
     public List<ItemDefinition> ItemsInContainer;
     
 
@@ -24,7 +24,7 @@ public class Containers : NetworkedBehaviour
         }
         for(int i = 0;i < ItemsInContainer.Count;i++)
         {
-            temp[i] = ItemsInContainer[i].itemId;
+            temp[i] = ItemsInContainer[i].instanceId;
         }
         return temp;
     }
@@ -39,7 +39,7 @@ public class Containers : NetworkedBehaviour
     {     
         foreach(ItemDefinition items in ItemsInContainer)
         {
-            if(items.itemId == item.itemId)
+            if(items.instanceId == item.instanceId)
             {
                 ItemsInContainer.Remove(items);
                 return items;

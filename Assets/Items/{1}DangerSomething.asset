@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
   m_Name: DangerSomething
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 6
   ItemName: Danger Something
   ObjectModel: {fileID: 0}
+  imageArt: {fileID: 0}
   itemDescription: ' If all prisoners have a DangerSomething in their inventory they
     gain the Achievement: "making something out of nothings a danger" and lose the
     game'
@@ -23,3 +24,6 @@ MonoBehaviour:
   isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}
+  Recipe:
+  - {fileID: 11400000, guid: 3643e7e01a231c24786d53abcb2538b8, type: 2}
+  - {fileID: 11400000, guid: 1aaf0c30a86f46145bec2bbd561e72e1, type: 2}
