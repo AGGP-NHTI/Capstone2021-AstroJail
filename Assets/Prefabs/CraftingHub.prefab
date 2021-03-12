@@ -1092,8 +1092,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74b65a4f6d51c64f9139addfd2e68a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CraftedItems: {fileID: 3908561544071342494}
+  craftecCheck: {fileID: 0}
   _container: {fileID: 0}
   _player: {fileID: 0}
+  stash: {fileID: 0}
   Containerbuttons:
   - {fileID: 3868766466564458648}
   - {fileID: 2425858067240474911}
@@ -1105,7 +1108,6 @@ MonoBehaviour:
   - {fileID: 1684192870699201221}
   - {fileID: 5813361826600813703}
   - {fileID: 2238162650182575750}
-  CraftedItems: {fileID: 3908561544071342494}
 --- !u!1 &2437783904451827607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1501,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1133767716496862990}
         m_MethodName: CloseButtom
         m_Mode: 1
         m_Arguments:
