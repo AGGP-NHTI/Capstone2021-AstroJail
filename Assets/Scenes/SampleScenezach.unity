@@ -477,6 +477,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406256254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6931734879424044714, guid: fc5d1e7d6c4f00a4597040951dceb632,
+    type: 3}
+  m_PrefabInstance: {fileID: 3191376966352908224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &406256255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406256254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a036fb7acf9d524da3aad2c4f04a2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Label: {fileID: 1792328291}
+  HUDPanelToAttach: {fileID: 2417650863846744274, guid: 630f121d7a2712f40a0ef72a30617e16,
+    type: 3}
+  IsPanelActive: 0
+  labelObject: {fileID: 1792328291}
+  HudReference: {fileID: 0}
 --- !u!1 &426851186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,6 +2676,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1792328291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6931734879478260448, guid: fc5d1e7d6c4f00a4597040951dceb632,
+    type: 3}
+  m_PrefabInstance: {fileID: 3191376966352908224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1797916042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,7 +2993,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6931734879424044712, guid: fc5d1e7d6c4f00a4597040951dceb632, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc5d1e7d6c4f00a4597040951dceb632, type: 3}
 --- !u!114 &3191376966352908225 stripped
 MonoBehaviour:
@@ -2971,7 +3002,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3191376966352908224}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 406256254}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
