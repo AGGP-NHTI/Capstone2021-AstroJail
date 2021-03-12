@@ -216,6 +216,7 @@ public class CraftingStash : MapInteractable
 
     public void Client_CraftItem(int id)
     {
+        if (IsServer) return;
         foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
         {
             if (id == item.itemId)

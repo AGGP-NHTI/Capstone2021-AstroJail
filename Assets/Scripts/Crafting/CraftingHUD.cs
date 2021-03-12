@@ -144,7 +144,6 @@ public class CraftingHUD : NetworkedBehaviour
         {
             if (IsServer)
             {
-                Debug.Log($"index inventory {i} + {stash} +  item id{tempPawn.playerInventory.ItemsInContainer[i].instanceId}");
                 stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.TakeItem(i);
             }
