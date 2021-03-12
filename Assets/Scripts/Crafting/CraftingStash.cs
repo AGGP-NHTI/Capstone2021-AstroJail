@@ -90,6 +90,7 @@ public class CraftingStash : MapInteractable
             HudReference = Instantiate(HUDPanelToAttach);
             HudReference.GetComponent<CraftingHUD>()._container = container;
             HudReference.GetComponent<CraftingHUD>()._player = UsingPlayer;
+            HudReference.GetComponent<CraftingHUD>().stash = this;
         }
     }
 

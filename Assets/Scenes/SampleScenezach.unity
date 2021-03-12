@@ -2933,6 +2933,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fa68342b0a031fa4297239bf826d0353,
         type: 2}
+    - target: {fileID: 6931734879424044706, guid: fc5d1e7d6c4f00a4597040951dceb632,
+        type: 3}
+      propertyPath: MaxItems
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6931734879424044714, guid: fc5d1e7d6c4f00a4597040951dceb632,
         type: 3}
       propertyPath: m_Name

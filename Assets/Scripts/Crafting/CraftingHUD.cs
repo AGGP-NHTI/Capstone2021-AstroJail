@@ -113,6 +113,7 @@ public class CraftingHUD : NetworkedBehaviour
         {
             if (IsServer)
             {
+                Debug.Log($"index inventory {i} + {stash} +  item id{tempPawn.playerInventory.ItemsInContainer[i].itemId}");
                 stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
                 tempPawn.playerInventory.TakeItem(i);
             }
@@ -137,7 +138,7 @@ public class CraftingHUD : NetworkedBehaviour
 
         for (int buttons = 0; buttons < 6; buttons++)
         {
-            if (buttons < 2)
+            if (buttons < 3)
             {
                 Containerbuttons[buttons].gameObject.SetActive(false);
                 Containerbuttons[buttons].onClick.RemoveAllListeners();
