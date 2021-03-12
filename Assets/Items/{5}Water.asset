@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
-  m_Name: Water
+  m_Name: '{5}Water'
   m_EditorClassIdentifier: 
-  itemId: 3
+  itemId: 5
+  instanceId: 0
   ItemName: water
   ObjectModel: {fileID: 0}
+  imageArt: {fileID: 0}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
   isContraband: 0
   isCrafted: 0
   Effects: []
   startingLocation: {fileID: 0}
+  Recipe: []
