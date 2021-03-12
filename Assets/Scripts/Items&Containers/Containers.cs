@@ -97,7 +97,11 @@ public class Containers : NetworkedBehaviour
     public void Client_ItemListUpdate(int[] itemList)
     {
         Debug.Log("In the Client_ItemListUpdate with list size of: " + itemList.Length);
-        ItemsInContainer.Clear();
+        foreach (int i in itemList)
+        {
+            Debug.Log(i);
+        }
+            ItemsInContainer.Clear();
 
         foreach(int i in itemList)
         {
