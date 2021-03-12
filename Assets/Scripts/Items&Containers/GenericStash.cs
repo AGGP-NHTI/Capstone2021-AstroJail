@@ -143,27 +143,13 @@ public class GenericStash : MapInteractable
     }
 
     public void AddItemRPC(int i)
-    {
-        if (IsServer)
-        {
-            InvokeClientRpcOnEveryone(Client_AddItem, i);
-        }
-        else
-        {
+    { 
             InvokeServerRpc(Server_AddItem, i);
-        }
     }
 
     public void TakeItemRPC(int i)
     {
-        if (IsServer)
-        {
-            InvokeClientRpcOnEveryone(Client_TakeItem, i);
-        }
-        else
-        {
             InvokeServerRpc(Server_TakeItem, i);
-        }
     }
 
 
