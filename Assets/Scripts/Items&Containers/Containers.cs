@@ -62,8 +62,7 @@ public class Containers : NetworkedBehaviour
 
         ItemsInContainer.RemoveAt(itemAt);
 
-        //grab this return value to take item and place into player inventory 
-        Debug.Log($"you removed {temp} from the container");
+
         return temp;
     }
     
@@ -103,6 +102,7 @@ public class Containers : NetworkedBehaviour
         {
             if(i != -1)
             {
+                Debug.Log("This is the item we should be adding to the container: " + MapItemManager.Instance.itemList[i]);
                 ItemsInContainer.Add(MapItemManager.Instance.itemList[i]);
             }
         }

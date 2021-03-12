@@ -97,7 +97,6 @@ public class CraftingStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        Debug.Log("we are in Open container");
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
@@ -118,7 +117,6 @@ public class CraftingStash : MapInteractable
 
     public override bool OnDone()
     {
-        Debug.Log("we are in close container");
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
 
@@ -224,6 +222,7 @@ public class CraftingStash : MapInteractable
             {
                 ItemDefinition tempItem = item;
                 tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                Debug.Log("Our crafted items instance ID is: " + tempItem.instanceId);
                 MapItemManager.Instance.itemList.Add(tempItem);
             }
         }
