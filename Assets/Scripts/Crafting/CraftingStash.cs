@@ -21,6 +21,8 @@ public class CraftingStash : MapInteractable
     Containers container;
     public GameObject HudReference;
     public ItemDefinition craftedItem;
+    public List<ItemDefinition> CraftableItems;
+   
 
 
     //order of operations that are happening as things are being interacted with 
@@ -95,6 +97,7 @@ public class CraftingStash : MapInteractable
         }
     }
 
+
     public override bool OnUse(PlayerController user)
     {
         IsPanelActive = true;
@@ -149,6 +152,11 @@ public class CraftingStash : MapInteractable
     public void CraftItemRPC(int i)
     {
         InvokeServerRpc(Server_CraftItem, i);
+    }
+
+    public void ReturnItemRPC(List<int> item)
+    {
+        InvokeServerRpc(Server_ReturnItem, item);
     }
 
 
@@ -245,5 +253,28 @@ public class CraftingStash : MapInteractable
         InvokeClientRpcOnEveryone(Client_CraftItem, id);
 ;    }
 
+
+    [ClientRPC]
+    public void Client_ReturnItem(List<int> items)
+    {
+        if (IsServer) return;
+
+    }
+
+    [ServerRPC(RequireOwnership =false)]
+    public void Server_ReturnItem(List<int> items)
+    {
+        /*foreach(ItemDefinition item in MapItemManager.Instance.everyItem)
+        {
+            if (id == item.itemId)
+            {
+                ItemDefinition tempItem = item;
+                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                MapItemManager.Instance.itemList.Add(tempItem);
+            }
+        }
+        InvokeClientRpcOnEveryone(Client_CraftItem, id);*/
+
+    }
 
 }
