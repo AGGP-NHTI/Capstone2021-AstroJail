@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
-  m_Name: DietSoda
+  m_Name: '{5}Water'
   m_EditorClassIdentifier: 
-  itemId: 2
-  ItemName: diet soda
+  itemId: 5
+  instanceId: 0
+  ItemName: water
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 1ce6879cd38afcc45b6fbbd184f279cb, type: 3}
+  imageArt: {fileID: 0}
   itemDescription: insert Degen Humor Here
-  hasEffect: 1
-  isContraband: 1
-  isCrafted: 1
+  hasEffect: 0
+  isContraband: 0
+  isCrafted: 0
   Effects: []
   startingLocation: {fileID: 0}
-  Recipe:
-  - {fileID: 11400000, guid: 41ee94e3f7df6d7419b9a0d722167a26, type: 2}
-  - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}
+  Recipe: []

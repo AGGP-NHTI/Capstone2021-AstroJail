@@ -11,12 +11,17 @@ using TMPro;
 public class CraftingStash : MapInteractable
 {
 
+    //rename this to Generic Stash 
+    //this goes on a mapInteractable that a player can go up to and grab or place an item into 
+
 
     public GameObject HUDPanelToAttach;
     public bool IsPanelActive = false;
     public GameObject labelObject;
     Containers container;
     public GameObject HudReference;
+    public ItemDefinition craftedItem;
+
 
     //order of operations that are happening as things are being interacted with 
     //-------------------------------------------------------------------------
@@ -66,6 +71,7 @@ public class CraftingStash : MapInteractable
     public void Start()
     {
         container = gameObject.GetComponent<Containers>();
+        container.itemUpdateCallback = ItemsUpdated;
         labelObject.SetActive(false);
     }
     private void Update()
@@ -76,17 +82,23 @@ public class CraftingStash : MapInteractable
         }
     }
 
+    public void ItemsUpdated()
+    {
+        //this creates the itemhud and gives the items in container
+      
+        if (HUDPanelToAttach.GetComponent<CraftingHUD>())
+        {
+            HudReference = Instantiate(HUDPanelToAttach);
+            HudReference.GetComponent<CraftingHUD>()._container = container;
+            HudReference.GetComponent<CraftingHUD>()._player = UsingPlayer;
+            HudReference.GetComponent<CraftingHUD>().stash = this;
+        }
+    }
+
     public override bool OnUse(PlayerController user)
     {
-        Debug.Log("we are in Open container");
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-
-        //this creates the itemhud and gives the items in container
-        HudReference = Instantiate(HUDPanelToAttach);
-        HudReference.GetComponent<NetworkedObject>().Spawn();
-        HudReference.GetComponent<CraftingHUD>()._container = container;
-        HudReference.GetComponent<CraftingHUD>()._player = user;
 
         if (IsServer)
         {
@@ -96,14 +108,18 @@ public class CraftingStash : MapInteractable
         {
             InvokeServerRpc(Server_InUse);
         }
+
+        Debug.Log(user);
+        container.ServerRequestItems(UsingPlayer.OwnerClientId);
+
         return true;
     }
 
     public override bool OnDone()
     {
-        Debug.Log("we are in close container");
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
+
         if (HudReference)
         {
             Debug.Log(HudReference);
@@ -121,29 +137,113 @@ public class CraftingStash : MapInteractable
         return true;
     }
 
+    public void AddItemRPC(int i)
+    {
+        InvokeServerRpc(Server_AddItem, i);
+    }
+
+    public void TakeItemRPC(int i)
+    {
+        InvokeServerRpc(Server_TakeItem, i);
+    }
+    public void CraftItemRPC(int i)
+    {
+        InvokeServerRpc(Server_CraftItem, i);
+    }
 
 
+
+    //-------------Start interact/End Interact RPCs--------------//
     [ClientRPC]
     public void Client_InUse()
     {
 
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
+    [ClientRPC]
     public void Client_StopUse()
     {
-
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_InUse()
     {
-
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
+        InvokeClientRpcOnEveryone(Client_InUse);
     }
     [ServerRPC(RequireOwnership = false)]
     public void Server_StopUse()
     {
-
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
+        InvokeClientRpcOnEveryone(Client_StopUse);
     }
+
+    //-------------Taking/Adding item to container RPCs--------------//
+    [ClientRPC]
+    public void Client_TakeItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.TakeItem(itemDef);
+    }
+    [ClientRPC]
+    public void Client_AddItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.Additem(itemDef);
+    }
+   
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_TakeItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.TakeItem(itemDef);
+    }
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_AddItem(int itemID)
+    {
+        ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
+
+        container.Additem(itemDef);
+    }
+
+    //---------------- Crafted items ------------------//
+
+    [ClientRPC]
+
+    public void Client_CraftItem(int id)
+    {
+        if (IsServer) return;
+        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        {
+            if (id == item.itemId)
+            {
+                ItemDefinition tempItem = item;
+                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                Debug.Log("Our crafted items instance ID is: " + tempItem.instanceId);
+                MapItemManager.Instance.itemList.Add(tempItem);
+            }
+        }
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+
+    public void Server_CraftItem(int id)
+    {
+        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        {
+            if (id == item.itemId)
+            {
+                ItemDefinition tempItem = item;
+                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
+                MapItemManager.Instance.itemList.Add(tempItem);
+            }
+        }
+        InvokeClientRpcOnEveryone(Client_CraftItem, id);
+;    }
+
+
 }

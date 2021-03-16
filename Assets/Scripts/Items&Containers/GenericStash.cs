@@ -100,7 +100,6 @@ public class GenericStash : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        Debug.Log("we are in Open container");
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
@@ -120,8 +119,7 @@ public class GenericStash : MapInteractable
     }
 
     public override bool OnDone()
-    {
-        Debug.Log("we are in close container");       
+    {   
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
 
@@ -143,27 +141,13 @@ public class GenericStash : MapInteractable
     }
 
     public void AddItemRPC(int i)
-    {
-        if (IsServer)
-        {
-            InvokeClientRpcOnEveryone(Client_AddItem, i);
-        }
-        else
-        {
+    { 
             InvokeServerRpc(Server_AddItem, i);
-        }
     }
 
     public void TakeItemRPC(int i)
     {
-        if (IsServer)
-        {
-            InvokeClientRpcOnEveryone(Client_TakeItem, i);
-        }
-        else
-        {
             InvokeServerRpc(Server_TakeItem, i);
-        }
     }
 
 

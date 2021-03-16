@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
-  m_Name: NothingItem
+  m_Name: '{4}Soda'
   m_EditorClassIdentifier: 
-  itemId: 0
-  ItemName: Nothing
-  ObjectModel: {fileID: 0}
+  itemId: 4
+  instanceId: 0
+  ItemName: 'Soda Test '
+  ObjectModel: {fileID: 923791832117716685, guid: ca2d9f7a17e13cf4cbe3076598ea9a20,
+    type: 3}
   imageArt: {fileID: 0}
-  itemDescription: 'othing how does it feel does it feel '
-  hasEffect: 0
+  itemDescription: insert Degen Humor Here
+  hasEffect: 1
   isContraband: 0
   isCrafted: 0
-  Effects: []
+  Effects:
+  - {fileID: 0}
   startingLocation: {fileID: 0}
-  Recipe: []
+  Recipe:
+  - {fileID: 0}
+  - {fileID: 0}

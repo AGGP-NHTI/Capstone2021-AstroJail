@@ -11,7 +11,8 @@ using MLAPI.Serialization.Pooled;
 
 public class ItemDefinition : ScriptableObject
 {
-    public int itemId = -1;
+    public int itemId;
+    public int instanceId=-1;
     public string ItemName = "Default Name";
     public GameObject ObjectModel;
     public Sprite imageArt;

@@ -11,7 +11,7 @@ public class Containers : NetworkedBehaviour
     public int containerID;
     public int MaxItems;
     public List<ItemDefinition> startingItems;
-    public List<ItemDefinition> craftableItems;
+    
     public List<ItemDefinition> ItemsInContainer;
     
 
@@ -24,7 +24,7 @@ public class Containers : NetworkedBehaviour
         }
         for(int i = 0;i < ItemsInContainer.Count;i++)
         {
-            temp[i] = ItemsInContainer[i].itemId;
+            temp[i] = ItemsInContainer[i].instanceId;
         }
         return temp;
     }
@@ -39,7 +39,7 @@ public class Containers : NetworkedBehaviour
     {     
         foreach(ItemDefinition items in ItemsInContainer)
         {
-            if(items.itemId == item.itemId)
+            if(items.instanceId == item.instanceId)
             {
                 ItemsInContainer.Remove(items);
                 return items;
@@ -48,6 +48,7 @@ public class Containers : NetworkedBehaviour
         //return null when you cannot remove the item asked 
         return null;
     }
+
     public ItemDefinition TakeItem(int itemAt)
     {
        
@@ -61,8 +62,7 @@ public class Containers : NetworkedBehaviour
 
         ItemsInContainer.RemoveAt(itemAt);
 
-        //grab this return value to take item and place into player inventory 
-        Debug.Log($"you removed {temp} from the container");
+
         return temp;
     }
     
@@ -96,12 +96,18 @@ public class Containers : NetworkedBehaviour
     [ClientRPC]
     public void Client_ItemListUpdate(int[] itemList)
     {
-        ItemsInContainer.Clear();
+        Debug.Log("In the Client_ItemListUpdate with list size of: " + itemList.Length);
+        foreach (int i in itemList)
+        {
+            Debug.Log(i);
+        }
+            ItemsInContainer.Clear();
 
         foreach(int i in itemList)
         {
             if(i != -1)
             {
+                Debug.Log("This is the item we should be adding to the container: " + MapItemManager.Instance.itemList[i]);
                 ItemsInContainer.Add(MapItemManager.Instance.itemList[i]);
             }
         }

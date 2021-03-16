@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapItemManager : MonoBehaviour
 {
     private static MapItemManager _instance;
-
+    
     public static MapItemManager Instance { get { return _instance; } }
 
     private void Awake()
@@ -23,6 +23,10 @@ public class MapItemManager : MonoBehaviour
 
     public List<Containers> containerList;
     public List<ItemDefinition> itemList;
+    public List<ItemDefinition> craftedItems;
+    public List<ItemDefinition> everyItem;
+
+
     void Start()
     {
         foreach (Containers box in containerList)
@@ -35,7 +39,7 @@ public class MapItemManager : MonoBehaviour
 
                 //set item copy container to this container
                 newItem.startingLocation = box;
-                newItem.itemId = itemList.Count;
+                newItem.instanceId = itemList.Count;
 
                 itemList.Add(newItem);
                 //put item into container (items in container)
@@ -43,12 +47,13 @@ public class MapItemManager : MonoBehaviour
 
             }
 
+            /*
             foreach (ItemDefinition item in box.craftableItems)
             {
                 item.itemId = itemList.Count;
                 item.startingLocation = box;
                 itemList.Add(item);
-            }
+            }*/
 
         }
         // Debug Testing, 

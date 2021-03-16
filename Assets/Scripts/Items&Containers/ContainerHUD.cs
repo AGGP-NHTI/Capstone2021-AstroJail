@@ -32,17 +32,15 @@ public class ContainerHUD : NetworkedBehaviour
         // Make Container Panel Appear
     }
     
-
-
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         _container.gameObject.GetComponent<GenericStash>().Done();
         tempPawn.ObjectUsing = null;
     }
+
     public void TakeItem(int i)
     {
-        Debug.Log("Index where item should've been taken from " + i);
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
@@ -57,8 +55,16 @@ public class ContainerHUD : NetworkedBehaviour
         }
         else
         {
-            stash.TakeItemRPC(_container.ItemsInContainer[i].itemId);
-            tempPawn.playerInventory.Additem(_container.TakeItem(i));
+            if(IsServer)
+            {
+                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
+            }
+            else
+            {
+                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
+                tempPawn.playerInventory.Additem(_container.TakeItem(i));
+            }
         }
 
         UpdateList();
@@ -80,12 +86,21 @@ public class ContainerHUD : NetworkedBehaviour
         }
         else
         {
-            stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].itemId);
-            _container.Additem(tempPawn.playerInventory.TakeItem(i));
+            if(IsServer)
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
+                tempPawn.playerInventory.TakeItem(i);
+            }
+            else
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
+                _container.Additem(tempPawn.playerInventory.TakeItem(i));
+            }
+
         }
         UpdateList();
-
     }
+
     public void UpdateList()
     {
         int i = 0;
