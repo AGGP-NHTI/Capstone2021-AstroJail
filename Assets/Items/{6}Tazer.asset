@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
+  m_Name: '{6}Tazer'
+  m_EditorClassIdentifier: 
+  itemId: 6
+  instanceId: -1
+  ItemName: Tazer
+  ObjectModel: {fileID: 0}
+  imageArt: {fileID: 21300000, guid: 13c6f14701347694b93acffd3e8b9ac3, type: 3}
+  itemDescription: zap zap
+  hasEffect: 0
+  isContraband: 1
+  isCrafted: 1
+  Effects: []
+  startingLocation: {fileID: 0}
+  Recipe:
+  - {fileID: 11400000, guid: 17c6393e73199df41bcfaf6c8ffd067a, type: 2}
+  - {fileID: 11400000, guid: 92fcf1d9dc5c662418d13419f40c9b2c, type: 2}

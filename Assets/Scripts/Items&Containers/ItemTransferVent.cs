@@ -7,8 +7,7 @@ using MLAPI;
 using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
-
-public class CraftingStash : MapInteractable
+public class ItemTransferVent : MapInteractable
 {
 
     //rename this to Generic Stash 
@@ -20,9 +19,7 @@ public class CraftingStash : MapInteractable
     public GameObject labelObject;
     Containers container;
     public GameObject HudReference;
-    public ItemDefinition craftedItem;
-    public List<ItemDefinition> CraftableItems;
-   
+    public ItemTransferVent TransferDestination;
 
 
     //order of operations that are happening as things are being interacted with 
@@ -87,16 +84,18 @@ public class CraftingStash : MapInteractable
     public void ItemsUpdated()
     {
         //this creates the itemhud and gives the items in container
-      
-        if (HUDPanelToAttach.GetComponent<CraftingHUD>())
-        {
-            HudReference = Instantiate(HUDPanelToAttach);
-            HudReference.GetComponent<CraftingHUD>()._container = container;
-            HudReference.GetComponent<CraftingHUD>()._player = UsingPlayer;
-            HudReference.GetComponent<CraftingHUD>().stash = this;
-        }
+
+        HudReference = Instantiate(HUDPanelToAttach);
+        HudReference.GetComponent<ItemTransferHUD>()._container = container;
+        HudReference.GetComponent<ItemTransferHUD>()._player = UsingPlayer;
+        HudReference.GetComponent<ItemTransferHUD>().stash = this;
+
     }
 
+    public void TransferItems()
+    {
+        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, container.containerID);
+    }
 
     public override bool OnUse(PlayerController user)
     {
@@ -149,15 +148,6 @@ public class CraftingStash : MapInteractable
     {
         InvokeServerRpc(Server_TakeItem, i);
     }
-    public void CraftItemRPC(int i)
-    {
-        InvokeServerRpc(Server_CraftItem, i);
-    }
-
-    public void ReturnItemRPC(List<int> item)
-    {
-        InvokeServerRpc(Server_ReturnItem, item);
-    }
 
 
 
@@ -201,7 +191,6 @@ public class CraftingStash : MapInteractable
 
         container.Additem(itemDef);
     }
-   
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_TakeItem(int itemID)
@@ -218,63 +207,40 @@ public class CraftingStash : MapInteractable
         container.Additem(itemDef);
     }
 
-    //---------------- Crafted items ------------------//
+    //---------------Transfer Item RPC----------------//
 
     [ClientRPC]
-
-    public void Client_CraftItem(int id)
+    public void Client_TransferItem(int instanceID, int containerID)
     {
-        if (IsServer) return;
-        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        if(IsServer)
         {
-            if (id == item.itemId)
-            {
-                ItemDefinition tempItem = item;
-                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
-                Debug.Log("Our crafted items instance ID is: " + tempItem.instanceId);
-                MapItemManager.Instance.itemList.Add(tempItem);
-            }
+            return;
         }
+        Containers destination = MapItemManager.Instance.containerList[containerID];
+        ItemDefinition item = MapItemManager.Instance.itemList[instanceID];
+
+        destination.Additem(item);
+        this.container.TakeItem(item);
     }
 
     [ServerRPC(RequireOwnership = false)]
-
-    public void Server_CraftItem(int id)
+    public void Server_TransferItem(int instanceID, int containerID)
     {
-        foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
+        Containers destination = MapItemManager.Instance.containerList[containerID];
+        ItemDefinition item = MapItemManager.Instance.itemList[instanceID];
+
+        if( destination.ItemsInContainer.Count > 0)//checks if there is already an item in the destination container
         {
-            if (id == item.itemId)
-            {
-                ItemDefinition tempItem = item;
-                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
-                MapItemManager.Instance.itemList.Add(tempItem);
-            }
+            return;
         }
-        InvokeClientRpcOnEveryone(Client_CraftItem, id);
-;    }
 
+        destination.Additem(item);
+        this.container.TakeItem(item);
 
-    [ClientRPC]
-    public void Client_ReturnItem(List<int> items)
-    {
-        if (IsServer) return;
-
+        InvokeClientRpcOnEveryone(Client_TransferItem, instanceID, containerID);
     }
-
-    [ServerRPC(RequireOwnership =false)]
-    public void Server_ReturnItem(List<int> items)
-    {
-        /*foreach(ItemDefinition item in MapItemManager.Instance.everyItem)
-        {
-            if (id == item.itemId)
-            {
-                ItemDefinition tempItem = item;
-                tempItem.instanceId = MapItemManager.Instance.itemList.Count;
-                MapItemManager.Instance.itemList.Add(tempItem);
-            }
-        }
-        InvokeClientRpcOnEveryone(Client_CraftItem, id);*/
-
-    }
-
 }
+
+//This Script can look at whats in containers
+//This script will also call from TakeItem and AddItem
+//enum that checks for guard or prisoner
