@@ -22,6 +22,8 @@ public class CraftingHUD : NetworkedBehaviour
     List<ItemDefinition> PlayerInv;
     List<ItemDefinition> ContainerInv;
 
+    public Dropdown dropDown;
+
     public List<Button> Containerbuttons;
     public List<Button> Playerbuttons;
 
@@ -30,7 +32,12 @@ public class CraftingHUD : NetworkedBehaviour
     void Start()
     {
         UpdateList();
-
+        dropDownList();
+        stash.craftedItem = stash.CraftableItems[dropDown.value];
+        dropDown.onValueChanged.AddListener(delegate
+        {
+            DropDownValueChanged(dropDown);
+        });
         // access both containers to get the items for both the player and container (should have sprites associated with them)
         //      Set PlayerInv and ContainerInv to there corresponding accessed containers
         //      Populate UI with those items 
@@ -46,6 +53,7 @@ public class CraftingHUD : NetworkedBehaviour
 
     public void CraftItem()
     {
+       
         int CorrectItems = 0;
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         //might need to do iterger checdk for amount of items correct = amount of items in recipe to provide item 
@@ -82,16 +90,38 @@ public class CraftingHUD : NetworkedBehaviour
                     tempPawn.playerInventory.Additem(newCraftedItem);
                     stash.CraftItemRPC(newCraftedItem.itemId);
                 }
-             
-             
+
+                
             }
         }
        
         UpdateList();
+        CorrectItems = 0;
         return;
     }
 
+   public void DropDownValueChanged(Dropdown dd)
+    {
+        stash.craftedItem = stash.CraftableItems[dd.value];
+        Debug.Log($"item to be crafted {stash.craftedItem}");
+    }
 
+
+
+    public void returnItems()
+    {
+        List<int> temp = new List<int>();
+        foreach(ItemDefinition item in _container.ItemsInContainer)
+        {
+            temp.Add(item.instanceId);
+
+        }
+
+
+
+      
+
+    }
 
 
     public void TakeItem(int i)
@@ -203,6 +233,18 @@ public class CraftingHUD : NetworkedBehaviour
 
     }
 
+    public void dropDownList()
+    {
+        List<string> itemNames = new List<string>();
+
+
+        foreach(ItemDefinition item in stash.CraftableItems)
+        {
+            itemNames.Add(item.ItemName);
+        }
+
+        dropDown.AddOptions(itemNames);
+    }
    
 
 }

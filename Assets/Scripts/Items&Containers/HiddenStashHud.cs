@@ -6,13 +6,13 @@ using MLAPI;
 using System.ComponentModel;
 using UnityEngine.UI;
 
-public class ContainerHUD : NetworkedBehaviour
+public class HiddenStashHud : NetworkedBehaviour
 {
 
     //this variable holds the GENERIC STASH CONTAINER
     public Containers _container;
     public PlayerController _player;
-    public GenericStash stash;
+    public HiddenStashes stash;
     GameObject ContainerHUDPanel;
     List<ItemDefinition> PlayerInv;
     List<ItemDefinition> ContainerInv;
@@ -20,7 +20,7 @@ public class ContainerHUD : NetworkedBehaviour
     public List<Button> Containerbuttons;
     public List<Button> Playerbuttons;
 
-  
+
     //make sure the button corresponds with the number (we might need a list of buttons)
     void Start()
     {
@@ -31,11 +31,11 @@ public class ContainerHUD : NetworkedBehaviour
         //      Populate UI with those items 
         // Make Container Panel Appear
     }
-    
+
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        _container.gameObject.GetComponent<GenericStash>().Done();
+        _container.gameObject.GetComponent<HiddenStashes>().Done();
         tempPawn.ObjectUsing = null;
     }
 
@@ -55,7 +55,7 @@ public class ContainerHUD : NetworkedBehaviour
         }
         else
         {
-            if(IsServer)
+            if (IsServer)
             {
                 tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
                 stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
@@ -70,7 +70,37 @@ public class ContainerHUD : NetworkedBehaviour
         UpdateList();
     }
 
-   
+    public void AddItem(int i)
+    {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
+        if (!tempPawn)
+        {
+            // debug if no player is set dont do stuff
+            return;
+        }
+
+        if (_container.ItemsInContainer.Count >= _container.MaxItems)
+        {
+            Debug.LogError($"{tempPawn} inventory is full");
+        }
+        else
+        {
+            if (IsServer)
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
+                tempPawn.playerInventory.TakeItem(i);
+            }
+            else
+            {
+                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
+                _container.Additem(tempPawn.playerInventory.TakeItem(i));
+            }
+
+        }
+        UpdateList();
+    }
+
     public void UpdateList()
     {
         int i = 0;
@@ -100,9 +130,12 @@ public class ContainerHUD : NetworkedBehaviour
         foreach (ItemDefinition items in PlayerInv)
         {
             Playerbuttons[i].gameObject.SetActive(true);
+            int x = new int();
+            x = i;
+            Playerbuttons[i].onClick.AddListener(() => AddItem(x));
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
-            
-        }  
+
+        }
     }
 }
