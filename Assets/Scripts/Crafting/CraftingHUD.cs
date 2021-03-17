@@ -52,14 +52,12 @@ public class CraftingHUD : NetworkedBehaviour
     }
 
     public void CraftItem()
-    {
-       
+    {     
         int CorrectItems = 0;
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        //might need to do iterger checdk for amount of items correct = amount of items in recipe to provide item 
+
         if (_container.ItemsInContainer.Count == stash.craftedItem.Recipe.Count)
         {
-            Debug.Log("did we ever get here?");
             foreach (ItemDefinition ingredients in stash.craftedItem.Recipe)
             {
                 foreach(ItemDefinition items in _container.ItemsInContainer)
@@ -79,7 +77,6 @@ public class CraftingHUD : NetworkedBehaviour
                 //run code to supply the crafted item here 
                 ItemDefinition newCraftedItem =stash.craftedItem;
 
-
                 if(IsServer)
                 {
                     tempPawn.playerInventory.Additem(newCraftedItem);
@@ -91,7 +88,7 @@ public class CraftingHUD : NetworkedBehaviour
                     stash.CraftItemRPC(newCraftedItem.itemId);
                 }
 
-                
+                ReturnItems();
             }
         }
        
@@ -108,20 +105,19 @@ public class CraftingHUD : NetworkedBehaviour
 
 
 
-    public void returnItems()
+    public void ReturnItems()
     {
-        List<int> temp = new List<int>();
-        foreach(ItemDefinition item in _container.ItemsInContainer)
-        {
-            temp.Add(item.instanceId);
+        stash.ReturnItemsPerform();
 
+        if(!IsServer)
+        {
+            stash.ReturnItemRPC();
         }
 
-
-
-      
-
     }
+
+ 
+   
 
 
     public void TakeItem(int i)

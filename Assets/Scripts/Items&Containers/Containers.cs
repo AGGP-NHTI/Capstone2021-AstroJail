@@ -52,7 +52,7 @@ public class Containers : NetworkedBehaviour
     public ItemDefinition TakeItem(int itemAt)
     {
        
-        if(itemAt>(ItemsInContainer.Count-1))
+        if( itemAt > (ItemsInContainer.Count-1))
         {
             Debug.LogError($"no stop get some help{itemAt} Is not there");
             return null;

@@ -25,12 +25,14 @@ public class MapItemManager : MonoBehaviour
     public List<ItemDefinition> itemList;
     public List<ItemDefinition> craftedItems;
     public List<ItemDefinition> everyItem;
+    public Containers myBox;
 
 
     void Start()
     {
         foreach (Containers box in containerList)
         {
+            myBox = box;
             box.containerID = containerList.IndexOf(box);
             foreach (ItemDefinition item in box.startingItems)
             {
