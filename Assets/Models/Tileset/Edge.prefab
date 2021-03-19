@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5012919748975649732}
   - component: {fileID: 8232206727181036641}
   - component: {fileID: 6186357295855966379}
-  - component: {fileID: 2374285045282571133}
+  - component: {fileID: 4527860927882794576}
+  - component: {fileID: 5776829930071156481}
   m_Layer: 8
   m_Name: Edge
   m_TagString: Ground
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2374285045282571133
-MeshCollider:
+--- !u!65 &4527860927882794576
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +91,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1786708198840637756, guid: 62d343cc1be3eaf42a73d29e57483f25, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 11.1057415, y: 0.6279019, z: 11.288564}
+  m_Center: {x: -5.5528708, y: 0.31395096, z: 5.644282}
+--- !u!65 &5776829930071156481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5682037907008502142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3340931, y: 1.4284295, z: 11.288564}
+  m_Center: {x: -10.938695, y: 0.71421474, z: 5.644282}
