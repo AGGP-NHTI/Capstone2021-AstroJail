@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9a6132732746d64aa83f96604d1e1be, type: 2}
   - {fileID: 11400000, guid: a5748660629e5514398052fdfbc4f09f, type: 2}
   - {fileID: 11400000, guid: 4f90baee0a8f38640829c418590bf3ad, type: 2}
+  myBox: {fileID: 0}
 --- !u!4 &61112825
 Transform:
   m_ObjectHideFlags: 0
