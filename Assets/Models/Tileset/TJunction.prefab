@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3473306249637472744}
   - component: {fileID: 6931788939081222557}
   - component: {fileID: 5487754499578302719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface529
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 20a42bbe73a05eb4f9aa6ac9bd4d9ed5, type: 3}
+  - {fileID: 2100000, guid: 6171b05f934d74f4b97a5fd7d5d73b94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,9 +88,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8517036342332718658}
-  m_Layer: 0
+  - component: {fileID: 6062213219431906098}
+  m_Layer: 8
   m_Name: TJunction
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,3 +111,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6062213219431906098
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041336621200647416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7414596224532720728, guid: 6ff1bd3fd183ec44e99853ffe497f4aa, type: 3}

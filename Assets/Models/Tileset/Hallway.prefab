@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1738846580231541448}
   - component: {fileID: 5676058081060819724}
   - component: {fileID: 8883024835983612771}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface105
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 4853edf9783ee394895aebdf1ce2d978, type: 3}
+  - {fileID: 2100000, guid: 6171b05f934d74f4b97a5fd7d5d73b94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,9 +88,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5883592627320667536}
-  m_Layer: 0
+  - component: {fileID: 1738410803860255422}
+  m_Layer: 8
   m_Name: Hallway
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,3 +111,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1738410803860255422
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552008477055543082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4192862124740287070, guid: 4853edf9783ee394895aebdf1ce2d978, type: 3}
