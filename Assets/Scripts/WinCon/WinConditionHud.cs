@@ -4,11 +4,12 @@ using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WinConditionHud : NetworkedBehaviour
 {
     //this variable holds the GENERIC STASH CONTAINER
-    public List<ItemDefinition> winConditon;
+   
     public Button WinButton;
 
 
@@ -16,7 +17,7 @@ public class WinConditionHud : NetworkedBehaviour
     //this variable holds the GENERIC STASH CONTAINER
     public Containers _container;
     public PlayerController _player;
-    public CraftingStash stash;
+    public WinConditionStash stash;
     GameObject ContainerHUDPanel;
     List<ItemDefinition> PlayerInv;
     List<ItemDefinition> ContainerInv;
@@ -37,7 +38,7 @@ public class WinConditionHud : NetworkedBehaviour
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        _container.gameObject.GetComponent<CraftingStash>().Done();
+        _container.gameObject.GetComponent<WinConditionStash>().Done();
         tempPawn.ObjectUsing = null;
     }
 
@@ -46,9 +47,9 @@ public class WinConditionHud : NetworkedBehaviour
         int CorrectItems = 0;
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
 
-        if (_container.ItemsInContainer.Count == winConditon.Count)
+        if (_container.ItemsInContainer.Count == stash.winConditon.Count)
         {
-            foreach (ItemDefinition ingredients in winConditon)
+            foreach (ItemDefinition ingredients in stash.winConditon)
             {
                 foreach (ItemDefinition items in _container.ItemsInContainer)
                 {
@@ -61,14 +62,11 @@ public class WinConditionHud : NetworkedBehaviour
 
                 }
             }
-            if (CorrectItems == stash.craftedItem.Recipe.Count)
+            if (CorrectItems == stash.winConditon.Count)
             {
-                Debug.Log("inside of providing the item are we here ever?");
+                Debug.Log("Congrats you Win!");
                 //run code to supply the crafted item here 
-                ItemDefinition newCraftedItem = stash.craftedItem;
-
-
-
+                SceneManager.LoadScene(0);
 
             }
         }
@@ -192,19 +190,6 @@ public class WinConditionHud : NetworkedBehaviour
         }
 
 
-    }
-
-    public void dropDownList()
-    {
-        List<string> itemNames = new List<string>();
-
-
-        foreach (ItemDefinition item in stash.CraftableItems)
-        {
-            itemNames.Add(item.ItemName);
-        }
-
-        dropDown.AddOptions(itemNames);
     }
 
 }
