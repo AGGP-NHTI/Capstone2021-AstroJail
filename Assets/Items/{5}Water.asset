@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: 0
   ItemName: water
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 0}
+  imageArt: {fileID: 21300000, guid: 46d036b2e4b13454da0307ab8d69e084, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
   isContraband: 0
