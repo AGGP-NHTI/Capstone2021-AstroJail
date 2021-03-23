@@ -188,12 +188,12 @@ GameObject:
   - component: {fileID: 4383110808353465226}
   - component: {fileID: 4383110808353465227}
   - component: {fileID: 4383110808353465224}
-  - component: {fileID: 4383110808353465225}
   - component: {fileID: 4383110808353465230}
   - component: {fileID: 4383110808353465231}
   - component: {fileID: 4383110808353465228}
   - component: {fileID: 4383110808353465221}
   - component: {fileID: 4383110808353465220}
+  - component: {fileID: 9062464959609016781}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -223,7 +223,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4383110808353465229}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: 29206376230116d45ba9548c15482cc2, type: 3}
 --- !u!23 &4383110808353465224
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -263,19 +263,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4383110808353465225
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4383110808353465229}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4383110808353465230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -321,8 +308,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6252375, y: 1.4659295, z: 2.7302818}
-  m_Center: {x: -0.07955122, y: 0.23296475, z: 0.021821976}
+  m_Size: {x: 4, y: 2, z: 4}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &4383110808353465221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  containerID: 0
   MaxItems: 6
   startingItems:
   - {fileID: 11400000, guid: 99b1b9d015db50f4f99c800ce888af81, type: 2}
@@ -344,7 +332,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
   - {fileID: 11400000, guid: efe173aea53bf104bb54d04293f6430f, type: 2}
   ItemsInContainer: []
-  thePlayer: {fileID: 0}
 --- !u!114 &4383110808353465220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,3 +349,17 @@ MonoBehaviour:
   PrefabHashGenerator: Container
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
+--- !u!64 &9062464959609016781
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383110808353465229}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 29206376230116d45ba9548c15482cc2, type: 3}

@@ -15,7 +15,7 @@ public class PlayerPawn : Pawn
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;
-    public float moveRate = 5;
+    public float moveRate = 7.5f;
     public float rotationRate = 90;
     public float pitchRate = 90;
     public Vector2 pitchRange = new Vector2(-89, 89);
