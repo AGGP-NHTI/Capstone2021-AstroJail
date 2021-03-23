@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2482933988528917604}
   - component: {fileID: 1574849041358750657}
   - component: {fileID: 3620343872667612939}
-  m_Layer: 0
+  - component: {fileID: 1798675823319193245}
+  m_Layer: 8
   m_Name: Diagonal
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 1c6943b8e8331874b95029d441ca58dd, type: 3}
+  - {fileID: 2100000, guid: 6171b05f934d74f4b97a5fd7d5d73b94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1798675823319193245
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972085354845361886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.667493, y: 0.6541331, z: 11.105794}
+  m_Center: {x: -6.333746, y: -0.38043165, z: 5.552843}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
+  m_Name: '{20}KeyCard'
+  m_EditorClassIdentifier: 
+  itemId: 20
+  instanceId: 38
+  ItemName: Default Name
+  ObjectModel: {fileID: 0}
+  imageArt: {fileID: 21300000, guid: 4ca2dd9ca482b1644bda6f93051dd648, type: 3}
+  itemDescription: insert Degen Humor Here
+  hasEffect: 0
+  isContraband: 0
+  isCrafted: 1
+  Effects: []
+  startingLocation: {fileID: 0}
+  Recipe:
+  - {fileID: 11400000, guid: a1a5cb38d3efa844da1f2533408660f0, type: 2}
+  - {fileID: 11400000, guid: ebb534fff97a1e449b0be826fbd6613d, type: 2}
+  - {fileID: 11400000, guid: fd54c14b375ee42478d44ed6f11f910c, type: 2}

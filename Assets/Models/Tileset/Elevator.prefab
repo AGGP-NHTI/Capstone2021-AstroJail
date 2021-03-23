@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2646554886962157783}
   - component: {fileID: 1375190187725494130}
   - component: {fileID: 3814935334398714808}
+  - component: {fileID: 8451648617886616339}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8451648617886616339
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3454721649583342189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3628990442929905983, guid: 9121589f5569a8b4ea3ee447f634c7cc, type: 3}

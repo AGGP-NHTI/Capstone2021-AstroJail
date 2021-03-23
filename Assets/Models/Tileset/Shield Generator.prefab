@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2050408672426873880}
   - component: {fileID: 3160216628489968573}
   - component: {fileID: 882616528136941431}
+  - component: {fileID: 4881535455717462719}
   m_Layer: 0
   m_Name: Shield Generator
   m_TagString: Untagged
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: d8655390eec455f478597707cd980d27, type: 3}
+  - {fileID: 2100000, guid: c6fedf3d89afec04bacdd5868c5a2eb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4881535455717462719
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675149388895358626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1984987933520197390, guid: d8655390eec455f478597707cd980d27, type: 3}
