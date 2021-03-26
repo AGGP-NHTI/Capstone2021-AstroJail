@@ -44,6 +44,7 @@ public class ServerManager : NetworkedBehaviour
     [ClientRPC]
     public void Client_UpdatePlayerList()
     {
+        Debug.Log("We are inside the client rpc");
         if(IsServer)
         {
             return;
@@ -68,8 +69,6 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
-
-
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
             players.RemoveAll(item => item == null);
