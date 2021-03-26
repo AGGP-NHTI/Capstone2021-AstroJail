@@ -37,6 +37,7 @@ public class ServerManager : NetworkedBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("test");
         InvokeServerRpc(Server_UpdatePlayerList);
     }
 
@@ -50,13 +51,16 @@ public class ServerManager : NetworkedBehaviour
 
         players.RemoveAll(item => item == null);
 
-        foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
+        if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
-            if (client.PlayerObject.GetComponent<PlayerController>())
+            foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
             {
-                if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
+                if (client.PlayerObject.GetComponent<PlayerController>())
                 {
-                    players.Add(client.PlayerObject.GetComponent<PlayerController>());
+                    if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
+                    {
+                        players.Add(client.PlayerObject.GetComponent<PlayerController>());
+                    }
                 }
             }
         }
@@ -67,17 +71,19 @@ public class ServerManager : NetworkedBehaviour
     {
         players.RemoveAll(item => item == null);
 
-        foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
+        if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
-            if (client.PlayerObject.GetComponent<PlayerController>())
+            foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
             {
-                if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
+                if (client.PlayerObject.GetComponent<PlayerController>())
                 {
-                    players.Add(client.PlayerObject.GetComponent<PlayerController>());
+                    if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
+                    {
+                        players.Add(client.PlayerObject.GetComponent<PlayerController>());
+                    }
                 }
             }
         }
-
         InvokeClientRpcOnEveryone(Client_UpdatePlayerList);
     }
 
