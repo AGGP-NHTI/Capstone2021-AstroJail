@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Controller
 {
+    public int playerID;
+    public string playerName;
     public GameObject PSpawn;
     public bool usingGamePad = false;
 
@@ -154,7 +156,7 @@ public class PlayerController : Controller
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
 
-        InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkedObject>().NetworkId);
+        //InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkedObject>().NetworkId);
     }
 
     [ClientRPC]
