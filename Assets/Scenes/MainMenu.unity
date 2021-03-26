@@ -4837,7 +4837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34929653c93773d4f8c9140ecdd6d7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIDs: 
+  players: []
 --- !u!4 &1247718072
 Transform:
   m_ObjectHideFlags: 0
@@ -7180,7 +7180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageBufferSize: 5120
   MaxConnections: 100
-  ConnectAddress: 127.0.0.1
+  ConnectAddress: 66.31.95.85
   ConnectPort: 1234
   ServerListenPort: 1234
   ServerWebsocketListenPort: 8887
