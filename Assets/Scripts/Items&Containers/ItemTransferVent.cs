@@ -229,12 +229,12 @@ public class ItemTransferVent : MapInteractable
         Containers destination = MapItemManager.Instance.containerList[containerID];
         ItemDefinition item = MapItemManager.Instance.itemList[instanceID];
 
-        /*
+        
         if( destination.ItemsInContainer.Count > 0)//checks if there is already an item in the destination container
         {
             return;
         }
-        */
+        
 
         destination.Additem(item);
         this.container.TakeItem(item);
