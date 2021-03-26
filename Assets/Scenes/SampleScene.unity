@@ -1488,6 +1488,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013322932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1211762831501435824, guid: 6b4804873ba7b8e49867ffe4de35af78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1035768891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1035768891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1660,7 +1672,7 @@ PrefabInstance:
         type: 3}
       propertyPath: containerList.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1013322932}
     - target: {fileID: 6236408364039914696, guid: 6c5d04c156ee99541bad66dd6788dddb,
         type: 3}
       propertyPath: m_Name
