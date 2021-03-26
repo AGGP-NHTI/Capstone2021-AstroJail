@@ -92,9 +92,9 @@ public class ItemTransferVent : MapInteractable
 
     }
 
-    public void TransferItems()
+    public void TransferItem()
     {
-        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, container.containerID);
+        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, TransferDestination.container.containerID);
     }
 
     public override bool OnUse(PlayerController user)
@@ -229,10 +229,12 @@ public class ItemTransferVent : MapInteractable
         Containers destination = MapItemManager.Instance.containerList[containerID];
         ItemDefinition item = MapItemManager.Instance.itemList[instanceID];
 
+        
         if( destination.ItemsInContainer.Count > 0)//checks if there is already an item in the destination container
         {
             return;
         }
+        
 
         destination.Additem(item);
         this.container.TakeItem(item);

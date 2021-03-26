@@ -35,7 +35,7 @@ public class ItemTransferHUD : NetworkedBehaviour
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        _container.gameObject.GetComponent<GenericStash>().Done();
+        _container.gameObject.GetComponent<ItemTransferVent>().Done();
         tempPawn.ObjectUsing = null;
     }
 
@@ -99,6 +99,15 @@ public class ItemTransferHUD : NetworkedBehaviour
 
         }
         UpdateList();
+    }
+
+    public void TransferItem()
+    {
+        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        _container.gameObject.GetComponent<ItemTransferVent>().Done();
+        tempPawn.ObjectUsing = null;
+
+        stash.TransferItem();
     }
 
     public void UpdateList()
