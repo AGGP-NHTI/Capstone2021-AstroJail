@@ -35,6 +35,28 @@ public class GenericStash : MapInteractable
         }
     }
 
+    public override void OnTriggerEnter(Collider other)
+    {      
+        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        if (p)
+        {
+            if(p.playerType == PlayerType.Guard)
+            {
+                return;
+            }
+            if (p.control)
+            {
+                if (p.control.IsLocalPlayer)
+                {
+                    p.Interactables.Add(this);
+                    Label.SetActive(true);
+                    Debug.Log("Detected Player");
+
+                }
+            }
+        }
+    }
+
     public void ItemsUpdated()
     {
         //this creates the itemhud and gives the items in container

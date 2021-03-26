@@ -10,7 +10,7 @@ public class MapInteractable : NetworkedBehaviour
     public GameObject Label;
     protected PlayerController UsingPlayer;
 
-    public void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
         if (p)
