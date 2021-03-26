@@ -103,12 +103,11 @@ public class ItemTransferHUD : NetworkedBehaviour
 
     public void TransferItem()
     {
-        stash.TransferItem();
-        /*
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
         _container.gameObject.GetComponent<ItemTransferVent>().Done();
         tempPawn.ObjectUsing = null;
-        */
+
+        stash.TransferItem();
     }
 
     public void UpdateList()
