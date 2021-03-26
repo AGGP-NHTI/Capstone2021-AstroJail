@@ -49,10 +49,9 @@ public class ServerManager : NetworkedBehaviour
             return;
         }
 
-        players.RemoveAll(item => item == null);
-
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
+            players.RemoveAll(item => item == null);
             foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
             {
                 if (client.PlayerObject.GetComponent<PlayerController>())
@@ -69,10 +68,11 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
-        players.RemoveAll(item => item == null);
+
 
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
+            players.RemoveAll(item => item == null);
             foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
             {
                 if (client.PlayerObject.GetComponent<PlayerController>())
