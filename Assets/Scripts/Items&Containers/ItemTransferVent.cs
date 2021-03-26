@@ -239,7 +239,7 @@ public class ItemTransferVent : MapInteractable
         destination.Additem(item);
         this.container.TakeItem(item);
 
-        InvokeClientRpcOnEveryone(Client_TransferItem, item.instanceId, destination.containerID);
+        InvokeClientRpcOnEveryone(Client_TransferItem, instanceID, containerID);
     }
 }
 
