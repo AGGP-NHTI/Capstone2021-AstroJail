@@ -37,13 +37,7 @@ public class ServerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(PlayerController pc in players)
-        {
-            if(pc == null)
-            {
-                players.Remove(pc);
-            }
-        }
+        players.RemoveAll(item => item == null);
 
         foreach(NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
         {
