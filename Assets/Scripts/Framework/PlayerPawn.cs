@@ -10,8 +10,6 @@ public class PlayerPawn : Pawn
     public int maxInventory;
     protected Containers _PlayerInventory;
  
-
-
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;
@@ -27,7 +25,6 @@ public class PlayerPawn : Pawn
 
     public List<MapInteractable> Interactables;
     public MapInteractable ObjectUsing;
-
 
 
     //bool for interact
