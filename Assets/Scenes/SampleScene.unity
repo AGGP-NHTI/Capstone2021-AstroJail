@@ -160,7 +160,7 @@ MonoBehaviour:
   SupportWebsocket: 0
   Channels: []
   UseMLAPIRelay: 1
-  MLAPIRelayAddress: 3.18.212.220
+  MLAPIRelayAddress: 18.221.90.202
   MLAPIRelayPort: 8888
 --- !u!114 &349739817
 MonoBehaviour:
