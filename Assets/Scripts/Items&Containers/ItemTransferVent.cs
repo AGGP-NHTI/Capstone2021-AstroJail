@@ -92,9 +92,9 @@ public class ItemTransferVent : MapInteractable
 
     }
 
-    public void TransferItems()
+    public void TransferItem()
     {
-        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, container.containerID);
+        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, TransferDestination.container.containerID);
     }
 
     public override bool OnUse(PlayerController user)
