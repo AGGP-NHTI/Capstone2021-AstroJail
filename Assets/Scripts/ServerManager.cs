@@ -4,6 +4,7 @@ using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.Connection;
+using MLAPI.SceneManagement;
 
 public class ServerManager : NetworkedBehaviour
 {
@@ -47,6 +48,11 @@ public class ServerManager : NetworkedBehaviour
     public void changeName(ulong clientID, string nameChange)
     {
         InvokeServerRpc(Server_PlayerNameChange, clientID, nameChange);
+    }
+
+    public void StartGame(string sceneName)
+    {
+        InvokeServerRpc(Server_StartGame, sceneName);
     }
 
     [ClientRPC]
@@ -108,5 +114,19 @@ public class ServerManager : NetworkedBehaviour
         }
 
     }
+
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_StartGame(string sceneName)
+    {
+        NetworkSceneManager.SwitchScene(sceneName);
+
+        foreach(PlayerController pc in playerControllers)
+        {
+            pc.myPawn.gameObject.transform.position = Vector3.zero;
+        }    
+    }
+
+ 
 
 }

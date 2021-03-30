@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MLAPI;
 using TMPro;
+using MLAPI.Configuration;
+using MLAPI.SceneManagement;
 
 public class MainMenuManager : NetworkedBehaviour
 {
@@ -23,7 +25,7 @@ public class MainMenuManager : NetworkedBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsServer)
+        if (IsHost)
         { 
             startButton.SetActive(true);
         }
@@ -73,6 +75,7 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        NetworkingManager.Singleton.NetworkConfig.EnableSceneManagement = true;
         NetworkingManager.Singleton.StartHost();
     }
 
@@ -96,7 +99,7 @@ public class MainMenuManager : NetworkedBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        ServerManager.Instance.StartGame("SampleScene");
     }
     public void Close()
     {
