@@ -38,7 +38,10 @@ public class ServerManager : NetworkedBehaviour
     void Update()
     {
         //This is only working for host
-        InvokeServerRpc(Server_UpdatePlayerList);
+        if(NetworkingManager.Singleton.IsHost)
+        {
+            InvokeServerRpc(Server_UpdatePlayerList);
+        }
     }
 
     public void changeName(ulong clientID, string nameChange)
@@ -50,28 +53,24 @@ public class ServerManager : NetworkedBehaviour
     public void Client_UpdatePlayerList(string[] players)
     {
         Debug.Log("inside Client_UpdatePlayerList");
-        Debug.Log(players);
+        Debug.Log(players[0]);
         if(IsServer)
         {
             return;
         }
 
-        if (players.Length > 0)
+        List<string> temp = new List<string>();
+        foreach(string s in players)
         {
-            playerNames.RemoveAll(item => item == null);
-            foreach (string name in playerNames)
-            {
-                playerNames.Add(name);
-            }
+            temp.Add(s);
         }
+
+        playerNames = temp;
     }
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
-        int iterator = 0;
-        string[] players = new string[NetworkingManager.Singleton.ConnectedClientsList.Count];
-
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
             playerControllers.RemoveAll(item => item == null);
@@ -83,14 +82,14 @@ public class ServerManager : NetworkedBehaviour
                     if (!playerControllers.Contains(client.PlayerObject.GetComponent<PlayerController>()))
                     {
                         playerControllers.Add(client.PlayerObject.GetComponent<PlayerController>());
-                        players[iterator] = client.PlayerObject.GetComponent<PlayerController>().playerName;
                         playerNames.Add(client.PlayerObject.GetComponent<PlayerController>().playerName);
-                        iterator++;
                     }
                 }
             }
         }
-        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, players);
+
+        string[] clientPlayerList = playerNames.ToArray();
+        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, clientPlayerList);
     }
 
     [ServerRPC(RequireOwnership = false)]
@@ -108,8 +107,6 @@ public class ServerManager : NetworkedBehaviour
             }
         }
 
-        string[] players = playerNames.ToArray();
-        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, players);
     }
 
 }

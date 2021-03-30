@@ -4249,7 +4249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34929653c93773d4f8c9140ecdd6d7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  playerControllers: []
+  playerNames: []
 --- !u!4 &1247718072
 Transform:
   m_ObjectHideFlags: 0
@@ -4806,7 +4807,7 @@ MonoBehaviour:
   joinPanel: {fileID: 1437296938}
   lobbyPanel: {fileID: 596132178}
   startButton: {fileID: 379376459}
-  NameInputField: {fileID: 0}
+  NameInputField: {fileID: 162658707}
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0
@@ -7052,7 +7053,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2123950533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1441080378}
+        m_MethodName: changeName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2123950533
 MonoBehaviour:
   m_ObjectHideFlags: 0
