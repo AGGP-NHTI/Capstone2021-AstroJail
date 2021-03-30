@@ -5,148 +5,62 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class GuardPawn : Pawn
+public class GuardPawn : PlayerPawn
 {
-    public int maxInventory;
-    protected Containers _PlayerInventory;
-
-    public GameObject projSpawn;
-    public GameObject projPrefab;
-    public float mouseSensitivity = 15;
-    public float moveRate = 7.5f;
-    public float rotationRate = 90;
-    public float pitchRate = 90;
-    public Vector2 pitchRange = new Vector2(-89, 89);
-    public bool InvertCamVerticle = true;
-    Rigidbody rb;
-    public bool IsGrounded = true;
-    public float JumpSpeed;
-  
-
-
-    public List<MapInteractable> Interactables;
-    public MapInteractable ObjectUsing;
-
-
-    //bool for interact
-    public bool InteractE = false;
-
+    
+    Camera theCam;
+    Ray locateRay;
+    public float searchDistance = 10f;
+    public PrisonerPawn FoundPlayer = null;
+    public PrisonerPawn searchedPlayer = null;
+   
 
     //Properties
-    public Containers playerInventory
-    {
-        get
-        {
-            if (!_PlayerInventory)
-            {
-                _PlayerInventory = gameObject.GetComponent<Containers>();
-            }
 
-            return _PlayerInventory;
-        }
+
+    public override void Initilize()
+    {
+        playerType = PlayerType.Guard;
+        theCam = CameraControl.GetComponent<Camera>();
+        locateRay = new Ray();
+    }
+    public override void Update()
+    {
+        //may be something in pawn that we need to do 
+        base.Update();
+        FindPrisoners();
+
     }
 
-    public void Start()
+    public void FindPrisoners()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        FoundPlayer = null;
+        locateRay.direction = theCam.transform.forward ;
+        //this might need to be moved to a better starting position
+        locateRay.origin = gameObject.transform.position;
+        
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(locateRay, out hitInfo, searchDistance))
+        {
+            FoundPlayer = hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>();
+           
+            
+        }
+
     }
 
-
-    public void SetCamPitch(float value)
-    {
-        if (ObjectUsing)
-        {
-            return;
-        }
-        if (value == 0)
-        {
-            return;
-        }
-
-        if (InvertCamVerticle)
-        {
-            value *= -1;
-        }
-
-        float nextPitch = CameraControl.transform.rotation.eulerAngles.x;
-        if (nextPitch > 180)
-        {
-            nextPitch -= 360;
-        }
-
-        float delta = (value * mouseSensitivity * pitchRate * Time.deltaTime);
-        nextPitch = nextPitch + delta;
-
-        // Restrain with in Riange
-        if (nextPitch < pitchRange.x)
-        {
-            nextPitch = pitchRange.x;
-        }
-
-        if (nextPitch > pitchRange.y)
-        {
-            nextPitch = pitchRange.y;
-        }
-
-        Quaternion r = Quaternion.Euler(nextPitch, 0, 0);
-        CameraControl.transform.localRotation = r;
-    }
-
-    public override void RotatePlayer(float value)
-    {
-        if (ObjectUsing)
-        {
-            return;
-        }
-        gameObject.transform.Rotate(Vector3.up * value * mouseSensitivity * rotationRate * Time.deltaTime);
-    }
-
-    public override void Move(float horizontal, float vertical)
-    {
-        if (ObjectUsing)
-        {
-            return;
-        }
-        if (!rb)
-        {
-            Debug.Log("waiting");
-            return;
-        }
-        Vector3 direction = (gameObject.transform.forward * vertical) + (gameObject.transform.right * horizontal);
-        direction = direction.normalized;
-
-        rb.velocity = new Vector3(0, rb.velocity.y, 0) + (direction * moveRate);
-    }
-
-    public override void Jump(bool s)
-    {
-        if (ObjectUsing)
-        {
-            return;
-        }
-        if (s)
-        {
-            Debug.Log("Jump in Player Pawn");
-            if (IsGrounded)
-            {
-                Debug.Log("In Ground");
-                rb.velocity = new Vector3(rb.velocity.x, JumpSpeed, rb.velocity.z);
-                //rb.AddForce(Vector3.up * JumpSpeed);
-                IsGrounded = false;
-            }
-        }
-    }
 
     public override void Interact(bool e)
-    {
-        //how guards interact with prisoners will be different system
+    {     
+       
         if (e && !ObjectUsing && (Interactables.Count != 0))
         {
             Debug.Log($"pressed e: {e} ");
             if (Interactables[0].IsInUse())
             {
                 Debug.Log("object is in use");
-                //will need to add code here later to indicate the object is in use
+                
             }
             else
             {
@@ -157,6 +71,60 @@ public class GuardPawn : Pawn
             }
         }
     }
+    public override void Search(bool q)
+    {
+        if (q)
+        {
+            if(FoundPlayer && !searchedPlayer)
+            {
+                searchedPlayer = FoundPlayer;
+                this.lockMovement = true;
+                searchedPlayer.lockMovement = true;
+
+                // we have done this locally on guard client machine 
+                // we now need to replicate what we have done here acrossed the network 
+                // insync with the player that is being searched 
+                // we may have to tell the prisoner where they need to be standing
+                // they need a hud to show up saying they are being searched 
+                // get there inventory then show the guards search hud with that information 
+
+
+                // search begins 
+                // Guard sends server rpc and it states which player and their location 
+                // in server rpc 
+                // 1.) sends client rpc (prisoner inventory) to guard with prisoner inventory 
+                // 1.a) guard can open hud element with prisoner inventory information
+                // 2.) sends client rpc (search begins) to prisoner to inform them being searched and a location
+                // 2.a) prisoner can open hud element and places themselves at location
+          
+
+
+
+                // the search interaction ends when the guard
+                // either
+                // A.) ends the search without picking an item from inventory
+                // B.) follows through on search
+
+                // if A, then we need to call end interaction on prisoner(across network) and guard
+                // if B, guard wins/ prisoner wins interaction
+
+                // if guard wins
+                // report interaction to all players 
+                // then send items back to starting stash
+                // teleport player to cell 
+                // release both players and remove huds(ends interaction)
+
+                // if Prisoner wins 
+                // report interaction to all players 
+                // Guard enters sleep/cooldown state
+                // release both players and remove huds(ends interaction) 
+
+
+            }
+        }
+        
+    }
+    
 
     public override void Close(bool escape)
     {
@@ -165,40 +133,15 @@ public class GuardPawn : Pawn
         {
             EndInteract();
         }
-
-    }
-    public override void EndInteract()
-    {
-        ObjectUsing.Done();
-        ObjectUsing = null;
-    }
-
-
-    private void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.tag == "Ground")
+        if(escape && searchedPlayer)
         {
-            IsGrounded = true;
+            this.lockMovement = false;
+            searchedPlayer.lockMovement = false;
+            searchedPlayer = null;
+            EndInteract();
         }
-    }
+       
 
-    public override void Fire1()
-    {
-        if (IsServer)
-        {
-            SpawnProj();
-        }
-        else
-        {
-            InvokeServerRpc(SpawnProj);
-        }
     }
-
-    [ServerRPC(RequireOwnership = false)]
-    public void SpawnProj()
-    {
-        NetworkSpawn(projPrefab, projSpawn.transform.position, projSpawn.transform.rotation);
-    }
-
 
 }

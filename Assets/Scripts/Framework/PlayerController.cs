@@ -18,13 +18,11 @@ public class PlayerController : Controller
     float leftTrigger = 0.0f;
     float rightTrigger = 0.0f;
 
-    bool buttonSouth = false;
-    bool buttonWest = false;
-    bool buttonEast = false;
-    bool buttonNorth = false;
+  
     bool buttonSpace = false;
     bool buttonInteract = false;
     bool buttonClose = false;
+    bool buttonSearch = false;
 
     bool dpad_up = false;
     bool dpad_right = false;
@@ -61,6 +59,7 @@ public class PlayerController : Controller
         myPawn.Jump(buttonSpace);
         myPawn.Interact(buttonInteract);
         myPawn.Close(buttonClose);
+        myPawn.Search(buttonSearch);
         
 
     }
@@ -116,6 +115,7 @@ public class PlayerController : Controller
         buttonSpace = Input.GetKeyDown(KeyCode.Space);
         buttonInteract = Input.GetKeyDown(KeyCode.E);
         buttonClose = Input.GetKeyDown(KeyCode.Escape);
+        buttonSearch = Input.GetKeyDown(KeyCode.Q);
 
         KeyToAxis();
     }
