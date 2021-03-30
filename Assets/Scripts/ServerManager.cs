@@ -49,6 +49,8 @@ public class ServerManager : NetworkedBehaviour
     [ClientRPC]
     public void Client_UpdatePlayerList(string[] players)
     {
+        Debug.Log("inside Client_UpdatePlayerList");
+        Debug.Log(players);
         if(IsServer)
         {
             return;
