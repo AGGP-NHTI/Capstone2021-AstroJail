@@ -37,23 +37,24 @@ public class ServerManager : NetworkedBehaviour
     // Update is called once per frame
     void Update()
     {
+        //This is only working for host
+
         Debug.Log("test");
         InvokeServerRpc(Server_UpdatePlayerList);
     }
 
     [ClientRPC]
-    public void Client_UpdatePlayerList()
+    public void Client_UpdatePlayerList(List<NetworkedClient> playerControllers)
     {
-        Debug.Log("We are inside the client rpc");
         if(IsServer)
         {
             return;
         }
 
-        if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
+        if (playerControllers.Count > 0)
         {
             players.RemoveAll(item => item == null);
-            foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
+            foreach (NetworkedClient client in playerControllers)
             {
                 if (client.PlayerObject.GetComponent<PlayerController>())
                 {
@@ -83,7 +84,7 @@ public class ServerManager : NetworkedBehaviour
                 }
             }
         }
-        InvokeClientRpcOnEveryone(Client_UpdatePlayerList);
+        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, NetworkingManager.Singleton.ConnectedClientsList);
     }
 
 }
