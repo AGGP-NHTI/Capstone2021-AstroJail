@@ -38,8 +38,6 @@ public class ServerManager : NetworkedBehaviour
     void Update()
     {
         //This is only working for host
-
-        Debug.Log("test");
         InvokeServerRpc(Server_UpdatePlayerList);
     }
 
@@ -49,14 +47,14 @@ public class ServerManager : NetworkedBehaviour
     }
 
     [ClientRPC]
-    public void Client_UpdatePlayerList(List<string> players)
+    public void Client_UpdatePlayerList(string[] players)
     {
         if(IsServer)
         {
             return;
         }
 
-        if (players.Count > 0)
+        if (players.Length > 0)
         {
             playerNames.RemoveAll(item => item == null);
             foreach (string name in playerNames)
@@ -69,7 +67,8 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
-        List<string> players = new List<string>();
+        int iterator = 0;
+        string[] players = new string[NetworkingManager.Singleton.ConnectedClientsList.Count];
 
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
@@ -82,8 +81,9 @@ public class ServerManager : NetworkedBehaviour
                     if (!playerControllers.Contains(client.PlayerObject.GetComponent<PlayerController>()))
                     {
                         playerControllers.Add(client.PlayerObject.GetComponent<PlayerController>());
-                        players.Add(client.PlayerObject.GetComponent<PlayerController>().playerName);
+                        players[iterator] = client.PlayerObject.GetComponent<PlayerController>().playerName;
                         playerNames.Add(client.PlayerObject.GetComponent<PlayerController>().playerName);
+                        iterator++;
                     }
                 }
             }
@@ -94,13 +94,20 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_PlayerNameChange(ulong owner, string nameChange)
     {
-        foreach(NetworkedClient NC in NetworkingManager.Singleton.ConnectedClientsList)
+
+        foreach (NetworkedClient NC in NetworkingManager.Singleton.ConnectedClientsList)
         {
             if(NC.ClientId == owner)
             {
+                int index = playerNames.FindIndex(name => name == NC.PlayerObject.GetComponent<PlayerController>().playerName);
+                playerNames.RemoveAt(index);
                 NC.PlayerObject.GetComponent<PlayerController>().playerName = nameChange;
+                playerNames.Add(NC.PlayerObject.GetComponent<PlayerController>().playerName);
             }
         }
+
+        string[] players = playerNames.ToArray();
+        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, players);
     }
 
 }
