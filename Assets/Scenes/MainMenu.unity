@@ -4325,7 +4325,7 @@ GameObject:
   - component: {fileID: 1300541094}
   - component: {fileID: 1300541093}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: IPInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4808,6 +4808,7 @@ MonoBehaviour:
   lobbyPanel: {fileID: 596132178}
   startButton: {fileID: 379376459}
   NameInputField: {fileID: 162658707}
+  IPInputField: {fileID: 1300541093}
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0

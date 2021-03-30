@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MLAPI;
+using MLAPI.Transports.UNET;
 using TMPro;
-using MLAPI.Configuration;
-using MLAPI.SceneManagement;
 
 public class MainMenuManager : NetworkedBehaviour
 {
     public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
-    public TMP_InputField NameInputField;
+    public TMP_InputField NameInputField, IPInputField;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +85,8 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = "66.31.95.85";
+        NetworkingManager.Singleton.StartClient();
     }
 
     public void changeName()
