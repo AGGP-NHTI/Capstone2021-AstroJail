@@ -87,7 +87,11 @@ public class MainMenuManager : NetworkedBehaviour
 
     public void changeName()
     {
-        //NetworkingManager.Singleton.
+        if (NameInputField.text.Length > 0)
+        {
+            string nameChange = NameInputField.text;
+            ServerManager.Instance.changeName(NetworkingManager.Singleton.LocalClientId, nameChange);
+        }
     }
 
     public void StartGame()
