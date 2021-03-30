@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MLAPI;
+using TMPro;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenuManager : NetworkedBehaviour
 {
-    public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, hostPanel, clientPanel;
+    public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
+    public TMP_InputField NameInputField;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +17,20 @@ public class MainMenuManager : MonoBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         joinPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (IsServer)
+        { 
+            startButton.SetActive(true);
+        }
+        else
+        {
+            startButton.SetActive(false);
+        }
     }
     public void Instructions()
     {
@@ -29,8 +38,7 @@ public class MainMenuManager : MonoBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(true);
         joinPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
     }
     public void Credits()
     {
@@ -38,8 +46,7 @@ public class MainMenuManager : MonoBehaviour
         CreditsPanel.SetActive(true);
         instructionsPanel.SetActive(false);
         joinPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
     }
     public void MainMenu()
     {
@@ -47,8 +54,7 @@ public class MainMenuManager : MonoBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         joinPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
     }
 
     public void PlayButton()
@@ -57,8 +63,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
 
     }
     public void HostButton()
@@ -67,9 +72,8 @@ public class MainMenuManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
-        clientPanel.SetActive(false);
-        hostPanel.SetActive(true);
-
+        lobbyPanel.SetActive(true);
+        NetworkingManager.Singleton.StartHost();
     }
 
     public void JoinButton()
@@ -78,9 +82,16 @@ public class MainMenuManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
-        clientPanel.SetActive(true);
-        hostPanel.SetActive(false);
+        lobbyPanel.SetActive(true);
+    }
 
+    public void changeName()
+    {
+        if (NameInputField.text.Length > 0)
+        {
+            string nameChange = NameInputField.text;
+            ServerManager.Instance.changeName(NetworkingManager.Singleton.LocalClientId, nameChange);
+        }
     }
 
     public void StartGame()
