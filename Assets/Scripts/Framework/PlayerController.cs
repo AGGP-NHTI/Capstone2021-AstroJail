@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Controller
 {
     public int playerID;
-    public string playerName;
+    public string playerName = "DefaultName";
     public GameObject PSpawn;
     public bool usingGamePad = false;
 

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MLAPI;
+using MLAPI.Transports.UNET;
 using TMPro;
 
 public class MainMenuManager : NetworkedBehaviour
 {
     public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
-    public TMP_InputField NameInputField;
+    public TMP_InputField NameInputField, IPInputField;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class MainMenuManager : NetworkedBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsServer)
+        if (IsHost)
         { 
             startButton.SetActive(true);
         }
@@ -73,6 +74,7 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        NetworkingManager.Singleton.NetworkConfig.EnableSceneManagement = true;
         NetworkingManager.Singleton.StartHost();
     }
 
@@ -83,16 +85,22 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = "66.31.95.85";
+        NetworkingManager.Singleton.StartClient();
     }
 
     public void changeName()
     {
-        //NetworkingManager.Singleton.
+        if (NameInputField.text.Length > 0)
+        {
+            string nameChange = NameInputField.text;
+            ServerManager.Instance.changeName(NetworkingManager.Singleton.LocalClientId, nameChange);
+        }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        ServerManager.Instance.StartGame("SampleScene");
     }
     public void Close()
     {
