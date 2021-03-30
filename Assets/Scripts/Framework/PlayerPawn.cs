@@ -51,10 +51,10 @@ public class PlayerPawn : Pawn
     {
         
         rb = gameObject.GetComponent<Rigidbody>();
-        Initilize();
+        Initialize();
 
     }
-    public virtual void Initilize()
+    public virtual void Initialize()
     {
 
     }

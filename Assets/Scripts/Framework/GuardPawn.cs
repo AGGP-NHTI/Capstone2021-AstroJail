@@ -18,7 +18,7 @@ public class GuardPawn : PlayerPawn
     //Properties
 
 
-    public override void Initilize()
+    public override void Initialize()
     {
         playerType = PlayerType.Guard;
         theCam = CameraControl.GetComponent<Camera>();
@@ -117,7 +117,7 @@ public class GuardPawn : PlayerPawn
                 // if Prisoner wins 
                 // report interaction to all players 
                 // Guard enters sleep/cooldown state
-                // release both players and remove huds(ends interaction) 
+                // release both players and remove huds(ends interaction)  
 
 
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PrisonerPawn : PlayerPawn
 {
-    public override void Initilize()
+    public override void Initialize()
     {
         playerType = PlayerType.Prisoner;
     }
