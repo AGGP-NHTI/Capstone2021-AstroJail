@@ -123,7 +123,7 @@ public class ServerManager : NetworkedBehaviour
 
         foreach(PlayerController pc in playerControllers)
         {
-            pc.myPawn.gameObject.transform.position = Vector3.zero;
+            pc.myPawn.gameObject.transform.position = new Vector3(0,10,0);
         }    
     }
 
