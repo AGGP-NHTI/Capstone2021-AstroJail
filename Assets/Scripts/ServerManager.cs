@@ -25,8 +25,8 @@ public class ServerManager : NetworkedBehaviour
     }
 
 
-    public List<PlayerController> players = new List<PlayerController>();
-
+    public List<PlayerController> playerControllers = new List<PlayerController>();
+    public List<string> playerNames = new List<string>();
 
     // Start is called before the first frame update
     void Start()
@@ -38,31 +38,28 @@ public class ServerManager : NetworkedBehaviour
     void Update()
     {
         //This is only working for host
-
-        Debug.Log("test");
         InvokeServerRpc(Server_UpdatePlayerList);
     }
 
+    public void changeName(ulong clientID, string nameChange)
+    {
+        InvokeServerRpc(Server_PlayerNameChange, clientID, nameChange);
+    }
+
     [ClientRPC]
-    public void Client_UpdatePlayerList(List<NetworkedClient> playerControllers)
+    public void Client_UpdatePlayerList(string[] players)
     {
         if(IsServer)
         {
             return;
         }
 
-        if (playerControllers.Count > 0)
+        if (players.Length > 0)
         {
-            players.RemoveAll(item => item == null);
-            foreach (NetworkedClient client in playerControllers)
+            playerNames.RemoveAll(item => item == null);
+            foreach (string name in playerNames)
             {
-                if (client.PlayerObject.GetComponent<PlayerController>())
-                {
-                    if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
-                    {
-                        players.Add(client.PlayerObject.GetComponent<PlayerController>());
-                    }
-                }
+                playerNames.Add(name);
             }
         }
     }
@@ -70,21 +67,47 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
+        int iterator = 0;
+        string[] players = new string[NetworkingManager.Singleton.ConnectedClientsList.Count];
+
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
-            players.RemoveAll(item => item == null);
+            playerControllers.RemoveAll(item => item == null);
+            playerNames.RemoveAll(item => item == null);
             foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
             {
                 if (client.PlayerObject.GetComponent<PlayerController>())
                 {
-                    if (!players.Contains(client.PlayerObject.GetComponent<PlayerController>()))
+                    if (!playerControllers.Contains(client.PlayerObject.GetComponent<PlayerController>()))
                     {
-                        players.Add(client.PlayerObject.GetComponent<PlayerController>());
+                        playerControllers.Add(client.PlayerObject.GetComponent<PlayerController>());
+                        players[iterator] = client.PlayerObject.GetComponent<PlayerController>().playerName;
+                        playerNames.Add(client.PlayerObject.GetComponent<PlayerController>().playerName);
+                        iterator++;
                     }
                 }
             }
         }
-        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, NetworkingManager.Singleton.ConnectedClientsList);
+        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, players);
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_PlayerNameChange(ulong owner, string nameChange)
+    {
+
+        foreach (NetworkedClient NC in NetworkingManager.Singleton.ConnectedClientsList)
+        {
+            if(NC.ClientId == owner)
+            {
+                int index = playerNames.FindIndex(name => name == NC.PlayerObject.GetComponent<PlayerController>().playerName);
+                playerNames.RemoveAt(index);
+                NC.PlayerObject.GetComponent<PlayerController>().playerName = nameChange;
+                playerNames.Add(NC.PlayerObject.GetComponent<PlayerController>().playerName);
+            }
+        }
+
+        string[] players = playerNames.ToArray();
+        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, players);
     }
 
 }
