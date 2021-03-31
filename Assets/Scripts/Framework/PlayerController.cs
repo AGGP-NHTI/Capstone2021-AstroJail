@@ -1,5 +1,6 @@
 ﻿using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.NetworkedVar;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : Controller
 {
     public int playerID;
-    public string playerName = "DefaultName";
+    public NetworkedVar<string> playerName = new NetworkedVar<string>("DefaultName"); //Test this with someone else
+    public PlayerType selectedPlayerType; //Maybe make a NetworkedVar<int> to track this over the network
     public GameObject PSpawn;
     public bool usingGamePad = false;
-
+    
     //Controller Inputs//
     Vector2 leftStick = Vector2.zero;
     Vector2 rightStick = Vector2.zero;
@@ -166,5 +168,23 @@ public class PlayerController : Controller
         myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
+    }
+
+    public void SpawnPlayerGameStart()
+    {
+        //Find a spawn point and set position to it
+        //Set PSpawn to player prefab based on enum
+
+        Vector3 position = new Vector3(0, 0, 0);
+        GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
+        Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
+
+        InvokeClientRpcOnClient(Client_SetGameStart, OwnerClientId, Gobj.GetComponent<NetworkedObject>().NetworkId);
+    }
+
+    [ClientRPC]
+    public void Client_SetGameStart(ulong id)
+    {
+
     }
 }
