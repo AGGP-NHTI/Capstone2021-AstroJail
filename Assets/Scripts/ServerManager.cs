@@ -25,14 +25,12 @@ public class ServerManager : NetworkedBehaviour
 
     }
 
-
     public List<PlayerController> playerControllers = new List<PlayerController>();
     public List<string> playerNames = new List<string>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -54,6 +52,7 @@ public class ServerManager : NetworkedBehaviour
     {
         InvokeServerRpc(Server_StartGame, sceneName);
     }
+
 
     [ClientRPC]
     public void Client_UpdatePlayerList(string[] players)
@@ -123,18 +122,20 @@ public class ServerManager : NetworkedBehaviour
     public void Server_StartGame(string sceneName)
     {
         NetworkSceneManager.SwitchScene(sceneName);
-
         InvokeClientRpcOnEveryone(Client_StartGame);
     }
 
+    [ClientRPC]
     public void Client_StartGame()
     {
+        Debug.Log("hello");
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
+            Debug.Log(pc.playerName.Value);
             if(pc.myController)
             {
                 Debug.Log(pc.playerName.Value);
-                pc.gameObject.transform.position = new Vector3(0, 50, 0);
+                pc.myPawn.transform.position = new Vector3(0, 10, 0);
             }
         }
     }
