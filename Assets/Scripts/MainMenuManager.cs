@@ -11,6 +11,8 @@ public class MainMenuManager : NetworkedBehaviour
 {
     public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
     public TMP_InputField NameInputField, IPInputField;
+    public TextMeshProUGUI playerList;
+    private string tempPlayerList;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,17 @@ public class MainMenuManager : NetworkedBehaviour
         else
         {
             startButton.SetActive(false);
+        }
+
+        if (lobbyPanel.activeSelf)
+        {
+            tempPlayerList = "";
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                tempPlayerList += pc.playerName.Value;
+                tempPlayerList += ", ";
+            }
+            playerList.text = tempPlayerList;
         }
     }
     public void Instructions()
