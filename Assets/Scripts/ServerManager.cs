@@ -124,10 +124,19 @@ public class ServerManager : NetworkedBehaviour
     {
         NetworkSceneManager.SwitchScene(sceneName);
 
-        foreach(PlayerController pc in playerControllers)
+        InvokeClientRpcOnEveryone(Client_StartGame);
+    }
+
+    public void Client_StartGame()
+    {
+        foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            pc.myPawn.gameObject.transform.position = new Vector3(0,10,0);
-        }    
+            if(pc.myController)
+            {
+                Debug.Log(pc.playerName.Value);
+                pc.gameObject.transform.position = new Vector3(0, 50, 0);
+            }
+        }
     }
 
   
