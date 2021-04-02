@@ -34,14 +34,14 @@ public class ContainerHUD : NetworkedBehaviour
     
     public void CloseButtom()
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         _container.gameObject.GetComponent<GenericStash>().Done();
         tempPawn.ObjectUsing = null;
     }
 
     public void TakeItem(int i)
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
         {
@@ -74,7 +74,7 @@ public class ContainerHUD : NetworkedBehaviour
     public void UpdateList()
     {
         int i = 0;
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
         //Containerbuttons.Clear();

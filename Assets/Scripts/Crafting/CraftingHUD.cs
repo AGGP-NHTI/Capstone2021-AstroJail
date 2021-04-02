@@ -46,7 +46,7 @@ public class CraftingHUD : NetworkedBehaviour
 
     public void CloseButtom()
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         _container.gameObject.GetComponent<CraftingStash>().Done();
         tempPawn.ObjectUsing = null;
     }
@@ -54,7 +54,7 @@ public class CraftingHUD : NetworkedBehaviour
     public void CraftItem()
     {     
         int CorrectItems = 0;
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
 
         if (_container.ItemsInContainer.Count == stash.craftedItem.Recipe.Count)
         {
@@ -123,7 +123,7 @@ public class CraftingHUD : NetworkedBehaviour
     public void TakeItem(int i)
     {
         Debug.Log("Index where item should've been taken from " + i);
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
         {
@@ -154,7 +154,7 @@ public class CraftingHUD : NetworkedBehaviour
 
     public void AddItem(int i)
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
         {
@@ -186,7 +186,7 @@ public class CraftingHUD : NetworkedBehaviour
     public void UpdateList()
     {
         int i = 0;
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
         //Containerbuttons.Clear();
