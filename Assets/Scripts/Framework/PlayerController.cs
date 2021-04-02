@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Controller
 {
     public int playerID;
+    public bool myController = false;
     public NetworkedVar<string> playerName = new NetworkedVar<string>("DefaultName"); //Test this with someone else
     public PlayerType selectedPlayerType; //Maybe make a NetworkedVar<int> to track this over the network
     public GameObject PSpawn;
@@ -56,8 +57,6 @@ public class PlayerController : Controller
             return;
         }
 
-        playerName.Value = "test: " + temp++;
-
         GetInput();
 
         ((PlayerPawn)myPawn).SetCamPitch(rightStick.y);
@@ -67,7 +66,6 @@ public class PlayerController : Controller
         myPawn.Interact(buttonInteract);
         myPawn.Close(buttonClose);
         myPawn.Search(buttonSearch);
-        
 
     }
 
@@ -174,6 +172,7 @@ public class PlayerController : Controller
         myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
+        myController = true;
     }
 
     public void SpawnPlayerGameStart()
