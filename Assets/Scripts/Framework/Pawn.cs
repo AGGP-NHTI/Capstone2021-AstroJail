@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Pawn : Actor
 {
+    public TextMeshPro NamePlate;
     public Controller control;
     public GameObject CameraControl;
     public PlayerType playerType = PlayerType.Prisoner;
@@ -29,7 +31,10 @@ public class Pawn : Actor
     }
     public virtual void Update()
     {
-
+        if(NamePlate.gameObject.activeSelf)
+        {
+            NamePlate.transform.rotation = Quaternion.LookRotation(NamePlate.transform.position - Camera.main.transform.position);
+        }
     }
     public void OnPossessed()
     {

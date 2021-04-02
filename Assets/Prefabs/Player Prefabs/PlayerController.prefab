@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPawn: {fileID: 0}
   playerID: 0
-  playerName: DefaultName
+  myController: 0
+  selectedPlayerType: 0
   PSpawn: {fileID: 9154986995550128394, guid: ec985acb1647aca419a5235fd1728c99, type: 3}
   usingGamePad: 0
 --- !u!114 &1171618758931421535
