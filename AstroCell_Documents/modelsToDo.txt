@@ -1,0 +1,128 @@
+M<AKE DOOOORRRS
+total items list
+--------------
+1 cafeteria chairs 
+2 cafateria table 
+3 trash can 
+4 bowl 
+5 tray 
+6 cafeteria food trolly/board/steam table 
+7 tub-big pots for food 
+8 shower walls
+9 stalls
+10 toilets
+11 faucets
+12 sinks
+13 drains
+14 many boxes 
+15 sheet covered area/tarp covered thing 
+16 rope hanging 
+17 shelves for boxes
+18 books
+19 shelves for books
+20 basic chairs 
+21 regular table
+22 fake computer /simple hologram perhaps
+23 body trays
+24 casket
+25 autapsy table 
+26 tool table 
+27 stairs metal frame work 
+28 space ships 
+29 big ass machine 
+30 tables-metal tables 
+31 astroids
+32 pickaxes
+33 mine carts
+34 reactor
+35 escape pods 
+36 exit sign
+37 red light 
+38 pizza boxes
+39 desk 
+
+
+basic assets to go in to areas
+------------
+- cafeteria
+cafeteria chairs 
+cafateria table 
+trash can 
+bowl 
+tray 
+cafeteria food trolly/board/steam table 
+tub-big pots for food 
+----------
+- shower
+shower walls
+stalls
+/toilets
+faucets
+sinks
+trashcan-can be same model
+drains
+----
+
+-storage
+many boxes 
+sheet covered area/tarp covered thing 
+rope hanging 
+shelves
+--------
+
+-library 
+shelves
+books
+basic chairs 
+regular table
+fake computer /simple hologram perhaps
+trash cans- same model 
+lamps - if time 
+
+-morge
+trash can
+body trays
+casket
+autapsy table 
+tool table 
+shelves 
+
+-hanger
+space ships 
+chests or boxes from storage 
+trash can - same 
+chairs- cafeteria
+stairs metal frame work 
+
+- processing 
+boxes - same
+-trash same
+big ass machine 
+tables-metal tables 
+
+- mining 
+astroids
+boxs- same 
+trash- same 
+pickaxes
+mine carts
+
+-reactor
+reactor
+
+-escape pod room 
+escape pods 
+exit sign
+red light 
+
+-armory 
+- dont make sit for it 
+
+break room
+pizza boxes
+-use assets
+
+-wardens office 
+desk 
+
+
