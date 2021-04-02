@@ -30,6 +30,18 @@ ModelImporter:
   - first:
       74: -791783127511820889
     second: humanoid_rig|prisoner_spread_em_mode
+  - first:
+      74: 6393212775107815432
+    second: prisoner_jump
+  - first:
+      74: -6892709002905556281
+    second: prisoner_spread_em_mode
+  - first:
+      74: -1486197603377838836
+    second: prisoner_jog
+  - first:
+      74: -8964740467746829816
+    second: prisoner_idle
   externalObjects: {}
   materials:
     materialImportMode: 1
