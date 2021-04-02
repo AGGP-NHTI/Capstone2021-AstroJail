@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Pawn : Actor
 {
+    public TextMeshPro NamePlate;
     public Controller control;
     public GameObject CameraControl;
     public PlayerType playerType = PlayerType.Prisoner;
@@ -29,7 +31,8 @@ public class Pawn : Actor
     }
     public virtual void Update()
     {
-
+        PlayerController temp = (PlayerController)control;
+        NamePlate.GetComponentInChildren<TextMeshPro>().text = temp.playerName.Value;
     }
     public void OnPossessed()
     {
