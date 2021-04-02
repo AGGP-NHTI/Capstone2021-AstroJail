@@ -169,7 +169,7 @@ public class PlayerController : Controller
     public void client_set(ulong id)
     {
         Debug.Log("client_set with owner id of " + id);
-        myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
+        myPawn = GetNetworkedObject(id).GetComponent<PrisonerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myController = true;
