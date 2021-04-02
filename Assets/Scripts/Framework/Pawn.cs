@@ -27,7 +27,10 @@ public class Pawn : Actor
         }
 
     }
+    public virtual void Update()
+    {
 
+    }
     public void OnPossessed()
     {
 
@@ -63,6 +66,11 @@ public class Pawn : Actor
     {
 
     }
+    public virtual void Search(bool q)
+    {
+
+    }
+
     public virtual void Fire1()
     {
 

@@ -60,12 +60,14 @@ public class MainMenuCamera : MonoBehaviour
             MoveDirection = (cameraRunPoints[nextPoint].transform.position - transform.position).normalized;
             turnCounter = 0;
         }
-
     }
+
     public float GetDistanceTo(GameObject Other)
     {
         float distanceTo = (Other.transform.position - transform.position).magnitude;
 
         return distanceTo;
     }
+
+
 }

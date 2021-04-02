@@ -31,7 +31,7 @@ public class HiddenStashHud : NetworkedBehaviour
         //      Populate UI with those items 
         // Make Container Panel Appear
     }
-
+ 
     public void CloseButtom()
     {
         PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;

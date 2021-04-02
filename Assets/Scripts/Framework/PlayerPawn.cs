@@ -18,17 +18,19 @@ public class PlayerPawn : Pawn
     public float pitchRate = 90;
     public Vector2 pitchRange = new Vector2(-89, 89);
     public bool InvertCamVerticle = true;
-    Rigidbody rb;
+    protected Rigidbody rb;
     public bool IsGrounded = true;
     public float JumpSpeed;
 
 
     public List<MapInteractable> Interactables;
     public MapInteractable ObjectUsing;
+   
 
 
     //bool for interact
     public bool InteractE = false;
+    public bool lockMovement = false;
 
 
     //Properties
@@ -47,16 +49,28 @@ public class PlayerPawn : Pawn
 
     public void Start()
     {
+        
         rb = gameObject.GetComponent<Rigidbody>();
+        Initialize();
+
+    }
+    public virtual void Initialize()
+    {
+
     }
 
 
     public void SetCamPitch(float value)
     {
+        if(lockMovement)
+        {
+            return;
+        }
         if (ObjectUsing)
         {
             return;
         }
+        
         if (value == 0)
         {
             return;
@@ -93,6 +107,10 @@ public class PlayerPawn : Pawn
 
     public override void RotatePlayer(float value)
     {
+        if (lockMovement)
+        {
+            return;
+        }
         if (ObjectUsing)
         {
             return;
@@ -102,7 +120,11 @@ public class PlayerPawn : Pawn
 
     public override void Move(float horizontal, float vertical)
     {
-        if(ObjectUsing)
+        if (lockMovement)
+        {
+            return;
+        }
+        if (ObjectUsing)
         {
             return;
         }
@@ -119,6 +141,10 @@ public class PlayerPawn : Pawn
 
     public override void Jump(bool s)
     {
+        if (lockMovement)
+        {
+            return;
+        }
         if (ObjectUsing)
         {
             return;
@@ -164,12 +190,18 @@ public class PlayerPawn : Pawn
         {
             EndInteract();
         }
+
       
     }
+    
     public override void EndInteract()
     {
-        ObjectUsing.Done();
+        if(ObjectUsing)
+        {
+            ObjectUsing.Done();      
+        }
         ObjectUsing = null;
+        lockMovement = false;
     }
 
 
