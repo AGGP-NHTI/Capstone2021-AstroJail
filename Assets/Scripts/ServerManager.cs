@@ -121,8 +121,6 @@ public class ServerManager : NetworkedBehaviour
     [ServerRPC(RequireOwnership = false)]
     public void Server_StartGame(string sceneName)
     {
-        NetworkSceneManager.SwitchScene(sceneName);
-
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             pc.myPawn.NamePlate.text = pc.playerName.Value;
@@ -134,7 +132,7 @@ public class ServerManager : NetworkedBehaviour
                 pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
-
+        NetworkSceneManager.SwitchScene(sceneName);
         InvokeClientRpcOnEveryone(Client_StartGame);
     }
 
