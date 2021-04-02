@@ -128,17 +128,15 @@ public class ServerManager : NetworkedBehaviour
     [ClientRPC]
     public void Client_StartGame()
     {
-        float spawn = 20;
         Debug.Log("hello");
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            spawn++;
             Debug.Log(pc.playerName.Value);
             if(pc.myController)
             {
                 Debug.Log(pc.playerName.Value);
                 pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                pc.myPawn.transform.position = new Vector3(0, spawn, 0);
+                pc.myPawn.transform.position = new Vector3(0, 50, 0);
                 pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
