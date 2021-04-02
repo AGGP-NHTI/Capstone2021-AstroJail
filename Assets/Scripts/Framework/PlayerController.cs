@@ -36,7 +36,10 @@ public class PlayerController : Controller
 
     bool leftStickButton = false;
     bool rightStickButton = false;
+
     //Controller Inputs//
+
+    int temp = 0;
 
     private void Start()
     {
@@ -52,6 +55,8 @@ public class PlayerController : Controller
         if (!myPawn){
             return;
         }
+
+        playerName.Value = "test: " + temp++;
 
         GetInput();
 
@@ -149,6 +154,7 @@ public class PlayerController : Controller
             InvokeServerRpc(Server_SpawnPlayer, OwnerClientId);
         }
     }
+
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_SpawnPlayer(ulong whclient)
