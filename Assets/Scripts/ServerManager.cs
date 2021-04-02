@@ -74,9 +74,11 @@ public class ServerManager : NetworkedBehaviour
         playerNames = temp;
     }
 
+
     [ServerRPC(RequireOwnership = false)]
     public void Server_UpdatePlayerList()
     {
+        /*
         if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
         {
             playerControllers.RemoveAll(item => item == null);
@@ -96,12 +98,13 @@ public class ServerManager : NetworkedBehaviour
 
         string[] clientPlayerList = playerNames.ToArray();
         InvokeClientRpcOnEveryone(Client_UpdatePlayerList, clientPlayerList);
+        */
     }
 
     [ServerRPC(RequireOwnership = false)]
     public void Server_PlayerNameChange(ulong owner, string nameChange)
     {
-
+        /*
         foreach (NetworkedClient NC in NetworkingManager.Singleton.ConnectedClientsList)
         {
             if(NC.ClientId == owner)
@@ -112,7 +115,7 @@ public class ServerManager : NetworkedBehaviour
                 playerNames.Add(NC.PlayerObject.GetComponent<PlayerController>().playerName);
             }
         }
-
+        */
     }
 
 

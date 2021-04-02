@@ -95,6 +95,13 @@ public class MainMenuManager : NetworkedBehaviour
         {
             string nameChange = NameInputField.text;
             ServerManager.Instance.changeName(NetworkingManager.Singleton.LocalClientId, nameChange);
+            foreach(PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if (go.myController)
+                {
+                    go.playerName.Value = NameInputField.text;
+                }
+            }
         }
     }
 
