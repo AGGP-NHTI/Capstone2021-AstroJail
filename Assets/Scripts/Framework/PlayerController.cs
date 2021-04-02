@@ -10,7 +10,7 @@ public class PlayerController : Controller
 {
     public int playerID;
     public bool myController = false;
-    public NetworkedVar<string> playerName = new NetworkedVar<string>("DefaultName"); //Test this with someone else
+    public NetworkedVarString playerName = new NetworkedVarString("DefaultName"); //Test this with someone else
     public PlayerType selectedPlayerType; //Maybe make a NetworkedVar<int> to track this over the network
     public GameObject PSpawn;
     public bool usingGamePad = false;
