@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MLAPI;
 using MLAPI.Transports.UNET;
-using MLAPI.Configuration;
-using MLAPI.SceneManagement;
 using TMPro;
 
 public class MainMenuManager : NetworkedBehaviour
@@ -24,7 +22,6 @@ public class MainMenuManager : NetworkedBehaviour
         joinPanel.SetActive(false);
         lobbyPanel.SetActive(false);
 
-        NetworkSceneManager.AddRuntimeSceneName("SampleScenezach", 1);
     }
 
     // Update is called once per frame
