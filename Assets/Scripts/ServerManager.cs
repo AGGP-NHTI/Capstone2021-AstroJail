@@ -123,7 +123,14 @@ public class ServerManager : NetworkedBehaviour
     {
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            pc.myPawn.NamePlate.text = pc.playerName.Value;
+            foreach(PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            {
+                if (pc.OwnerClientId == pp.OwnerClientId)
+                {
+                    pp.NamePlate.text = pc.playerName.Value;
+                }
+                
+            }
             if (pc.myController)
             {
                 Debug.Log(pc.playerName.Value);
@@ -141,8 +148,15 @@ public class ServerManager : NetworkedBehaviour
     {
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            pc.myPawn.NamePlate.text = pc.playerName.Value;
-            if(pc.myController)
+            foreach (PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            {
+                if (pc.OwnerClientId == pp.OwnerClientId)
+                {
+                    pp.NamePlate.text = pc.playerName.Value;
+                }
+
+            }
+            if (pc.myController)
             {
                 Debug.Log(pc.playerName.Value);
                 pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
