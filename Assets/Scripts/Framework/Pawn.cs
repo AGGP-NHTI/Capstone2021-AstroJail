@@ -31,8 +31,10 @@ public class Pawn : Actor
     }
     public virtual void Update()
     {
+        /*
         PlayerController temp = (PlayerController)control;
         NamePlate.GetComponentInChildren<TextMeshPro>().text = temp.playerName.Value;
+        */
     }
     public void OnPossessed()
     {
