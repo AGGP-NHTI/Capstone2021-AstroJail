@@ -31,10 +31,10 @@ public class Pawn : Actor
     }
     public virtual void Update()
     {
-        /*
-        PlayerController temp = (PlayerController)control;
-        NamePlate.GetComponentInChildren<TextMeshPro>().text = temp.playerName.Value;
-        */
+        if(NamePlate.gameObject.activeSelf)
+        {
+            NamePlate.transform.rotation = Quaternion.LookRotation(NamePlate.transform.position - Camera.main.transform.position);
+        }
     }
     public void OnPossessed()
     {
