@@ -2,34 +2,7 @@ fileFormatVersion: 2
 guid: 3a10a87b85abcf2459dcde1600320b8c
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: 1722623193987290998
-    second: prisoner_spread_em_mode.001
-  - first:
-      74: 1094890109413066443
-    second: prisoner_idle.001
-  - first:
-      74: 9164300540233066971
-    second: prisoner_idle.002
-  - first:
-      74: -545309655504750512
-    second: prisoner_jog.001
-  - first:
-      74: -7782118380821182976
-    second: prisoner_jump.001
-  - first:
-      74: 4522959639879280089
-    second: humanoid_rig|prisoner_idle
-  - first:
-      74: -7808579631938448852
-    second: humanoid_rig|prisoner_jog
-  - first:
-      74: 2628743581304131523
-    second: humanoid_rig|prisoner_jump
-  - first:
-      74: -791783127511820889
-    second: humanoid_rig|prisoner_spread_em_mode
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -42,7 +15,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
