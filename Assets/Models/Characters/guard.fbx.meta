@@ -30,6 +30,15 @@ ModelImporter:
   - first:
       74: 2356019965586207636
     second: guard_armature_third|guard_search_mode
+  - first:
+      74: 1690554842745307683
+    second: guard_idle_tp_one
+  - first:
+      74: -879331919607174464
+    second: guard_move_tp
+  - first:
+      74: -1367020840783922896
+    second: guard_search_mode
   externalObjects:
   - first:
       type: UnityEngine:Material
