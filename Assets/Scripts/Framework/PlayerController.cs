@@ -174,7 +174,6 @@ public class PlayerController : Controller
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myController = true;
-        myPawn.NamePlate.gameObject.SetActive(false);
     }
 
     public void SpawnPlayerGameStart()
