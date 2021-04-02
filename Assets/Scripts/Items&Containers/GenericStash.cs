@@ -37,7 +37,7 @@ public class GenericStash : MapInteractable
 
     public override void OnTriggerEnter(Collider other)
     {      
-        PlayerPawn p = other.gameObject.GetComponentInParent<PlayerPawn>();
+        PrisonerPawn p = other.gameObject.GetComponentInParent<PrisonerPawn>();
         if (p)
         {
             if(p.playerType == PlayerType.Guard)

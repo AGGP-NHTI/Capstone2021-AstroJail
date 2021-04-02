@@ -34,14 +34,14 @@ public class ItemTransferHUD : NetworkedBehaviour
 
     public void CloseButtom()
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         _container.gameObject.GetComponent<ItemTransferVent>().Done();
         tempPawn.ObjectUsing = null;
     }
 
     public void TakeItem(int i)
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
         {
@@ -72,7 +72,7 @@ public class ItemTransferHUD : NetworkedBehaviour
 
     public void AddItem(int i)
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
         if (!tempPawn)
         {
@@ -103,7 +103,7 @@ public class ItemTransferHUD : NetworkedBehaviour
 
     public void TransferItem()
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         _container.gameObject.GetComponent<ItemTransferVent>().Done();
         tempPawn.ObjectUsing = null;
 
@@ -113,7 +113,7 @@ public class ItemTransferHUD : NetworkedBehaviour
     public void UpdateList()
     {
         int i = 0;
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
         PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
         //Containerbuttons.Clear();
