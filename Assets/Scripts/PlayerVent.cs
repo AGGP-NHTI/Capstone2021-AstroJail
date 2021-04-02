@@ -34,7 +34,7 @@ public class PlayerVent : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        PlayerPawn tempPawn = (PlayerPawn)user.myPawn;
+        PrisonerPawn tempPawn = (PrisonerPawn)user.myPawn;
         if (tempPawn.playerType == PlayerType.Prisoner)
         {
 

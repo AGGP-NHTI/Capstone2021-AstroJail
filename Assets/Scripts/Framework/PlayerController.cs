@@ -44,6 +44,7 @@ public class PlayerController : Controller
 
     private void Start()
     {
+        playerName.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
         Debug.Log("My owner id is " + OwnerClientId);
         SpawnPlayer();
     }

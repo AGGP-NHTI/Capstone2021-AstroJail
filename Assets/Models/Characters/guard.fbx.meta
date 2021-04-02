@@ -6,6 +6,30 @@ ModelImporter:
   - first:
       74: 7652016557440551971
     second: guard_armature_third|guard_idle_tp
+  - first:
+      74: 2045359917449681191
+    second: guard_idle_tp_base
+  - first:
+      74: 4410766125576620710
+    second: guard_idle_tp_one.001
+  - first:
+      74: 6917861754470980713
+    second: guard_move_tp.001
+  - first:
+      74: -7704738508999758802
+    second: guard_search_mode.001
+  - first:
+      74: 3031694873815886027
+    second: guard_armature_third|guard_idle_tp_base
+  - first:
+      74: 4253857234078183368
+    second: guard_armature_third|guard_idle_tp_one
+  - first:
+      74: 5385804411125783579
+    second: guard_armature_third|guard_move_tp
+  - first:
+      74: 2356019965586207636
+    second: guard_armature_third|guard_search_mode
   externalObjects:
   - first:
       type: UnityEngine:Material
