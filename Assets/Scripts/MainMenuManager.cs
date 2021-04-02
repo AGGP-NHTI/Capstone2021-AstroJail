@@ -11,8 +11,8 @@ public class MainMenuManager : NetworkedBehaviour
 {
     public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
     public TMP_InputField NameInputField, IPInputField;
-    public TextMeshProUGUI playerList;
-    private string tempPlayerList;
+    public TextMeshProUGUI prisonerList, guardList;
+    private string tempGuardList, tempPrisonerList;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +38,24 @@ public class MainMenuManager : NetworkedBehaviour
 
         if (lobbyPanel.activeSelf)
         {
-            tempPlayerList = "";
+            tempGuardList = "";
+            tempPrisonerList = "";
             foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
             {
-                tempPlayerList += pc.playerName.Value;
-                tempPlayerList += ", ";
+                if(pc.playerEnum.Value == 0)
+                {
+                    tempPrisonerList += pc.playerName.Value;
+                    tempPrisonerList += ", ";
+                }
+                else if(pc.playerEnum.Value == 1)
+                {
+                    tempGuardList += pc.playerName.Value;
+                    tempGuardList += ", ";
+                }
+
             }
-            playerList.text = tempPlayerList;
+            guardList.text = tempGuardList;
+            prisonerList.text = tempPrisonerList; 
         }
     }
     public void Instructions()
@@ -115,6 +126,28 @@ public class MainMenuManager : NetworkedBehaviour
                 {
                     go.playerName.Value = NameInputField.text;
                 }
+            }
+        }
+    }
+
+    public void swapGuard()
+    {
+        foreach (PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (go.myController)
+            {
+                go.playerEnum.Value = 1;
+            }
+        }
+    }
+
+    public void swapPrisoner()
+    {
+        foreach (PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (go.myController)
+            {
+                go.playerEnum.Value = 0;
             }
         }
     }

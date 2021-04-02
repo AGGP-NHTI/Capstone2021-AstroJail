@@ -11,6 +11,7 @@ public class PlayerController : Controller
     public int playerID;
     public bool myController = false;
     public NetworkedVar<string> playerName = new NetworkedVar<string>("DefaultName"); //Test this with someone else
+    public NetworkedVar<int> playerEnum = new NetworkedVar<int>(0);
     public PlayerType selectedPlayerType; //Maybe make a NetworkedVar<int> to track this over the network
     public GameObject PSpawn;
     public bool usingGamePad = false;
@@ -45,6 +46,7 @@ public class PlayerController : Controller
     private void Start()
     {
         playerName.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
+        playerEnum.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
         Debug.Log("My owner id is " + OwnerClientId);
         SpawnPlayer();
     }
