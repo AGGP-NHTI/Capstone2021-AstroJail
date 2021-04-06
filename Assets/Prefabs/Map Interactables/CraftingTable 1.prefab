@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkedInstanceId: 0
-  PrefabHash: 11694714464045865886
-  PrefabHashGenerator: Container
+  PrefabHash: 1482253058897396957
+  PrefabHashGenerator: CraftingTable
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
 --- !u!114 &2799362972137852076

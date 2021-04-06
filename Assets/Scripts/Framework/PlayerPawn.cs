@@ -9,7 +9,6 @@ public class PlayerPawn : Pawn
 
     public int maxInventory;
     protected Containers _PlayerInventory;
- 
     public GameObject projSpawn;
     public GameObject projPrefab;
     public float mouseSensitivity = 15;
@@ -47,12 +46,10 @@ public class PlayerPawn : Pawn
         }
     }
 
-    public void Start()
+    public virtual void Start()
     {
-        
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
-
     }
     public virtual void Initialize()
     {
@@ -203,6 +200,15 @@ public class PlayerPawn : Pawn
         ObjectUsing = null;
         lockMovement = false;
     }
+
+    public override void OnPossessed()
+    {
+        if(control is PlayerController pc)
+        {
+            NamePlate.text = pc.playerName.Value;
+        }
+    }
+
 
 
     private void OnCollisionStay(Collision other)

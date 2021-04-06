@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/WallRising_Test.mat.meta
+guid: e37a5ccf4436b08478fdb2628a125f52
+NativeFormatImporter:
+=======
 guid: 41220476cbec8964cbdbee1727dd2c0f
 folderAsset: yes
 DefaultImporter:
+>>>>>>> d8b99995aad14b89256f42d82e6ce66500c801f4:Assets/Models/Tileset/Raw2/Textures/TextureTest.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

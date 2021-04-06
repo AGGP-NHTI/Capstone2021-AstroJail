@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkedInstanceId: 0
-  PrefabHash: 11694714464045865886
-  PrefabHashGenerator: Container
+  PrefabHash: 14825127250030058440
+  PrefabHashGenerator: HiddenStash
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
 --- !u!114 &6412358868001903205

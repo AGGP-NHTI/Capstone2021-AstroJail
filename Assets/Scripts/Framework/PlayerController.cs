@@ -1,4 +1,5 @@
-﻿using MLAPI;
+﻿using System;
+using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.NetworkedVar;
 using System.Collections;
@@ -47,8 +48,13 @@ public class PlayerController : Controller
     {
         playerName.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
         playerEnum.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
+        //SpawnPlayer();
         Debug.Log("My owner id is " + OwnerClientId);
-        SpawnPlayer();
+
+        if(IsOwner)
+        {
+            myController = true;
+        }
     }
 
     private void Update()
@@ -150,13 +156,15 @@ public class PlayerController : Controller
 
     public void SpawnPlayer()
     {
-        if (IsOwner)
+        
+        if(IsOwner)
         {
             InvokeServerRpc(Server_SpawnPlayer, OwnerClientId);
         }
+        
+        
     }
-
-
+    
     [ServerRPC(RequireOwnership = false)]
     public void Server_SpawnPlayer(ulong whclient)
     {
@@ -165,7 +173,7 @@ public class PlayerController : Controller
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
 
-        InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkedObject>().NetworkId);
+        //InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkedObject>().NetworkId);
     }
 
     [ClientRPC]
@@ -175,15 +183,15 @@ public class PlayerController : Controller
         myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
-        myController = true;
     }
 
     public void SpawnPlayerGameStart()
     {
         //Find a spawn point and set position to it
         //Set PSpawn to player prefab based on enum
-
-        Vector3 position = new Vector3(0, 0, 0);
+        Debug.Log("We should be spawning a pawn in");
+        Debug.Log("Pspawn: " + PSpawn.name);
+        Vector3 position = new Vector3(0, 15, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
 
@@ -193,6 +201,10 @@ public class PlayerController : Controller
     [ClientRPC]
     public void Client_SetGameStart(ulong id)
     {
-
+        Debug.Log("We should be possessing our pawn");
+        myPawn = GetNetworkedObject(id).GetComponent<Pawn>();
+        myPawn.Possessed(this);
+        myPawn.CameraControl.SetActive(true);
+        myController = true;
     }
 }
