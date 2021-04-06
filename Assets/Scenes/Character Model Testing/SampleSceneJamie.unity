@@ -280,8 +280,77 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &795924905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.94497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.0625544
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881855088387678664, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall2Rising
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e63b145fa934d59469826c997c7b9acd, type: 3}
 --- !u!1001 &1510763065
 PrefabInstance:
   m_ObjectHideFlags: 0
