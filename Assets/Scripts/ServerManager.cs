@@ -5,7 +5,6 @@ using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.Connection;
 using MLAPI.SceneManagement;
-
 public class ServerManager : NetworkedBehaviour
 {
     private static ServerManager _instance;
@@ -23,17 +22,19 @@ public class ServerManager : NetworkedBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
+        NetworkSceneManager.OnSceneSwitched += OnSceneSwitched;
     }
 
     public List<PlayerController> playerControllers = new List<PlayerController>();
     public List<string> playerNames = new List<string>();
+    public GameObject GuardPrefab, PrisonerPrefab;
 
-    // Start is called before the first frame update
     void Start()
     {
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         //This is only working for host
@@ -52,7 +53,6 @@ public class ServerManager : NetworkedBehaviour
     {
         InvokeServerRpc(Server_StartGame, sceneName);
     }
-
 
     [ClientRPC]
     public void Client_UpdatePlayerList(string[] players)
@@ -123,24 +123,41 @@ public class ServerManager : NetworkedBehaviour
     {
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            foreach(PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            //Check NetworkedVar<int> to decide enum
+            if (pc.playerEnum.Value == 0)
             {
-                if (pc.OwnerClientId == pp.OwnerClientId)
-                {
-                    pp.NamePlate.text = pc.playerName.Value;
-                }
-                
+                pc.selectedPlayerType = PlayerType.Prisoner;
             }
-            if (pc.myController)
+            else
             {
-                Debug.Log(pc.playerName.Value);
-                pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                pc.myPawn.transform.position = new Vector3(0, 50, 0);
-                pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                pc.selectedPlayerType = PlayerType.Guard;
             }
+
+            //Check enum to decide prefab
+            if (pc.selectedPlayerType == PlayerType.Prisoner)
+            {
+                pc.PSpawn = PrisonerPrefab;
+            }
+            else
+            {
+                pc.PSpawn = GuardPrefab;
+            }
+
         }
-        NetworkSceneManager.SwitchScene(sceneName);
         InvokeClientRpcOnEveryone(Client_StartGame);
+
+
+
+        NetworkSceneManager.SwitchScene(sceneName);
+       
+    }
+
+    public void OnSceneSwitched()
+    {
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            pc.SpawnPlayerGameStart();
+        }
     }
 
     [ClientRPC]
@@ -148,24 +165,28 @@ public class ServerManager : NetworkedBehaviour
     {
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            foreach (PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            //Check NetworkedVar<int> to decide enum
+            if (pc.playerEnum.Value == 0)
             {
-                if (pc.OwnerClientId == pp.OwnerClientId)
-                {
-                    pp.NamePlate.text = pc.playerName.Value;
-                }
+                pc.selectedPlayerType = PlayerType.Prisoner;
+            }
+            else
+            {
+                pc.selectedPlayerType = PlayerType.Guard;
+            }
 
-            }
-            if (pc.myController)
+
+            //Check enum to decide prefab
+            if (pc.selectedPlayerType == PlayerType.Prisoner)
             {
-                Debug.Log(pc.playerName.Value);
-                pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                pc.myPawn.transform.position = new Vector3(0, 50, 0);
-                pc.myPawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                pc.PSpawn = PrisonerPrefab;
             }
+            else
+            {
+                pc.PSpawn = GuardPrefab;
+            }
+
+
         }
     }
-
-  
-
 }

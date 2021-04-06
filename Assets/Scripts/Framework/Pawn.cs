@@ -36,12 +36,12 @@ public class Pawn : Actor
             NamePlate.transform.rotation = Quaternion.LookRotation(NamePlate.transform.position - Camera.main.transform.position);
         }
     }
-    public void OnPossessed()
+    public virtual void OnPossessed()
     {
 
     }
 
-    public void UnPossess()
+    public virtual void UnPossess()
     {
 
     }

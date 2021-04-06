@@ -82,8 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkedInstanceId: 0
-  PrefabHash: 6724313812539414249
-  PrefabHashGenerator: PlayerModel
+  PrefabHash: 12727099640952773015
+  PrefabHashGenerator: PrisonerPawn
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
 --- !u!114 &1410193837815993247
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   CCImmune: 0
+  NamePlate: {fileID: 5232012935759556653}
   control: {fileID: 0}
   CameraControl: {fileID: 2835706084880430289}
   playerType: 0
