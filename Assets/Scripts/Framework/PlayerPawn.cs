@@ -50,11 +50,6 @@ public class PlayerPawn : Pawn
     {
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
-
-        if (control is PlayerController pc)
-        {
-            NamePlate.text = pc.playerName.Value;
-        }
     }
     public virtual void Initialize()
     {

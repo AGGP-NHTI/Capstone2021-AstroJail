@@ -45,7 +45,10 @@ public class GuardPawn : PlayerPawn
         //may be something in pawn that we need to do 
         base.Update();
         FindPrisoners();
-
+        if (control is PlayerController pc)
+        {
+            NamePlate.text = pc.playerName.Value;
+        }
     }
 
     public void FindPrisoners()
