@@ -1,0 +1,19 @@
+1 cafeteria chairs 
+2 cafateria table 
+3 trash can 
+4 bowl 
+5 tray 
+6 tub-big pots for food 
+7 drains
+8 many boxes 
+9 books
+10 basic chairs 
+11 regular table
+12 body trays
+13 casket
+14 autapsy table 
+15 tool table 
+16 tables-metal tables
+17 pickaxes
+18 mine carts
+19 pizza boxes
