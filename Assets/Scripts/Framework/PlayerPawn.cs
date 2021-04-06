@@ -46,12 +46,10 @@ public class PlayerPawn : Pawn
         }
     }
 
-    public void Start()
+    public virtual void Start()
     {
-        
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
-
     }
     public virtual void Initialize()
     {
@@ -210,6 +208,7 @@ public class PlayerPawn : Pawn
             NamePlate.text = pc.playerName.Value;
         }
     }
+
 
 
     private void OnCollisionStay(Collision other)
