@@ -23,11 +23,21 @@ public class GuardPawn : PlayerPawn
 
     //Properties
 
-
+    /*
     public override void Initialize()
     {
         playerType = PlayerType.Guard;
         theCam = CameraControl.GetComponent<Camera>();
+        locateRay = new Ray();
+    }
+    */
+
+    public override void Start()
+    {
+        base.Start();
+
+        playerType = PlayerType.Guard;
+        theCam = Camera.main;
         locateRay = new Ray();
     }
     public override void Update()
