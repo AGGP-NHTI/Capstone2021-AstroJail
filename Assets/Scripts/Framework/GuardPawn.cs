@@ -160,15 +160,19 @@ public class GuardPawn : PlayerPawn
         }
 
     }
+    
+
+     
+ 
     public void ItemsUpdated()
     {
         //this creates the itemhud and gives the items in container
-        if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())
+        if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())   
         {
             Debug.Log("are we here in items update");
             HudReference = Instantiate(HUDPanelToAttach);
             HudReference.GetComponent<SearchPlayerHud>()._container = searchedPlayer.playerInventory;
-            //HudReference.GetComponent<SearchPlayerHud>()._player = UsingPlayer;
+            HudReference.GetComponent<SearchPlayerHud>()._player = (PlayerController)control;
             //HudReference.GetComponent<SearchPlayerHud>().stash = this;
         }
 
@@ -183,13 +187,22 @@ public class GuardPawn : PlayerPawn
         }
         if (escape && searchedPlayer)
         {
-            this.lockMovement = false;
-            searchedPlayer.lockMovement = false;
-            searchedPlayer = null;
-            EndInteract();
+            DoneSearching();
         }
 
 
+    }
+    public void DoneSearching()
+    {
+
+        Debug.Log(HudReference);
+        Destroy(HudReference);
+        Debug.Log(HudReference);
+
+        this.lockMovement = false;
+        searchedPlayer.lockMovement = false;
+        searchedPlayer = null;
+        EndInteract();
     }
 
     [ServerRPC(RequireOwnership = false)]
