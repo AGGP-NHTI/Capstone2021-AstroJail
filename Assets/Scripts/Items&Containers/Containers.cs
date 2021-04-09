@@ -84,6 +84,11 @@ public class Containers : NetworkedBehaviour
         InvokeServerRpc(Server_RequestItems, id);
     }
 
+    public void GuardRequestItems(ulong prisonerID, ulong guardID)
+    {
+        InvokeServerRpc(Server_RequestItemsFromClient, prisonerID, guardID);
+    }
+
     /// <summary>
     /// This request is from the client to the server, asks the server for a list of items in this container
     /// </summary>
@@ -92,6 +97,24 @@ public class Containers : NetworkedBehaviour
     public void Server_RequestItems(ulong clientID)
     {
         InvokeClientRpcOnClient(Client_ItemListUpdate, clientID,GetItemArray());
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_RequestItemsFromClient(ulong prisonerID, ulong guardID)
+    {
+        InvokeClientRpcOnClient(Client_GiveServerItems, prisonerID, prisonerID, guardID);
+    }
+
+    [ServerRPC(RequireOwnership = false)]
+    public void Server_GiveItemsToClient(int[] instanceIDs, ulong guardID)
+    {
+        InvokeClientRpcOnClient(Client_ItemListUpdate, guardID, instanceIDs);
+    }
+
+    [ClientRPC]
+    public void Client_GiveServerItems(ulong prisonerID, ulong guardID)
+    {
+        InvokeServerRpc(Server_GiveItemsToClient, GetItemArray(), guardID);
     }
 
     [ClientRPC]

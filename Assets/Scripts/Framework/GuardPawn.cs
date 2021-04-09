@@ -70,8 +70,6 @@ public class GuardPawn : PlayerPawn
         }
 
     }
-
-
     public override void Interact(bool e)
     {
 
@@ -106,7 +104,7 @@ public class GuardPawn : PlayerPawn
                 searchedPlayer.lockMovement = true;
 
                 
-                 searchedPlayer.playerInventory.Server_RequestItems(OwnerClientId);
+                 searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId,OwnerClientId);
                             
                 
 
