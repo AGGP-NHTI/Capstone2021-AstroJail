@@ -189,8 +189,6 @@ public class PlayerController : Controller
     {
         //Find a spawn point and set position to it
         //Set PSpawn to player prefab based on enum
-        Debug.Log("We should be spawning a pawn in");
-        Debug.Log("Pspawn: " + PSpawn.name);
         Vector3 position = new Vector3(0, 15, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
@@ -201,10 +199,20 @@ public class PlayerController : Controller
     [ClientRPC]
     public void Client_SetGameStart(ulong id)
     {
-        Debug.Log("We should be possessing our pawn");
         myPawn = GetNetworkedObject(id).GetComponent<Pawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myController = true;
+        
+        foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            foreach(PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            {
+                if(pc.OwnerClientId == pp.OwnerClientId)
+                {
+                    pp.NamePlate.text = pc.playerName.Value;
+                }
+            }
+        }
     }
 }

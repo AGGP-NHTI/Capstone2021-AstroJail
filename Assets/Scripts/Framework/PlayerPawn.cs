@@ -26,8 +26,6 @@ public class PlayerPawn : Pawn
     public MapInteractable ObjectUsing;
    
 
-
-    //bool for interact
     public bool InteractE = false;
     public bool lockMovement = false;
 
@@ -51,11 +49,16 @@ public class PlayerPawn : Pawn
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
     }
+
+    public override void Update()
+    {
+        base.Update();
+    }
+
     public virtual void Initialize()
     {
 
     }
-
 
     public void SetCamPitch(float value)
     {

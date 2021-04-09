@@ -80,6 +80,7 @@ public class Containers : NetworkedBehaviour
 
     public void ServerRequestItems(ulong id)
     {
+        Debug.Log("were w called");
         InvokeServerRpc(Server_RequestItems, id);
     }
 

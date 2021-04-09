@@ -19,6 +19,8 @@ public class GuardPawn : PlayerPawn
     public PrisonerPawn FoundPlayer = null;
     public PrisonerPawn searchedPlayer = null;
     public List<int> toRecieve;
+    public GameObject rayPoint;
+    
 
 
     //Properties
@@ -45,27 +47,24 @@ public class GuardPawn : PlayerPawn
         //may be something in pawn that we need to do 
         base.Update();
         FindPrisoners();
-        if (control is PlayerController pc)
-        {
-            NamePlate.text = pc.playerName.Value;
-        }
     }
 
     public void FindPrisoners()
     {
         FoundPlayer = null;
-        locateRay.direction = theCam.transform.forward;
+        locateRay.direction = rayPoint.transform.forward;
         //this might need to be moved to a better starting position
-        locateRay.origin = gameObject.transform.position;
-
+        locateRay.origin = rayPoint.transform.position;
+        Debug.DrawRay(locateRay.origin, locateRay.direction * searchDistance, Color.red);
         RaycastHit hitInfo;
-
+       
         if (Physics.Raycast(locateRay, out hitInfo, searchDistance))
         {
+            Debug.Log(hitInfo.collider.gameObject.name);
             if (hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>())
             {
                 FoundPlayer = hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>();
-
+                
             }
 
         }
@@ -99,18 +98,21 @@ public class GuardPawn : PlayerPawn
         {
             if (FoundPlayer && !searchedPlayer)
             {
+               
+                Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
+                searchedPlayer.playerInventory.itemUpdateCallback = ItemsUpdated;
                 this.lockMovement = true;
                 searchedPlayer.lockMovement = true;
 
-
                 if (IsServer)
                 {
-                   // InvokeClientRpcOnEveryone(Client_RequestItems);
+                    searchedPlayer.playerInventory.Server_RequestItems(OwnerClientId);
+                            
                 }
                 else
                 {
-                    InvokeServerRpc(Server_RequestItems, searchedPlayer.NetworkId);
+                    
                 }
 
 
@@ -168,8 +170,9 @@ public class GuardPawn : PlayerPawn
         //this creates the itemhud and gives the items in container
         if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())
         {
+            Debug.Log("are we here in items update");
             HudReference = Instantiate(HUDPanelToAttach);
-           // HudReference.GetComponent<SearchPlayerHud>()._container = container;
+            HudReference.GetComponent<SearchPlayerHud>()._container = searchedPlayer.playerInventory;
             //HudReference.GetComponent<SearchPlayerHud>()._player = UsingPlayer;
             //HudReference.GetComponent<SearchPlayerHud>().stash = this;
         }
@@ -195,7 +198,7 @@ public class GuardPawn : PlayerPawn
     }
 
     [ServerRPC(RequireOwnership = false)]
-    public int[] Server_RequestItems(ulong playerID)
+    public void Server_RequestItems(ulong playerID)
     {
         int[] test;
         PrisonerPawn temp = null;
@@ -209,11 +212,11 @@ public class GuardPawn : PlayerPawn
 
     InvokeClientRpcOnClient(Client_RequestItems,playerID);
 
-        return null;
+       
     }
 
     [ClientRPC]
-    public int[] Client_RequestItems()
+    public void Client_RequestItems()
     {
         PrisonerPawn temp = null;
         List<int> itemIDs = new List<int>();
@@ -231,6 +234,6 @@ public class GuardPawn : PlayerPawn
         }
         int[] items = itemIDs.ToArray();
 
-        return items;
+     
     }
 }
