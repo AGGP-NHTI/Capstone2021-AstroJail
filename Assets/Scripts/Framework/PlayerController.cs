@@ -203,5 +203,16 @@ public class PlayerController : Controller
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myController = true;
+        
+        foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            foreach(PlayerPawn pp in GameObject.FindObjectsOfType<PlayerPawn>())
+            {
+                if(pc.OwnerClientId == pp.OwnerClientId)
+                {
+                    pp.NamePlate.text = pc.playerName.Value;
+                }
+            }
+        }
     }
 }
