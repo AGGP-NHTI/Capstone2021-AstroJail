@@ -420,7 +420,8 @@ MonoBehaviour:
   ObjectUsing: {fileID: 0}
   InteractE: 0
   lockMovement: 0
-  HUDPanelToAttach: {fileID: 0}
+  HUDPanelToAttach: {fileID: 4044377038233939787, guid: 22b05685a3226bc499e76d556a0ef28b,
+    type: 3}
   HudReference: {fileID: 0}
   searchDistance: 5
   FoundPlayer: {fileID: 0}

@@ -98,18 +98,21 @@ public class GuardPawn : PlayerPawn
         {
             if (FoundPlayer && !searchedPlayer)
             {
+               
                 Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
+                searchedPlayer.playerInventory.itemUpdateCallback = ItemsUpdated;
                 this.lockMovement = true;
                 searchedPlayer.lockMovement = true;
 
                 if (IsServer)
                 {
-                   // InvokeClientRpcOnEveryone(Client_RequestItems);
+                    searchedPlayer.playerInventory.Server_RequestItems(OwnerClientId);
+                            
                 }
                 else
                 {
-                    InvokeServerRpc(Server_RequestItems, searchedPlayer.NetworkId);
+                    
                 }
 
 
@@ -167,8 +170,9 @@ public class GuardPawn : PlayerPawn
         //this creates the itemhud and gives the items in container
         if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())
         {
+            Debug.Log("are we here in items update");
             HudReference = Instantiate(HUDPanelToAttach);
-           // HudReference.GetComponent<SearchPlayerHud>()._container = container;
+            HudReference.GetComponent<SearchPlayerHud>()._container = searchedPlayer.playerInventory;
             //HudReference.GetComponent<SearchPlayerHud>()._player = UsingPlayer;
             //HudReference.GetComponent<SearchPlayerHud>().stash = this;
         }
@@ -194,7 +198,7 @@ public class GuardPawn : PlayerPawn
     }
 
     [ServerRPC(RequireOwnership = false)]
-    public int[] Server_RequestItems(ulong playerID)
+    public void Server_RequestItems(ulong playerID)
     {
         int[] test;
         PrisonerPawn temp = null;
@@ -208,11 +212,11 @@ public class GuardPawn : PlayerPawn
 
     InvokeClientRpcOnClient(Client_RequestItems,playerID);
 
-        return null;
+       
     }
 
     [ClientRPC]
-    public int[] Client_RequestItems()
+    public void Client_RequestItems()
     {
         PrisonerPawn temp = null;
         List<int> itemIDs = new List<int>();
@@ -230,6 +234,6 @@ public class GuardPawn : PlayerPawn
         }
         int[] items = itemIDs.ToArray();
 
-        return items;
+     
     }
 }
