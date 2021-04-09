@@ -13,7 +13,6 @@
 13 big ass machine 
 14 astroids
 15 reactor
-16 reactor
-17 escape pods 
-18 red light 
-19 desk 
+16 escape pods 
+17 red light 
+18 desk 
