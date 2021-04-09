@@ -26,8 +26,6 @@ public class PlayerPawn : Pawn
     public MapInteractable ObjectUsing;
    
 
-
-    //bool for interact
     public bool InteractE = false;
     public bool lockMovement = false;
 
@@ -55,11 +53,6 @@ public class PlayerPawn : Pawn
     public override void Update()
     {
         base.Update();
-        if (control is PlayerController pc)
-        {
-            Debug.Log("should be changing player nameplate value");
-            NamePlate.text = pc.playerName.Value;
-        }
     }
 
     public virtual void Initialize()

@@ -185,8 +185,6 @@ public class ServerManager : NetworkedBehaviour
             {
                 pc.PSpawn = GuardPrefab;
             }
-
-
         }
     }
 }
