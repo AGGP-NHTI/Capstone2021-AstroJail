@@ -7,7 +7,7 @@ using System.ComponentModel;
 using UnityEngine.UI;
 
 
-public class SearchPlayerHud : MonoBehaviour
+public class SearchPlayerHud : NetworkedBehaviour
 {
     //this variable holds the GENERIC STASH CONTAINER
     public Containers _container;
@@ -33,9 +33,9 @@ public class SearchPlayerHud : MonoBehaviour
 
     public void CloseButtom()
     {
-        PlayerPawn tempPawn = (PlayerPawn)_player.myPawn;
-        _container.gameObject.GetComponent<HiddenStashes>().Done();
-        tempPawn.ObjectUsing = null;
+        GuardPawn temp = (GuardPawn)_player.myPawn;
+        temp.DoneSearching();
+        temp.ObjectUsing = null;
     }
 
     public void TakeItem(int i)
@@ -103,39 +103,29 @@ public class SearchPlayerHud : MonoBehaviour
     public void UpdateList()
     {
         int i = 0;
-        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
-        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
+      //  PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
+       // PlayerInv = tempPawn.playerInventory.ItemsInContainer;
 
         //Containerbuttons.Clear();
         //Playerbuttons.Clear();
 
         for (int buttons = 0; buttons < 6; buttons++)
         {
-            Containerbuttons[buttons].gameObject.SetActive(false);
-            Containerbuttons[buttons].onClick.RemoveAllListeners();
+            
             Playerbuttons[buttons].gameObject.SetActive(false);
             Playerbuttons[buttons].onClick.RemoveAllListeners();
         }
         foreach (ItemDefinition items in _container.ItemsInContainer)
         {
-            Containerbuttons[i].gameObject.SetActive(true);
-            int x = new int();
-            x = i;
-            Containerbuttons[i].onClick.AddListener(() => TakeItem(x));
-            Containerbuttons[i].image.sprite = items.imageArt;
-            i++;
-        }
-        i = 0;
-        foreach (ItemDefinition items in PlayerInv)
-        {
             Playerbuttons[i].gameObject.SetActive(true);
             int x = new int();
             x = i;
-            Playerbuttons[i].onClick.AddListener(() => AddItem(x));
+            Playerbuttons[i].onClick.AddListener(() => TakeItem(x));
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
-
         }
+        i = 0;
+        
     }
 }
 
