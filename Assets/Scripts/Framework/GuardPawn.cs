@@ -105,15 +105,10 @@ public class GuardPawn : PlayerPawn
                 this.lockMovement = true;
                 searchedPlayer.lockMovement = true;
 
-                if (IsServer)
-                {
-                    searchedPlayer.playerInventory.Server_RequestItems(OwnerClientId);
+                
+                 searchedPlayer.playerInventory.Server_RequestItems(OwnerClientId);
                             
-                }
-                else
-                {
-                    
-                }
+                
 
 
                 //for me to put in here 
