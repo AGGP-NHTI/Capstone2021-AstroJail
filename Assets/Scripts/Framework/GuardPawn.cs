@@ -159,8 +159,6 @@ public class GuardPawn : PlayerPawn
 
     }
     
-
-     
  
     public void ItemsUpdated()
     {
