@@ -19,6 +19,8 @@ public class GuardPawn : PlayerPawn
     public PrisonerPawn FoundPlayer = null;
     public PrisonerPawn searchedPlayer = null;
     public List<int> toRecieve;
+    public GameObject rayPoint;
+    
 
 
     //Properties
@@ -50,15 +52,15 @@ public class GuardPawn : PlayerPawn
     public void FindPrisoners()
     {
         FoundPlayer = null;
-        locateRay.direction = theCam.transform.forward;
+        locateRay.direction = rayPoint.transform.forward;
         //this might need to be moved to a better starting position
-        locateRay.origin = gameObject.transform.position;
-
+        locateRay.origin = rayPoint.transform.position;
+        Debug.DrawRay(locateRay.origin, locateRay.direction * searchDistance, Color.red);
         RaycastHit hitInfo;
        
         if (Physics.Raycast(locateRay, out hitInfo, searchDistance))
         {
-            Debug.Log(hitInfo);
+            Debug.Log(hitInfo.collider.gameObject.name);
             if (hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>())
             {
                 FoundPlayer = hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>();
