@@ -51,11 +51,21 @@ public class PlayerPawn : Pawn
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
     }
+
+    public override void Update()
+    {
+        base.Update();
+        if (control is PlayerController pc)
+        {
+            Debug.Log("should be changing player nameplate value");
+            NamePlate.text = pc.playerName.Value;
+        }
+    }
+
     public virtual void Initialize()
     {
 
     }
-
 
     public void SetCamPitch(float value)
     {
