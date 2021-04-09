@@ -59,13 +59,14 @@ public class GuardPawn : PlayerPawn
         locateRay.origin = gameObject.transform.position;
 
         RaycastHit hitInfo;
-
+       
         if (Physics.Raycast(locateRay, out hitInfo, searchDistance))
         {
+            Debug.Log(hitInfo);
             if (hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>())
             {
                 FoundPlayer = hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>();
-
+                
             }
 
         }
@@ -99,6 +100,7 @@ public class GuardPawn : PlayerPawn
         {
             if (FoundPlayer && !searchedPlayer)
             {
+                Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
                 this.lockMovement = true;
                 searchedPlayer.lockMovement = true;
