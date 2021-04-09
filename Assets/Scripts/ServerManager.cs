@@ -25,6 +25,7 @@ public class ServerManager : NetworkedBehaviour
         NetworkSceneManager.OnSceneSwitched += OnSceneSwitched;
     }
 
+    public GameObject mainmenu;
     public List<PlayerController> playerControllers = new List<PlayerController>();
     public List<string> playerNames = new List<string>();
     public GameObject GuardPrefab, PrisonerPrefab;
@@ -148,8 +149,9 @@ public class ServerManager : NetworkedBehaviour
 
 
 
-        NetworkSceneManager.SwitchScene(sceneName);
-       
+        //NetworkSceneManager.SwitchScene(sceneName);
+        Camera.main.gameObject.SetActive(false);
+        OnSceneSwitched();
     }
 
     public void OnSceneSwitched()
