@@ -1,11 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using MLAPI.Messaging;
 using MLAPI;
+using MLAPI.Connection;
 
-public class MapInteractable : NetworkedBehaviour
+public class MapInteractable : NetworkBehaviour
 {
     public GameObject Label;
     protected PlayerController UsingPlayer;
@@ -54,12 +55,12 @@ public class MapInteractable : NetworkedBehaviour
 
         if(IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InteractableStartUse, user);
+            InteractableStartUseClientRpc(user.OwnerClientId);
         }
         else
         { //Potentially two people opening at the same time might break this
             UsingPlayer = user;
-            InvokeServerRpc(Server_InteractableStartUse, user);
+            InteractableStartUseServerRpc(user.OwnerClientId);
         }
 
         if (OnUse(user))
@@ -79,11 +80,11 @@ public class MapInteractable : NetworkedBehaviour
         //Always called from PlayerPawn
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InteractableStopUse);
+            InteractableStopUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_InteractableStopUse);
+            InteractableStopUseServerRpc();
         }
         return OnDone();
     }
@@ -111,29 +112,41 @@ public class MapInteractable : NetworkedBehaviour
         return UsingPlayer;
     }
 
-    [ClientRPC]
-    public void Client_InteractableStartUse(PlayerController user)
+    [ClientRpc]
+    public void InteractableStartUseClientRpc(ulong user)
     {
-        UsingPlayer = user;
+        foreach(NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if(NC.ClientId == user)
+            {
+                UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
+            }
+        }
     }
 
-    [ClientRPC]
-    public void Client_InteractableStopUse()
+    [ClientRpc]
+    public void InteractableStopUseClientRpc()
     {
         UsingPlayer = null;
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_InteractableStartUse(PlayerController user)
+    [ServerRpc(RequireOwnership = false)]
+    public void InteractableStartUseServerRpc(ulong user)
     {
-        UsingPlayer = user;
-        InvokeClientRpcOnEveryone(Client_InteractableStartUse, user);
+        foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (NC.ClientId == user)
+            {
+                UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
+            }
+        }
+        InteractableStartUseClientRpc(user);
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_InteractableStopUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void InteractableStopUseServerRpc()
     {
         UsingPlayer = null;
-        InvokeClientRpcOnEveryone(Client_InteractableStopUse);
+        InteractableStopUseClientRpc();
     }
 
 

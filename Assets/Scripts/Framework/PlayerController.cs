@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using MLAPI;
 using MLAPI.Messaging;
-using MLAPI.NetworkedVar;
+using MLAPI.NetworkVariable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +11,12 @@ public class PlayerController : Controller
 {
     public int playerID;
     public bool myController = false;
-    public NetworkedVar<string> playerName = new NetworkedVar<string>("DefaultName"); //Test this with someone else
-    public NetworkedVar<int> playerEnum = new NetworkedVar<int>(0);
-    public PlayerType selectedPlayerType; //Maybe make a NetworkedVar<int> to track this over the network
+    public NetworkVariable<string> playerName = new NetworkVariable<string>("DefaultName"); //Test this with someone else
+    public NetworkVariable<int> playerEnum = new NetworkVariable<int>(0);
+    public PlayerType selectedPlayerType; //Maybe make a NetworkVariable<int> to track this over the network
     public GameObject PSpawn;
     public bool usingGamePad = false;
+
     
     //Controller Inputs//
     Vector2 leftStick = Vector2.zero;
@@ -44,10 +45,11 @@ public class PlayerController : Controller
 
     int temp = 0;
 
-    private void Start()
+    public override void Start()
     {
-        playerName.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
-        playerEnum.Settings.WritePermission = NetworkedVarPermission.OwnerOnly;
+        base.Start();
+        playerName.Settings.WritePermission = NetworkVariablePermission.OwnerOnly;
+        playerEnum.Settings.WritePermission = NetworkVariablePermission.OwnerOnly;
         //SpawnPlayer();
         Debug.Log("My owner id is " + OwnerClientId);
 
@@ -159,28 +161,28 @@ public class PlayerController : Controller
         
         if(IsOwner)
         {
-            InvokeServerRpc(Server_SpawnPlayer, OwnerClientId);
+            SpawnPlayerServerRpc(OwnerClientId);
         }
         
         
     }
     
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_SpawnPlayer(ulong whclient)
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnPlayerServerRpc(ulong whclient)
     {
         Debug.Log("Server_SpawnPlayer called with owner id of " + whclient);
         Vector3 position = new Vector3(0, 0, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
-        Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
+        Gobj.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
-        //InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkedObject>().NetworkId);
+        //InvokeClientRpcOnClient(client_set, whclient, Gobj.GetComponent<NetworkObject>().NetworkId);
     }
 
-    [ClientRPC]
-    public void client_set(ulong id)
+    [ClientRpc]
+    public void client_setClientRpc(ulong id)
     {
         Debug.Log("client_set with owner id of " + id);
-        myPawn = GetNetworkedObject(id).GetComponent<PlayerPawn>();
+        myPawn = GetNetworkObject(id).GetComponent<PlayerPawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
     }
@@ -191,15 +193,17 @@ public class PlayerController : Controller
         //Set PSpawn to player prefab based on enum
         Vector3 position = new Vector3(0, 15, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
-        Gobj.GetComponent<NetworkedObject>().SpawnWithOwnership(OwnerClientId);
+        Gobj.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+        ClientRpcParams CRP = new ClientRpcParams();
+        CRP.Send.TargetClientIds[0] = OwnerClientId;
 
-        InvokeClientRpcOnClient(Client_SetGameStart, OwnerClientId, Gobj.GetComponent<NetworkedObject>().NetworkId);
+        SetGameStartClientRpc(Gobj.GetComponent<NetworkObject>().NetworkObjectId, CRP);
     }
 
-    [ClientRPC]
-    public void Client_SetGameStart(ulong id)
+    [ClientRpc]
+    public void SetGameStartClientRpc(ulong id, ClientRpcParams CRP = default)
     {
-        myPawn = GetNetworkedObject(id).GetComponent<Pawn>();
+        myPawn = GetNetworkObject(id).GetComponent<Pawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myController = true;

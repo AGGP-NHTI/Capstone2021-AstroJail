@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ using MLAPI;
 using MLAPI.Transports.UNET;
 using TMPro;
 
-public class MainMenuManager : NetworkedBehaviour
+public class MainMenuManager : NetworkBehaviour
 {
     public GameObject instructionsPanel, mainMenuPanel, CreditsPanel, joinPanel, lobbyPanel, startButton;
     public TMP_InputField NameInputField, IPInputField;
@@ -99,8 +99,8 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
-        NetworkingManager.Singleton.NetworkConfig.EnableSceneManagement = true;
-        NetworkingManager.Singleton.StartHost();
+        NetworkManager.Singleton.NetworkConfig.EnableSceneManagement = true;
+        NetworkManager.Singleton.StartHost();
     }
 
     public void JoinButton()
@@ -110,8 +110,8 @@ public class MainMenuManager : NetworkedBehaviour
         CreditsPanel.SetActive(false);
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
-        NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = "66.31.95.85";
-        NetworkingManager.Singleton.StartClient();
+        NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress = "66.31.95.85";
+        NetworkManager.Singleton.StartClient();
     }
 
     public void changeName()
@@ -119,7 +119,7 @@ public class MainMenuManager : NetworkedBehaviour
         if (NameInputField.text.Length > 0)
         {
             string nameChange = NameInputField.text;
-            ServerManager.Instance.changeName(NetworkingManager.Singleton.LocalClientId, nameChange);
+            ServerManager.Instance.changeName(NetworkManager.Singleton.LocalClientId, nameChange);
             foreach(PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
             {
                 if (go.myController)

@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.Connection;
 using MLAPI.SceneManagement;
-public class ServerManager : NetworkedBehaviour
+public class ServerManager : NetworkBehaviour
 {
     private static ServerManager _instance;
     public static ServerManager Instance { get { return _instance; } }
@@ -38,24 +38,24 @@ public class ServerManager : NetworkedBehaviour
     void Update()
     {
         //This is only working for host
-        if(NetworkingManager.Singleton.IsHost)
+        if(NetworkManager.Singleton.IsHost)
         {
-            InvokeServerRpc(Server_UpdatePlayerList);
+            UpdatePlayerListServerRpc();
         }
     }
 
     public void changeName(ulong clientID, string nameChange)
     {
-        InvokeServerRpc(Server_PlayerNameChange, clientID, nameChange);
+        PlayerNameChangeServerRpc( clientID, nameChange);
     }
 
     public void StartGame(string sceneName)
     {
-        InvokeServerRpc(Server_StartGame, sceneName);
+        StartGameServerRpc(sceneName);
     }
 
-    [ClientRPC]
-    public void Client_UpdatePlayerList(string[] players)
+    [ClientRpc]
+    public void UpdatePlayerListClientRpc(string[] players)
     {
         Debug.Log("inside Client_UpdatePlayerList");
         Debug.Log(players[0]);
@@ -74,15 +74,15 @@ public class ServerManager : NetworkedBehaviour
     }
 
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_UpdatePlayerList()
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdatePlayerListServerRpc()
     {
         /*
-        if (NetworkingManager.Singleton.ConnectedClientsList.Count > 0)
+        if (NetworkManager.Singleton.ConnectedClientsList.Count > 0)
         {
             playerControllers.RemoveAll(item => item == null);
             playerNames.RemoveAll(item => item == null);
-            foreach (NetworkedClient client in NetworkingManager.Singleton.ConnectedClientsList)
+            foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
             {
                 if (client.PlayerObject.GetComponent<PlayerController>())
                 {
@@ -100,11 +100,11 @@ public class ServerManager : NetworkedBehaviour
         */
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_PlayerNameChange(ulong owner, string nameChange)
+    [ServerRpc(RequireOwnership = false)]
+    public void PlayerNameChangeServerRpc(ulong owner, string nameChange)
     {
         /*
-        foreach (NetworkedClient NC in NetworkingManager.Singleton.ConnectedClientsList)
+        foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
         {
             if(NC.ClientId == owner)
             {
@@ -118,12 +118,12 @@ public class ServerManager : NetworkedBehaviour
     }
 
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_StartGame(string sceneName)
+    [ServerRpc(RequireOwnership = false)]
+    public void StartGameServerRpc(string sceneName)
     {
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            //Check NetworkedVar<int> to decide enum
+            //Check NetworkVariable<int> to decide enum
             if (pc.playerEnum.Value == 0)
             {
                 pc.selectedPlayerType = PlayerType.Prisoner;
@@ -144,12 +144,9 @@ public class ServerManager : NetworkedBehaviour
             }
 
         }
-        InvokeClientRpcOnEveryone(Client_StartGame);
-
-
+        StartGameClientRpc();
 
         NetworkSceneManager.SwitchScene(sceneName);
-       
     }
 
     public void OnSceneSwitched()
@@ -161,12 +158,12 @@ public class ServerManager : NetworkedBehaviour
         }
     }
 
-    [ClientRPC]
-    public void Client_StartGame()
+    [ClientRpc]
+    public void StartGameClientRpc()
     {
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            //Check NetworkedVar<int> to decide enum
+            //Check NetworkVariable<int> to decide enum
             if (pc.playerEnum.Value == 0)
             {
                 pc.selectedPlayerType = PlayerType.Prisoner;

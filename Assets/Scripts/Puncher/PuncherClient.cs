@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,7 +22,7 @@ namespace MLAPI.Puncher.Client
         /// Gets or sets the transport used to communicate with puncher server.
         /// </summary>
         /// <value>The transport used to communcate with puncher server.</value>
-        public IUDPTransport Transport { get; set; } = new SlimUDPTransport();
+        public IUDPTransport NetworkTransport { get; set; } = new SlimUDPTransport();
         /// <summary>
         /// Gets or sets the amount port predictions to attempt.
         /// </summary>
@@ -111,7 +111,7 @@ namespace MLAPI.Puncher.Client
         public void ListenForPunches(IPEndPoint listenEndpoint)
         {
             // Bind the socket
-            Transport.Bind(listenEndpoint);
+            NetworkTransport.Bind(listenEndpoint);
 
             _isRunning = true;
 
@@ -128,7 +128,7 @@ namespace MLAPI.Puncher.Client
         public IPEndPoint ListenForSinglePunch(IPEndPoint listenEndpoint)
         {
             // Bind the socket
-            Transport.Bind(listenEndpoint);
+            NetworkTransport.Bind(listenEndpoint);
 
             _isRunning = true;
 
@@ -152,7 +152,7 @@ namespace MLAPI.Puncher.Client
             }
 
             // Bind the socket
-            Transport.Bind(new IPEndPoint(IPAddress.Any, 0));
+            NetworkTransport.Bind(new IPEndPoint(IPAddress.Any, 0));
 
             // Set running state
             _isRunning = true;
@@ -241,7 +241,7 @@ namespace MLAPI.Puncher.Client
             for (int i = 0; i < _puncherServerEndpoints.Length; i++)
             {
                 // Send register
-                int size = Transport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, _puncherServerEndpoints[i]);
+                int size = NetworkTransport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, _puncherServerEndpoints[i]);
 
                 if (size != Constants.BUFFER_SIZE)
                 {
@@ -265,7 +265,7 @@ namespace MLAPI.Puncher.Client
             for (int i = 0; i < PortPredictions; i++)
             {
                 // Send all punches
-                int size = Transport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, new IPEndPoint(punchEndpoint.Address, punchEndpoint.Port + i));
+                int size = NetworkTransport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, new IPEndPoint(punchEndpoint.Address, punchEndpoint.Port + i));
 
                 if (size != Constants.BUFFER_SIZE)
                 {
@@ -305,7 +305,7 @@ namespace MLAPI.Puncher.Client
 
             while (_isRunning)
             {
-                int size = Transport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
+                int size = NetworkTransport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
 
                 int indexOfEndPointStatus = -1;
 
@@ -405,7 +405,7 @@ namespace MLAPI.Puncher.Client
                 _buffer[0] = (byte)MessageType.PunchSuccess;
 
                 // Send punch success
-                int size = Transport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, remoteEndPoint);
+                int size = NetworkTransport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, remoteEndPoint);
 
                 if (size != Constants.BUFFER_SIZE)
                 {
@@ -432,7 +432,7 @@ namespace MLAPI.Puncher.Client
 
             do
             {
-                int size = Transport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
+                int size = NetworkTransport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
 
                 if (size == Constants.BUFFER_SIZE && remoteEndPoint != null && _puncherServerEndpoints.Contains(remoteEndPoint))
                 {
@@ -501,7 +501,7 @@ namespace MLAPI.Puncher.Client
             do
             {
                 // Receive punch success
-                int size = Transport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
+                int size = NetworkTransport.ReceiveFrom(_buffer, 0, Constants.BUFFER_SIZE, SocketReceiveTimeout, out IPEndPoint remoteEndPoint);
 
                 // Santy checks
                 if (size == Constants.BUFFER_SIZE && remoteEndPoint != null && remoteEndPoint.Address.Equals(punchEndpoint.Address))
@@ -544,7 +544,7 @@ namespace MLAPI.Puncher.Client
                                 {
                                     // They got a totally new port that we have not seen before.
                                     // Lets punch it. We dont need to port predict these new punches
-                                    int sendSize = Transport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, new IPEndPoint(punchEndpoint.Address, remoteEndPoint.Port));
+                                    int sendSize = NetworkTransport.SendTo(_buffer, 0, Constants.BUFFER_SIZE, SocketSendTimeout, new IPEndPoint(punchEndpoint.Address, remoteEndPoint.Port));
 
                                     if (sendSize != Constants.BUFFER_SIZE)
                                     {
@@ -602,7 +602,7 @@ namespace MLAPI.Puncher.Client
         public void Dispose()
         {
             _isRunning = false;
-            Transport.Close();
+            NetworkTransport.Close();
         }
 
         /// <summary>
@@ -611,7 +611,7 @@ namespace MLAPI.Puncher.Client
         public void Close()
         {
             _isRunning = false;
-            Transport.Close();
+            NetworkTransport.Close();
         }
     }
 }

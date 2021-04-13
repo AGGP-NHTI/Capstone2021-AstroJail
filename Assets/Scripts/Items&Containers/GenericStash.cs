@@ -1,4 +1,4 @@
-﻿using MLAPI.Prototyping;
+using MLAPI.Prototyping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,11 +82,11 @@ public class GenericStash : MapInteractable
 
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InUse);
+            InUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_InUse);
+            InUseServerRpc();
         }
 
         Debug.Log(user);
@@ -108,11 +108,11 @@ public class GenericStash : MapInteractable
         }
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_StopUse);
+            StopUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_StopUse);
+            StopUseServerRpc();
         }
         return true;
     }
@@ -120,39 +120,39 @@ public class GenericStash : MapInteractable
    
     public void TakeItemRPC(int i)
     {
-            InvokeServerRpc(Server_TakeItem, i);
+            TakeItemServerRpc(i);
     }
 
 
 
     //-------------Start interact/End Interact RPCs--------------//
-    [ClientRPC]
-    public void Client_InUse()
+    [ClientRpc]
+    public void InUseClientRpc()
     {
        
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
-    [ClientRPC]
-    public void Client_StopUse()
+    [ClientRpc]
+    public void StopUseClientRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_InUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void InUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        InvokeClientRpcOnEveryone(Client_InUse);
+        InUseClientRpc();
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_StopUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void StopUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
-        InvokeClientRpcOnEveryone(Client_StopUse);
+        StopUseClientRpc();
     }
 
     //-------------Taking/Adding item to container RPCs--------------//
-    [ClientRPC]
-    public void Client_TakeItem(int itemID)
+    [ClientRpc]
+    public void TakeItemClientRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
@@ -160,8 +160,8 @@ public class GenericStash : MapInteractable
     }
     
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_TakeItem(int itemID)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +34,7 @@ public class TestServer : MonoBehaviour
             }
         });
         */
-        NetworkingManager.Singleton.StartHost();
+        NetworkManager.Singleton.StartHost();
     }
 
     public void JoinAsClient()
@@ -48,8 +48,8 @@ public class TestServer : MonoBehaviour
             // Punches and returns the result
             if (connector.TryPunch(IPAddress.Parse(address), out IPEndPoint remoteEndPoint))
             {
-                NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = remoteEndPoint.Address.ToString();
-                NetworkingManager.Singleton.StartClient();
+                NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress = remoteEndPoint.Address.ToString();
+                NetworkManager.Singleton.StartClient();
                 MainMenu.gameObject.SetActive(false);
                 Debug.Log("Punch Succeed"+ " " + remoteEndPoint.Address + ":" + remoteEndPoint.Port );
 
@@ -65,15 +65,15 @@ public class TestServer : MonoBehaviour
 
         if (attemptedConnection)
         {
-            NetworkingManager.Singleton.StopClient();
-            NetworkingManager.Singleton.GetComponent<UnetTransport>().Shutdown();
+            NetworkManager.Singleton.StopClient();
+            NetworkManager.Singleton.GetComponent<UNetTransport>().Shutdown();
             attemptedConnection = false;
         }
         else
         {
-            NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().ConnectAddress = ConnectAddressStandalone;
-            NetworkingManager.Singleton.gameObject.GetComponent<UnetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
-            NetworkingManager.Singleton.StartClient();
+            NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress = ConnectAddressStandalone;
+            NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().MLAPIRelayAddress = RelayAddressStandalone;
+            NetworkManager.Singleton.StartClient();
             attemptedConnection = true;
         }
         

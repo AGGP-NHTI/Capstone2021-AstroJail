@@ -1,12 +1,18 @@
-﻿using MLAPI;
+using MLAPI;
+using MLAPI.Messaging;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : NetworkedBehaviour
+public class Controller : NetworkBehaviour
 {
     public Pawn myPawn;
+    public ClientRpcParams myClientParams;
 
+    public virtual void Start()
+    {
+        myClientParams.Send.TargetClientIds[0] = OwnerClientId;
+    }
     public void PossessPawn(GameObject go)
     {
         Pawn x = go.GetComponent<Pawn>();

@@ -1,17 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 
-public class Containers : NetworkedBehaviour
+public class Containers : NetworkBehaviour
 {
     public delegate void ContainerCallback();
     public ContainerCallback itemUpdateCallback;
     public int containerID;
     public int MaxItems;
     public List<ItemDefinition> startingItems;
-    
     public List<ItemDefinition> ItemsInContainer;
     
 
@@ -81,44 +80,53 @@ public class Containers : NetworkedBehaviour
     public void ServerRequestItems(ulong id)
     {
         Debug.Log("were w called");
-        InvokeServerRpc(Server_RequestItems, id);
+        RequestItemsServerRpc(id);
     }
 
     public void GuardRequestItems(ulong prisonerID, ulong guardID)
     {
-        InvokeServerRpc(Server_RequestItemsFromClient, prisonerID, guardID);
+        RequestItemsFromClientServerRpc(prisonerID, guardID);
     }
 
     /// <summary>
     /// This request is from the client to the server, asks the server for a list of items in this container
     /// </summary>
     /// <param name="clientID"></param>
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_RequestItems(ulong clientID)
+    [ServerRpc(RequireOwnership = false)]
+    public void RequestItemsServerRpc(ulong clientID)
     {
-        InvokeClientRpcOnClient(Client_ItemListUpdate, clientID,GetItemArray());
+        ClientRpcParams CRP = new ClientRpcParams();
+        CRP.Send.TargetClientIds[0] = clientID;
+
+        ItemListUpdateClientRpc(GetItemArray(), CRP);
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_RequestItemsFromClient(ulong prisonerID, ulong guardID)
+    [ServerRpc(RequireOwnership = false)]
+    public void RequestItemsFromClientServerRpc(ulong prisonerID, ulong guardID)
     {
-        InvokeClientRpcOnClient(Client_GiveServerItems, prisonerID, prisonerID, guardID);
+        ClientRpcParams CRP = new ClientRpcParams();
+        CRP.Send.TargetClientIds[0] = prisonerID;
+
+        GiveServerItemsClientRpc(prisonerID, guardID, CRP);
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_GiveItemsToClient(int[] instanceIDs, ulong guardID)
+    [ServerRpc(RequireOwnership = false)]
+    public void GiveItemsToClientServerRpc(int[] instanceIDs, ulong guardID)
     {
-        InvokeClientRpcOnClient(Client_ItemListUpdate, guardID, instanceIDs);
+        ClientRpcParams CRP = new ClientRpcParams();
+        CRP.Send.TargetClientIds[0] = guardID;
+
+        ItemListUpdateClientRpc(instanceIDs, CRP);
     }
 
-    [ClientRPC]
-    public void Client_GiveServerItems(ulong prisonerID, ulong guardID)
+    [ClientRpc]
+    public void GiveServerItemsClientRpc(ulong prisonerID, ulong guardID, ClientRpcParams CRP = default)
     {
-        InvokeServerRpc(Server_GiveItemsToClient, GetItemArray(), guardID);
+        GiveItemsToClientServerRpc(GetItemArray(), guardID);
     }
 
-    [ClientRPC]
-    public void Client_ItemListUpdate(int[] itemList)
+    [ClientRpc]
+    public void ItemListUpdateClientRpc(int[] itemList, ClientRpcParams CRP = default )
     {
         Debug.Log("In the Client_ItemListUpdate with list size of: " + itemList.Length);
         foreach (int i in itemList)
