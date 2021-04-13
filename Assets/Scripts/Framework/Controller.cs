@@ -11,7 +11,11 @@ public class Controller : NetworkBehaviour
 
     public virtual void Start()
     {
-        myClientParams.Send.TargetClientIds[0] = OwnerClientId;
+        myClientParams = new ClientRpcParams();
+        ulong[] clientID = new ulong[1];
+        clientID[0] = OwnerClientId;
+        myClientParams.Send.TargetClientIds = clientID;
+        
     }
     public void PossessPawn(GameObject go)
     {
