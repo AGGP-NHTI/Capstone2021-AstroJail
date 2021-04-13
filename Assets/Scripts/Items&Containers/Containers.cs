@@ -96,7 +96,10 @@ public class Containers : NetworkBehaviour
     public void RequestItemsServerRpc(ulong clientID)
     {
         ClientRpcParams CRP = new ClientRpcParams();
-        CRP.Send.TargetClientIds[0] = clientID;
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = clientID;
+        CRP.Send.TargetClientIds = targetClientID;
+
 
         ItemListUpdateClientRpc(GetItemArray(), CRP);
     }
@@ -105,7 +108,10 @@ public class Containers : NetworkBehaviour
     public void RequestItemsFromClientServerRpc(ulong prisonerID, ulong guardID)
     {
         ClientRpcParams CRP = new ClientRpcParams();
-        CRP.Send.TargetClientIds[0] = prisonerID;
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = prisonerID;
+        CRP.Send.TargetClientIds = targetClientID;
+
 
         GiveServerItemsClientRpc(prisonerID, guardID, CRP);
     }
@@ -114,7 +120,10 @@ public class Containers : NetworkBehaviour
     public void GiveItemsToClientServerRpc(int[] instanceIDs, ulong guardID)
     {
         ClientRpcParams CRP = new ClientRpcParams();
-        CRP.Send.TargetClientIds[0] = guardID;
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = guardID;
+        CRP.Send.TargetClientIds = targetClientID;
+
 
         ItemListUpdateClientRpc(instanceIDs, CRP);
     }

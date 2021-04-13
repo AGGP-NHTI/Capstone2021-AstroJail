@@ -194,10 +194,8 @@ public class PlayerController : Controller
         Vector3 position = new Vector3(0, 15, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
-        ClientRpcParams CRP = new ClientRpcParams();
-        CRP.Send.TargetClientIds[0] = OwnerClientId;
 
-        SetGameStartClientRpc(Gobj.GetComponent<NetworkObject>().NetworkObjectId, CRP);
+        SetGameStartClientRpc(Gobj.GetComponent<NetworkObject>().NetworkObjectId, myClientParams);
     }
 
     [ClientRpc]
