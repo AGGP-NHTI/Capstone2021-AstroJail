@@ -9,6 +9,7 @@ using MLAPI.Connection;
 public class MapInteractable : NetworkBehaviour
 {
     public GameObject Label;
+    [SerializeField]
     protected PlayerController UsingPlayer;
 
     public virtual void OnTriggerEnter(Collider other)
