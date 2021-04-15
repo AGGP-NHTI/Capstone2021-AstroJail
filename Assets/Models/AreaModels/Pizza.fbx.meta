@@ -6,6 +6,13 @@ ModelImporter:
   externalObjects: {}
   materials:
     materialImportMode: 2
+guid: a6d08718512b12e4ea44c4e242b83edf
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
