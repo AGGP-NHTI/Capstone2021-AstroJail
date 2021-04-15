@@ -1,4 +1,4 @@
-﻿using MLAPI.Messaging;
+using MLAPI.Messaging;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -29,6 +29,7 @@ public class PlayerPawn : Pawn
     public bool InteractE = false;
     public bool lockMovement = false;
 
+    ClientRpcParams x;
 
     //Properties
     public Containers playerInventory
@@ -48,6 +49,7 @@ public class PlayerPawn : Pawn
     {
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
+        x.Send.TargetClientIds[0] = OwnerClientId;
     }
 
     public override void Update()
@@ -211,9 +213,6 @@ public class PlayerPawn : Pawn
             NamePlate.text = pc.playerName.Value;
         }
     }
-
-
-
     private void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "Ground")
@@ -224,21 +223,7 @@ public class PlayerPawn : Pawn
 
     public override void Fire1()
     {
-        if(IsServer)
-        {
-            SpawnProj();
-        }
-        else
-        {
-            InvokeServerRpc(SpawnProj);
-        }
+        
     }
-
-    [ServerRPC(RequireOwnership = false)]
-    public void SpawnProj()
-    {
-        NetworkSpawn(projPrefab, projSpawn.transform.position, projSpawn.transform.rotation);
-    }
-
     
 }

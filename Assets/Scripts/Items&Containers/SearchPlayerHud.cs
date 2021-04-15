@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI.Messaging;
@@ -7,7 +7,7 @@ using System.ComponentModel;
 using UnityEngine.UI;
 
 
-public class SearchPlayerHud : NetworkedBehaviour
+public class SearchPlayerHud : NetworkBehaviour
 {
     //this variable holds the GENERIC STASH CONTAINER
     public Containers _container;

@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine.UI;
 
-public class CraftingHUD : NetworkedBehaviour
+public class CraftingHUD : NetworkBehaviour
 {
 
     //this variable holds the GENERIC STASH CONTAINER

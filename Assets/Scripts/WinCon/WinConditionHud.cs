@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
@@ -6,7 +6,7 @@ using MLAPI.Messaging;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class WinConditionHud : NetworkedBehaviour
+public class WinConditionHud : NetworkBehaviour
 {
     //this variable holds the GENERIC STASH CONTAINER
    
