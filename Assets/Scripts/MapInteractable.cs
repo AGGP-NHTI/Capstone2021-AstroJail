@@ -105,6 +105,7 @@ public class MapInteractable : NetworkBehaviour
             if(NC.ClientId == user)
             {
                 UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
+                Debug.Log("we just set the using player");
             }
         }
     }
