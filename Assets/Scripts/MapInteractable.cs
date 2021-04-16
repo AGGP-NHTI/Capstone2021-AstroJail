@@ -113,15 +113,14 @@ public class MapInteractable : NetworkBehaviour
     [ClientRpc]
     public void InteractableStartOnClientRpc(ulong user, ClientRpcParams clientID = default)
     {
-        Debug.Log("I should've opened the stash hud for my client");
-        foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
+        foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            if (NC.ClientId == user)
+            if(pc.myController)
             {
-                Debug.Log("we called OnUse()");
-                OnUse(NC.PlayerObject.GetComponent<PlayerController>());
+                OnUse(pc);
             }
         }
+
     }
 
     [ServerRpc(RequireOwnership = false)]
