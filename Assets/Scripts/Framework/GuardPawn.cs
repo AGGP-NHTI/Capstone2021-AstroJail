@@ -169,7 +169,6 @@ public class GuardPawn : PlayerPawn
     {
         Debug.Log("inside of failed search function");
         failedSearch = true;
-        lockMovement = true;
     }
     
     public void ItemsUpdated()
