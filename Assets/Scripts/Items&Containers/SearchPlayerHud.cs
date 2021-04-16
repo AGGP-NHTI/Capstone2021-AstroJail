@@ -108,7 +108,7 @@ public class SearchPlayerHud : NetworkBehaviour
             Playerbuttons[i].gameObject.SetActive(true);
             int x = new int();
             x = i;
-            Playerbuttons[i].onClick.AddListener(() => TakeItem(x));
+            Playerbuttons[i].onClick.AddListener(() => searchForContraband(x));
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
         }
