@@ -125,6 +125,7 @@ public class MapInteractable : NetworkBehaviour
                 OnUse(NC.PlayerObject.GetComponent<PlayerController>());
             }
         }
+        InteractableStartUseClientRpc(user);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -141,7 +142,6 @@ public class MapInteractable : NetworkBehaviour
                 targetClient.Send.TargetClientIds = targetClientId;
 
                 InteractableStartOnClientRpc(user, targetClient);
-                InteractableStartUseClientRpc(user);
             }
         }
 
