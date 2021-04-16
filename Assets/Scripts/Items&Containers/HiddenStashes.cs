@@ -10,20 +10,14 @@ using TMPro;
 
 public class HiddenStashes : MapInteractable
 {
-
-
     //rename this to Generic Stash 
     //this goes on a mapInteractable that a player can go up to and grab or place an item into 
-
 
     public GameObject HUDPanelToAttach;
     public bool IsPanelActive = false;
     public GameObject labelObject;
     Containers container;
     public GameObject HudReference;
-
-
-
 
     public void Start()
     {
@@ -54,7 +48,6 @@ public class HiddenStashes : MapInteractable
                     p.Interactables.Add(this);
                     Label.SetActive(true);
                     Debug.Log("Detected Player");
-
                 }
             }
         }
@@ -78,16 +71,7 @@ public class HiddenStashes : MapInteractable
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
-        if (IsServer)
-        {
-            InUseClientRpc();
-        }
-        else
-        {
-            InUseClientRpc();
-        }
-
-        Debug.Log(user);
+        InUseServerRpc();
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
         return true;
@@ -104,14 +88,8 @@ public class HiddenStashes : MapInteractable
             Destroy(HudReference);
             Debug.Log(HudReference);
         }
-        if (IsServer)
-        {
-            StopUseClientRpc();
-        }
-        else
-        {
-            StopUseServerRpc();
-        }
+
+        StopUseServerRpc();
         return true;
     }
 
@@ -131,12 +109,13 @@ public class HiddenStashes : MapInteractable
     [ClientRpc]
     public void InUseClientRpc()
     {
-
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ClientRpc]
     public void StopUseClientRpc()
     {
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRpc(RequireOwnership = false)]

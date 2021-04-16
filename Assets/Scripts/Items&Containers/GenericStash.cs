@@ -50,8 +50,6 @@ public class GenericStash : MapInteractable
                 {
                     p.Interactables.Add(this);
                     Label.SetActive(true);
-                    Debug.Log("Detected Player");
-
                 }
             }
         }
@@ -80,40 +78,26 @@ public class GenericStash : MapInteractable
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
-        if (IsServer)
-        {
-            InUseClientRpc();
-        }
-        else
-        {
-            InUseServerRpc();
-        }
-
-        Debug.Log(user);
+        InUseServerRpc();
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
         return true;
     }
 
     public override bool OnDone()
-    {   
+    {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         UsingPlayer = null;
 
-        if(HudReference)
+        if (HudReference)
         {
             Debug.Log(HudReference);
             Destroy(HudReference);
             Debug.Log(HudReference);
         }
-        if (IsServer)
-        {
-            StopUseClientRpc();
-        }
-        else
-        {
-            StopUseServerRpc();
-        }
+
+        StopUseServerRpc();
+
         return true;
     }
 
@@ -129,12 +113,13 @@ public class GenericStash : MapInteractable
     [ClientRpc]
     public void InUseClientRpc()
     {
-       
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ClientRpc]
     public void StopUseClientRpc()
     {
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRpc(RequireOwnership = false)]
