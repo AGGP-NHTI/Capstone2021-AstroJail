@@ -29,8 +29,6 @@ public class PlayerPawn : Pawn
     public bool InteractE = false;
     public bool lockMovement = false;
 
-    ClientRpcParams x;
-
     //Properties
     public Containers playerInventory
     {
@@ -49,7 +47,6 @@ public class PlayerPawn : Pawn
     {
         rb = gameObject.GetComponent<Rigidbody>();
         Initialize();
-        x.Send.TargetClientIds[0] = OwnerClientId;
     }
 
     public override void Update()

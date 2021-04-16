@@ -117,6 +117,7 @@ public class MapInteractable : NetworkBehaviour
     [ClientRpc]
     public void InteractableStartOnClientRpc(ulong user, ClientRpcParams clientID = default)
     {
+        Debug.Log("I should've opened the stash hud for my client");
         foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
         {
             if (NC.ClientId == user)
@@ -139,8 +140,8 @@ public class MapInteractable : NetworkBehaviour
                 targetClientId[0] = user;
                 targetClient.Send.TargetClientIds = targetClientId;
 
-                InteractableStartUseClientRpc(user);
                 InteractableStartOnClientRpc(user, targetClient);
+                InteractableStartUseClientRpc(user);
             }
         }
 
