@@ -18,6 +18,10 @@ public class GuardPawn : PlayerPawn
     public PrisonerPawn searchedPlayer = null;
     public List<int> toRecieve;
     public GameObject rayPoint;
+    public float timer = 0;
+    public float failTime = 5;
+    public bool failedSearch = false;
+   
     
 
 
@@ -35,13 +39,25 @@ public class GuardPawn : PlayerPawn
     public override void Start()
     {
         base.Start();
-
+        timer = 0;
         playerType = PlayerType.Guard;
         theCam = Camera.main;
         locateRay = new Ray();
     }
     public override void Update()
     {
+        if (failedSearch)
+        {
+
+            timer += Time.deltaTime;
+            if (timer >= failTime)
+            {
+                lockMovement = false;
+                timer = 0;
+            }
+
+        }
+       
         //may be something in pawn that we need to do 
         base.Update();
         FindPrisoners();
@@ -147,6 +163,11 @@ public class GuardPawn : PlayerPawn
             }
         }
 
+    }
+    public void FailedSearch()
+    {
+        failedSearch = true;
+        lockMovement = true;
     }
     
     public void ItemsUpdated()
