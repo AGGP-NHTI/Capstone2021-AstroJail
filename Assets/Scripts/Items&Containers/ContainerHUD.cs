@@ -67,7 +67,6 @@ public class ContainerHUD : NetworkBehaviour
             }
         }
 
-        UpdateList();
     }
 
    

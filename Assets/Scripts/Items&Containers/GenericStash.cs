@@ -151,6 +151,7 @@ public class GenericStash : MapInteractable
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
+        HudReference.GetComponent<ContainerHUD>().UpdateList();
     }
    
 
