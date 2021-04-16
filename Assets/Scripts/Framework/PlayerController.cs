@@ -191,7 +191,7 @@ public class PlayerController : Controller
     {
         //Find a spawn point and set position to it
         //Set PSpawn to player prefab based on enum
-        Vector3 position = SpawnPoints.Instance.randomSpawn(selectedPlayerType);
+        Vector3 position = new Vector3(0, 10, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
         Gobj.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
