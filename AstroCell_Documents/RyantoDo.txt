@@ -1,19 +1,23 @@
-bowl 
-drains
-tray 
-books
-pizza boxes
-tool table
+soda
+water
+tazer
+9v battery
+bowl - Done
+drains - Done
+tray - Done
+books - Done
+pizza boxes - Done
+tool table - To be UV Mapped
 cafeteria chairs
 basic chairs
-trash can 
+trash can - Done
 tub-big pots for food 
-many boxes 
-pickaxes
-cafateria table 
+pickaxes - Done
+cafateria table - To be UV Mapped 
+many boxes
 tables-metal tables
-regular table
-body trays
+regular table - Done
+body trays - To be UV Mapped
 casket
-autapsy table  
+autapsy table - Done
 mine carts
