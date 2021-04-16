@@ -1,4 +1,4 @@
-﻿using MLAPI.Prototyping;
+using MLAPI.Prototyping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,7 +94,7 @@ public class ItemTransferVent : MapInteractable
 
     public void TransferItem()
     {
-        InvokeServerRpc(Server_TransferItem, container.ItemsInContainer[0].instanceId, TransferDestination.container.containerID);
+        TransferItemServerRpc(container.ItemsInContainer[0].instanceId, TransferDestination.container.containerID);
     }
 
     public override bool OnUse(PlayerController user)
@@ -104,11 +104,11 @@ public class ItemTransferVent : MapInteractable
 
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InUse);
+            InUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_InUse);
+            InUseServerRpc();
         }
 
         Debug.Log(user);
@@ -130,77 +130,76 @@ public class ItemTransferVent : MapInteractable
         }
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_StopUse);
+            StopUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_StopUse);
+            StopUseServerRpc();
         }
         return true;
     }
 
     public void AddItemRPC(int i)
     {
-        InvokeServerRpc(Server_AddItem, i);
+        AddItemServerRpc(i);
     }
 
     public void TakeItemRPC(int i)
     {
-        InvokeServerRpc(Server_TakeItem, i);
+        TakeItemServerRpc(i);
     }
 
 
 
     //-------------Start interact/End Interact RPCs--------------//
-    [ClientRPC]
-    public void Client_InUse()
+    [ClientRpc]
+    public void InUseClientRpc()
     {
-
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
-    [ClientRPC]
-    public void Client_StopUse()
+    [ClientRpc]
+    public void StopUseClientRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_InUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void InUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        InvokeClientRpcOnEveryone(Client_InUse);
+        InUseClientRpc();
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_StopUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void StopUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
-        InvokeClientRpcOnEveryone(Client_StopUse);
+        StopUseClientRpc();
     }
 
     //-------------Taking/Adding item to container RPCs--------------//
-    [ClientRPC]
-    public void Client_TakeItem(int itemID)
+    [ClientRpc]
+    public void TakeItemClientRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
     }
-    [ClientRPC]
-    public void Client_AddItem(int itemID)
+    [ClientRpc]
+    public void AddItemClientRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.Additem(itemDef);
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_TakeItem(int itemID)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_AddItem(int itemID)
+    [ServerRpc(RequireOwnership = false)]
+    public void AddItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
@@ -209,8 +208,8 @@ public class ItemTransferVent : MapInteractable
 
     //---------------Transfer Item RPC----------------//
 
-    [ClientRPC]
-    public void Client_TransferItem(int instanceID, int containerID)
+    [ClientRpc]
+    public void TransferItemClientRpc(int instanceID, int containerID)
     {
         if(IsServer)
         {
@@ -223,8 +222,8 @@ public class ItemTransferVent : MapInteractable
         this.container.TakeItem(item);
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_TransferItem(int instanceID, int containerID)
+    [ServerRpc(RequireOwnership = false)]
+    public void TransferItemServerRpc(int instanceID, int containerID)
     {
         Containers destination = MapItemManager.Instance.containerList[containerID];
         ItemDefinition item = MapItemManager.Instance.itemList[instanceID];
@@ -239,7 +238,7 @@ public class ItemTransferVent : MapInteractable
         destination.Additem(item);
         this.container.TakeItem(item);
 
-        InvokeClientRpcOnEveryone(Client_TransferItem, instanceID, containerID);
+        TransferItemClientRpc(instanceID, containerID);
     }
 }
 

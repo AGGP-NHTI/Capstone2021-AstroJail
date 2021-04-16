@@ -1,4 +1,4 @@
-﻿using MLAPI.Prototyping;
+using MLAPI.Prototyping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,11 +53,11 @@ public class WinConditionStash : MapInteractable
 
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_InUse);
+            InUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_InUse);
+            InUseServerRpc();
         }
 
         Debug.Log(user);
@@ -79,71 +79,71 @@ public class WinConditionStash : MapInteractable
         }
         if (IsServer)
         {
-            InvokeClientRpcOnEveryone(Client_StopUse);
+            StopUseClientRpc();
         }
         else
         {
-            InvokeServerRpc(Server_StopUse);
+            StopUseServerRpc();
         }
         return true;
     }
 
     public void AddItemRPC(int i)
     {
-        InvokeServerRpc(Server_AddItem, i);
+        AddItemServerRpc(i);
     }
 
     public void TakeItemRPC(int i)
     {
-        InvokeServerRpc(Server_TakeItem, i);
+        TakeItemServerRpc(i);
     }
     public void CraftItemRPC(int i)
     {
-        InvokeServerRpc(Server_CraftItem, i);
+        CraftItemServerRpc(i);
     }
 
     public void ReturnItemRPC()
     {
-        InvokeServerRpc(Server_ReturnItems);
+        ReturnItemsServerRpc();
     }
 
 
 
     //-------------Start interact/End Interact RPCs--------------//
-    [ClientRPC]
-    public void Client_InUse()
+    [ClientRpc]
+    public void InUseClientRpc()
     {
 
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
-    [ClientRPC]
-    public void Client_StopUse()
+    [ClientRpc]
+    public void StopUseClientRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_InUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void InUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
-        InvokeClientRpcOnEveryone(Client_InUse);
+        InUseClientRpc();
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_StopUse()
+    [ServerRpc(RequireOwnership = false)]
+    public void StopUseServerRpc()
     {
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
-        InvokeClientRpcOnEveryone(Client_StopUse);
+        StopUseClientRpc();
     }
 
     //-------------Taking/Adding item to container RPCs--------------//
-    [ClientRPC]
-    public void Client_TakeItem(int itemID)
+    [ClientRpc]
+    public void TakeItemClientRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
     }
-    [ClientRPC]
-    public void Client_AddItem(int itemID)
+    [ClientRpc]
+    public void AddItemClientRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
@@ -151,15 +151,15 @@ public class WinConditionStash : MapInteractable
     }
 
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_TakeItem(int itemID)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
     }
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_AddItem(int itemID)
+    [ServerRpc(RequireOwnership = false)]
+    public void AddItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
@@ -168,9 +168,9 @@ public class WinConditionStash : MapInteractable
 
     //---------------- Crafted items ------------------//
 
-    [ClientRPC]
+    [ClientRpc]
 
-    public void Client_CraftItem(int id)
+    public void CraftItemClientRpc(int id)
     {
         if (IsServer) return;
         foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
@@ -185,9 +185,9 @@ public class WinConditionStash : MapInteractable
         }
     }
 
-    [ServerRPC(RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = false)]
 
-    public void Server_CraftItem(int id)
+    public void CraftItemServerRpc(int id)
     {
         foreach (ItemDefinition item in MapItemManager.Instance.everyItem)
         {
@@ -198,20 +198,13 @@ public class WinConditionStash : MapInteractable
                 MapItemManager.Instance.itemList.Add(tempItem);
             }
         }
-        InvokeClientRpcOnEveryone(Client_CraftItem, id);
+        CraftItemClientRpc(id);
         ;
     }
 
 
-    [ClientRPC]
-    public void Client_ReturnItem(List<int> items)
-    {
-        if (IsServer) return;
-
-    }
-
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_ReturnItems()
+    [ServerRpc(RequireOwnership = false)]
+    public void ReturnItemsServerRpc()
     {
         ReturnItemsPerform();
         //known issue: if other client using containeras where items are being returned to

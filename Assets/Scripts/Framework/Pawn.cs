@@ -1,4 +1,4 @@
-﻿using MLAPI;
+using MLAPI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +17,7 @@ public class Pawn : Actor
         
         OnPossessed();
 
-        NetworkedObject NetObj = gameObject.GetComponent<NetworkedObject>();
+        NetworkObject NetObj = gameObject.GetComponent<NetworkObject>();
         if(NetObj)
         {
             Debug.Log("Changed net Owner on Pawn");

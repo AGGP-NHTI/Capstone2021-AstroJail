@@ -1,12 +1,10 @@
-﻿using MLAPI.Messaging;
+using MLAPI.Messaging;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Connection;
-
-
 
 public class GuardPawn : PlayerPawn
 {
@@ -105,15 +103,11 @@ public class GuardPawn : PlayerPawn
 
                 
                  searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId,OwnerClientId);
-                            
-                
 
 
                 //for me to put in here 
                 //pull up player inventory hud. send found player to hud same as stashed
                 //move logic to hud script
-
-
 
                 // we have done this locally on guard client machine 
                 // we now need to replicate what we have done here acrossed the network 
@@ -122,7 +116,6 @@ public class GuardPawn : PlayerPawn
                 // they need a hud to show up saying they are being searched 
                 // get there inventory then show the guards search hud with that information 
 
-
                 // search begins 
                 // Guard sends server rpc and it states which player and their location 
                 // in server rpc 
@@ -130,9 +123,6 @@ public class GuardPawn : PlayerPawn
                 // 1.a) guard can open hud element with prisoner inventory information
                 // 2.) sends client rpc (search begins) to prisoner to inform them being searched and a location
                 // 2.a) prisoner can open hud element and places themselves at location
-
-
-
 
                 // the search interaction ends when the guard
                 // either
@@ -159,7 +149,6 @@ public class GuardPawn : PlayerPawn
 
     }
     
- 
     public void ItemsUpdated()
     {
         //this creates the itemhud and gives the items in container
@@ -171,7 +160,6 @@ public class GuardPawn : PlayerPawn
             HudReference.GetComponent<SearchPlayerHud>()._player = (PlayerController)control;
             //HudReference.GetComponent<SearchPlayerHud>().stash = this;
         }
-
     }
 
     public override void Close(bool escape)
@@ -185,9 +173,8 @@ public class GuardPawn : PlayerPawn
         {
             DoneSearching();
         }
-
-
     }
+
     public void DoneSearching()
     {
 
@@ -201,12 +188,12 @@ public class GuardPawn : PlayerPawn
         EndInteract();
     }
 
-    [ServerRPC(RequireOwnership = false)]
-    public void Server_RequestItems(ulong playerID)
+    [ServerRpc(RequireOwnership = false)]
+    public void RequestItemsServerRpc(ulong playerID)
     {
         int[] test;
         PrisonerPawn temp = null;
-        foreach (NetworkedClient nc in NetworkingManager.Singleton.ConnectedClientsList)
+        foreach (NetworkClient nc in NetworkManager.Singleton.ConnectedClientsList)
         {
             if (nc.ClientId == playerID)
             {
@@ -214,13 +201,12 @@ public class GuardPawn : PlayerPawn
             }
         }
 
-    InvokeClientRpcOnClient(Client_RequestItems,playerID);
-
-       
+        RequestItemsClientRpc(control.myClientParams);
+  
     }
 
-    [ClientRPC]
-    public void Client_RequestItems()
+    [ClientRpc]
+    public void RequestItemsClientRpc(ClientRpcParams clientRpcParams = default)
     {
         PrisonerPawn temp = null;
         List<int> itemIDs = new List<int>();
