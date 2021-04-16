@@ -1,7 +1,7 @@
-1 cafeteria food trolly/board/steam table 
-2 shower walls
-3 stalls
-4 toilets
+1 cafeteria food trolly/board/steam table **
+2 shower walls **
+3 stalls **
+4 toilets **
 5 faucets
 6 sinks
 7 sheet covered area/tarp covered thing 
@@ -15,4 +15,4 @@
 15 reactor
 16 escape pods 
 17 red light 
-18 desk 
+18 desk **
