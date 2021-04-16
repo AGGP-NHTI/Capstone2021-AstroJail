@@ -18,13 +18,15 @@ public class SearchPlayerHud : NetworkBehaviour
 
     public List<Button> Containerbuttons;
     public List<Button> Playerbuttons;
+    public bool failedSearch = false;
+        
 
 
     //make sure the button corresponds with the number (we might need a list of buttons)
     void Start()
     {
         UpdateList();
-
+    
         // access both containers to get the items for both the player and container (should have sprites associated with them)
         //      Set PlayerInv and ContainerInv to there corresponding accessed containers
         //      Populate UI with those items 
@@ -37,23 +39,38 @@ public class SearchPlayerHud : NetworkBehaviour
         temp.DoneSearching();
         temp.ObjectUsing = null;
     }
+    public void searchForContraband(int i)
+    {   
+        PlayerInv = _container.ItemsInContainer;
+      
 
-    public void TakeItem(int i)
-    {
-        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
-        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
-        if (!tempPawn)
+        if (PlayerInv.Count <= 0)
         {
-            // debug if no player is set dont do stuff
+            Debug.LogError($"{PlayerInv} inventory is empty");
             return;
-        }
-
-        if (tempPawn.playerInventory.itemCount >= tempPawn.playerInventory.MaxItems)
-        {
-            Debug.LogError($"{tempPawn} inventory is full");
         }
         else
         {
+            if(_container.ItemsInContainer[i].isContraband)
+            {
+                //run rpc to send items back 
+            }
+            else
+            {
+                Debug.Log("found non contraband item" +"item you found was: " + _container.ItemsInContainer[i]);
+                GuardPawn temp = (GuardPawn)_player.myPawn;
+                temp.FailedSearch();
+
+            }
+            
+           
+        }
+
+    }
+
+    public void TakeItem(int i)
+    {
+       
             /*if (IsServer)
             {
                 tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
@@ -64,7 +81,7 @@ public class SearchPlayerHud : NetworkBehaviour
                 stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }*/
-        }
+        
 
         //WE SHOULD BE UPDATING THE LIST IN THE GUARDPAWN RPC
     }
