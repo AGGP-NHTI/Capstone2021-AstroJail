@@ -11,6 +11,7 @@ public class MapInteractable : NetworkBehaviour
     public GameObject Label;
     [SerializeField]
     protected PlayerController UsingPlayer;
+    [SerializeField]
     protected bool beingUsed;
 
     public virtual void OnTriggerEnter(Collider other)
@@ -117,6 +118,7 @@ public class MapInteractable : NetworkBehaviour
         {
             if (NC.ClientId == user)
             {
+                Debug.Log("we called OnUse()");
                 OnUse(NC.PlayerObject.GetComponent<PlayerController>());
             }
         }
