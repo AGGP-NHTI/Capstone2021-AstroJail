@@ -54,6 +54,7 @@ public class SearchPlayerHud : NetworkBehaviour
             Debug.Log("do we get to the if");
             if(_container.ItemsInContainer[i].isContraband)
             {
+                Debug.Log("is contraband?");
                 //run rpc to send items back 
             }
             else
