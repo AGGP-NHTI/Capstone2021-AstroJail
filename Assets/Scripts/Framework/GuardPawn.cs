@@ -53,6 +53,7 @@ public class GuardPawn : PlayerPawn
             if (timer >= failTime)
             {
                 lockMovement = false;
+                failedSearch = false;
                 timer = 0;
             }
 
