@@ -54,7 +54,6 @@ public class HiddenStashes : MapInteractable
                     p.Interactables.Add(this);
                     Label.SetActive(true);
                     Debug.Log("Detected Player");
-
                 }
             }
         }

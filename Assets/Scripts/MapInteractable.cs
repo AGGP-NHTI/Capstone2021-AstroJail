@@ -54,26 +54,8 @@ public class MapInteractable : NetworkBehaviour
             return false;
         }
 
-        if(IsServer)
-        {
-            InteractableStartUseClientRpc(user.OwnerClientId);
-        }
-        else
-        { //Potentially two people opening at the same time might break this
-            UsingPlayer = user;
-            InteractableStartUseServerRpc(user.OwnerClientId);
-        }
-
-        if (OnUse(user))
-        {
-            return true;
-        }
-        else
-        {
-            Done();
-            return false;
-        }
-
+        InteractableStartUseServerRpc(user.OwnerClientId);
+        return true;
     }
 
     public bool Done()
@@ -116,6 +98,7 @@ public class MapInteractable : NetworkBehaviour
     [ClientRpc]
     public void InteractableStartUseClientRpc(ulong user)
     {
+        if (IsServer) return;
         foreach(NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
         {
             if(NC.ClientId == user)
@@ -131,6 +114,18 @@ public class MapInteractable : NetworkBehaviour
         UsingPlayer = null;
     }
 
+    [ClientRpc]
+    public void InteractableStartOnClientRpc(ulong user, ClientRpcParams clientID = default)
+    {
+        foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (NC.ClientId == user)
+            {
+                OnUse(NC.PlayerObject.GetComponent<PlayerController>());
+            }
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void InteractableStartUseServerRpc(ulong user)
     {
@@ -139,9 +134,16 @@ public class MapInteractable : NetworkBehaviour
             if (NC.ClientId == user)
             {
                 UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
+                ClientRpcParams targetClient = new ClientRpcParams();
+                ulong[] targetClientId = new ulong[1];
+                targetClientId[0] = user;
+                targetClient.Send.TargetClientIds = targetClientId;
+
+                InteractableStartUseClientRpc(user);
+                InteractableStartOnClientRpc(user, targetClient);
             }
         }
-        InteractableStartUseClientRpc(user);
+
     }
     [ServerRpc(RequireOwnership = false)]
     public void InteractableStopUseServerRpc()

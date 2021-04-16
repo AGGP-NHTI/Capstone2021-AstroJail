@@ -50,8 +50,6 @@ public class GenericStash : MapInteractable
                 {
                     p.Interactables.Add(this);
                     Label.SetActive(true);
-                    Debug.Log("Detected Player");
-
                 }
             }
         }
@@ -89,7 +87,6 @@ public class GenericStash : MapInteractable
             InUseServerRpc();
         }
 
-        Debug.Log(user);
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
         return true;

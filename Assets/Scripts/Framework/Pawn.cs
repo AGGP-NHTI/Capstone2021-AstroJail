@@ -20,12 +20,10 @@ public class Pawn : Actor
         NetworkObject NetObj = gameObject.GetComponent<NetworkObject>();
         if(NetObj)
         {
-            Debug.Log("Changed net Owner on Pawn");
             //NetObj.ChangeOwnership(c.OwnerClientId);
         }
         else
         {
-            Debug.Log("No NetObj found");
         }
 
     }
