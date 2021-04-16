@@ -192,7 +192,7 @@ public class GuardPawn : PlayerPawn
         {
             EndInteract();
         }
-        if (escape && searchedPlayer)
+        if (escape && searchedPlayer && failedSearch == false)
         {
             DoneSearching();
         }
