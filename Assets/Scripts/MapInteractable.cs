@@ -99,6 +99,7 @@ public class MapInteractable : NetworkBehaviour
     public void InteractableStartUseClientRpc(ulong user)
     {
         if (IsServer) return;
+        Debug.Log("Everyone should know that " + user + " is using the container");
         foreach(NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
         {
             if(NC.ClientId == user)
@@ -125,6 +126,7 @@ public class MapInteractable : NetworkBehaviour
                 OnUse(NC.PlayerObject.GetComponent<PlayerController>());
             }
         }
+
         InteractableStartUseClientRpc(user);
     }
 
