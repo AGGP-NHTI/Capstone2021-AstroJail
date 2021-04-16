@@ -103,7 +103,7 @@ public class MainMenuManager : NetworkBehaviour
         NetworkManager.Singleton.StartHost();
     }
 
-    public void JoinButton()
+    public void JoinJaredButton()
     {
         joinPanel.SetActive(false);
         mainMenuPanel.SetActive(false);
@@ -111,6 +111,17 @@ public class MainMenuManager : NetworkBehaviour
         instructionsPanel.SetActive(false);
         lobbyPanel.SetActive(true);
         NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress = "66.31.95.85";
+        NetworkManager.Singleton.StartClient();
+    }
+
+    public void JoinZachButton()
+    {
+        joinPanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
+        instructionsPanel.SetActive(false);
+        lobbyPanel.SetActive(true);
+        NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress = "73.149.137.68";
         NetworkManager.Singleton.StartClient();
     }
 

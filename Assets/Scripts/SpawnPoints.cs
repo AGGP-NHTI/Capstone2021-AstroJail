@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SpawnPoints : MonoBehaviour
+using MLAPI;
+public class SpawnPoints : NetworkBehaviour
 {
     private static SpawnPoints _instance;
     public static SpawnPoints Instance { get { return _instance; } }
 
-    public List<Transform> guardSpawns, prisonerSpawns;
+    public List<Vector3> guardSpawns, prisonerSpawns;
 
     private void Awake()
     {
@@ -22,14 +22,23 @@ public class SpawnPoints : MonoBehaviour
         }
     }
 
-    void Start()
+    public Vector3 randomSpawn(PlayerType playerEnum)
     {
-        
-    }
+        if (playerEnum == PlayerType.Prisoner)
+        {
+            int randomIndex = Random.Range(0, prisonerSpawns.Count - 1);
+            Vector3 randomSpawn = prisonerSpawns[randomIndex];
+            prisonerSpawns.RemoveAt(randomIndex);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            return randomSpawn;
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, guardSpawns.Count - 1);
+            Vector3 randomSpawn = guardSpawns[randomIndex];
+            guardSpawns.RemoveAt(randomIndex);
+
+            return randomSpawn;
+        }
     }
 }
