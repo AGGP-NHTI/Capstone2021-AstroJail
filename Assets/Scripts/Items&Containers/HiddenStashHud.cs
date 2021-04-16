@@ -67,7 +67,6 @@ public class HiddenStashHud : NetworkBehaviour
             }
         }
 
-        UpdateList();
     }
 
     public void AddItem(int i)
@@ -98,7 +97,6 @@ public class HiddenStashHud : NetworkBehaviour
             }
 
         }
-        UpdateList();
     }
 
     public void UpdateList()

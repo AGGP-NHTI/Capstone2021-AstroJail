@@ -66,38 +66,7 @@ public class SearchPlayerHud : NetworkBehaviour
             }*/
         }
 
-        UpdateList();
-    }
-
-    public void AddItem(int i)
-    {
-        PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
-        PlayerInv = tempPawn.playerInventory.ItemsInContainer;
-        if (!tempPawn)
-        {
-            // debug if no player is set dont do stuff
-            return;
-        }
-
-        if (_container.ItemsInContainer.Count >= _container.MaxItems)
-        {
-            Debug.LogError($"{tempPawn} inventory is full");
-        }
-        else
-        {
-          /*  if (IsServer)
-            {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
-                tempPawn.playerInventory.TakeItem(i);
-            }
-            else
-            {
-                stash.AddItemRPC(tempPawn.playerInventory.ItemsInContainer[i].instanceId);
-                _container.Additem(tempPawn.playerInventory.TakeItem(i));
-            }*/
-
-        }
-        UpdateList();
+        //WE SHOULD BE UPDATING THE LIST IN THE GUARDPAWN RPC
     }
 
     public void UpdateList()

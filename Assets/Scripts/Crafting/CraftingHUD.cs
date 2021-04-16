@@ -115,11 +115,6 @@ public class CraftingHUD : NetworkBehaviour
         }
 
     }
-
- 
-   
-
-
     public void TakeItem(int i)
     {
         Debug.Log("Index where item should've been taken from " + i);
@@ -148,8 +143,6 @@ public class CraftingHUD : NetworkBehaviour
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }
         }
-
-        UpdateList();
     }
 
     public void AddItem(int i)
@@ -180,7 +173,6 @@ public class CraftingHUD : NetworkBehaviour
             }
 
         }
-        UpdateList();
     }
 
     public void UpdateList()

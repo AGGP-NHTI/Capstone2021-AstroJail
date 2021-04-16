@@ -66,8 +66,6 @@ public class ItemTransferHUD : NetworkBehaviour
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }
         }
-
-        UpdateList();
     }
 
     public void AddItem(int i)
@@ -98,7 +96,6 @@ public class ItemTransferHUD : NetworkBehaviour
             }
 
         }
-        UpdateList();
     }
 
     public void TransferItem()

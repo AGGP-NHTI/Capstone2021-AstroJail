@@ -138,20 +138,40 @@ public class WinConditionStash : MapInteractable
         container.Additem(itemDef);
     }
 
-
     [ServerRpc(RequireOwnership = false)]
     public void TakeItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
+
+        ClientRpcParams targetClient = new ClientRpcParams();
+        ulong[] target = new ulong[1];
+        target[0] = UsingPlayer.OwnerClientId;
+        targetClient.Send.TargetClientIds = target;
+
+        UpdateItemsForClientRpc(targetClient);
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void AddItemServerRpc(int itemID)
     {
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.Additem(itemDef);
+
+        ClientRpcParams targetClient = new ClientRpcParams();
+        ulong[] target = new ulong[1];
+        target[0] = UsingPlayer.OwnerClientId;
+        targetClient.Send.TargetClientIds = target;
+
+        UpdateItemsForClientRpc(targetClient);
+    }
+
+    [ClientRpc]
+    public void UpdateItemsForClientRpc(ClientRpcParams targetClient = default)
+    {
+        HudReference.GetComponent<WinConditionHud>().UpdateList();
     }
 
     //---------------- Crafted items ------------------//

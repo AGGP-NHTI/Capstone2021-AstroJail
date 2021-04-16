@@ -143,7 +143,7 @@ public class GenericStash : MapInteractable
 
         container.TakeItem(itemDef);
     }
-    
+
 
     [ServerRpc(RequireOwnership = false)]
     public void TakeItemServerRpc(int itemID)
@@ -151,8 +151,21 @@ public class GenericStash : MapInteractable
         ItemDefinition itemDef = MapItemManager.Instance.itemList[itemID];
 
         container.TakeItem(itemDef);
+
+        ClientRpcParams targetClient = new ClientRpcParams();
+        ulong[] target = new ulong[1];
+        target[0] = UsingPlayer.OwnerClientId;
+        targetClient.Send.TargetClientIds = target;
+
+        UpdateItemsForClientRpc(targetClient);
     }
-   
+
+    [ClientRpc]
+    public void UpdateItemsForClientRpc(ClientRpcParams targetClient = default)
+    {
+        HudReference.GetComponent<ContainerHUD>().UpdateList();
+    }
+
 
 }
 

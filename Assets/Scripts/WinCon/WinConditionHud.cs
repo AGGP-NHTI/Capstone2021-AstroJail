@@ -76,13 +76,6 @@ public class WinConditionHud : NetworkBehaviour
         return;
     }
 
-
-
-
-
-
-
-
     public void TakeItem(int i)
     {
         Debug.Log("Index where item should've been taken from " + i);
@@ -112,7 +105,6 @@ public class WinConditionHud : NetworkBehaviour
             }
         }
 
-        UpdateList();
     }
 
     public void AddItem(int i)
@@ -143,7 +135,6 @@ public class WinConditionHud : NetworkBehaviour
             }
 
         }
-        UpdateList();
     }
 
     public void UpdateList()

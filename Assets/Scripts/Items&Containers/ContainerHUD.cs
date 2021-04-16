@@ -66,8 +66,6 @@ public class ContainerHUD : NetworkBehaviour
                 tempPawn.playerInventory.Additem(_container.TakeItem(i));
             }
         }
-
-        UpdateList();
     }
 
    
