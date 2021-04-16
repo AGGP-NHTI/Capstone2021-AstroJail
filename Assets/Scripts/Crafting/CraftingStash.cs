@@ -78,16 +78,8 @@ public class CraftingStash : MapInteractable
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
-        if (IsServer)
-        {
-           InUseClientRpc();
-        }
-        else
-        {
-           InUseServerRpc();
-        }
 
-        Debug.Log(user);
+        InUseServerRpc();
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
         return true;
@@ -104,14 +96,8 @@ public class CraftingStash : MapInteractable
             Destroy(HudReference);
             Debug.Log(HudReference);
         }
-        if (IsServer)
-        {
-            StopUseClientRpc();
-        }
-        else
-        {
-            StopUseServerRpc();
-        }
+
+        StopUseServerRpc();
         return true;
     }
 
@@ -138,12 +124,13 @@ public class CraftingStash : MapInteractable
     [ClientRpc]
     public void InUseClientRpc()
     {
-
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ClientRpc]
     public void StopUseClientRpc()
     {
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRpc(RequireOwnership = false)]

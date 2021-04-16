@@ -51,15 +51,8 @@ public class WinConditionStash : MapInteractable
         IsPanelActive = true;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
-        if (IsServer)
-        {
-            InUseClientRpc();
-        }
-        else
-        {
-            InUseServerRpc();
-        }
 
+        InUseServerRpc();
         Debug.Log(user);
         container.ServerRequestItems(UsingPlayer.OwnerClientId);
 
@@ -77,14 +70,8 @@ public class WinConditionStash : MapInteractable
             Destroy(HudReference);
             Debug.Log(HudReference);
         }
-        if (IsServer)
-        {
-            StopUseClientRpc();
-        }
-        else
-        {
-            StopUseServerRpc();
-        }
+
+        StopUseServerRpc();
         return true;
     }
 
@@ -113,12 +100,13 @@ public class WinConditionStash : MapInteractable
     [ClientRpc]
     public void InUseClientRpc()
     {
-
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
     }
     [ClientRpc]
     public void StopUseClientRpc()
     {
+        if (IsServer) return;
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
     }
     [ServerRpc(RequireOwnership = false)]
