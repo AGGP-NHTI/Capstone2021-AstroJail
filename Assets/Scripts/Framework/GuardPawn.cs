@@ -53,6 +53,7 @@ public class GuardPawn : PlayerPawn
             if (timer >= failTime)
             {
                 lockMovement = false;
+                failedSearch = false;
                 timer = 0;
             }
 
@@ -168,7 +169,6 @@ public class GuardPawn : PlayerPawn
     {
         Debug.Log("inside of failed search function");
         failedSearch = true;
-        lockMovement = true;
     }
     
     public void ItemsUpdated()
@@ -191,7 +191,7 @@ public class GuardPawn : PlayerPawn
         {
             EndInteract();
         }
-        if (escape && searchedPlayer)
+        if (escape && searchedPlayer && failedSearch == false)
         {
             DoneSearching();
         }

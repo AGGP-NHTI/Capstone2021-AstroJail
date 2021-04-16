@@ -42,8 +42,8 @@ public class SearchPlayerHud : NetworkBehaviour
     public void searchForContraband(int i)
     {   
         PlayerInv = _container.ItemsInContainer;
-      
 
+        Debug.Log("do we click the button atleast");
         if (PlayerInv.Count <= 0)
         {
             Debug.LogError($"{PlayerInv} inventory is empty");
@@ -51,8 +51,10 @@ public class SearchPlayerHud : NetworkBehaviour
         }
         else
         {
+            Debug.Log("do we get to the if");
             if(_container.ItemsInContainer[i].isContraband)
             {
+                Debug.Log("is contraband?");
                 //run rpc to send items back 
             }
             else
@@ -106,7 +108,7 @@ public class SearchPlayerHud : NetworkBehaviour
             Playerbuttons[i].gameObject.SetActive(true);
             int x = new int();
             x = i;
-            Playerbuttons[i].onClick.AddListener(() => TakeItem(x));
+            Playerbuttons[i].onClick.AddListener(() => searchForContraband(x));
             Playerbuttons[i].image.sprite = items.imageArt;
             i++;
         }
