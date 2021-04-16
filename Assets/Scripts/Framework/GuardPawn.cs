@@ -48,7 +48,7 @@ public class GuardPawn : PlayerPawn
     {
         if (failedSearch)
         {
-
+            Debug.Log("timer: " + timer);   
             timer += Time.deltaTime;
             if (timer >= failTime)
             {
@@ -166,6 +166,7 @@ public class GuardPawn : PlayerPawn
     }
     public void FailedSearch()
     {
+        Debug.Log("inside of failed search function");
         failedSearch = true;
         lockMovement = true;
     }
