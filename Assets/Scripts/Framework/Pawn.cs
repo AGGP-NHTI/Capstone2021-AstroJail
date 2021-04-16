@@ -31,7 +31,10 @@ public class Pawn : Actor
     {
         if(NamePlate.gameObject.activeSelf)
         {
-            NamePlate.transform.rotation = Quaternion.LookRotation(NamePlate.transform.position - Camera.main.transform.position);
+            if(Camera.main)
+            {
+                NamePlate.transform.rotation = Quaternion.LookRotation(NamePlate.transform.position - Camera.main.transform.position);
+            }
         }
     }
     public virtual void OnPossessed()

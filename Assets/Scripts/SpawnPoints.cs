@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
+using MLAPI.Messaging;
 public class SpawnPoints : NetworkBehaviour
 {
     private static SpawnPoints _instance;
     public static SpawnPoints Instance { get { return _instance; } }
 
-    public List<Vector3> guardSpawns, prisonerSpawns;
+    public List<Transform> guardSpawns, prisonerSpawns;
 
     private void Awake()
     {
@@ -27,18 +28,48 @@ public class SpawnPoints : NetworkBehaviour
         if (playerEnum == PlayerType.Prisoner)
         {
             int randomIndex = Random.Range(0, prisonerSpawns.Count - 1);
-            Vector3 randomSpawn = prisonerSpawns[randomIndex];
-            prisonerSpawns.RemoveAt(randomIndex);
+            Transform randomSpawn = prisonerSpawns[randomIndex];
 
-            return randomSpawn;
+            removeSpawnServerRpc(randomIndex, playerEnum);
+            return randomSpawn.position;
         }
         else
         {
             int randomIndex = Random.Range(0, guardSpawns.Count - 1);
-            Vector3 randomSpawn = guardSpawns[randomIndex];
-            guardSpawns.RemoveAt(randomIndex);
+            Transform randomSpawn = guardSpawns[randomIndex];
 
-            return randomSpawn;
+            removeSpawnServerRpc(randomIndex, playerEnum);
+            return randomSpawn.position;
+        }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void removeSpawnServerRpc(int index, PlayerType playerEnum)
+    {
+        if(playerEnum == PlayerType.Prisoner)
+        {
+            prisonerSpawns.RemoveAt(index);
+        }
+        else
+        {
+            guardSpawns.RemoveAt(index);
+        }
+
+        removeSpawnClientRpc(index, playerEnum);
+    }
+
+    [ClientRpc]
+    public void removeSpawnClientRpc(int index, PlayerType playerEnum)
+    {
+        if (IsServer) return;
+        if (playerEnum == PlayerType.Prisoner)
+        {
+            prisonerSpawns.RemoveAt(index);
+        }
+        else
+        {
+            guardSpawns.RemoveAt(index);
         }
     }
 }
