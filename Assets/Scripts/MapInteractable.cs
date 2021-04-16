@@ -11,6 +11,7 @@ public class MapInteractable : NetworkBehaviour
     public GameObject Label;
     [SerializeField]
     protected PlayerController UsingPlayer;
+    protected bool beingUsed;
 
     public virtual void OnTriggerEnter(Collider other)
     {
@@ -49,11 +50,11 @@ public class MapInteractable : NetworkBehaviour
 
     public bool Use(PlayerController user)
     {
-        if (UsingPlayer)
+        if (beingUsed)
         {
             return false;
         }
-
+        UsingPlayer = user;
         InteractableStartUseServerRpc(user.OwnerClientId);
         return true;
     }
@@ -96,24 +97,16 @@ public class MapInteractable : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void InteractableStartUseClientRpc(ulong user)
+    public void InteractableStartUseClientRpc()
     {
         if (IsServer) return;
-        Debug.Log("Everyone should know that " + user + " is using the container");
-        foreach(NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            if(NC.ClientId == user)
-            {
-                UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
-                Debug.Log("we just set the using player");
-            }
-        }
+        beingUsed = true;
     }
 
     [ClientRpc]
     public void InteractableStopUseClientRpc()
     {
-        UsingPlayer = null;
+        beingUsed = false;
     }
 
     [ClientRpc]
@@ -127,8 +120,6 @@ public class MapInteractable : NetworkBehaviour
                 OnUse(NC.PlayerObject.GetComponent<PlayerController>());
             }
         }
-
-        InteractableStartUseClientRpc(user);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -139,12 +130,15 @@ public class MapInteractable : NetworkBehaviour
             if (NC.ClientId == user)
             {
                 UsingPlayer = NC.PlayerObject.gameObject.GetComponent<PlayerController>();
+                beingUsed = true;
                 ClientRpcParams targetClient = new ClientRpcParams();
                 ulong[] targetClientId = new ulong[1];
                 targetClientId[0] = user;
                 targetClient.Send.TargetClientIds = targetClientId;
 
+
                 InteractableStartOnClientRpc(user, targetClient);
+                InteractableStartUseClientRpc();
             }
         }
 
@@ -153,6 +147,7 @@ public class MapInteractable : NetworkBehaviour
     public void InteractableStopUseServerRpc()
     {
         UsingPlayer = null;
+        beingUsed = false;
         InteractableStopUseClientRpc();
     }
 
