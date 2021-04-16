@@ -56,7 +56,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,7 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4030211836226826378
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -135,25 +133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2905428979946643433}
     m_Modifications:
-    - target: {fileID: 5326925153638848906, guid: 3bac836da3e00ab48923600295ea4f83,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5326925153638848906, guid: 3bac836da3e00ab48923600295ea4f83,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5975703052526762079, guid: 3bac836da3e00ab48923600295ea4f83,
         type: 3}
       propertyPath: m_Name
       value: Wall2Falling
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
         type: 3}
@@ -172,11 +155,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -189,6 +167,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6459893495994999525, guid: 3bac836da3e00ab48923600295ea4f83,
         type: 3}
@@ -220,21 +208,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2905428979946643433}
     m_Modifications:
-    - target: {fileID: 80305354100195357, guid: e63b145fa934d59469826c997c7b9acd,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 80305354100195357, guid: e63b145fa934d59469826c997c7b9acd,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -252,11 +225,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -269,6 +237,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1249293251646307186, guid: e63b145fa934d59469826c997c7b9acd,
         type: 3}
