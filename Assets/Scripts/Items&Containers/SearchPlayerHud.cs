@@ -61,8 +61,9 @@ public class SearchPlayerHud : NetworkBehaviour
             {
                 Debug.Log("found non contraband item" +"item you found was: " + _container.ItemsInContainer[i]);
                 GuardPawn temp = (GuardPawn)_player.myPawn;
-                CloseButtom();
                 temp.FailedSearch();
+                CloseButtom();
+                
 
             }
             
