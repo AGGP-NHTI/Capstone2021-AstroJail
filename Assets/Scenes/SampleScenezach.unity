@@ -2269,11 +2269,9 @@ MonoBehaviour:
   guardSpawns:
   - {fileID: 1743316090}
   - {fileID: 419665398}
-  - {fileID: 0}
   prisonerSpawns:
   - {fileID: 167561389}
   - {fileID: 1394006075}
-  - {fileID: 0}
 --- !u!4 &2045459967
 Transform:
   m_ObjectHideFlags: 0

@@ -151,7 +151,6 @@ public class ServerManager : NetworkBehaviour
 
     public void OnSceneSwitched()
     {
-
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             pc.SpawnPlayerGameStart();
