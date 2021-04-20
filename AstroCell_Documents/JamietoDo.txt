@@ -12,7 +12,7 @@
 12 space ships 
 13 big ass machine 
 14 astroids
-15 reactor
+15 reactor **
 16 escape pods 
-17 red light 
+17 red light **
 18 desk **
