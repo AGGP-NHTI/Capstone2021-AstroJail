@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 1000304744}
   - {fileID: 927057961}
   - {fileID: 1205827213}
+  - {fileID: 1540622250}
   itemList: []
   craftedItems: []
   everyItem:
@@ -1208,6 +1209,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7683459402031365109, guid: 4204c8b190fb1874697db560b8e18afe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4204c8b190fb1874697db560b8e18afe, type: 3}
+--- !u!114 &1540622250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7683459402515023793, guid: 4204c8b190fb1874697db560b8e18afe,
+    type: 3}
+  m_PrefabInstance: {fileID: 1540622249}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed6706fb7813d14cabaa14ce2eb2e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1743316086
 GameObject:
   m_ObjectHideFlags: 0
