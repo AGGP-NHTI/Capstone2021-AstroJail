@@ -1,7 +1,7 @@
-soda
-water
-tazer
-9v battery
+soda - Done
+water - Done
+tazer - Done
+9v battery - Done
 bowl - Done
 drains - Done
 tray - Done
@@ -14,7 +14,7 @@ trash can - Done
 tub-big pots for food 
 pickaxes - Done
 cafateria table - To be UV Mapped 
-many boxes
+many boxes - Done
 tables-metal tables
 regular table - Done
 body trays - To be UV Mapped
