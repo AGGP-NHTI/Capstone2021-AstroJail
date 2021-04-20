@@ -24,14 +24,13 @@ public class SpawnPoints : NetworkBehaviour
     
     public Vector3 randomSpawn(PlayerType playerEnum)
     {
-
         if (playerEnum == PlayerType.Prisoner)
         {
             if (prisonerSpawns.Count == 0) return Vector3.zero;
             int randomIndex = Random.Range(0, prisonerSpawns.Count - 1);
             Transform randomSpawn = prisonerSpawns[randomIndex];
 
-            removePrisonerSpawnServerRpc(randomIndex);
+            removePrisonerSpawn(randomIndex);
             return randomSpawn.position;
         }
         else
@@ -40,20 +39,18 @@ public class SpawnPoints : NetworkBehaviour
             int randomIndex = Random.Range(0, guardSpawns.Count - 1);
             Transform randomSpawn = guardSpawns[randomIndex];
 
-            removeGuardSpawnServerRpc(randomIndex);
+            removeGuardSpawn(randomIndex);
             return randomSpawn.position;
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void removePrisonerSpawnServerRpc(int index)
+    public void removePrisonerSpawn(int index)
     {
         prisonerSpawns.RemoveAt(index);
         Debug.Log("Calling prisoner clientRPC");
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void removeGuardSpawnServerRpc(int index)
+    public void removeGuardSpawn(int index)
     {
         guardSpawns.RemoveAt(index);
         Debug.Log("Calling clientRPC");

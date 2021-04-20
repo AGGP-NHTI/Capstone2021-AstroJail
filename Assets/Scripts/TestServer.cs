@@ -17,6 +17,7 @@ public class TestServer : MonoBehaviour
     public GameObject ConnectAddress;
     public GameObject MainMenu;
     public bool attemptedConnection = false;
+    public GameObject referenceToServerManagerSpawn;
 
     public string ConnectAddressStandalone;
     public string RelayAddressStandalone;
@@ -35,6 +36,7 @@ public class TestServer : MonoBehaviour
         });
         */
         NetworkManager.Singleton.StartHost();
+
     }
 
     public void JoinAsClient()
