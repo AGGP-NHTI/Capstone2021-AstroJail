@@ -8920,9 +8920,6 @@ MonoBehaviour:
     - Prefab: {fileID: 6323784573335748263, guid: 71649106233a2074288d23f9807f8b61,
         type: 3}
       PlayerPrefab: 1
-    - Prefab: {fileID: 9154986995550128394, guid: ec985acb1647aca419a5235fd1728c99,
-        type: 3}
-      PlayerPrefab: 0
     - Prefab: {fileID: 4383110808353465229, guid: 5f9176971ec78b44482f50f32d009135,
         type: 3}
       PlayerPrefab: 0
