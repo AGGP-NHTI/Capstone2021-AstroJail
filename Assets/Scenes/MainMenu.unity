@@ -3528,6 +3528,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609374336}
   m_CullTransparentMesh: 0
+--- !u!1 &610679033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610679036}
+  - component: {fileID: 610679035}
+  - component: {fileID: 610679034}
+  m_Layer: 0
+  m_Name: ServerManagerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &610679034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610679033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260f9f73fdf489d448956c801c9c5ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverManagerPrefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
+    type: 3}
+--- !u!114 &610679035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610679033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 6998878709971436899
+  PrefabHashGenerator: ServerManagerSpawner
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+--- !u!4 &610679036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610679033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 485.40005, y: 166.82242, z: 644.1188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &629659711
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,73 +6028,6 @@ RectTransform:
   m_AnchoredPosition: {x: -341, y: 192}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1247718070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1247718072}
-  - component: {fileID: 1247718071}
-  - component: {fileID: 1247718073}
-  m_Layer: 0
-  m_Name: ServerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1247718071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247718070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34929653c93773d4f8c9140ecdd6d7e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerControllers: []
-  playerNames: []
-  GuardPrefab: {fileID: 9014897465159990460, guid: 6c8b352c260077a4c967647f3413d9b9,
-    type: 3}
-  PrisonerPrefab: {fileID: 424292381393445453, guid: dd1a21c03bc55eb42a5b9fe0d3c8c12b,
-    type: 3}
---- !u!4 &1247718072
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247718070}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 485.40005, y: 166.82242, z: 644.1188}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1247718073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247718070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 17055518477593535337
-  PrefabHashGenerator: ServerManager
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
 --- !u!1 &1249974255
 GameObject:
   m_ObjectHideFlags: 0
@@ -6871,6 +6867,7 @@ MonoBehaviour:
   IPInputField: {fileID: 1300541093}
   prisonerList: {fileID: 1500177921}
   guardList: {fileID: 194344660}
+  referenceToServerManagerSpawner: {fileID: 610679033}
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0
@@ -8941,6 +8938,9 @@ MonoBehaviour:
     - Prefab: {fileID: 9014897465159990460, guid: 6c8b352c260077a4c967647f3413d9b9,
         type: 3}
       PlayerPrefab: 0
+    - Prefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
+        type: 3}
+      PlayerPrefab: 0
     PlayerPrefabHash:
       id: 0
     CreatePlayerPrefab: 1
@@ -8983,7 +8983,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2080626256
 GameObject:

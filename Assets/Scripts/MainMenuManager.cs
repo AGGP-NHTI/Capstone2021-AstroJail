@@ -13,6 +13,7 @@ public class MainMenuManager : NetworkBehaviour
     public TMP_InputField NameInputField, IPInputField;
     public TextMeshProUGUI prisonerList, guardList;
     private string tempGuardList, tempPrisonerList;
+    public GameObject referenceToServerManagerSpawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,6 @@ public class MainMenuManager : NetworkBehaviour
         instructionsPanel.SetActive(false);
         joinPanel.SetActive(false);
         lobbyPanel.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -101,6 +101,8 @@ public class MainMenuManager : NetworkBehaviour
         lobbyPanel.SetActive(true);
         NetworkManager.Singleton.NetworkConfig.EnableSceneManagement = true;
         NetworkManager.Singleton.StartHost();
+        referenceToServerManagerSpawner.GetComponent<ServerIntitialization>().createServerManager();
+        
     }
 
     public void JoinJaredButton()
@@ -130,7 +132,6 @@ public class MainMenuManager : NetworkBehaviour
         if (NameInputField.text.Length > 0)
         {
             string nameChange = NameInputField.text;
-            ServerManager.Instance.changeName(NetworkManager.Singleton.LocalClientId, nameChange);
             foreach(PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
             {
                 if (go.myController)
