@@ -153,7 +153,7 @@ public class GuardPawn : PlayerPawn
 
 
                 searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId, OwnerClientId);
-
+                BeginSearchPrisonerClientRpc();
 
                 //for me to put in here 
                 //pull up player inventory hud. send found player to hud same as stashed
@@ -202,7 +202,7 @@ public class GuardPawn : PlayerPawn
     {
         Debug.Log("inside of failed search function");
         failedSearch = true;
-        FailedSearchMovementLock = true;
+
     }
 
     public void ItemsUpdated()
@@ -241,6 +241,7 @@ public class GuardPawn : PlayerPawn
         this.lockMovement = false;
         searchedPlayer.lockMovement = false;
         searchedPlayer = null;
+        EndSearchPrisonerServerRpc(searchedPlayer.OwnerClientId);
         EndInteract();
     }
 
@@ -279,13 +280,11 @@ public class GuardPawn : PlayerPawn
                 temp = (PrisonerPawn)pc.myPawn;
             }
         }
-
         foreach (ItemDefinition id in temp.playerInventory.ItemsInContainer)
         {
             itemIDs.Add(id.instanceId);
         }
         int[] items = itemIDs.ToArray();
-
 
     }
 
@@ -326,7 +325,7 @@ public class GuardPawn : PlayerPawn
     public void EndSearchPrisonerClientRpc(ClientRpcParams clientRpcParams = default)
     {
         PrisonerPawn temp = null;
-        List<int> itemIDs = new List<int>();
+
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             if (pc.myController)
@@ -335,11 +334,8 @@ public class GuardPawn : PlayerPawn
             }
         }
 
-        foreach (ItemDefinition id in temp.playerInventory.ItemsInContainer)
-        {
-            itemIDs.Add(id.instanceId);
-        }
-        int[] items = itemIDs.ToArray();
+
+        temp.isBeingSearched = false;
 
 
     }
