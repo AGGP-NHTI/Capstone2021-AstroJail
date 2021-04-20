@@ -62,11 +62,11 @@ public class PlayerPawn : Pawn
 
     public void SetCamPitch(float value)
     {
-        if(FailedSearchMovementLock == true)
+        if (FailedSearchMovementLock == true)
         {
             return;
         }
-        if(lockMovement)
+        if (lockMovement)
         {
             return;
         }
@@ -111,6 +111,10 @@ public class PlayerPawn : Pawn
 
     public override void RotatePlayer(float value)
     {
+        if (FailedSearchMovementLock == true)
+        {
+            return;
+        }
         if (lockMovement)
         {
             return;
@@ -124,6 +128,10 @@ public class PlayerPawn : Pawn
 
     public override void Move(float horizontal, float vertical)
     {
+        if (FailedSearchMovementLock == true)
+        {
+            return;
+        }
         if (lockMovement)
         {
             return;
@@ -145,6 +153,10 @@ public class PlayerPawn : Pawn
 
     public override void Jump(bool s)
     {
+        if (FailedSearchMovementLock == true)
+        {
+            return;
+        }
         if (lockMovement)
         {
             return;
@@ -168,6 +180,10 @@ public class PlayerPawn : Pawn
 
     public override void Interact(bool e)
     {
+        if (FailedSearchMovementLock == true)
+        {
+            return;
+        }
         //how guards interact with prisoners will be different system
         if (e && !ObjectUsing &&  (Interactables.Count != 0))
         {
