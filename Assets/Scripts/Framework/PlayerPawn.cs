@@ -28,6 +28,7 @@ public class PlayerPawn : Pawn
 
     public bool InteractE = false;
     public bool lockMovement = false;
+    public bool FailedSearchMovementLock = false;
 
     //Properties
     public Containers playerInventory
@@ -61,6 +62,10 @@ public class PlayerPawn : Pawn
 
     public void SetCamPitch(float value)
     {
+        if(FailedSearchMovementLock == true)
+        {
+            return;
+        }
         if(lockMovement)
         {
             return;
