@@ -52,7 +52,7 @@ public class GuardPawn : PlayerPawn
             timer += Time.deltaTime;
             if (timer >= failTime)
             {
-                lockMovement = false;
+                FailedSearchMovementLock = false;
                 failedSearch = false;
                 timer = 0;
             }
@@ -169,6 +169,7 @@ public class GuardPawn : PlayerPawn
     {
         Debug.Log("inside of failed search function");
         failedSearch = true;
+        FailedSearchMovementLock = true;
     }
     
     public void ItemsUpdated()

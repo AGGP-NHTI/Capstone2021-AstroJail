@@ -7,7 +7,6 @@ public class SpawnPoints : NetworkBehaviour
 {
     private static SpawnPoints _instance;
     public static SpawnPoints Instance { get { return _instance; } }
-
     public List<Transform> guardSpawns, prisonerSpawns;
 
     private void Awake()
@@ -22,11 +21,13 @@ public class SpawnPoints : NetworkBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-
+    
     public Vector3 randomSpawn(PlayerType playerEnum)
     {
+
         if (playerEnum == PlayerType.Prisoner)
         {
+            if (prisonerSpawns.Count == 0) return Vector3.zero;
             int randomIndex = Random.Range(0, prisonerSpawns.Count - 1);
             Transform randomSpawn = prisonerSpawns[randomIndex];
 
@@ -35,6 +36,7 @@ public class SpawnPoints : NetworkBehaviour
         }
         else
         {
+            if (guardSpawns.Count == 0) return Vector3.zero;
             int randomIndex = Random.Range(0, guardSpawns.Count - 1);
             Transform randomSpawn = guardSpawns[randomIndex];
 
@@ -42,7 +44,6 @@ public class SpawnPoints : NetworkBehaviour
             return randomSpawn.position;
         }
     }
-
 
     [ServerRpc(RequireOwnership = false)]
     public void removeSpawnServerRpc(int index, PlayerType playerEnum)
