@@ -130,7 +130,6 @@ public class MainMenuManager : NetworkBehaviour
         if (NameInputField.text.Length > 0)
         {
             string nameChange = NameInputField.text;
-            ServerManager.Instance.changeName(NetworkManager.Singleton.LocalClientId, nameChange);
             foreach(PlayerController go in GameObject.FindObjectsOfType<PlayerController>())
             {
                 if (go.myController)

@@ -25,8 +25,6 @@ public class ServerManager : NetworkBehaviour
         NetworkSceneManager.OnSceneSwitched += OnSceneSwitched;
     }
 
-    public List<PlayerController> playerControllers = new List<PlayerController>();
-    public List<string> playerNames = new List<string>();
     public GameObject GuardPrefab, PrisonerPrefab;
 
     void Start()
@@ -34,87 +32,9 @@ public class ServerManager : NetworkBehaviour
 
     }
 
-
-    void Update()
-    {
-        //This is only working for host
-        if(NetworkManager.Singleton.IsHost)
-        {
-            UpdatePlayerListServerRpc();
-        }
-    }
-
-    public void changeName(ulong clientID, string nameChange)
-    {
-        PlayerNameChangeServerRpc( clientID, nameChange);
-    }
-
     public void StartGame(string sceneName)
     {
         StartGameServerRpc(sceneName);
-    }
-
-    [ClientRpc]
-    public void UpdatePlayerListClientRpc(string[] players)
-    {
-        Debug.Log("inside Client_UpdatePlayerList");
-        Debug.Log(players[0]);
-        if(IsServer)
-        {
-            return;
-        }
-
-        List<string> temp = new List<string>();
-        foreach(string s in players)
-        {
-            temp.Add(s);
-        }
-
-        playerNames = temp;
-    }
-
-
-    [ServerRpc(RequireOwnership = false)]
-    public void UpdatePlayerListServerRpc()
-    {
-        /*
-        if (NetworkManager.Singleton.ConnectedClientsList.Count > 0)
-        {
-            playerControllers.RemoveAll(item => item == null);
-            playerNames.RemoveAll(item => item == null);
-            foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
-            {
-                if (client.PlayerObject.GetComponent<PlayerController>())
-                {
-                    if (!playerControllers.Contains(client.PlayerObject.GetComponent<PlayerController>()))
-                    {
-                        playerControllers.Add(client.PlayerObject.GetComponent<PlayerController>());
-                        playerNames.Add(client.PlayerObject.GetComponent<PlayerController>().playerName);
-                    }
-                }
-            }
-        }
-
-        string[] clientPlayerList = playerNames.ToArray();
-        InvokeClientRpcOnEveryone(Client_UpdatePlayerList, clientPlayerList);
-        */
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void PlayerNameChangeServerRpc(ulong owner, string nameChange)
-    {
-        /*
-        foreach (NetworkClient NC in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            if(NC.ClientId == owner)
-            {
-                int index = playerNames.FindIndex(name => name == NC.PlayerObject.GetComponent<PlayerController>().playerName);
-                playerNames.RemoveAt(index);
-                NC.PlayerObject.GetComponent<PlayerController>().playerName = nameChange;
-                playerNames.Add(NC.PlayerObject.GetComponent<PlayerController>().playerName);
-            }
-        }
-        */
     }
 
 
