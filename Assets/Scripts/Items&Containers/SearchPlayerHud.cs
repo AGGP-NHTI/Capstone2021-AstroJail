@@ -36,7 +36,7 @@ public class SearchPlayerHud : NetworkBehaviour
     public void CloseButtom()
     {
         GuardPawn temp = (GuardPawn)_player.myPawn;
-        temp.DoneSearching();
+        temp.   ();
         temp.ObjectUsing = null;
     }
     public void searchForContraband(int i)
