@@ -76,7 +76,6 @@ public class Containers : NetworkBehaviour
         return true;
     }
 
-
     public void ServerRequestItems(ulong id)
     {
         Debug.Log("were w called");
