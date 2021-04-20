@@ -21,8 +21,8 @@ public class GuardPawn : PlayerPawn
     public float timer = 0;
     public float failTime = 5;
     public bool failedSearch = false;
-   
-    
+
+
 
 
     //Properties
@@ -48,21 +48,51 @@ public class GuardPawn : PlayerPawn
     {
         if (failedSearch)
         {
-            Debug.Log("timer: " + timer);   
+            Debug.Log("timer: " + timer);
             timer += Time.deltaTime;
             if (timer >= failTime)
             {
-                FailedSearchMovementLock = false;
+                
                 failedSearch = false;
                 timer = 0;
             }
 
         }
-       
+
         //may be something in pawn that we need to do 
         base.Update();
         FindPrisoners();
     }
+
+    //movement overrides 
+    //
+    public override void Jump(bool s)
+    {
+        if (failedSearch)
+        {
+            return;
+        }
+        base.Jump(s);
+    }
+
+    public override void Move(float horizontal, float vertical)
+    {
+        if (failedSearch)
+        {
+            return;
+        }
+        base.Move(horizontal, vertical);
+    }
+
+    public override void SetCamPitch(float value)
+    {
+        if (failedSearch)
+        {
+            return;
+        }
+        base.SetCamPitch(value);
+    }
+
 
     public void FindPrisoners()
     {
@@ -72,14 +102,14 @@ public class GuardPawn : PlayerPawn
         locateRay.origin = rayPoint.transform.position;
         Debug.DrawRay(locateRay.origin, locateRay.direction * searchDistance, Color.red);
         RaycastHit hitInfo;
-       
+
         if (Physics.Raycast(locateRay, out hitInfo, searchDistance))
         {
             Debug.Log(hitInfo.collider.gameObject.name);
             if (hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>())
             {
                 FoundPlayer = hitInfo.collider.gameObject.GetComponentInParent<PrisonerPawn>();
-                
+
             }
 
         }
@@ -87,7 +117,10 @@ public class GuardPawn : PlayerPawn
     }
     public override void Interact(bool e)
     {
-
+        if(failedSearch)
+        {
+            return;
+        }
         if (e && !ObjectUsing && (Interactables.Count != 0))
         {
             Debug.Log($"pressed e: {e} ");
@@ -111,16 +144,16 @@ public class GuardPawn : PlayerPawn
         {
             if (FoundPlayer && !searchedPlayer)
             {
-               
+
                 Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
                 searchedPlayer.playerInventory.itemUpdateCallback = ItemsUpdated;
                 this.lockMovement = true;
                 searchedPlayer.lockMovement = true;
 
-                
-                 searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId,OwnerClientId);
 
+                searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId, OwnerClientId);
+                BeginSearchPrisonerClientRpc();
 
                 //for me to put in here 
                 //pull up player inventory hud. send found player to hud same as stashed
@@ -169,13 +202,13 @@ public class GuardPawn : PlayerPawn
     {
         Debug.Log("inside of failed search function");
         failedSearch = true;
-        FailedSearchMovementLock = true;
+
     }
-    
+
     public void ItemsUpdated()
     {
         //this creates the itemhud and gives the items in container
-        if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())   
+        if (HUDPanelToAttach.GetComponent<SearchPlayerHud>())
         {
             Debug.Log("are we here in items update");
             HudReference = Instantiate(HUDPanelToAttach);
@@ -208,12 +241,18 @@ public class GuardPawn : PlayerPawn
         this.lockMovement = false;
         searchedPlayer.lockMovement = false;
         searchedPlayer = null;
+        EndSearchPrisonerServerRpc(searchedPlayer.OwnerClientId);
         EndInteract();
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void RequestItemsServerRpc(ulong playerID)
     {
+        ClientRpcParams CRP = new ClientRpcParams();
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = playerID;
+        CRP.Send.TargetClientIds = targetClientID;
+
         int[] test;
         PrisonerPawn temp = null;
         foreach (NetworkClient nc in NetworkManager.Singleton.ConnectedClientsList)
@@ -224,8 +263,9 @@ public class GuardPawn : PlayerPawn
             }
         }
 
+        BeginSearchPrisonerClientRpc(CRP);
         RequestItemsClientRpc(control.myClientParams);
-  
+
     }
 
     [ClientRpc]
@@ -235,18 +275,68 @@ public class GuardPawn : PlayerPawn
         List<int> itemIDs = new List<int>();
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            if(pc.myController)
+            if (pc.myController)
             {
                 temp = (PrisonerPawn)pc.myPawn;
             }
         }
-
-        foreach(ItemDefinition id in temp.playerInventory.ItemsInContainer)
+        foreach (ItemDefinition id in temp.playerInventory.ItemsInContainer)
         {
             itemIDs.Add(id.instanceId);
         }
         int[] items = itemIDs.ToArray();
 
-     
+    }
+
+
+    [ClientRpc]
+    public void BeginSearchPrisonerClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        PrisonerPawn temp = null;
+
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (pc.myController)
+            {
+                temp = (PrisonerPawn)pc.myPawn;
+            }
+        }
+
+  
+        temp.isBeingSearched = true;
+
+
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void EndSearchPrisonerServerRpc(ulong playerID)
+    {
+
+        ClientRpcParams CRP = new ClientRpcParams();
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = playerID;
+        CRP.Send.TargetClientIds = targetClientID;
+
+
+        EndSearchPrisonerClientRpc(CRP);
+    }
+
+
+    [ClientRpc]
+    public void EndSearchPrisonerClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        PrisonerPawn temp = null;
+
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (pc.myController)
+            {
+                temp = (PrisonerPawn)pc.myPawn;
+            }
+        }
+
+
+        temp.isBeingSearched = false;
+
+
     }
 }

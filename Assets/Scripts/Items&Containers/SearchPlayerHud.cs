@@ -26,6 +26,7 @@ public class SearchPlayerHud : NetworkBehaviour
     void Start()
     {
         UpdateList();
+
     
         // access both containers to get the items for both the player and container (should have sprites associated with them)
         //      Set PlayerInv and ContainerInv to there corresponding accessed containers
@@ -64,40 +65,15 @@ public class SearchPlayerHud : NetworkBehaviour
                 temp.FailedSearch();
                 CloseButtom();
                 
-
             }
-            
-           
+                    
         }
-
     }
 
-    public void TakeItem(int i)
-    {
-       
-            /*if (IsServer)
-            {
-                tempPawn.playerInventory.Additem(_container.ItemsInContainer[i]);
-                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
-            }
-            else
-            {
-                stash.TakeItemRPC(_container.ItemsInContainer[i].instanceId);
-                tempPawn.playerInventory.Additem(_container.TakeItem(i));
-            }*/
-        
-
-        //WE SHOULD BE UPDATING THE LIST IN THE GUARDPAWN RPC
-    }
-
+  
     public void UpdateList()
     {
-        int i = 0;
-      //  PrisonerPawn tempPawn = (PrisonerPawn)_player.myPawn;
-       // PlayerInv = tempPawn.playerInventory.ItemsInContainer;
-
-        //Containerbuttons.Clear();
-        //Playerbuttons.Clear();
+        int i = 0;   
 
         for (int buttons = 0; buttons < 6; buttons++)
         {
