@@ -169,6 +169,7 @@ MonoBehaviour:
   control: {fileID: 0}
   CameraControl: {fileID: 2835706084880430289}
   playerUI: {fileID: 4634777853989274786}
+  playerModel: {fileID: 6827836245242368847}
   playerType: 0
   flashLight: {fileID: 5179358208897918328}
   maxInventory: 5
@@ -1314,6 +1315,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a10a87b85abcf2459dcde1600320b8c, type: 3}
+--- !u!1 &6827836245242368847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a10a87b85abcf2459dcde1600320b8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5908776803441864222}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6163888913506437621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a10a87b85abcf2459dcde1600320b8c,
