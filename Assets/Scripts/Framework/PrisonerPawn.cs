@@ -12,6 +12,7 @@ public class PrisonerPawn : PlayerPawn
     {
         playerType = PlayerType.Prisoner;
     }
+
     public override void Jump(bool s)
     {
         if(isBeingSearched)
