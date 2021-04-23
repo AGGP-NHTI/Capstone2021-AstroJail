@@ -6,6 +6,8 @@ using MLAPI.Messaging;
 public class Lightswitch : NetworkBehaviour
 {
     public bool turnLightsOff;
+    public float lightIntensity;
+    public float lightRange;
 
     void Start()
     {
@@ -43,8 +45,8 @@ public class Lightswitch : NetworkBehaviour
         {
             foreach (Light l in lights)
             {
-                l.range = 25;
-                l.intensity = 2.5f;
+                l.range = lightRange;
+                l.intensity = lightIntensity;
             }
         }
         TurnLightsOffClientRpc(lightsOff);

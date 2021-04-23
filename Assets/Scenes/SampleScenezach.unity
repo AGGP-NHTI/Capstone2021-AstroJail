@@ -704,6 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnLightsOff: 0
+  lightIntensity: 2.5
+  lightRange: 25
 --- !u!65 &708228658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1613,6 +1615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnLightsOff: 1
+  lightIntensity: 0
+  lightRange: 0
 --- !u!65 &1790890060
 BoxCollider:
   m_ObjectHideFlags: 0

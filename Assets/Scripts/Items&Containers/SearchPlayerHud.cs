@@ -55,8 +55,13 @@ public class SearchPlayerHud : NetworkBehaviour
             Debug.Log("do we get to the if");
             if(_container.ItemsInContainer[i].isContraband)
             {
-                Debug.Log("is contraband?");
-                //run rpc to send items back 
+                
+                Debug.Log("found contraband");
+                _container.GetComponent<PrisonerPawn>().ReturnItems();
+                //tell priosner they got hadded
+                //tp prisoner to cell
+                //return all items in inventory to starting crates
+                CloseButtom();
             }
             else
             {
@@ -87,7 +92,7 @@ public class SearchPlayerHud : NetworkBehaviour
             int x = new int();
             x = i;
             Playerbuttons[i].onClick.AddListener(() => searchForContraband(x));
-            Playerbuttons[i].image.sprite = items.imageArt;
+            Playerbuttons[i].image.sprite = null;
             i++;
         }
         i = 0;
