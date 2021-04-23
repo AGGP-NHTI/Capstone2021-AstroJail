@@ -286,7 +286,7 @@ MonoBehaviour:
   beingUsed: 0
   IsPanelActive: 0
   labelObject: {fileID: 2864131105685212494}
-  ItemToGive: {fileID: 0}
+  ItemToGive: {fileID: 11400000, guid: bf73fc2d203a04447b6cfc24f58d90bb, type: 2}
   HudReference: {fileID: 0}
   PawnReff: {fileID: 0}
 --- !u!114 &3434899825987921857

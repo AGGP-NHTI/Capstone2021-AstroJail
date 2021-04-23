@@ -4,12 +4,12 @@ using MLAPI;
 using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
-public class GuardItemStash : MapInteractable
+public class FixSabotage : MapInteractable
 {
     public bool IsPanelActive = false;
     public GameObject labelObject;
-    public ItemDefinition ItemToGive;
-    public GameObject HudReference;
+    public ItemDefinition ItemToDestroy;
+    public bool hasBeenFixed = false;
     public GuardPawn PawnReff = null;
 
     public void Start()
@@ -27,7 +27,7 @@ public class GuardItemStash : MapInteractable
     public override void OnTriggerEnter(Collider other)
     {
         PawnReff = other.gameObject.GetComponentInParent<GuardPawn>();
-        
+
         if (PawnReff)
         {
             if (PawnReff.playerType == PlayerType.Prisoner)
@@ -45,22 +45,17 @@ public class GuardItemStash : MapInteractable
         }
     }
 
-   
-
     public override bool OnUse(PlayerController user)
     {
-        if(PawnReff.playerInventory.itemCount > 0)
+        if (PawnReff.playerInventory.ItemsInContainer[0] == ItemToDestroy)
         {
             PawnReff.playerInventory.ItemsInContainer.Clear();
-            PawnReff.playerInventory.Additem(ItemToGive);
-        }
-        else
-        {
-            PawnReff.playerInventory.Additem(ItemToGive);
-        }
+            hasBeenFixed = true;
+        } 
         IsPanelActive = true;
         PawnReff.ObjectUsing = null;
         return true;
     }
 
 }
+
