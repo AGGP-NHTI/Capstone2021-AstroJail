@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerPawn : Pawn
 {
 
+    public GameObject flashLight;
     public int maxInventory;
     protected Containers _PlayerInventory;
     public GameObject projSpawn;
@@ -185,6 +186,21 @@ public class PlayerPawn : Pawn
                 {
                     ObjectUsing = Interactables[0];
                 }    
+            }
+        }
+    }
+
+    public override void FlashLight(bool f)
+    {
+        if(f)
+        {
+            if(flashLight.activeSelf)
+            {
+                flashLight.SetActive(false);
+            }
+            else
+            {
+                flashLight.SetActive(true);
             }
         }
     }

@@ -500,6 +500,7 @@ MonoBehaviour:
   CameraControl: {fileID: 6891151193868102176}
   playerUI: {fileID: 2831883018754118501}
   playerType: 1
+  flashLight: {fileID: 0}
   maxInventory: 3
   projSpawn: {fileID: 0}
   projPrefab: {fileID: 0}

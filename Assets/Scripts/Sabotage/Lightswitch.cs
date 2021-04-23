@@ -37,16 +37,16 @@ public class Lightswitch : NetworkBehaviour
         {
             foreach(Light l in lights)
             {
+                l.intensity = 0f;
                 l.range = 0;
-                l.intensity = 0;
             }
         }
         else
         {
             foreach (Light l in lights)
             {
-                l.range = lightRange;
-                l.intensity = lightIntensity;
+                l.intensity = 2.5f;
+                l.range = 25;
             }
         }
         TurnLightsOffClientRpc(lightsOff);
