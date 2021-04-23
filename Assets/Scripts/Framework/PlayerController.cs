@@ -29,6 +29,7 @@ public class PlayerController : Controller
     bool buttonInteract = false;
     bool buttonClose = false;
     bool buttonSearch = false;
+    bool buttonLight = false;
 
     bool dpad_up = false;
     bool dpad_right = false;
@@ -77,6 +78,7 @@ public class PlayerController : Controller
         myPawn.Interact(buttonInteract);
         myPawn.Close(buttonClose);
         myPawn.Search(buttonSearch);
+        myPawn.FlashLight(buttonLight);
     }
 
     private void GetInput()
@@ -131,6 +133,7 @@ public class PlayerController : Controller
         buttonInteract = Input.GetKeyDown(KeyCode.E);
         buttonClose = Input.GetKeyDown(KeyCode.Escape);
         buttonSearch = Input.GetKeyDown(KeyCode.Q);
+        buttonLight = Input.GetKeyDown(KeyCode.F);
 
         KeyToAxis();
     }
@@ -205,6 +208,7 @@ public class PlayerController : Controller
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
         myPawn.playerUI.SetActive(true);
+        myPawn.NamePlate.gameObject.SetActive(false);
         myController = true;
         
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())

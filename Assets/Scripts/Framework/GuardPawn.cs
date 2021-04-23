@@ -22,9 +22,6 @@ public class GuardPawn : PlayerPawn
     public float failTime = 5;
     public bool failedSearch = false;
 
-
-
-
     //Properties
 
     /*
