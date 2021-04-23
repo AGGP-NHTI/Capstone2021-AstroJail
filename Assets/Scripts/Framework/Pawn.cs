@@ -10,6 +10,7 @@ public class Pawn : Actor
     public TextMeshPro NamePlate;
     public Controller control;
     public GameObject CameraControl;
+    public GameObject playerUI;
     public PlayerType playerType = PlayerType.Prisoner;
     public void Possessed(Controller c)
     {

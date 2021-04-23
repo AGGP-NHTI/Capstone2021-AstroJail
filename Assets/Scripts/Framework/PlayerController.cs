@@ -77,7 +77,6 @@ public class PlayerController : Controller
         myPawn.Interact(buttonInteract);
         myPawn.Close(buttonClose);
         myPawn.Search(buttonSearch);
-
     }
 
     private void GetInput()
@@ -205,6 +204,7 @@ public class PlayerController : Controller
         myPawn = GetNetworkObject(id).GetComponent<Pawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
+        myPawn.playerUI.SetActive(true);
         myController = true;
         
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())

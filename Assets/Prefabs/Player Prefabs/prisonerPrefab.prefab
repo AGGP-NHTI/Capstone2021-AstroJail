@@ -168,6 +168,7 @@ MonoBehaviour:
   NamePlate: {fileID: 5232012935759556653}
   control: {fileID: 0}
   CameraControl: {fileID: 2835706084880430289}
+  playerUI: {fileID: 4634777853989274786}
   playerType: 0
   maxInventory: 5
   projSpawn: {fileID: 0}
@@ -752,7 +753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4585009120935058910
 RectTransform:
   m_ObjectHideFlags: 0

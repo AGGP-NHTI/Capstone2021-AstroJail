@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MLAPI;
+using MLAPI.Connection;
+using MLAPI.Messaging;
 
 public class PrisonerPawn : PlayerPawn
 {
@@ -9,6 +12,7 @@ public class PrisonerPawn : PlayerPawn
     {
         playerType = PlayerType.Prisoner;
     }
+
     public override void Jump(bool s)
     {
         if(isBeingSearched)
@@ -26,6 +30,10 @@ public class PrisonerPawn : PlayerPawn
         }
         base.Move(horizontal, vertical);
     }
+    public void ReturnItems()
+    {
+        ReturnItemsServerRpc(this.OwnerClientId);
+    }
 
     public override void SetCamPitch(float value)
     {
@@ -42,6 +50,36 @@ public class PrisonerPawn : PlayerPawn
             return;
         }
         base.Interact(e);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ReturnItemsServerRpc(ulong clientId)
+    {  
+        ClientRpcParams CRP = new ClientRpcParams();
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = clientId;
+        CRP.Send.TargetClientIds = targetClientID;
+        ReturnItemsPerform();
+       
+        ReturnItemsClientRpc(CRP);
+    }
+    [ClientRpc]
+    public void ReturnItemsClientRpc(ClientRpcParams CRP = default)
+    {
+        transform.position = new Vector3(0, 15, 0);
+        playerInventory.ItemsInContainer.Clear();
+    }
+
+    public void ReturnItemsPerform()
+    {
+
+        foreach (ItemDefinition item in playerInventory.ItemsInContainer)
+        {
+            item.startingLocation.Additem(item);
+
+        }
+        playerInventory.ItemsInContainer.Clear();
+
     }
 
 }
