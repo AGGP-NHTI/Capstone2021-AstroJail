@@ -7,24 +7,56 @@ public class InventoryHud : MonoBehaviour
 {
     private List<ItemDefinition> itemsInInventory;
     public List<Image> inventorySlots;
-    private PrisonerPawn me;
+    private Pawn me;
     void Start()
     {
-        me = gameObject.GetComponentInParent<PrisonerPawn>();
+        me = gameObject.GetComponentInParent<Pawn>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        populateInventorySlots();
+        if(me.playerType == PlayerType.Prisoner)
+        {
+            populateInventorySlotsPrisoner();
+        }
+        else
+        {
+            populateInventorySlotsGuard();
+        }
+
     }
 
-    private void populateInventorySlots()
+    private void populateInventorySlotsPrisoner()
     {
-        itemsInInventory = me.playerInventory.ItemsInContainer;
+        PrisonerPawn temp = (PrisonerPawn)me;
+        itemsInInventory = temp.playerInventory.ItemsInContainer;
 
         int index = 0;
         for(int totalIndex = 0; totalIndex < inventorySlots.Count; totalIndex++)
+        {
+            if (index < itemsInInventory.Count)
+            {
+                inventorySlots[totalIndex].sprite = itemsInInventory[index].imageArt;
+                inventorySlots[totalIndex].color = Color.white;
+            }
+            else
+            {
+                inventorySlots[totalIndex].sprite = null;
+                inventorySlots[totalIndex].color = Color.clear;
+            }
+
+            index++;
+        }
+    }
+
+    private void populateInventorySlotsGuard()
+    {
+        GuardPawn temp = (GuardPawn)me;
+        itemsInInventory = temp.playerInventory.ItemsInContainer;
+
+        int index = 0;
+        for (int totalIndex = 0; totalIndex < inventorySlots.Count; totalIndex++)
         {
             if (index < itemsInInventory.Count)
             {
