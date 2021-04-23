@@ -78,6 +78,11 @@ public class Pawn : Actor
 
     }
 
+    public virtual void FlashLight(bool f)
+    {
+
+    }
+
     public virtual void Fire1()
     {
 
