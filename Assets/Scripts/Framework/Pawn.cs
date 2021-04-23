@@ -11,6 +11,7 @@ public class Pawn : Actor
     public Controller control;
     public GameObject CameraControl;
     public GameObject playerUI;
+    public GameObject playerModel;
     public PlayerType playerType = PlayerType.Prisoner;
     public void Possessed(Controller c)
     {
