@@ -209,6 +209,7 @@ public class PlayerController : Controller
         myPawn.CameraControl.SetActive(true);
         myPawn.playerUI.SetActive(true);
         myPawn.NamePlate.gameObject.SetActive(false);
+        if (myPawn.playerType == PlayerType.Guard) { myPawn.playerModel.SetActive(false); }
         myController = true;
         
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
@@ -221,5 +222,7 @@ public class PlayerController : Controller
                 }
             }
         }
+
+        Cursor.visible = false;
     }
 }
