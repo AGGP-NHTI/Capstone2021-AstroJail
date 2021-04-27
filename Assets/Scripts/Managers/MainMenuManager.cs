@@ -141,6 +141,20 @@ public class MainMenuManager : NetworkBehaviour
             }
         }
     }
+    public void ReturnToMain()
+    {
+        MainMenu();
+        if (IsServer)
+        {
+            NetworkManager.Singleton.StopHost();
+        }
+        else
+        {
+            NetworkManager.Singleton.StopClient();
+        }
+
+       
+    }
 
     public void swapGuard()
     {
