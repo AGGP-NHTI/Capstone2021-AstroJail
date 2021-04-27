@@ -147,9 +147,11 @@ public class MainMenuManager : NetworkBehaviour
         if (IsServer)
         {
             NetworkManager.Singleton.StopHost();
+          
         }
         else
         {
+            NetworkManager.Singleton.Shutdown();
             NetworkManager.Singleton.StopClient();
         }
 
