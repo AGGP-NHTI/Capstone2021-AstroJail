@@ -241,6 +241,7 @@ public class PlayerPawn : Pawn
                 if (Interactables[0].Use((PlayerController)control))
                 {
                     ObjectUsing = Interactables[0];
+                    Cursor.visible = true;
                 }    
             }
         }
@@ -271,23 +272,26 @@ public class PlayerPawn : Pawn
          }     
         if(escape && inPlayerMenu)
         {
+            Cursor.visible = false;
             lockMovement = false;
             PlayerInventoryHUD.SetActive(true);
             playerMenuPanel.SetActive(false);
             optionsPanel.SetActive(false);
             inPlayerMenu = false;
+            return;
         }
         else if(escape && !inPlayerMenu)
         {
-            OpenPlayerMenu();         
+            Cursor.visible = true;
+            OpenPlayerMenu();
+            return;
         }
        
-
-
     }
     
     public override void EndInteract()
     {
+        Cursor.visible = false;
         if(ObjectUsing)
         {
             ObjectUsing.Done();      
