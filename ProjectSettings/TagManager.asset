@@ -5,6 +5,22 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Cafeteria Lights
+  - Hallway Lights
+  - Shower Lights
+  - Storage Lights
+  - Brig Lights
+  - Library Lights
+  - Morgue Lights
+  - Hangar Lights
+  - Material Processing Lights
+  - Mining Lights
+  - Armory Lights
+  - Reactor Lights
+  - Wardens Office Lights
+  - Escape Pod lights
+  - Break Room Lights
+  - Hallway 2nd floor Lights
   layers:
   - Default
   - TransparentFX
