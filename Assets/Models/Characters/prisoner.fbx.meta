@@ -42,6 +42,12 @@ ModelImporter:
   - first:
       74: -8964740467746829816
     second: prisoner_idle
+  - first:
+      74: 919048561606320603
+    second: prisoner_jog_forward
+  - first:
+      74: -1690008682034781716
+    second: humanoid_rig|prisoner_jog_forward
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -69,239 +75,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: prisoner_jump
-      takeName: prisoner_jump
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 39
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: prisoner_spread_em_mode
-      takeName: prisoner_spread_em_mode
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: prisoner_jog
-      takeName: prisoner_jog
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 119
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: prisoner_idle
-      takeName: prisoner_idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 359
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: humanoid_rig|prisoner_idle
-      takeName: humanoid_rig|prisoner_idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 359
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: humanoid_rig|prisoner_jog
-      takeName: humanoid_rig|prisoner_jog
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 119
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: humanoid_rig|prisoner_jump
-      takeName: humanoid_rig|prisoner_jump
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 79
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: humanoid_rig|prisoner_spread_em_mode
-      takeName: humanoid_rig|prisoner_spread_em_mode
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -344,7 +118,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -357,143 +131,143 @@ ModelImporter:
     - name: humanoid_rig
       parentName: prisoner(Clone)
       position: {x: 2.6645353e-15, y: 1.2967257, z: -0.072731614}
-      rotation: {x: 0.000000021855694, y: -1.1102232e-16, z: 1.1102232e-16, w: 1}
+      rotation: {x: 0.7071068, y: 0.000000061461215, z: -0.000000061461215, w: 0.7071068}
       scale: {x: 100, y: 100, z: 100}
     - name: C_root
       parentName: humanoid_rig
-      position: {x: -1.6479845e-10, y: -0.0018850743, z: -0.00017340838}
-      rotation: {x: 0.045849703, y: 0.00000023816786, z: -0.000000032642017, w: 0.99894834}
+      position: {x: -1.6479845e-10, y: -0.0026911364, z: -0.00017340835}
+      rotation: {x: -0.67394257, y: 0.00000014532868, z: -0.00000019149148, w: 0.7387837}
       scale: {x: 1, y: 1, z: 1}
     - name: D_thigh.L
       parentName: C_root
-      position: {x: -0.0024888897, y: 0.0005075803, z: -0.000046695168}
-      rotation: {x: 0.9979399, y: -0.044422124, z: 0.009094353, w: 0.04538669}
-      scale: {x: 0.9999899, y: 0.9999998, z: 0.99999034}
+      position: {x: -0.0024888897, y: 0.00050758064, z: -0.000046695193}
+      rotation: {x: 0.9972671, y: -0.04501139, z: -0.03867039, w: 0.044009887}
+      scale: {x: 0.9999895, y: 1, z: 0.9999908}
     - name: D_ankle.L
       parentName: D_thigh.L
-      position: {x: 5.8207657e-12, y: 0.0064041237, z: -3.1141097e-11}
-      rotation: {x: 0.043607697, y: -0.0009041605, z: -0.020206625, w: 0.99884397}
-      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000002}
+      position: {x: 5.820766e-11, y: 0.0064041233, z: -1.0710209e-10}
+      rotation: {x: 0.04360805, y: -0.00090414454, z: -0.020206967, w: 0.99884397}
+      scale: {x: 1.0000004, y: 1, z: 1.000002}
     - name: D_foot.L
       parentName: D_ankle.L
-      position: {x: 1.5716067e-11, y: 0.0044972287, z: -4.6566126e-11}
-      rotation: {x: -0.7230896, y: 0.01219966, z: 0.031796355, w: 0.6899142}
-      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+      position: {x: -2.3166649e-10, y: 0.0044972287, z: -2.8871e-10}
+      rotation: {x: -0.7230896, y: 0.012199637, z: 0.03179638, w: 0.6899142}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000004}
     - name: C_D_spine
       parentName: C_root
-      position: {x: -1.7763568e-17, y: 0.003786067, z: 7.7923775e-17}
-      rotation: {x: -0.07834004, y: -0.00000023910408, z: 0.00000002487262, w: 0.9969267}
+      position: {x: -3.1086245e-17, y: 0.003786067, z: 7.7923775e-17}
+      rotation: {x: -0.07834005, y: -0.00000023910405, z: 0.000000024872614, w: 0.9969267}
       scale: {x: 1, y: 1, z: 1}
     - name: C_D_chest
       parentName: C_D_spine
-      position: {x: -7.448325e-18, y: 0.004568956, z: -3.7252902e-11}
-      rotation: {x: 0.022137659, y: -4.262212e-14, z: 9.437853e-16, w: 0.99975497}
-      scale: {x: 1, y: 1.0000001, z: 1}
+      position: {x: -2.0740164e-17, y: 0.0045689554, z: -1.8626451e-11}
+      rotation: {x: 0.022137754, y: -8.526513e-14, z: -1.4210855e-14, w: 0.99975497}
+      scale: {x: 1, y: 1, z: 0.9999999}
     - name: C_D_neck
       parentName: C_D_chest
-      position: {x: -1.7763563e-17, y: 0.0047573727, z: 1.04773785e-11}
-      rotation: {x: 0.010414963, y: 1.0946998e-22, z: -2.1174675e-22, w: 0.99994576}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: -1.7763563e-17, y: 0.004757373, z: 8.731149e-12}
+      rotation: {x: 0.010414863, y: 2.9088955e-14, z: 2.3341958e-14, w: 0.9999458}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
     - name: C_D_head
       parentName: C_D_neck
       position: {x: -0, y: 0.0016349935, z: 0}
-      rotation: {x: -0.000000019797184, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 0.9999999, z: 1}
+      rotation: {x: -0, y: -0, z: 7.940933e-22, w: 1}
+      scale: {x: 1, y: 0.99999964, z: 0.9999998}
     - name: C_D_shoulder.L
       parentName: C_D_chest
-      position: {x: -0.0028740396, y: 0.0033215405, z: 0.000020311709}
-      rotation: {x: 0.0022526945, y: -0.0026587732, z: 0.73673403, w: 0.6761736}
-      scale: {x: 1.0000004, y: 1.0000004, z: 0.9999997}
+      position: {x: -1.7763563e-17, y: 0.004757373, z: 8.731149e-12}
+      rotation: {x: 0.024732672, y: -0.01384362, z: 0.81224597, w: 0.5826262}
+      scale: {x: 1.0000006, y: 1.0000008, z: 0.99999994}
     - name: D_arm.L
       parentName: C_D_shoulder.L
-      position: {x: -2.9584044e-10, y: 0.0025344088, z: 1.193257e-11}
-      rotation: {x: -0.014487528, y: 0.0018297238, z: -0.033431478, w: 0.9993344}
-      scale: {x: 1.0000001, y: 0.9999999, z: 1.0000002}
+      position: {x: -0.0000000012200325, y: 0.0036200297, z: 7.4505804e-11}
+      rotation: {x: -0.01877527, y: 0.0056074853, z: -0.11995931, w: 0.9925854}
+      scale: {x: 0.99999964, y: 0.99999964, z: 1}
     - name: D_forearm.L
       parentName: D_arm.L
-      position: {x: 0.0000000017561251, y: 0.0037149393, z: 3.7252902e-11}
-      rotation: {x: 0.016255042, y: 0.0005228731, z: -0.010073841, w: 0.999817}
-      scale: {x: 0.9999999, y: 1, z: 0.9999999}
+      position: {x: 8.6613e-10, y: 0.0057468456, z: 7.4505804e-11}
+      rotation: {x: 0.008938963, y: 0.0030105058, z: -0.032455064, w: 0.99942875}
+      scale: {x: 0.99999964, y: 1.0000004, z: 1}
     - name: D_hand.L
       parentName: D_forearm.L
-      position: {x: -7.3050614e-11, y: 0.0035785898, z: 9.3132255e-12}
-      rotation: {x: -0.0039114584, y: -0.01848277, z: -0.0035316693, w: 0.9998153}
-      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+      position: {x: 1.3038516e-10, y: 0.0035370307, z: -1.8626451e-11}
+      rotation: {x: -0.0037221531, y: 0.00034697485, z: -0.01431581, w: 0.99989057}
+      scale: {x: 1.000001, y: 1.0000012, z: 1.0000002}
     - name: C_D_shoulder.R
       parentName: C_D_chest
-      position: {x: 0.002874039, y: 0.0033215405, z: 0.000020311707}
-      rotation: {x: 0.002252676, y: 0.0026587564, z: -0.7367345, w: 0.67617315}
-      scale: {x: 1.0000004, y: 1.0000002, z: 0.9999997}
+      position: {x: -3.2959685e-10, y: 0.004757373, z: 8.731149e-12}
+      rotation: {x: -0.02473267, y: -0.0138435345, z: 0.81224597, w: -0.58262616}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1}
     - name: D_arm.R
       parentName: C_D_shoulder.R
-      position: {x: 4.006142e-10, y: 0.0025344098, z: 2.4592736e-11}
-      rotation: {x: -0.014487747, y: -0.001829735, z: 0.033432197, w: 0.99933434}
-      scale: {x: 0.9999999, y: 0.99999976, z: 1.0000002}
+      position: {x: 0.0000000012188683, y: 0.0036200297, z: 5.5879353e-11}
+      rotation: {x: -0.018481169, y: -0.005538133, z: 0.12168351, w: 0.9923815}
+      scale: {x: 0.9999998, y: 0.99999976, z: 0.9999998}
     - name: D_forearm.R
       parentName: D_arm.R
-      position: {x: -0.0000000021455344, y: 0.0037149389, z: 0}
-      rotation: {x: 0.016255464, y: -0.00052287924, z: 0.010074521, w: 0.999817}
-      scale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
+      position: {x: -2.2817402e-10, y: 0.0057468456, z: 9.3132255e-12}
+      rotation: {x: -0.008939071, y: 0.0030105077, z: -0.032455225, w: -0.99942875}
+      scale: {x: 0.9999996, y: 1.0000002, z: 1.0000002}
     - name: D_hand.R
       parentName: D_forearm.R
-      position: {x: 1.21654e-10, y: 0.003578591, z: -9.3132255e-12}
-      rotation: {x: -0.003911661, y: 0.018482786, z: 0.0035309754, w: 0.9998153}
-      scale: {x: 1.0000002, y: 0.99999994, z: 1}
+      position: {x: -3.1664968e-10, y: 0.0035370307, z: 7.4505804e-11}
+      rotation: {x: -0.0037222393, y: -0.00034696414, z: 0.014315688, w: 0.99989057}
+      scale: {x: 1.0000007, y: 0.99999964, z: 1}
     - name: D_thigh.R
       parentName: C_root
       position: {x: 0.0024888902, y: 0.00050758105, z: -0.000046692858}
-      rotation: {x: 0.9979373, y: 0.04448261, z: -0.009092373, w: 0.04538513}
-      scale: {x: 0.9999933, y: 0.9999998, z: 0.9999933}
+      rotation: {x: 0.9972672, y: 0.04501148, z: 0.038669713, w: 0.044009965}
+      scale: {x: 0.9999931, y: 0.99999946, z: 0.9999935}
     - name: D_ankle.R
       parentName: D_thigh.R
-      position: {x: -2.866727e-10, y: 0.006404124, z: -6.577466e-11}
-      rotation: {x: 0.043609977, y: 0.00090418686, z: 0.020207636, w: 0.99884385}
-      scale: {x: 1, y: 1.0000005, z: 1.0000004}
+      position: {x: -4.2142345e-10, y: 0.0064041237, z: -1.5192199e-10}
+      rotation: {x: 0.043608133, y: 0.00090421655, z: 0.020206869, w: 0.9988439}
+      scale: {x: 1.0000004, y: 1, z: 1.0000021}
     - name: D_foot.R
       parentName: D_ankle.R
-      position: {x: 3.1315722e-10, y: 0.0044972296, z: -3.7252902e-11}
-      rotation: {x: -0.7230897, y: -0.012199684, z: -0.03179632, w: 0.6899141}
-      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+      position: {x: 1.6472768e-10, y: 0.0044972305, z: 2.9802322e-10}
+      rotation: {x: -0.7230897, y: -0.012199688, z: -0.03179634, w: 0.6899141}
+      scale: {x: 1, y: 1.0000005, z: 1.0000005}
     - name: H_leg_IK.L
       parentName: humanoid_rig
-      position: {x: -0.003280556, y: -0.012228105, z: -0.00057880103}
-      rotation: {x: -0.5281832, y: -0.00000010122424, z: 0.00000006296435, w: 0.84913045}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: -0.003280556, y: -0.012863514, z: 0.00041970014}
+      rotation: {x: 0.9739079, y: 0.00000002705383, z: -0.000000116098896, w: -0.22694382}
+      scale: {x: 1, y: 1.0000004, z: 1.0000004}
     - name: C_leg_pole.L
       parentName: humanoid_rig
       position: {x: -0.003042037, y: -0.0077316468, z: 0.0059432834}
-      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0.0000001192093, y: 2.2204468e-16, z: 2.404331e-23, w: 1}
+      scale: {x: 1, y: 0.99999976, z: 0.99999976}
     - name: C_arm_pole.L
       parentName: humanoid_rig
-      position: {x: -0.009111848, y: 0.0094791185, z: -0.007917025}
-      rotation: {x: 0.49001786, y: 0.5097867, z: -0.5097867, w: -0.49001783}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: -0.01020625, y: 0.005631586, z: -0.0077089053}
+      rotation: {x: -0.69298995, y: 0.000000085943626, z: 0.7209472, w: -0.00000008261085}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1}
     - name: C_hand.L
       parentName: humanoid_rig
-      position: {x: -0.012690405, y: 0.009482553, z: -0.0002675062}
-      rotation: {x: 0.005225967, y: -0.008642061, z: 0.7040633, w: 0.7100654}
-      scale: {x: 0.9999999, y: 1, z: 0.99999994}
+      position: {x: -0.008681272, y: 0.0021450834, z: 0.0007158652}
+      rotation: {x: -0.49839687, y: 0.4917371, z: 0.5039587, w: 0.50578743}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
     - name: H_leg_IK.R
       parentName: humanoid_rig
-      position: {x: 0.003280556, y: -0.012228105, z: -0.00057880103}
-      rotation: {x: -0.5281832, y: 0.00000010122424, z: -0.00000006296435, w: 0.84913045}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: 0.003280556, y: -0.012772743, z: 0.00005660884}
+      rotation: {x: 0.9739079, y: -0.00000002705383, z: 0.000000116098896, w: -0.22694382}
+      scale: {x: 1, y: 1.0000004, z: 1.0000004}
     - name: C_leg_pole.R
       parentName: humanoid_rig
       position: {x: 0.003042037, y: -0.0077316468, z: 0.0059432834}
-      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0.0000001192093, y: 2.2204468e-16, z: 2.404331e-23, w: 1}
+      scale: {x: 1, y: 0.99999976, z: 0.99999976}
     - name: C_arm_pole.R
       parentName: humanoid_rig
-      position: {x: 0.009111848, y: 0.0094791185, z: -0.007917025}
-      rotation: {x: -0.49001786, y: 0.5097867, z: -0.5097867, w: 0.49001783}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: 0.00836473, y: 0.0060015414, z: -0.0081162825}
+      rotation: {x: 0.69298995, y: 0.000000085943626, z: 0.7209472, w: 0.00000008261085}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1}
     - name: C_hand.R
       parentName: humanoid_rig
-      position: {x: 0.012690405, y: 0.009482553, z: -0.0002675062}
-      rotation: {x: 0.005225967, y: 0.008642061, z: -0.7040633, w: 0.7100654}
-      scale: {x: 0.9999999, y: 1, z: 0.99999994}
+      position: {x: 0.008240015, y: 0.002176602, z: 0.0006654356}
+      rotation: {x: -0.4983968, y: -0.49173713, z: -0.5039587, w: 0.50578743}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
     - name: humanoid_base_mesh_main
       parentName: prisoner(Clone)
       position: {x: 0.000000114000294, y: 1.8566597, z: -0.08141325}
