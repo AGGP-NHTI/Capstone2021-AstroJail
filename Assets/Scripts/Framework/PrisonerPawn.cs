@@ -7,10 +7,31 @@ using MLAPI.Messaging;
 
 public class PrisonerPawn : PlayerPawn
 {
+    private Animator anim;
+
     public bool isBeingSearched = false;
     public override void Initialize()
     {
         playerType = PlayerType.Prisoner;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if(control.IsLocalPlayer)
+        {
+            SetAnimatorParams();
+        }
+
+
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        anim = gameObject.GetComponentInChildren<Animator>();
+
     }
 
     public override void Jump(bool s)
@@ -20,6 +41,14 @@ public class PrisonerPawn : PlayerPawn
             return;
         }
         base.Jump(s);
+        if(s)
+        {
+            anim.SetBool("jump", true);
+        }
+        else
+        {
+            anim.SetBool("jump", false);
+        }
     }
 
     public override void Move(float horizontal, float vertical)
@@ -50,6 +79,13 @@ public class PrisonerPawn : PlayerPawn
             return;
         }
         base.Interact(e);
+    }
+
+    private void SetAnimatorParams()
+    {
+        Vector3 localVelocity = transform.InverseTransformVector(rb.velocity);
+        anim.SetFloat("moveSpeedZ", localVelocity.z);
+        anim.SetFloat("moveSpeedX", localVelocity.x);
     }
 
     [ServerRpc(RequireOwnership = false)]

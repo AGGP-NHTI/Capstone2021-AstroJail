@@ -21,6 +21,8 @@ public class PlayerPawn : Pawn
     protected Rigidbody rb;
     public bool IsGrounded = true;
     public float JumpSpeed;
+    [Range(0.1f, 1f)]
+    public float slerpRatio;
 
 
     public List<MapInteractable> Interactables;
@@ -54,6 +56,7 @@ public class PlayerPawn : Pawn
     public override void Update()
     {
         base.Update();
+        rotatePlayerModel();
     }
 
     public virtual void Initialize()
@@ -121,6 +124,49 @@ public class PlayerPawn : Pawn
         gameObject.transform.Rotate(Vector3.up * value * mouseSensitivity * rotationRate * Time.deltaTime);
     }
 
+
+    /// <summary>
+    /// This function is quite possibly one of the most horrendous things I've written to date.
+    /// I'm not proud of it, but I'm working with what I've got for animations
+    /// </summary>
+    public virtual void rotatePlayerModel()
+    {
+        Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
+
+        if (localVel.z > 1 && localVel.x > 1) //front right
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, 45, 0), slerpRatio);
+        }
+        else if(localVel.z > 1 && localVel.x < -1) //front left
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, -45, 0), slerpRatio);
+        }
+        else if(localVel.z < -1 && localVel.x > 1) //back right
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, 135, 0), slerpRatio);
+        }
+        else if (localVel.z < -1 && localVel.x < -1) //back left
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, -135, 0), slerpRatio);
+        }
+        else if (localVel.x > 1) //Right
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, 90, 0), slerpRatio);
+        }
+        else if (localVel.x < -1) //Left
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, -90, 0), slerpRatio);
+        }
+        else if (localVel.z < -1) //Backwards
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, 180, 0), slerpRatio);
+        }
+        else //Forwards
+        {
+            playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, Quaternion.Euler(0, 0, 0), slerpRatio);
+        }
+    }
+
     public override void Move(float horizontal, float vertical)
     {
         
@@ -141,6 +187,7 @@ public class PlayerPawn : Pawn
         direction = direction.normalized;
 
         rb.velocity = new Vector3(0,rb.velocity.y,0) + (direction * moveRate);
+
     }
 
     public override void Jump(bool s)

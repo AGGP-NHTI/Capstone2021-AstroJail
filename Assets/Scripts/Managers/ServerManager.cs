@@ -71,6 +71,7 @@ public class ServerManager : NetworkBehaviour
 
     public void OnSceneSwitched()
     {
+        if (!IsServer) return;
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             pc.SpawnPlayerGameStart();

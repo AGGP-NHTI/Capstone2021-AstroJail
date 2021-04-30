@@ -194,16 +194,18 @@ public class PlayerController : Controller
         //Find a spawn point and set position to it
         //Set PSpawn to player prefab based on enum
         Vector3 position = SpawnPoints.Instance.randomSpawn(selectedPlayerType);
-        //Vector3 position = new Vector3(0, 15, 0);
         GameObject Gobj = Instantiate(PSpawn, position, Quaternion.identity);
+        Debug.Log("Spawning in: " + Gobj.name);
         Gobj.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
         SetGameStartClientRpc(Gobj.GetComponent<NetworkObject>().NetworkObjectId, myClientParams);
+
     }
 
     [ClientRpc]
     public void SetGameStartClientRpc(ulong id, ClientRpcParams CRP = default)
     {
+        Debug.Log("Taking control of my pawn");
         myPawn = GetNetworkObject(id).GetComponent<Pawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
