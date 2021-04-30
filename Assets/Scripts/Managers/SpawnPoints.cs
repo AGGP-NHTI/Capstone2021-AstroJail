@@ -19,7 +19,6 @@ public class SpawnPoints : NetworkBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
     }
     
