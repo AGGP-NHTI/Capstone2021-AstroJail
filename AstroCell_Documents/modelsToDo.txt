@@ -2,10 +2,10 @@ M<AKE DOOOORRRS
 total items list
 --------------
 1 cafeteria chairs 
-2 cafateria table 
-3 trash can 
-4 bowl 
-5 tray 
+2 cafateria table - DONE
+3 trash can - DONE
+4 bowl - DONE
+5 tray - DONE
 6 cafeteria food trolly/board/steam table 
 7 tub-big pots for food 
 8 shower walls
@@ -14,7 +14,7 @@ total items list
 11 faucets
 12 sinks
 13 drains
-14 many boxes 
+14 many boxes - DONE
 15 sheet covered area/tarp covered thing 
 16 rope hanging 
 17 shelves for boxes
@@ -24,7 +24,7 @@ total items list
 21 regular table
 22 fake computer /simple hologram perhaps
 23 body trays
-24 casket
+24 casket - DONE
 25 autapsy table 
 26 tool table 
 27 stairs metal frame work 
@@ -32,13 +32,13 @@ total items list
 29 big ass machine 
 30 tables-metal tables 
 31 astroids
-32 pickaxes
-33 mine carts
+32 pickaxes - DONE
+33 mine carts - DONE
 34 reactor
 35 escape pods 
 36 exit sign
 37 red light 
-38 pizza boxes
+38 pizza boxes - DONE
 39 desk 
 
 

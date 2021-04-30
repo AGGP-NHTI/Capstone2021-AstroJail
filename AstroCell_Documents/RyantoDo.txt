@@ -6,18 +6,17 @@ bowl - Done
 drains - Done
 tray - Done
 books - Done
-pizza boxes - Done
-tool table - To be UV Mapped
-cafeteria chairs
-basic chairs
+pizza boxes - Done/Textured
+tool table - Done
+basic chairs - Done
 trash can - Done
-tub-big pots for food 
+tub-big pots for food  - Done
 pickaxes - Done
-cafateria table - To be UV Mapped 
+cafateria table - Done/Textured
 many boxes - Done
 tables-metal tables
 regular table - Done
-body trays - To be UV Mapped
-casket
+body trays - Done
+casket - Done
 autapsy table - Done
-mine carts
+mine carts - Done
