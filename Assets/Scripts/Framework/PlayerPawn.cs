@@ -34,6 +34,7 @@ public class PlayerPawn : Pawn
 
     public GameObject playerMenuPanel;
     public GameObject PlayerInventoryHUD;
+    public GameObject optionsPanel;
 
     public bool inPlayerMenu = false;
 
@@ -57,6 +58,7 @@ public class PlayerPawn : Pawn
         rb = gameObject.GetComponent<Rigidbody>();
         PlayerInventoryHUD.SetActive(true);
         playerMenuPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         Initialize();
     }
 
@@ -269,8 +271,10 @@ public class PlayerPawn : Pawn
          }     
         if(escape && inPlayerMenu)
         {
+            lockMovement = false;
             PlayerInventoryHUD.SetActive(true);
             playerMenuPanel.SetActive(false);
+            optionsPanel.SetActive(false);
             inPlayerMenu = false;
         }
         else if(escape && !inPlayerMenu)
@@ -313,10 +317,19 @@ public class PlayerPawn : Pawn
     }
     public override void OpenPlayerMenu()
     {
+        lockMovement = true;
         PlayerInventoryHUD.SetActive(false);
         playerMenuPanel.SetActive(true);
         inPlayerMenu = true;
 
     }
-    
+    public override void OpenOptionsMenu()
+    {
+        PlayerInventoryHUD.SetActive(false);
+        playerMenuPanel.SetActive(false);
+        optionsPanel.SetActive(true);
+        inPlayerMenu = true;
+    }
+
+
 }
