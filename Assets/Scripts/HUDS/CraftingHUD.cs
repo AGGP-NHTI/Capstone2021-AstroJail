@@ -38,6 +38,7 @@ public class CraftingHUD : NetworkBehaviour
         {
             DropDownValueChanged(dropDown);
         });
+        
         // access both containers to get the items for both the player and container (should have sprites associated with them)
         //      Set PlayerInv and ContainerInv to there corresponding accessed containers
         //      Populate UI with those items 

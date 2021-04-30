@@ -88,4 +88,14 @@ public class Pawn : Actor
     {
 
     }
+    public virtual void OpenPlayerMenu()
+    {
+
+    }
+    public virtual void OpenOptionsMenu()
+    {
+
+    }
+        
+
 }
