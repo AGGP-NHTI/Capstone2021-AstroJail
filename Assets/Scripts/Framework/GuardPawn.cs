@@ -8,6 +8,7 @@ using MLAPI.Connection;
 
 public class GuardPawn : PlayerPawn
 {
+    private Animator anim;
     public GameObject HUDPanelToAttach;
     public GameObject HudReference;
     Containers container;
@@ -36,6 +37,7 @@ public class GuardPawn : PlayerPawn
     public override void Start()
     {
         base.Start();
+        anim = gameObject.GetComponentInChildren<Animator>();
         timer = 0;
         playerType = PlayerType.Guard;
         theCam = Camera.main;
@@ -58,6 +60,13 @@ public class GuardPawn : PlayerPawn
 
         //may be something in pawn that we need to do 
         base.Update();
+        if (control)
+        {
+            if (control.IsLocalPlayer)
+            {
+                SetAnimatorParams();
+            }
+        }
         FindPrisoners();
     }
 
@@ -205,7 +214,14 @@ public class GuardPawn : PlayerPawn
         EndInteract();
     }
 
-  [ServerRpc(RequireOwnership =false)]
+    private void SetAnimatorParams()
+    {
+        Vector3 localVelocity = transform.InverseTransformVector(rb.velocity);
+        anim.SetFloat("moveSpeedZ", localVelocity.z);
+        anim.SetFloat("moveSpeedX", localVelocity.x);
+    }
+
+    [ServerRpc(RequireOwnership =false)]
   public void BeginSearchPrisonerServerRpc(ulong playerID)
     {
          ClientRpcParams CRP = new ClientRpcParams();
