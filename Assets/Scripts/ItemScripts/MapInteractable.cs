@@ -25,8 +25,6 @@ public class MapInteractable : NetworkBehaviour
                 {
                     p.Interactables.Add(this);
                     Label.SetActive(true);
-                    Debug.Log("Detected Player");
-
                 }
             }
         }
@@ -42,8 +40,6 @@ public class MapInteractable : NetworkBehaviour
                 {
                     p.Interactables.Remove(this);
                     Label.SetActive(false);
-                    Debug.Log("Player Left Vicinity");
-
                 }
             }
         }
@@ -62,15 +58,8 @@ public class MapInteractable : NetworkBehaviour
 
     public bool Done()
     {
-        //Always called from PlayerPawn
-        if (IsServer)
-        {
-            InteractableStopUseClientRpc();
-        }
-        else
-        {
-            InteractableStopUseServerRpc();
-        }
+        InteractableStopUseServerRpc();
+        
         return OnDone();
     }
 

@@ -182,15 +182,12 @@ public class GuardPawn : PlayerPawn
 
     public override void Close(bool escape)
     {
-
-        if (escape && ObjectUsing)
-        {
-            EndInteract();
-        }
         if (escape && searchedPlayer && failedSearch == false)
         {
             DoneSearching();
+            return;
         }
+        base.Close(escape);
     }
 
     public void DoneSearching()
