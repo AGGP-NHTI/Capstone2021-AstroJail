@@ -37,14 +37,15 @@ public class PlayerVent : MapInteractable
         PrisonerPawn tempPawn = (PrisonerPawn)user.myPawn;
         if (tempPawn.playerType == PlayerType.Prisoner)
         {
-
             if (CooldownTimer > 0)
             {
+                tempPawn.EndInteract();
                 return false;
             }
             tempPawn.transform.position = endPoint.transform.position;
             CooldownTimer = maxCooldown;
 
+            tempPawn.EndInteract();
             return false;
         }
         else
@@ -53,6 +54,7 @@ public class PlayerVent : MapInteractable
         }
     }
 
+    
     public void OnCooldown()
     {
         CooldownTimer -= Time.deltaTime;

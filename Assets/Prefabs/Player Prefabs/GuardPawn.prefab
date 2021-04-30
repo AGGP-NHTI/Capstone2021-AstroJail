@@ -2211,7 +2211,7 @@ MonoBehaviour:
   InteractE: 0
   lockMovement: 0
   playerMenuPanel: {fileID: 1476829235031229503}
-  PlayerInventoryHUD: {fileID: 0}
+  PlayerInventoryHUD: {fileID: 1018700167676727520}
   optionsPanel: {fileID: 3669991258004952407}
   inPlayerMenu: 0
   HUDPanelToAttach: {fileID: 5520179169941753870, guid: 5c1021a62b2371f49b64b59fc16fa745,
