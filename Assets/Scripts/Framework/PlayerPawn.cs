@@ -32,6 +32,11 @@ public class PlayerPawn : Pawn
     public bool InteractE = false;
     public bool lockMovement = false;
 
+    public GameObject playerMenuPanel;
+    public GameObject PlayerInventoryHUD;
+
+    public bool inPlayerMenu = false;
+
 
     //Properties
     public Containers playerInventory
@@ -50,6 +55,8 @@ public class PlayerPawn : Pawn
     public virtual void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        PlayerInventoryHUD.SetActive(true);
+        playerMenuPanel.SetActive(false);
         Initialize();
     }
 
@@ -258,9 +265,21 @@ public class PlayerPawn : Pawn
         if (escape && ObjectUsing)
         {
             EndInteract();
+            return;
+         }     
+        if(escape && inPlayerMenu)
+        {
+            PlayerInventoryHUD.SetActive(true);
+            playerMenuPanel.SetActive(false);
+            inPlayerMenu = false;
         }
+        else if(escape && !inPlayerMenu)
+        {
+            OpenPlayerMenu();         
+        }
+       
 
-      
+
     }
     
     public override void EndInteract()
@@ -291,6 +310,13 @@ public class PlayerPawn : Pawn
     public override void Fire1()
     {
         
+    }
+    public override void OpenPlayerMenu()
+    {
+        PlayerInventoryHUD.SetActive(false);
+        playerMenuPanel.SetActive(true);
+        inPlayerMenu = true;
+
     }
     
 }
