@@ -19,9 +19,12 @@ public class PrisonerPawn : PlayerPawn
     {
         base.Update();
 
-        if(control.IsLocalPlayer)
+        if (control)
         {
-            SetAnimatorParams();
+            if (control.IsLocalPlayer)
+            {
+                SetAnimatorParams();
+            }
         }
 
 

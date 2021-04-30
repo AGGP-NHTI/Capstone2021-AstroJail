@@ -205,7 +205,6 @@ public class PlayerController : Controller
     [ClientRpc]
     public void SetGameStartClientRpc(ulong id, ClientRpcParams CRP = default)
     {
-        Debug.Log("Taking control of my pawn");
         myPawn = GetNetworkObject(id).GetComponent<Pawn>();
         myPawn.Possessed(this);
         myPawn.CameraControl.SetActive(true);
