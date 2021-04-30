@@ -140,6 +140,8 @@ public class PlayerPawn : Pawn
     /// </summary>
     public virtual void rotatePlayerModel()
     {
+        if (!playerModel.activeSelf) return;
+
         Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
 
         if (localVel.z > 1 && localVel.x > 1) //front right
