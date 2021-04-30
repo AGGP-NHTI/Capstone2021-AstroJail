@@ -8,6 +8,7 @@ public class SpawnPoints : NetworkBehaviour
     private static SpawnPoints _instance;
     public static SpawnPoints Instance { get { return _instance; } }
     public List<Transform> guardSpawns, prisonerSpawns;
+    public List<Transform> jailPoints;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class SpawnPoints : NetworkBehaviour
         if (playerEnum == PlayerType.Prisoner)
         {
             if (prisonerSpawns.Count == 0) return Vector3.zero;
-            int randomIndex = Random.Range(0, prisonerSpawns.Count - 1);
+            int randomIndex = Random.Range(0, prisonerSpawns.Count);
             Transform randomSpawn = prisonerSpawns[randomIndex];
 
             removePrisonerSpawn(randomIndex);
@@ -36,13 +37,21 @@ public class SpawnPoints : NetworkBehaviour
         else
         {
             if (guardSpawns.Count == 0) return Vector3.zero;
-            int randomIndex = Random.Range(0, guardSpawns.Count - 1);
+            int randomIndex = Random.Range(0, guardSpawns.Count);
             Transform randomSpawn = guardSpawns[randomIndex];
 
             removeGuardSpawn(randomIndex);
             return randomSpawn.position;
         }
     }
+
+    public Vector3 randomJailPoint()
+    {
+        int randomIndex = Random.Range(0, jailPoints.Count);
+
+        return jailPoints[randomIndex].position;
+    }
+
 
     public void removePrisonerSpawn(int index)
     {

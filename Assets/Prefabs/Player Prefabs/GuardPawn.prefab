@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8437969983967508626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -558,6 +558,7 @@ MonoBehaviour:
   InvertCamVerticle: 1
   IsGrounded: 1
   JumpSpeed: 3
+  slerpRatio: 0
   Interactables: []
   ObjectUsing: {fileID: 0}
   InteractE: 0
