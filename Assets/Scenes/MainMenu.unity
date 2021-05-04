@@ -9180,7 +9180,7 @@ MonoBehaviour:
     - Prefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
         type: 3}
       PlayerPrefab: 0
-    - Prefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
+    - Prefab: {fileID: 1775708266611920964, guid: ca137e038cfd7b040ac9094cb785813f,
         type: 3}
       PlayerPrefab: 0
     PlayerPrefabHash:
