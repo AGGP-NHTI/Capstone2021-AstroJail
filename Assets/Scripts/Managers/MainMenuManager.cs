@@ -14,6 +14,7 @@ public class MainMenuManager : NetworkBehaviour
     public TextMeshProUGUI prisonerList, guardList;
     private string tempGuardList, tempPrisonerList;
     public GameObject referenceToServerManagerSpawner;
+    public bool testMap;
     // Start is called before the first frame update
     void Start()
     {
@@ -182,7 +183,15 @@ public class MainMenuManager : NetworkBehaviour
 
     public void StartGame()
     {
-        ServerManager.Instance.StartGame("SampleScenezach");
+        if(testMap)
+        {
+            ServerManager.Instance.StartGame("SampleScenezach");
+        }
+        else
+        {
+            ServerManager.Instance.StartGame("FinalMapTake2");
+        }
+
     }
     public void Close()
     {
