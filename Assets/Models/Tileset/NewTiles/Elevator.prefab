@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8994598358599223551}
   - component: {fileID: 5813577215150778476}
   - component: {fileID: 4909538482337406753}
+  - component: {fileID: 6502647480268290294}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -129,6 +130,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5137593, y: 9.981921, z: 10.000001}
   m_Center: {x: -0.75687957, y: 4.982986, z: -4.9999847}
+--- !u!114 &6502647480268290294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775708266611920964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 14310573014857414895
+  PrefabHashGenerator: Elevator
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
 --- !u!1 &4623306799794666376
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8774365950215610910
 RectTransform:
   m_ObjectHideFlags: 0
