@@ -210,7 +210,16 @@ public class PlayerController : Controller
         myPawn.CameraControl.SetActive(true);
         myPawn.playerUI.SetActive(true);
         myPawn.NamePlate.gameObject.SetActive(false);
-        if (myPawn.playerType == PlayerType.Guard) { myPawn.playerModel.SetActive(false); }
+        
+        if (myPawn.playerType == PlayerType.Guard)
+        {
+            foreach(SkinnedMeshRenderer smr in myPawn.playerModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                smr.enabled = false;
+            }
+           
+        }
+        
         myController = true;
         
         foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
