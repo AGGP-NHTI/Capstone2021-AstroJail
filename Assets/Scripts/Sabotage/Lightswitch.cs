@@ -95,8 +95,7 @@ public class Lightswitch : MapInteractable
             {
                 if(l.transform.parent.tag == gameObject.tag)
                 {
-                    l.intensity = 0f;
-                    l.range = 0;
+                    l.enabled = false;
                 }
             }
             lightState = false;
@@ -107,8 +106,7 @@ public class Lightswitch : MapInteractable
             {
                 if (l.transform.parent.tag == gameObject.tag)
                 {
-                    l.intensity = 2.5f;
-                    l.range = 25;
+                    l.enabled = true;
                 }
             }
             lightState = true;
@@ -136,8 +134,7 @@ public class Lightswitch : MapInteractable
             {
                 if (l.transform.parent.tag == gameObject.tag)
                 {
-                    l.intensity = 0f;
-                    l.range = 0;
+                    l.enabled = false;
                 }
             }
             lightState = false;
@@ -148,8 +145,7 @@ public class Lightswitch : MapInteractable
             {
                 if (l.transform.parent.tag == gameObject.tag)
                 {
-                    l.intensity = 2.5f;
-                    l.range = 25;
+                    l.enabled = true;
                 }
             }
             lightState = true;
