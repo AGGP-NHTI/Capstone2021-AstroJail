@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6152681181518871941}
   - component: {fileID: 7119466960834179616}
   - component: {fileID: 4983684006977881834}
+  - component: {fileID: 3317144140155408887}
   m_Layer: 0
   m_Name: Tape
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3317144140155408887
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785066752265545535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 675711555775644876, guid: e83c22e4dc25f1b49bf752e5c47ad8b8, type: 3}
