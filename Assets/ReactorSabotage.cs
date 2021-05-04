@@ -4,11 +4,9 @@ using UnityEngine;
 using MLAPI;
 using TMPro;
 using MLAPI.Messaging;
-public class Lightswitch : MapInteractable
+public class ReactorSabotage : MapInteractable
 {
-    public bool lightState = true;
-    public float lightIntensity;
-    public float lightRange;
+    public bool reactorMeltdown = false;
     public GameObject itemReqLabel;
 
     public override void OnTriggerEnter(Collider other)
@@ -20,12 +18,12 @@ public class Lightswitch : MapInteractable
             {
                 if (p.control.IsLocalPlayer)
                 {
-                    if(lightState == true && p.playerType == PlayerType.Prisoner)
+                    if (reactorMeltdown == false && p.playerType == PlayerType.Prisoner)
                     {
                         p.Interactables.Add(this);
                         Label.SetActive(true);
                     }
-                    else if(lightState == false && p.playerType == PlayerType.Guard)
+                    else if (reactorMeltdown == true && p.playerType == PlayerType.Guard)
                     {
                         p.Interactables.Add(this);
                         Label.SetActive(true);
@@ -41,15 +39,15 @@ public class Lightswitch : MapInteractable
         {
             Label.transform.rotation = Quaternion.LookRotation(Label.transform.position - Camera.main.transform.position);
         }
-        if(lightState == true)
+        if (reactorMeltdown == false)
         {
-            Label.GetComponent<TextMeshPro>().text = "Press E to sabotage lights";
-            itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Tazer";
+            Label.GetComponent<TextMeshPro>().text = "Press E to smack the reactor";
+            itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Tazer Nunchucks";
         }
         else
         {
             Label.GetComponent<TextMeshPro>().text = "Press E to fix lights";
-            itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Wrench";
+            itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Toolbox";
         }
     }
 
@@ -57,13 +55,13 @@ public class Lightswitch : MapInteractable
     {
         PlayerPawn player = (PlayerPawn)user.myPawn;
 
-        if(player.playerType == PlayerType.Prisoner)
+        if (player.playerType == PlayerType.Prisoner)
         {
-            foreach(ItemDefinition item in player.playerInventory.ItemsInContainer)
+            foreach (ItemDefinition item in player.playerInventory.ItemsInContainer)
             {
-                if(item.itemId == 6)
+                if (item.itemId == 22)
                 {
-                    TurnLightsOffServerRpc(true, item.instanceId);
+                    ReactorMeltdownServerRpc(true, true,item.instanceId);
                     player.playerInventory.ItemsInContainer.Remove(item);
                     Label.SetActive(false);
                     break;
@@ -72,9 +70,9 @@ public class Lightswitch : MapInteractable
         }
         else
         {
-            if (player.playerInventory.ItemsInContainer[0].itemId == 21)
+            if (player.playerInventory.ItemsInContainer[0].itemId == 23)
             {
-                TurnLightsOffServerRpc(false);
+                ReactorMeltdownServerRpc(false, false);
                 player.playerInventory.ItemsInContainer.Clear();
                 Label.SetActive(false);
             }
@@ -85,44 +83,43 @@ public class Lightswitch : MapInteractable
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TurnLightsOffServerRpc(bool lightsOff, int itemID = -1)
+    public void ReactorMeltdownServerRpc(bool meltdown, bool lightsOff, int itemID = -1)
     {
         List<Light> lights = new List<Light>(GameObject.FindObjectsOfType<Light>());
 
-        if(lightsOff)
+        if (lightsOff)
         {
-            foreach(Light l in lights)
+            foreach (Light l in lights)
             {
-                if(l.transform.parent.tag == gameObject.tag)
-                {
-                    l.enabled = false;
-                }
+                l.GetComponent<Animator>().SetBool("reactorMeltdown", true);
             }
-            lightState = false;
         }
         else
         {
             foreach (Light l in lights)
             {
-                if (l.transform.parent.tag == gameObject.tag)
+                if (l.GetComponentInParent<PlayerPawn>())
+                { }
+                else
                 {
-                    l.enabled = true;
+                    l.GetComponent<Animator>().SetBool("reactorMeltdown", false);
                 }
             }
-            lightState = true;
         }
-        if(itemID != -1)
+
+
+        if (itemID != -1)
         {
-            if(!MapItemManager.Instance.itemList[itemID].isCrafted)
+            if (!MapItemManager.Instance.itemList[itemID].isCrafted)
             {
                 MapItemManager.Instance.itemList[itemID].startingLocation.Additem(MapItemManager.Instance.itemList[itemID]);
             }
         }
-        TurnLightsOffClientRpc(lightsOff);
+        ReactorMeltdownClientRpc(meltdown ,lightsOff);
     }
 
     [ClientRpc]
-    public void TurnLightsOffClientRpc(bool lightsOff, int itemID = -1)
+    public void ReactorMeltdownClientRpc(bool meltdown ,bool lightsOff)
     {
         if (IsServer) { return; }
 
@@ -132,23 +129,20 @@ public class Lightswitch : MapInteractable
         {
             foreach (Light l in lights)
             {
-                if (l.transform.parent.tag == gameObject.tag)
-                {
-                    l.enabled = false;
-                }
+                l.GetComponent<Animator>().SetBool("reactorMeltdown", true);
             }
-            lightState = false;
         }
         else
         {
             foreach (Light l in lights)
             {
-                if (l.transform.parent.tag == gameObject.tag)
+                if (l.GetComponentInParent<PlayerPawn>())
+                { }
+                else
                 {
-                    l.enabled = true;
+                    l.GetComponent<Animator>().SetBool("reactorMeltdown", false);
                 }
             }
-            lightState = true;
         }
     }
 }
