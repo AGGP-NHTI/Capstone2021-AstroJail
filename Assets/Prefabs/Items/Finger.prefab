@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7799896083739211837}
   - component: {fileID: 6598081028956583832}
   - component: {fileID: 8968321576657453906}
+  - component: {fileID: 3585794305824418974}
   m_Layer: 0
   m_Name: Finger
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7454896115847799431}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 156.58534, y: 1.56, z: 8.091901}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07656576, y: 0.11170866, z: 0.07656576}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3585794305824418974
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454896115847799431}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7846685681052900924, guid: 119217bf8239a5b4dbb8bdd4c3726529, type: 3}
