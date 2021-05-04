@@ -6972,7 +6972,7 @@ MonoBehaviour:
   prisonerList: {fileID: 1500177921}
   guardList: {fileID: 194344660}
   referenceToServerManagerSpawner: {fileID: 610679033}
-  testMap: 1
+  testMap: 0
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0
@@ -9175,6 +9175,9 @@ MonoBehaviour:
         type: 3}
       PlayerPrefab: 0
     - Prefab: {fileID: 9014897465159990460, guid: 6c8b352c260077a4c967647f3413d9b9,
+        type: 3}
+      PlayerPrefab: 0
+    - Prefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
         type: 3}
       PlayerPrefab: 0
     - Prefab: {fileID: 1730758670037769674, guid: 6a80a7146c403444abc8f797b66f1a95,
