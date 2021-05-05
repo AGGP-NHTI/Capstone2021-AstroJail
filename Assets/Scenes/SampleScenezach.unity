@@ -2388,6 +2388,8 @@ MonoBehaviour:
   beingUsed: 0
   reactorMeltdown: 0
   itemReqLabel: {fileID: 7025254780322606358}
+  reactorTimer: 0
+  reactorMaxTime: 10
 --- !u!1 &7025254780322606358
 GameObject:
   m_ObjectHideFlags: 0

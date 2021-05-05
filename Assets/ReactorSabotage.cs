@@ -10,7 +10,6 @@ public class ReactorSabotage : MapInteractable
     public GameObject itemReqLabel;
     public float reactorTimer;
     public float reactorMaxTime;
-    public GameObject reactorTimerUI;
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -52,11 +51,22 @@ public class ReactorSabotage : MapInteractable
             Label.GetComponent<TextMeshPro>().text = "Press E to repair reactor";
             itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Toolbox";
         }
+
+        ReactorCountdown();
     }
 
     public void ReactorCountdown()
     {
+        if (reactorMeltdown == true)
+        {
+            reactorTimer -= Time.deltaTime;
 
+            GameObject.FindObjectOfType<PlayerPawn>().reactorCountdown.GetComponent<TextMeshPro>().text = reactorTimer.ToString("F");
+        }
+        if(IsServer && reactorTimer <= 0)
+        {
+            Debug.Log("GAME OVER");
+        }
     }
 
     public override bool OnUse(PlayerController user)
@@ -123,12 +133,13 @@ public class ReactorSabotage : MapInteractable
                 MapItemManager.Instance.itemList[itemID].startingLocation.Additem(MapItemManager.Instance.itemList[itemID]);
             }
         }
+        reactorTimer = reactorMaxTime;
         reactorMeltdown = true;
         ReactorMeltdownClientRpc(meltdown ,lightsOff);
     }
 
     [ClientRpc]
-    public void ReactorMeltdownClientRpc(bool meltdown ,bool lightsOff)
+    public void ReactorMeltdownClientRpc(bool meltdown, bool lightsOff)
     {
         if (IsServer) { return; }
 
@@ -136,6 +147,16 @@ public class ReactorSabotage : MapInteractable
 
         if (lightsOff)
         {
+            foreach(PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if(pc.myController)
+                {
+                    Debug.Log("my controller found");
+                    PlayerPawn temp = (PlayerPawn)pc.myPawn;
+                    temp.reactorCountdown.transform.parent.gameObject.SetActive(true);
+                }
+            }
+
             foreach (Light l in lights)
             {
                 l.GetComponent<Animator>().SetBool("reactorMeltdown", true);
@@ -153,6 +174,8 @@ public class ReactorSabotage : MapInteractable
                 }
             }
         }
+
+        reactorTimer = reactorMaxTime;
         reactorMeltdown = true;
     }
 }
