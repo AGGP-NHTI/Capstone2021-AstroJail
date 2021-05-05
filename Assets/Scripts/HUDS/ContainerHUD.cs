@@ -24,6 +24,10 @@ public class ContainerHUD : NetworkBehaviour
     //make sure the button corresponds with the number (we might need a list of buttons)
     void Start()
     {
+        if(!_player)
+        {
+            Destroy(gameObject);
+        }
         UpdateList();
 
         // access both containers to get the items for both the player and container (should have sprites associated with them)

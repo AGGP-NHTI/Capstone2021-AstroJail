@@ -6792,7 +6792,7 @@ MonoBehaviour:
   prisonerList: {fileID: 1500177921}
   guardList: {fileID: 194344660}
   referenceToServerManagerSpawner: {fileID: 610679033}
-  testMap: 0
+  testMap: 1
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0
