@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: -1
   ItemName: Default Name
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: d927aa0ed0385e6438325874446c2268, type: 3}
+  imageArt: {fileID: 21300000, guid: 4ff405a1d5db79d4798564fad66049c9, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
   isContraband: 0
