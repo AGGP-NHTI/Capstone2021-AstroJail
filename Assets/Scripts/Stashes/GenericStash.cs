@@ -79,8 +79,14 @@ public class GenericStash : MapInteractable
         labelObject.GetComponent<TextMeshPro>().text = "In Use";
 
         InUseServerRpc();
-        container.ServerRequestItems(UsingPlayer.OwnerClientId);
-
+        if(UsingPlayer)
+        {
+            container.ServerRequestItems(UsingPlayer.OwnerClientId);
+        }
+        else
+        {
+            OnDone();
+        }
         return true;
     }
 
@@ -91,9 +97,7 @@ public class GenericStash : MapInteractable
 
         if (HudReference)
         {
-            Debug.Log(HudReference);
             Destroy(HudReference);
-            Debug.Log(HudReference);
         }
 
         StopUseServerRpc();

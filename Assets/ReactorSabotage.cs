@@ -46,7 +46,7 @@ public class ReactorSabotage : MapInteractable
         }
         else
         {
-            Label.GetComponent<TextMeshPro>().text = "Press E to fix lights";
+            Label.GetComponent<TextMeshPro>().text = "Press E to repair reactor";
             itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Toolbox";
         }
     }
@@ -115,6 +115,7 @@ public class ReactorSabotage : MapInteractable
                 MapItemManager.Instance.itemList[itemID].startingLocation.Additem(MapItemManager.Instance.itemList[itemID]);
             }
         }
+        reactorMeltdown = true;
         ReactorMeltdownClientRpc(meltdown ,lightsOff);
     }
 
@@ -144,5 +145,6 @@ public class ReactorSabotage : MapInteractable
                 }
             }
         }
+        reactorMeltdown = true;
     }
 }
