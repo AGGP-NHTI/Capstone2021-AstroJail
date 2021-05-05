@@ -17,7 +17,7 @@ MonoBehaviour:
   ItemName: 'Soda Test '
   ObjectModel: {fileID: 923791832117716685, guid: ca2d9f7a17e13cf4cbe3076598ea9a20,
     type: 3}
-  imageArt: {fileID: 21300000, guid: 7c9e94fd91bfbd048b88c8c666db378b, type: 3}
+  imageArt: {fileID: 21300000, guid: 8262ef339fe60d5458f27613d1f862d4, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 1
   isContraband: 0
