@@ -8,6 +8,9 @@ public class ReactorSabotage : MapInteractable
 {
     public bool reactorMeltdown = false;
     public GameObject itemReqLabel;
+    public float reactorTimer;
+    public float reactorMaxTime;
+    public GameObject reactorTimerUI;
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -49,6 +52,11 @@ public class ReactorSabotage : MapInteractable
             Label.GetComponent<TextMeshPro>().text = "Press E to repair reactor";
             itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Toolbox";
         }
+    }
+
+    public void ReactorCountdown()
+    {
+
     }
 
     public override bool OnUse(PlayerController user)
