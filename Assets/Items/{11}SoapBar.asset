@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: -1
   ItemName: bar of soap
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 71b94e30ab923f040a0d165f34cdd546, type: 3}
+  imageArt: {fileID: 21300000, guid: 6adc298619f6f1e4ba6c0782732cea48, type: 3}
   itemDescription: 'you thought id make a joke about dropping it didnt you '
   hasEffect: 0
   isContraband: 0
