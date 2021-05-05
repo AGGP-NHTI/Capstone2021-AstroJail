@@ -45,21 +45,22 @@ public class GuardItemStash : MapInteractable
         }
     }
 
-   
-
     public override bool OnUse(PlayerController user)
     {
         if(PawnReff.playerInventory.itemCount > 0)
         {
             PawnReff.playerInventory.ItemsInContainer.Clear();
             PawnReff.playerInventory.Additem(ItemToGive);
-        }
+        } 
         else
         {
             PawnReff.playerInventory.Additem(ItemToGive);
         }
         IsPanelActive = true;
+        UsingPlayer = null;
+        beingUsed = false;
         PawnReff.ObjectUsing = null;
+
         return true;
     }
 
