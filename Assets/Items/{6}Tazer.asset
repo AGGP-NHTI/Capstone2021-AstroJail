@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: -1
   ItemName: Tazer
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 13c6f14701347694b93acffd3e8b9ac3, type: 3}
+  imageArt: {fileID: 21300000, guid: 31581728740db5a47aa92aec1f4dbc73, type: 3}
   itemDescription: zap zap
   hasEffect: 0
   isContraband: 1
