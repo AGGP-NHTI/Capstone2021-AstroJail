@@ -73,19 +73,28 @@ public class CellDoors : MapInteractable
             UsingPlayer = null;
             beingUsed = false;
             temp.ObjectUsing = null;
-
         }
         return true;
     }
     public void MoveDoor()
     {
-       MoveDoorServerRpc();
+        if(IsServer)
+        {
+            GetComponent<Animator>().Play("doors", 0);
+            beingUsed = false;
+        }
+        else
+        {
+            MoveDoorServerRpc();
+            beingUsed = false;
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void MoveDoorServerRpc()
     {
         GetComponent<Animator>().Play("doors", 0);
+        beingUsed = false;
     }
 
 }
