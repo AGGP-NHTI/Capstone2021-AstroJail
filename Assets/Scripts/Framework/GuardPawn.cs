@@ -150,11 +150,11 @@ public class GuardPawn : PlayerPawn
         {
             if (FoundPlayer.ObjectUsing == true)
             {
+                Debug.Log("player was using an object");
                 return;
             }
-            else if (FoundPlayer && !searchedPlayer)
+            else if (FoundPlayer && !searchedPlayer && FoundPlayer.ObjectUsing ==false)
             {
-
                 Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
                 searchedPlayer.playerInventory.itemUpdateCallback = ItemsUpdated;
