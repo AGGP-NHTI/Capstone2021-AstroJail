@@ -21,6 +21,7 @@ public class PrisonerPawn : PlayerPawn
     public override void Update()
     {
         base.Update();
+
         if(canOpenCell==false)
         {
             timer += Time.deltaTime;
@@ -91,6 +92,7 @@ public class PrisonerPawn : PlayerPawn
     {
         if (isBeingSearched)
         {
+            canBeSearched = false;
             return;
         }
         base.Interact(e);
