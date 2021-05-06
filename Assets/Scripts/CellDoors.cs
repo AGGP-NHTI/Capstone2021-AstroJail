@@ -83,7 +83,13 @@ public class CellDoors : MapInteractable
     }
     public void MoveDoor()
     {
+        MoveDoorServerRpc();
+     
+    }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void MoveDoorServerRpc()
+    {
         if (isOpen == false)
         {
             if (timer <= 1.5)
