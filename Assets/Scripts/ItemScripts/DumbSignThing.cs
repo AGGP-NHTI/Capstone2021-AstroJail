@@ -6,10 +6,10 @@ using TMPro;
 public class DumbSignThing : MonoBehaviour
 {
 
-    public List<string> accusations, crimes, duration;
+    public List<string> prisoners, accusations, crimes, duration;
     public TextMeshPro text;
     float timer = 3;
-    int randomAccu, randomCrime, randomDuration;
+    int randomPrisoner, randomAccu, randomCrime, randomDuration;
 
     // Start is called before the first frame update
     private void Update()
@@ -30,10 +30,14 @@ public class DumbSignThing : MonoBehaviour
         {
             if (player.selectedPlayerType == PlayerType.Prisoner)
             {
-
+                prisoners.Add(player.name);
             }
         }
-        text.text = "This Prisoner " + accusations + " " + crimes + ". Duration of Sentence:" + duration;
+        randomPrisoner = Random.Range(0, prisoners.Count);
+        randomAccu = Random.Range(0, accusations.Count);
+        randomCrime = Random.Range(0, crimes.Count);
+        randomDuration = Random.Range(0, duration.Count);
+        text.text = prisoners[randomPrisoner] + " " + accusations[randomAccu] + " " + crimes [randomCrime] + ". Duration of Sentence:" + duration[randomDuration];
         Destroy(this);
     }
 

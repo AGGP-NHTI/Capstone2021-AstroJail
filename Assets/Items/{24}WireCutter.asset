@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff944cfc8138dd140b4c6452836fefef, type: 3}
   m_Name: '{24}WireCutter'
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 24
   instanceId: -1
-  ItemName: Default Name
+  ItemName: Wire Cutter
   ObjectModel: {fileID: 0}
   imageArt: {fileID: 0}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
-  isContraband: 0
-  isCrafted: 0
+  isContraband: 1
+  isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}
-  Recipe: []
+  Recipe:
+  - {fileID: 11400000, guid: ebb534fff97a1e449b0be826fbd6613d, type: 2}
+  - {fileID: 11400000, guid: ebb534fff97a1e449b0be826fbd6613d, type: 2}
+  - {fileID: 11400000, guid: a1a5cb38d3efa844da1f2533408660f0, type: 2}
