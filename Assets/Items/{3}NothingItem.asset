@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: 0
   ItemName: Nothing
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: ba879a3f8c160d445b1a92b538d92833, type: 3}
+  imageArt: {fileID: 21300000, guid: a38f5a46d8598ce4eb105caff059fc71, type: 3}
   itemDescription: 'othing how does it feel does it feel '
   hasEffect: 0
   isContraband: 0

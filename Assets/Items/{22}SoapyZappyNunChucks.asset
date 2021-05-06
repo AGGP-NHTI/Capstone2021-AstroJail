@@ -16,11 +16,14 @@ MonoBehaviour:
   instanceId: -1
   ItemName: Soapy Zappy NunChucks
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: afcebb1b3bef80f4888fd4d696c809a7, type: 3}
+  imageArt: {fileID: 21300000, guid: 8a2b4101aee62a244aedd334c14651ed, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
-  isContraband: 0
-  isCrafted: 0
+  isContraband: 1
+  isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}
-  Recipe: []
+  Recipe:
+  - {fileID: 11400000, guid: 971b996a8dac4af4399acb6ec4d0267c, type: 2}
+  - {fileID: 11400000, guid: c9a6132732746d64aa83f96604d1e1be, type: 2}
+  - {fileID: 11400000, guid: 971b996a8dac4af4399acb6ec4d0267c, type: 2}

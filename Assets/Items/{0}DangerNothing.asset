@@ -16,7 +16,7 @@ MonoBehaviour:
   instanceId: 0
   ItemName: '1Danger Nothing '
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 26d1747d5d8f20643a3617852376de72, type: 3}
+  imageArt: {fileID: 21300000, guid: f2d645db2c72c134a810c1e6bfdc11a2, type: 3}
   itemDescription: I know nothing! *salutes*
   hasEffect: 1
   isContraband: 1

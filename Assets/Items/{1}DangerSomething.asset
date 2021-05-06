@@ -16,12 +16,12 @@ MonoBehaviour:
   instanceId: 12
   ItemName: Danger Something
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 3fa0e730a310dfb4d8c8a16446f6b799, type: 3}
+  imageArt: {fileID: 21300000, guid: 9d441c82874487448a0596125b1b16c3, type: 3}
   itemDescription: ' If all prisoners have a DangerSomething in their inventory they
     gain the Achievement: "making something out of nothings a danger" and lose the
     game'
   hasEffect: 0
-  isContraband: 0
+  isContraband: 1
   isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}

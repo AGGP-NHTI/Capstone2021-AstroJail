@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 13
   instanceId: -1
-  ItemName: Default Name
+  ItemName: Plastic
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 0eebf145c83e4044681a0967dcd362be, type: 3}
+  imageArt: {fileID: 21300000, guid: b37f9e25cc4fe424d941a35ced6e34e1, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
   isContraband: 0

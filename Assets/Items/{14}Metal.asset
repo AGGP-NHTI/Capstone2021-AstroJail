@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 14
   instanceId: -1
-  ItemName: Default Name
+  ItemName: Metal
   ObjectModel: {fileID: 0}
-  imageArt: {fileID: 21300000, guid: 4ff405a1d5db79d4798564fad66049c9, type: 3}
+  imageArt: {fileID: 21300000, guid: 0bc00dda898e18b46a773b915673d74e, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
   isContraband: 0
   isCrafted: 0
   Effects: []
   startingLocation: {fileID: 0}
-  Recipe: []
+  Recipe:
+  - {fileID: 11400000, guid: 3c6c811d3bb52094b9e66f5b0e2820b6, type: 2}
+  - {fileID: 11400000, guid: 3c6c811d3bb52094b9e66f5b0e2820b6, type: 2}

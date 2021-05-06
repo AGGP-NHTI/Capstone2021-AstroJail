@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: '{17}Finger'
   m_EditorClassIdentifier: 
   itemId: 17
-  instanceId: 37
-  ItemName: Default Name
+  instanceId: 61
+  ItemName: Finger
   ObjectModel: {fileID: 0}
   imageArt: {fileID: 21300000, guid: da0585277fdf1ed4d9c4389fdffb3976, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
-  isContraband: 0
+  isContraband: 1
   isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 19
   instanceId: -1
-  ItemName: Default Name
+  ItemName: Magnet
   ObjectModel: {fileID: 0}
   imageArt: {fileID: 21300000, guid: 082a07618f7828248b10b13fef8a52c0, type: 3}
   itemDescription: insert Degen Humor Here
