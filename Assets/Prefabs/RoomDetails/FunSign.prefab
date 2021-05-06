@@ -98,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Library
+  m_text: Calculating Crime...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -125,12 +125,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 32
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 6
+  m_fontSizeMax: 32
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.21255438, y: 0, z: 0.37974763, w: 0.6714306}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -264,7 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337bdccf2220f0a47baa6ffd0fe323b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prisoners: []
   accusations:
   - Was charged with
   - Is serving time for
@@ -327,7 +326,7 @@ MonoBehaviour:
   - Working on a Crime Commited Sheet
   - Blocking the Suez Cannal
   - Discovering the secret to life, the universe, and everything
-  - Building a theme park about California in California.
+  - Building a theme park about California in California
   - Copyright Violations
   - Finding the Secret Room
   - Being the Dark Souls of Criminals
@@ -370,4 +369,5 @@ MonoBehaviour:
   - Death via Martian Gladiator Pits
   - Death via Trampling
   - Death via Herring
-  text: {fileID: 0}
+  prisoners: []
+  text: {fileID: 4736369576433403846}
