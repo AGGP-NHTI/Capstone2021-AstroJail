@@ -11,6 +11,8 @@ public class PrisonerPawn : PlayerPawn
 
     public bool isBeingSearched = false;
     public bool canOpenCell = true;
+    public float timer;
+    public float cellTime = 20;
     public override void Initialize()
     {
         playerType = PlayerType.Prisoner;
@@ -19,6 +21,15 @@ public class PrisonerPawn : PlayerPawn
     public override void Update()
     {
         base.Update();
+        if(canOpenCell==false)
+        {
+            timer += Time.deltaTime;
+            if(timer >=cellTime)
+            {
+                canOpenCell = true;
+                timer = 0;
+            }
+        }
 
         if (control)
         {
@@ -106,7 +117,8 @@ public class PrisonerPawn : PlayerPawn
     [ClientRpc]
     public void ReturnItemsClientRpc(ClientRpcParams CRP = default)
     {
-        transform.position = new Vector3(0, 15, 0);
+        canOpenCell = false;
+        transform.position = SpawnPoints.Instance.randomJailPoint();
         playerInventory.ItemsInContainer.Clear();
     }
 
@@ -115,7 +127,15 @@ public class PrisonerPawn : PlayerPawn
 
         foreach (ItemDefinition item in playerInventory.ItemsInContainer)
         {
-            item.startingLocation.Additem(item);
+            if (item.isCrafted)
+            {
+
+            }
+            else
+            {
+                item.startingLocation.Additem(item);
+            }
+           
 
         }
         playerInventory.ItemsInContainer.Clear();
