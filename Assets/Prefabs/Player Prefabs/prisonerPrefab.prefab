@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 1410193837815993247}
   - component: {fileID: 2683226823117118160}
   - component: {fileID: 7672090833228692866}
-  - component: {fileID: 4646771224029987218}
   - component: {fileID: 9040596115115849958}
   m_Layer: 0
   m_Name: prisonerPrefab
@@ -333,18 +332,6 @@ MonoBehaviour:
   canOpenCell: 1
   timer: 0
   cellTime: 20
---- !u!114 &4646771224029987218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424292381393445453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04577f4d062df5542983896a5f2636c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &9040596115115849958
 AudioListener:
   m_ObjectHideFlags: 0

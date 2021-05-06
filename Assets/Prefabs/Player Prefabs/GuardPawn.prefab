@@ -3142,7 +3142,6 @@ GameObject:
   - component: {fileID: 7740061607115738478}
   - component: {fileID: 6756672964407608353}
   - component: {fileID: -461647612275065389}
-  - component: {fileID: 6397716182803361534}
   - component: {fileID: 2049488434808040002}
   m_Layer: 0
   m_Name: GuardPawn
@@ -3334,18 +3333,6 @@ MonoBehaviour:
   timer: 0
   failTime: 5
   failedSearch: 0
---- !u!114 &6397716182803361534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014897465159990460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04577f4d062df5542983896a5f2636c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &2049488434808040002
 AudioListener:
   m_ObjectHideFlags: 0
