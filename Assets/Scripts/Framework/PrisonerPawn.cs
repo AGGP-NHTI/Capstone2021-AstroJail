@@ -10,6 +10,7 @@ public class PrisonerPawn : PlayerPawn
     private Animator anim;
 
     public bool isBeingSearched = false;
+    public bool canOpenCell = true;
     public override void Initialize()
     {
         playerType = PlayerType.Prisoner;

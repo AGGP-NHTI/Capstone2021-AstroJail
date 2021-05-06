@@ -5268,6 +5268,16 @@ PrefabInstance:
       propertyPath: endPoint
       value: 
       objectReference: {fileID: 434565369}
+    - target: {fileID: 6832463312100336444, guid: ad4a4e99fb4e5c24c90ef0823b71fa25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6832463312924246305, guid: ad4a4e99fb4e5c24c90ef0823b71fa25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.33
+      objectReference: {fileID: 0}
     - target: {fileID: 7782659913475379817, guid: ad4a4e99fb4e5c24c90ef0823b71fa25,
         type: 3}
       propertyPath: m_Name
