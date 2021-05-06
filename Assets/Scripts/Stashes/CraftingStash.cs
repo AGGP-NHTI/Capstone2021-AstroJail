@@ -248,7 +248,13 @@ public class CraftingStash : MapInteractable
 
         foreach (ItemDefinition item in container.ItemsInContainer)
         {
-            item.startingLocation.Additem(item);
+            if(item.isCrafted)
+            { }
+            else
+            {
+                item.startingLocation.Additem(item);
+
+            }
 
         }
         container.ItemsInContainer.Clear();
