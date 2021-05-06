@@ -244,8 +244,9 @@ public class GuardPawn : PlayerPawn
         {
             if (pc.myController)
             {
-                temp = (PrisonerPawn)pc.myPawn;
+                temp = (PrisonerPawn)pc.myPawn;            
                 FoundPlayer.ObjectUsing = temp.ObjectUsing;
+                Debug.Log(temp.ObjectUsing);
             }
         }
     }
