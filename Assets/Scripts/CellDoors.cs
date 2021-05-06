@@ -37,11 +37,7 @@ public class CellDoors : MapInteractable
     void Update()
     {
 
-        if (openedDoor == true)
-        {
-            MoveDoor();
-        }
-
+      
     }
     public override void OnTriggerEnter(Collider other)
     {
@@ -73,62 +69,29 @@ public class CellDoors : MapInteractable
         }
         else
         {
-            openedDoor = true;
+            MoveDoor();
+            Done();
             UsingPlayer = null;
-            beingUsed = false;
             temp.ObjectUsing = null;
-
         }
         return true;
     }
     public void MoveDoor()
     {
-        MoveDoorServerRpc();
-     
+        if(IsServer)
+        {
+            GetComponent<Animator>().Play("doors", 0);
+        }
+        else
+        {
+            MoveDoorServerRpc();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void MoveDoorServerRpc()
     {
-        if (isOpen == false)
-        {
-            if (timer <= 1.5)
-            {
-                timer += Time.deltaTime;
-                percent = timer / 1.5f;
-                theDoor.transform.position = originPos + (difference * percent);
-
-            }
-            else { isOpen = true; timer = 0; }
-
-
-        }
-        else if (isOpen == true)
-        {
-            if (openedTimer <= 3)
-            {
-                openedTimer += Time.deltaTime;
-            }
-            else
-            {
-                if (timer <= 1.5)
-                {
-                    timer += Time.deltaTime;
-                    percent = timer / 1.5f;
-                    theDoor.transform.position = point - (difference * percent);
-
-                }
-                else
-                {
-                    timer = 0;
-                    isOpen = false;
-                    openedDoor = false;
-                    openedTimer = 0;
-                }
-
-            }
-
-        }
+        GetComponent<Animator>().Play("doors", 0);
     }
 
 }
