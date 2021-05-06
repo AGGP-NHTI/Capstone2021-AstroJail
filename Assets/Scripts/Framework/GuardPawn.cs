@@ -146,15 +146,17 @@ public class GuardPawn : PlayerPawn
     }
     public override void Search(bool q)
     {
-        if (q)
+        if (q)  
         {
+            CanSearchPrisonerServerRpc(FoundPlayer.OwnerClientId);
             if (FoundPlayer.ObjectUsing == true)
             {
+              
+                Debug.Log("player was using an object");
                 return;
             }
-            else if (FoundPlayer && !searchedPlayer)
+            else if (FoundPlayer && !searchedPlayer && FoundPlayer.ObjectUsing ==false)
             {
-
                 Debug.Log("in found player");
                 searchedPlayer = FoundPlayer;
                 searchedPlayer.playerInventory.itemUpdateCallback = ItemsUpdated;
@@ -220,6 +222,34 @@ public class GuardPawn : PlayerPawn
         anim.SetFloat("moveSpeedZ", localVelocity.z);
         anim.SetFloat("moveSpeedX", localVelocity.x);
     }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void CanSearchPrisonerServerRpc(ulong playerID)
+    {
+        ClientRpcParams CRP = new ClientRpcParams();
+        ulong[] targetClientID = new ulong[1];
+        targetClientID[0] = playerID;
+        CRP.Send.TargetClientIds = targetClientID;
+
+        CanSearchPrisonerClientRpc(CRP);
+    }
+
+    [ClientRpc]
+    public void CanSearchPrisonerClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        PrisonerPawn temp = null;
+
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (pc.myController)
+            {
+                temp = (PrisonerPawn)pc.myPawn;
+                FoundPlayer.ObjectUsing = temp.ObjectUsing;
+            }
+        }
+    }
+
 
     [ServerRpc(RequireOwnership =false)]
   public void BeginSearchPrisonerServerRpc(ulong playerID)
