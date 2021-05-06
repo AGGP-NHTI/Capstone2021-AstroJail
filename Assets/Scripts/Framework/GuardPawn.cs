@@ -148,7 +148,11 @@ public class GuardPawn : PlayerPawn
     {
         if (q)
         {
-            if (FoundPlayer && !searchedPlayer)
+            if (FoundPlayer.ObjectUsing == true)
+            {
+                return;
+            }
+            else if (FoundPlayer && !searchedPlayer)
             {
 
                 Debug.Log("in found player");
@@ -160,10 +164,6 @@ public class GuardPawn : PlayerPawn
 
                 searchedPlayer.playerInventory.GuardRequestItems(searchedPlayer.OwnerClientId, OwnerClientId);
                 BeginSearchPrisonerServerRpc(searchedPlayer.OwnerClientId);
-
-
-
-
 
             }
         }
