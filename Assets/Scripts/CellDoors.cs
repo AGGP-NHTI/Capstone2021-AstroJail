@@ -70,8 +70,8 @@ public class CellDoors : MapInteractable
         else
         {
             MoveDoor();
+            Done();
             UsingPlayer = null;
-            beingUsed = false;
             temp.ObjectUsing = null;
         }
         return true;
@@ -81,12 +81,10 @@ public class CellDoors : MapInteractable
         if(IsServer)
         {
             GetComponent<Animator>().Play("doors", 0);
-            beingUsed = false;
         }
         else
         {
             MoveDoorServerRpc();
-            beingUsed = false;
         }
     }
 
@@ -94,7 +92,6 @@ public class CellDoors : MapInteractable
     public void MoveDoorServerRpc()
     {
         GetComponent<Animator>().Play("doors", 0);
-        beingUsed = false;
     }
 
 }
