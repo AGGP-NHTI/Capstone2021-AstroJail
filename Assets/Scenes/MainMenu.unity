@@ -3257,7 +3257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &596132179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3896,7 +3896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &709443245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8160,20 +8160,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Jared Matachun, Zach Spitzer, Matthew Mills
+  m_text: 'Zachary Spitzer
 
 
-    Jamie Roeger, Ryan Black,
+    Jared Matachun, Zach Spitzer
+
+
     Matthew Mills
+
+
+    Jamie
+    Roeger, Ryan Black, Matthew Mills
 
 
     Jamie Roeger
 
 
     Zach Spitzer
-
-
-    Prof. Gregory Walek
 
 
 '
@@ -9566,8 +9569,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Programming\n\n\nArt And Design\n\n\nSound\n\nConcept \n\nMental Stability
-    Check \n\n"
+  m_text: "Project Lead\n\nProgramming\n\n\nProduction Manager \n\nArt And Design\n\n\nSound\n\nConcept 
+    \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
