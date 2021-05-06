@@ -64,6 +64,8 @@ public class CellDoors : MapInteractable
     {
         if (temp.canOpenCell == false)
         {
+            Done();
+            temp.ObjectUsing = null;
             UsingPlayer = null;
             return true;
         }
