@@ -56,9 +56,9 @@ public class GuardItemStash : MapInteractable
         {
             PawnReff.playerInventory.Additem(ItemToGive);
         }
-        IsPanelActive = true;
+         IsPanelActive = true;
         UsingPlayer = null;
-        beingUsed = false;
+        Done();
         PawnReff.ObjectUsing = null;
 
         return true;
