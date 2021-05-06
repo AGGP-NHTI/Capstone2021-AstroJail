@@ -32,6 +32,7 @@ public class PlayerPawn : Pawn
     public bool InteractE = false;
     public bool lockMovement = false;
 
+    public GameObject reactorCountdown;
     public GameObject playerMenuPanel;
     public GameObject PlayerInventoryHUD;
     public GameObject optionsPanel;
