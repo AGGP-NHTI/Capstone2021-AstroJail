@@ -9,6 +9,8 @@ public class ServerManager : NetworkBehaviour
 {
     private static ServerManager _instance;
     public static ServerManager Instance { get { return _instance; } }
+    private float hostDCtimer = 2f;
+    private bool startTimer = false;
 
     private void Awake()
     {
@@ -30,6 +32,18 @@ public class ServerManager : NetworkBehaviour
     void Start()
     {
 
+    }
+
+    private void Update()
+    {
+        if(startTimer)
+        {
+            hostDCtimer -= Time.deltaTime;
+            if(hostDCtimer <= 0)
+            {
+                NetworkManager.Singleton.StopHost();
+            }
+        }
     }
 
     public void StartGame(string sceneName)
@@ -69,6 +83,14 @@ public class ServerManager : NetworkBehaviour
         NetworkSceneManager.SwitchScene(sceneName);
     }
 
+    public void onHostDisconnect()
+    {
+        if(IsServer)
+        {
+            startTimer = true;
+        }
+        
+    }
     public void OnSceneSwitched()
     {
         if (!IsServer) return;

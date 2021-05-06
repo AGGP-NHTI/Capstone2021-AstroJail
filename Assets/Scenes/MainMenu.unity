@@ -6792,7 +6792,7 @@ MonoBehaviour:
   prisonerList: {fileID: 1500177921}
   guardList: {fileID: 194344660}
   referenceToServerManagerSpawner: {fileID: 610679033}
-  testMap: 0
+  testMap: 1
 --- !u!1 &1471550074
 GameObject:
   m_ObjectHideFlags: 0
@@ -8941,6 +8941,7 @@ MonoBehaviour:
     - MainMenu
     - SampleScenezach
     - FinalMapTake2
+    - NuclearReactorEnd
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 6323784573335748263, guid: 71649106233a2074288d23f9807f8b61,

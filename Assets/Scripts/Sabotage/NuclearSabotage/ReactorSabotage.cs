@@ -4,6 +4,7 @@ using UnityEngine;
 using MLAPI;
 using TMPro;
 using MLAPI.Messaging;
+using MLAPI.SceneManagement;
 public class ReactorSabotage : MapInteractable
 {
     public bool reactorMeltdown = false;
@@ -35,6 +36,11 @@ public class ReactorSabotage : MapInteractable
         }
     }
 
+    private void Start()
+    {
+        NetworkSceneManager.OnSceneSwitched -= ServerManager.Instance.OnSceneSwitched;
+    }
+
     void Update()
     {
         if (Label.activeSelf)
@@ -61,10 +67,11 @@ public class ReactorSabotage : MapInteractable
         {
             reactorTimer -= Time.deltaTime;
 
-            GameObject.FindObjectOfType<PlayerPawn>().reactorCountdown.GetComponent<TextMeshPro>().text = reactorTimer.ToString("F");
+            GameObject.FindObjectOfType<PlayerPawn>().reactorCountdown.GetComponent<TextMeshProUGUI>().text = reactorTimer.ToString("F");
         }
-        if(IsServer && reactorTimer <= 0)
+        if(IsServer && reactorMeltdown && reactorTimer <= 0)
         {
+            NuclearReactorEnd();
             Debug.Log("GAME OVER");
         }
     }
@@ -107,13 +114,33 @@ public class ReactorSabotage : MapInteractable
 
         if (lightsOff)
         {
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if (pc.myController)
+                {
+                    PlayerPawn temp = (PlayerPawn)pc.myPawn;
+                    temp.reactorCountdown.transform.parent.gameObject.SetActive(true);
+                }
+            }
+
             foreach (Light l in lights)
             {
                 l.GetComponent<Animator>().SetBool("reactorMeltdown", true);
             }
+            reactorTimer = reactorMaxTime;
+            reactorMeltdown = true;
         }
         else
         {
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if (pc.myController)
+                {
+                    PlayerPawn temp = (PlayerPawn)pc.myPawn;
+                    temp.reactorCountdown.transform.parent.gameObject.SetActive(false);
+                }
+            }
+
             foreach (Light l in lights)
             {
                 if (l.GetComponentInParent<PlayerPawn>())
@@ -123,6 +150,8 @@ public class ReactorSabotage : MapInteractable
                     l.GetComponent<Animator>().SetBool("reactorMeltdown", false);
                 }
             }
+
+            reactorMeltdown = false;
         }
 
 
@@ -133,8 +162,7 @@ public class ReactorSabotage : MapInteractable
                 MapItemManager.Instance.itemList[itemID].startingLocation.Additem(MapItemManager.Instance.itemList[itemID]);
             }
         }
-        reactorTimer = reactorMaxTime;
-        reactorMeltdown = true;
+
         ReactorMeltdownClientRpc(meltdown ,lightsOff);
     }
 
@@ -151,7 +179,6 @@ public class ReactorSabotage : MapInteractable
             {
                 if(pc.myController)
                 {
-                    Debug.Log("my controller found");
                     PlayerPawn temp = (PlayerPawn)pc.myPawn;
                     temp.reactorCountdown.transform.parent.gameObject.SetActive(true);
                 }
@@ -161,9 +188,21 @@ public class ReactorSabotage : MapInteractable
             {
                 l.GetComponent<Animator>().SetBool("reactorMeltdown", true);
             }
+
+            reactorTimer = reactorMaxTime;
+            reactorMeltdown = true;
         }
         else
         {
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if (pc.myController)
+                {
+                    PlayerPawn temp = (PlayerPawn)pc.myPawn;
+                    temp.reactorCountdown.transform.parent.gameObject.SetActive(false);
+                }
+            }
+
             foreach (Light l in lights)
             {
                 if (l.GetComponentInParent<PlayerPawn>())
@@ -173,9 +212,13 @@ public class ReactorSabotage : MapInteractable
                     l.GetComponent<Animator>().SetBool("reactorMeltdown", false);
                 }
             }
-        }
 
-        reactorTimer = reactorMaxTime;
-        reactorMeltdown = true;
+            reactorMeltdown = false;
+        }
+    }
+
+    public void NuclearReactorEnd()
+    {
+        NetworkSceneManager.SwitchScene("NuclearReactorEnd");
     }
 }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalMapTake2.unity
     guid: 61dcf263a94aa7041a6b13e0a9fc69c2
+  - enabled: 1
+    path: Assets/Scenes/NuclearReactorEnd.unity
+    guid: 63ab3d28beea7764891ceb81f5d84852
   m_configObjects: {}
