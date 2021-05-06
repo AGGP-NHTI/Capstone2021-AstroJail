@@ -79,16 +79,13 @@ public class CellDoors : MapInteractable
     }
     public void MoveDoor()
     {
-
-        GetComponent<Animator>().Play("doors", 0);
-       // MoveDoorServerRpc();
-     
+       MoveDoorServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void MoveDoorServerRpc()
     {
-       
+        GetComponent<Animator>().Play("doors", 0);
     }
 
 }
