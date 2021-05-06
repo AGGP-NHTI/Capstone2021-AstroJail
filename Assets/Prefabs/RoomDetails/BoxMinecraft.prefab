@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3020064321839256378}
   - component: {fileID: 2181633287976410271}
   - component: {fileID: 4152952876321253461}
+  - component: {fileID: 1124719332060760917}
   m_Layer: 0
   m_Name: BoxMinecraft
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1124719332060760917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495764759899474304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1446896, y: 1.9999999, z: 2}
+  m_Center: {x: -0.005381584, y: -0.000000059604645, z: 0}
