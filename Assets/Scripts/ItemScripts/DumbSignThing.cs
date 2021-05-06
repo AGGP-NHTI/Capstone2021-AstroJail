@@ -21,6 +21,7 @@ public class DumbSignThing : MonoBehaviour
         else
         {
             ActivateText();
+            Destroy(this);
         }
     }
 
@@ -34,11 +35,14 @@ public class DumbSignThing : MonoBehaviour
             }
         }
         randomPrisoner = Random.Range(0, prisoners.Count);
+        Debug.Log(prisoners[randomPrisoner]);
         randomAccu = Random.Range(0, accusations.Count);
         randomCrime = Random.Range(0, crimes.Count);
         randomDuration = Random.Range(0, duration.Count);
-        text.text = prisoners[randomPrisoner] + " " + accusations[randomAccu] + " " + crimes [randomCrime] + ". Duration of Sentence:" + duration[randomDuration];
-        Destroy(this);
+        Debug.Log(accusations[randomAccu]);
+        Debug.Log(crimes[randomCrime]);
+        Debug.Log(duration[randomDuration]);
+        text.text = "This prisoner " + accusations[randomAccu].ToString() + " " + crimes [randomCrime].ToString() + ". Duration of Sentence:" + duration[randomDuration].ToString();
     }
 
 }
