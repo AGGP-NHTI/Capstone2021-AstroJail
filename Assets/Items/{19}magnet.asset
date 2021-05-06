@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 19
   instanceId: -1
-  ItemName: Magnet
+  ItemName: Electro Magnet
   ObjectModel: {fileID: 0}
   imageArt: {fileID: 21300000, guid: 082a07618f7828248b10b13fef8a52c0, type: 3}
   itemDescription: insert Degen Humor Here
   hasEffect: 0
-  isContraband: 0
-  isCrafted: 0
+  isContraband: 1
+  isCrafted: 1
   Effects: []
   startingLocation: {fileID: 0}
-  Recipe: []
+  Recipe:
+  - {fileID: 11400000, guid: ebb534fff97a1e449b0be826fbd6613d, type: 2}
+  - {fileID: 11400000, guid: 17c6393e73199df41bcfaf6c8ffd067a, type: 2}
