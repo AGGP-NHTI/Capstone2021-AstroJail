@@ -5,7 +5,9 @@ using TMPro;
 
 public class PlayerVent : MapInteractable
 {
+    public bool isVent;
     public GameObject endPoint;
+    public bool sabotaged;
     private float CooldownTimer;
     public float maxCooldown;
     void Start()
@@ -34,9 +36,41 @@ public class PlayerVent : MapInteractable
 
     public override bool OnUse(PlayerController user)
     {
-        PrisonerPawn tempPawn = (PrisonerPawn)user.myPawn;
-        if (tempPawn.playerType == PlayerType.Prisoner)
+        if (isVent)
         {
+            PrisonerPawn tempPawn = (PrisonerPawn)user.myPawn;
+            if (tempPawn.playerType == PlayerType.Prisoner)
+            {
+                if (sabotaged)
+                {
+                    tempPawn.EndInteract();
+                }
+
+                if (CooldownTimer > 0)
+                {
+                    tempPawn.EndInteract();
+                    return false;
+                }
+                tempPawn.transform.position = endPoint.transform.position;
+                CooldownTimer = maxCooldown;
+
+                tempPawn.EndInteract();
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            PlayerPawn tempPawn = (PlayerPawn)user.myPawn;
+
+            if (sabotaged)
+            {
+                tempPawn.EndInteract();
+            }
+
             if (CooldownTimer > 0)
             {
                 tempPawn.EndInteract();
@@ -47,11 +81,9 @@ public class PlayerVent : MapInteractable
 
             tempPawn.EndInteract();
             return false;
+
         }
-        else
-        {
-            return false;
-        }
+
     }
 
     
