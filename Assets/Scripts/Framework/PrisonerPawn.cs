@@ -92,7 +92,7 @@ public class PrisonerPawn : PlayerPawn
     {
         if (isBeingSearched)
         {
-            canBeSearched = false;
+
             return;
         }
         base.Interact(e);
