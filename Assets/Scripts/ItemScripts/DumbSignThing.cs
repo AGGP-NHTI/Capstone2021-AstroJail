@@ -6,7 +6,8 @@ using TMPro;
 public class DumbSignThing : MonoBehaviour
 {
 
-    public List<string> prisoners, accusations, crimes, duration;
+    public string[] accusations, crimes, duration;
+    public List<string> prisoners;
     public TextMeshPro text;
     float timer = 3;
     int randomPrisoner, randomAccu, randomCrime, randomDuration;
@@ -31,18 +32,17 @@ public class DumbSignThing : MonoBehaviour
         {
             if (player.selectedPlayerType == PlayerType.Prisoner)
             {
-                prisoners.Add(player.name);
+                prisoners.Add(player.playerName.Value);
             }
         }
         randomPrisoner = Random.Range(0, prisoners.Count);
-        Debug.Log(prisoners[randomPrisoner]);
-        randomAccu = Random.Range(0, accusations.Count);
-        randomCrime = Random.Range(0, crimes.Count);
-        randomDuration = Random.Range(0, duration.Count);
-        Debug.Log(accusations[randomAccu]);
-        Debug.Log(crimes[randomCrime]);
-        Debug.Log(duration[randomDuration]);
-        text.text = "This prisoner " + accusations[randomAccu].ToString() + " " + crimes [randomCrime].ToString() + ". Duration of Sentence:" + duration[randomDuration].ToString();
+        randomAccu = Random.Range(0, accusations.Length);
+        randomCrime = Random.Range(0, crimes.Length);
+        randomDuration = Random.Range(0, duration.Length);
+        string output = prisoners[randomPrisoner] + " " + accusations[randomAccu] + " " + crimes[randomCrime] + ". Duration of Sentence: " + duration[randomDuration];
+        Debug.Log(text);
+        text.SetText(output);
+
     }
 
 }
