@@ -267,7 +267,6 @@ public class PlayerPawn : Pawn
 
     public override void Close(bool escape)
     {
-
         if (escape && ObjectUsing)
         {
             EndInteract();

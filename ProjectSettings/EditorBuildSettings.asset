@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NuclearReactorEnd.unity
     guid: 63ab3d28beea7764891ceb81f5d84852
+  - enabled: 1
+    path: Assets/Scenes/GuardWin.unity
+    guid: bda6ea708119ab4489791482a831e522
+  - enabled: 1
+    path: Assets/Scenes/PrisonerAmoryTakeover.unity
+    guid: b81e26765137d564c94ef151ad732c06
   m_configObjects: {}

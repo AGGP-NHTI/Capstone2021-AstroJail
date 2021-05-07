@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAPI.Messaging;
 using MLAPI;
+using MLAPI.SceneManagement;
 using System.ComponentModel;
 using System.Reflection.Emit;
 using TMPro;
@@ -75,6 +76,11 @@ public class WinConditionStash : MapInteractable
         return true;
     }
 
+    public void PrisonerArmoryTakeover()
+    {
+        PrisonerArmoryTakeoverServerRpc();
+    }
+
     public void AddItemRPC(int i)
     {
         AddItemServerRpc(i);
@@ -121,6 +127,14 @@ public class WinConditionStash : MapInteractable
         labelObject.GetComponent<TextMeshPro>().text = "Press E to Interact";
         StopUseClientRpc();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PrisonerArmoryTakeoverServerRpc()
+    {
+        NetworkSceneManager.OnSceneSwitched -= ServerManager.Instance.OnSceneSwitched;
+        NetworkSceneManager.SwitchScene("PrisonerAmoryTakeover");
+    }
+
 
     //-------------Taking/Adding item to container RPCs--------------//
     [ClientRpc]

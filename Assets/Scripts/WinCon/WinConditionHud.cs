@@ -64,10 +64,7 @@ public class WinConditionHud : NetworkBehaviour
             }
             if (CorrectItems == stash.winConditon.Count)
             {
-                Debug.Log("Congrats you Win!");
-                //run code to supply the crafted item here 
-                SceneManager.LoadScene(0);
-
+                stash.PrisonerArmoryTakeover();
             }
         }
 

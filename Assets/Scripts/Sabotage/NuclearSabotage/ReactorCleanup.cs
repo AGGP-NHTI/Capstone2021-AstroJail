@@ -5,7 +5,7 @@ using MLAPI;
 using MLAPI.Messaging;
 public class ReactorCleanup : NetworkBehaviour
 {
-    private float timer = 2f;
+    public float timer = 2f;
     void Start()
     {
 

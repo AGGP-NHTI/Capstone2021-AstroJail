@@ -11,6 +11,8 @@ public class ServerManager : NetworkBehaviour
     public static ServerManager Instance { get { return _instance; } }
     private float hostDCtimer = 2f;
     private bool startTimer = false;
+    public float guardWinTimer = 20f;
+    private bool startGuardWinTimer;
 
     private void Awake()
     {
@@ -42,6 +44,15 @@ public class ServerManager : NetworkBehaviour
             if(hostDCtimer <= 0)
             {
                 NetworkManager.Singleton.StopHost();
+            }
+        }
+
+        if(startGuardWinTimer)
+        {
+            guardWinTimer -= Time.deltaTime;
+            if(guardWinTimer <= 0)
+            {
+                GuardWin();
             }
         }
     }
@@ -83,6 +94,16 @@ public class ServerManager : NetworkBehaviour
         NetworkSceneManager.SwitchScene(sceneName);
     }
 
+    public void GuardWin()
+    {
+        NetworkSceneManager.OnSceneSwitched -= OnSceneSwitched;
+        if (IsServer)
+        {
+            startGuardWinTimer = false;
+            NetworkSceneManager.SwitchScene("GuardWin");
+        }
+    }
+
     public void onHostDisconnect()
     {
         if(IsServer)
@@ -93,11 +114,13 @@ public class ServerManager : NetworkBehaviour
     }
     public void OnSceneSwitched()
     {
+        startGuardWinTimer = true;
         if (!IsServer) return;
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             pc.SpawnPlayerGameStart();
         }
+        startGuardWinTimer = true;
     }
 
     [ClientRpc]

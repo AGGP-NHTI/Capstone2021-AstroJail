@@ -9081,6 +9081,8 @@ MonoBehaviour:
     - SampleScenezach
     - FinalMapTake2
     - NuclearReactorEnd
+    - GuardWin
+    - PrisonerAmoryTakeover
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 6323784573335748263, guid: 71649106233a2074288d23f9807f8b61,

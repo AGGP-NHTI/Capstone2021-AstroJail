@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34929653c93773d4f8c9140ecdd6d7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guardWinTimer: 600
   GuardPrefab: {fileID: 9014897465159990460, guid: 6c8b352c260077a4c967647f3413d9b9,
     type: 3}
   PrisonerPrefab: {fileID: 424292381393445453, guid: dd1a21c03bc55eb42a5b9fe0d3c8c12b,

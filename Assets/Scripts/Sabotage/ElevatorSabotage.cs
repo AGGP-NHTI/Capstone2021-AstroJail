@@ -48,7 +48,7 @@ public class ElevatorSabotage : MapInteractable
         }
         else
         {
-            Label.GetComponent<TextMeshPro>().text = "Press E to fix lights";
+            Label.GetComponent<TextMeshPro>().text = "Press E to repair elevator";
             itemReqLabel.GetComponent<TextMeshPro>().text = "Requires: Wires";
         }
     }
@@ -87,6 +87,21 @@ public class ElevatorSabotage : MapInteractable
     [ServerRpc(RequireOwnership = false)]
     public void SabotageElevatorServerRpc(bool sabotage, int itemID = -1)
     {
+        if(sabotage)
+        {
+            elevator1.sabotaged = true;
+            elevator2.sabotaged = true;
+
+            elevatorDisabled = true;
+        }
+        else
+        {
+            elevator1.sabotaged = false;
+            elevator2.sabotaged = false;
+
+            elevatorDisabled = false;
+        }
+
         if (itemID != -1)
         {
             if (!MapItemManager.Instance.itemList[itemID].isCrafted)
@@ -101,7 +116,22 @@ public class ElevatorSabotage : MapInteractable
     [ClientRpc]
     public void SabotageElevatorClientRpc(bool sabotage, int itemID = -1)
     {
-        if (IsServer) { return; }
+        if (sabotage)
+        {
+            elevator1.sabotaged = true;
+            elevator2.sabotaged = true;
 
+            elevatorDisabled = true;
+        }
+        else
+        {
+            elevator1.sabotaged = false;
+            elevator2.sabotaged = false;
+
+            elevatorDisabled = false;
+        }
+
+
+        if (IsServer) { return; }
     }
 }

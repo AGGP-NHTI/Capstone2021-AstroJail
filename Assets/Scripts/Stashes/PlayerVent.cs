@@ -26,7 +26,6 @@ public class PlayerVent : MapInteractable
         else
         {
             Label.GetComponent<TextMeshPro>().text = "Press E to Interact";
-
         }
         if (Label.activeSelf)
         {
@@ -41,6 +40,7 @@ public class PlayerVent : MapInteractable
             PrisonerPawn tempPawn = (PrisonerPawn)user.myPawn;
             if (tempPawn.playerType == PlayerType.Prisoner)
             {
+
                 if (sabotaged)
                 {
                     tempPawn.EndInteract();
@@ -49,16 +49,20 @@ public class PlayerVent : MapInteractable
                 if (CooldownTimer > 0)
                 {
                     tempPawn.EndInteract();
+                    UsingPlayer = null;
                     return false;
                 }
                 tempPawn.transform.position = endPoint.transform.position;
                 CooldownTimer = maxCooldown;
 
                 tempPawn.EndInteract();
+                UsingPlayer = null;
                 return false;
             }
             else
             {
+                tempPawn.EndInteract();
+                UsingPlayer = null;
                 return false;
             }
         }
@@ -73,14 +77,17 @@ public class PlayerVent : MapInteractable
             if (CooldownTimer > 0)
             {
                 tempPawn.EndInteract();
+                UsingPlayer = null;
                 return false;
             }
             tempPawn.transform.position = endPoint.transform.position;
             CooldownTimer = maxCooldown;
 
             tempPawn.EndInteract();
+            UsingPlayer = null;
             return false;
         }
+
     }
     public void OnCooldown()
     {
