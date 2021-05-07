@@ -25,7 +25,7 @@ public class PlayerVent : MapInteractable
         }
         else
         {
-            Label.GetComponent<TextMeshPro>().text = "Press E to Interact";
+            Label.GetComponent<TextMeshPro>().text = "Press E to crawl through";
         }
         if (Label.activeSelf)
         {
